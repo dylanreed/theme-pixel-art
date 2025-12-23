@@ -1014,8 +1014,8 @@ html.night .click-ripple {
    EXTRA CHAOS - Misc insanity
    ═══════════════════════════════════════════════════════════════ */
 
-/* Make the diver leave a trail */
-.chaos-mode .diver {
+/* Make Ramona glow in chaos mode */
+.chaos-mode .ramona {
     filter: drop-shadow(0 0 10px #ffd700);
 }
 
@@ -1071,51 +1071,63 @@ html.night .click-ripple {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   DIVER TRAIL - Bubbles following the diver
+   RAMONA TRAIL - Hearts floating up from Ramona the cat
    ═══════════════════════════════════════════════════════════════ */
 
-.diver-bubble {
+.ramona-heart {
     position: fixed;
     pointer-events: none;
     z-index: 50;
-    background: radial-gradient(
-        circle at 30% 30%,
-        rgba(255, 255, 255, 0.95) 0%,
-        rgba(100, 180, 255, 0.7) 40%,
-        rgba(60, 140, 220, 0.5) 70%,
-        rgba(40, 120, 200, 0.2) 100%
-    );
-    border: 1px solid rgba(100, 180, 255, 0.6);
-    border-radius: 100%;
-    box-shadow: 0 0 4px rgba(100, 180, 255, 0.4);
-    animation: bubble-float 3s ease-out forwards;
+    color: #ff6b9d;
+    text-shadow: 0 0 4px rgba(255, 107, 157, 0.6);
+    animation: heart-float 1.5s ease-out forwards;
 }
 
-@keyframes bubble-float {
+html.night .ramona-heart {
+    color: #ff9ec4;
+    text-shadow: 0 0 6px rgba(255, 158, 196, 0.8);
+}
+
+@keyframes heart-float {
     0% {
-        opacity: 0.8;
+        opacity: 1;
         transform: translateY(0) scale(1);
-    }
-    50% {
-        opacity: 0.5;
     }
     100% {
         opacity: 0;
-        transform: translateY(-40px) scale(0.5);
+        transform: translateY(-60px) scale(0.5);
     }
 }
 
-/* Night mode bubbles - more ethereal */
-html.night .diver-bubble {
-    background: radial-gradient(
-        circle at 30% 30%,
-        rgba(220, 240, 255, 0.9) 0%,
-        rgba(150, 200, 255, 0.6) 40%,
-        rgba(100, 160, 220, 0.4) 70%,
-        rgba(80, 140, 200, 0.2) 100%
-    );
-    border-color: rgba(150, 200, 255, 0.7);
-    box-shadow: 0 0 8px rgba(150, 200, 255, 0.6);
+/* ═══════════════════════════════════════════════════════════════
+   RAMONA DIRT - Dust puffs when running
+   ═══════════════════════════════════════════════════════════════ */
+
+.ramona-dirt {
+    position: fixed;
+    pointer-events: none;
+    z-index: 49;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #8b7355;
+    opacity: 0.7;
+    animation: dirt-puff 0.5s ease-out forwards;
+}
+
+html.night .ramona-dirt {
+    background: #6b5344;
+}
+
+@keyframes dirt-puff {
+    0% {
+        opacity: 0.7;
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.3);
+    }
 }
 
 /* ═══════════════════════════════════════════════════════════════

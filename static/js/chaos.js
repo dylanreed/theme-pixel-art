@@ -525,67 +525,12 @@ KONAMI CODE: ↑↑↓↓←→←→BA
     }
 
     // ═══════════════════════════════════════════════════════════════
-    // DIVER TRAIL - Bubbles/dust following the diver
+    // RAMONA TRAIL - Hearts are now handled in footer.html (idle only)
     // ═══════════════════════════════════════════════════════════════
 
-    function initDiverTrail() {
-        const diver = document.querySelector('.diver');
-        if (!diver) return;
-
-        let lastX = 0;
-        let lastY = 0;
-
-        function createBubble(x, y) {
-            const bubble = document.createElement('div');
-            bubble.className = 'diver-bubble';
-
-            // Random offset from helmet position
-            const offsetX = (Math.random() - 0.5) * 15;
-            const offsetY = (Math.random() - 0.5) * 10;
-
-            bubble.style.left = (x + offsetX) + 'px';
-            bubble.style.top = (y + offsetY) + 'px';
-
-            // Random size
-            const size = 3 + Math.random() * 5;
-            bubble.style.width = size + 'px';
-            bubble.style.height = size + 'px';
-
-            document.body.appendChild(bubble);
-            setTimeout(() => bubble.remove(), 2000);
-        }
-
-        // Watch for diver position changes
-        const observer = new MutationObserver(() => {
-            const rect = diver.getBoundingClientRect();
-            const x = rect.left + rect.width / 2;
-            const y = rect.top + rect.height * 0.2; // Helmet area (top 20%)
-
-            // Only create bubble if diver has moved
-            if (Math.abs(x - lastX) > 5 || Math.abs(y - lastY) > 5) {
-                if (Math.random() < 0.3) { // 30% chance per movement
-                    createBubble(x, y);
-                }
-                lastX = x;
-                lastY = y;
-            }
-        });
-
-        observer.observe(diver, { attributes: true, attributeFilter: ['style'] });
-
-        // Spawn idle bubbles always (not just chaos mode)
-        setInterval(() => {
-            const rect = diver.getBoundingClientRect();
-            if (rect.width > 0) {
-                createBubble(rect.left + rect.width / 2, rect.top + rect.height * 0.15);
-                // Occasionally spawn a second bubble
-                if (Math.random() < 0.3) {
-                    setTimeout(() => {
-                        createBubble(rect.left + rect.width / 2, rect.top + rect.height * 0.15);
-                    }, 200);
-                }
-            }
-        }, 1200);
+    function initRamonaTrail() {
+        // Hearts now spawn from footer.html when Ramona is idle
+        // This function is kept for potential future trail effects
     }
 
     // ═══════════════════════════════════════════════════════════════
@@ -682,8 +627,8 @@ KONAMI CODE: ↑↑↓↓←→←→BA
         checkAutoNightMode();
         setInterval(checkAutoNightMode, 60000); // Check every minute
 
-        // Initialize diver trail
-        initDiverTrail();
+        // Initialize Ramona trail
+        initRamonaTrail();
 
         // Start seasonal effects
         startSeasonalEffects();

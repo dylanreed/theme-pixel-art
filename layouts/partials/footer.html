@@ -13,40 +13,88 @@
         );
         if (containers.length === 0) return;
 
-        // Sprite paths
+        // Ramona sprite paths
         const sprites = {
-            walkEast: "/sprites/diver/walking_east.gif",
-            walkWest: "/sprites/diver/walking_west.gif",
-            idleNorth: "/sprites/diver/idel_north.gif",
-            idleEast: "/sprites/diver/idle_east.gif",
-            idleNorthEast: "/sprites/diver/idle_north_east.gif",
-            idleNorthWest: "/sprites/diver/idle_north_west.gif",
-            idleSouthEast: "/sprites/diver/idle_sout_east.gif",
-            idleSouth: "/sprites/diver/idle_south.gif",
-            idleSouthWest: "/sprites/diver/idle_south_west.gif",
-            idleWest: "/sprites/diver/idle_west.gif",
+            // Walking - all 8 directions
+            walkNorth: "/sprites/ramona/ramona_walk_north.gif",
+            walkNortheast: "/sprites/ramona/ramona_walk_northeast.gif",
+            walkEast: "/sprites/ramona/ramona_walk_east.gif",
+            walkSoutheast: "/sprites/ramona/ramona_walk_southeast.gif",
+            walkSouth: "/sprites/ramona/ramona_walk_south.gif",
+            walkSouthwest: "/sprites/ramona/ramona_walk_southwest.gif",
+            walkWest: "/sprites/ramona/ramona_walk_west.gif",
+            walkNorthwest: "/sprites/ramona/ramona_walk_northwest.gif",
+            // Running
+            runEast: "/sprites/ramona/ramona_run_east.gif",
+            runWest: "/sprites/ramona/ramona_run_west.gif",
+            // Idle - all 8 directions
+            idleNorth: "/sprites/ramona/ramona_idle_north.gif",
+            idleNortheast: "/sprites/ramona/ramona_idle_northeast.gif",
+            idleEast: "/sprites/ramona/ramona_idle_east.gif",
+            idleSoutheast: "/sprites/ramona/ramona_idle_southeast.gif",
+            idleSouth: "/sprites/ramona/ramona_idle_south.gif",
+            idleSouthwest: "/sprites/ramona/ramona_idle_southwest.gif",
+            idleWest: "/sprites/ramona/ramona_idle_west.gif",
+            idleNorthwest: "/sprites/ramona/ramona_idle_northwest.gif",
+            // Special idle animations
+            yawning: "/sprites/ramona/ramona_yawning.gif",
+            yawningSouthwest: "/sprites/ramona/ramona_yawning_southwest.gif",
+            // Jump
+            jumpEast: "/sprites/ramona/ramona_jump_east.gif",
+            jumpWest: "/sprites/ramona/ramona_jump_west.gif",
         };
 
         const idleSprites = [
             sprites.idleNorth,
+            sprites.idleNortheast,
             sprites.idleEast,
-            sprites.idleNorthEast,
-            sprites.idleNorthWest,
-            sprites.idleSouthEast,
+            sprites.idleSoutheast,
             sprites.idleSouth,
-            sprites.idleSouthWest,
+            sprites.idleSouthwest,
             sprites.idleWest,
+            sprites.idleNorthwest,
         ];
 
-        // Create a diver for each container
+        const yawningSprites = [sprites.yawning, sprites.yawningSouthwest];
+
+        // Turn sequences for animated direction changes (using walk sprites)
+        const turnEastToWest = [
+            sprites.walkEast,
+            sprites.walkSoutheast,
+            sprites.walkSouth,
+            sprites.walkSouthwest,
+            sprites.walkWest,
+        ];
+        const turnWestToEast = [
+            sprites.walkWest,
+            sprites.walkSouthwest,
+            sprites.walkSouth,
+            sprites.walkSoutheast,
+            sprites.walkEast,
+        ];
+
+        // Sprite sheet paths (for CSS animation)
+        const spriteSheets = {
+            sittingWink: "/sprites/ramona/ramona_winking_spritesheet.png",
+            sittingYawn: "/sprites/ramona/ramona_yawning_spritesheet.png",
+        };
+
+        // Preload all sprites to prevent blinking during animation
+        Object.values(sprites).forEach((src) => {
+            const img = new Image();
+            img.src = src;
+        });
+
+        // Create Ramona for each container
         containers.forEach((container, index) => {
-            const diver = document.createElement("img");
-            diver.className = "diver";
-            diver.alt = "";
-            diver.style.position = "fixed";
-            diver.style.pointerEvents = "none";
-            diver.style.zIndex = "1000";
-            document.body.appendChild(diver);
+            const ramona = document.createElement("div");
+            ramona.className = "ramona";
+            ramona.setAttribute("role", "img");
+            ramona.setAttribute("aria-label", "Ramona the cat");
+            ramona.style.position = "fixed";
+            ramona.style.pointerEvents = "none";
+            ramona.style.zIndex = "1000";
+            document.body.appendChild(ramona);
 
             // Get container bounds
             function getContainerBounds() {
@@ -58,95 +106,242 @@
                 };
             }
 
-            // State - restore from localStorage if available (only for first diver)
+            // State
             let bounds = getContainerBounds();
-            const stateKey = "diver_state_" + index;
+            const stateKey = "ramona_state_" + index;
             const savedState = JSON.parse(
                 localStorage.getItem(stateKey) || "null",
             );
-            const diverSize = 96; // Diver is 96px wide (2x scale)
-            let x = savedState?.x ?? Math.random() * (bounds.width - diverSize);
+            const spriteSize = 192;
+            let x =
+                savedState?.x ?? Math.random() * (bounds.width - spriteSize);
             let direction =
                 savedState?.direction ?? (Math.random() > 0.5 ? 1 : -1);
-            let isIdle = false;
+            let state = "walking"; // walking, running, idle, yawning, jumping
             let speed = 1.5;
+            let idleStartTime = 0;
+            let jumpFrame = 0;
 
             // Clamp x to valid bounds
-            x = Math.max(0, Math.min(x, bounds.width - diverSize));
+            x = Math.max(0, Math.min(x, bounds.width - spriteSize));
 
             // Save state periodically
-            function saveDiverState() {
+            function saveState() {
                 localStorage.setItem(
                     stateKey,
                     JSON.stringify({ x, direction }),
                 );
             }
-            setInterval(saveDiverState, 1000);
+            setInterval(saveState, 1000);
 
-            diver.src = direction === 1 ? sprites.walkEast : sprites.walkWest;
+            setSprite(direction === 1 ? sprites.walkEast : sprites.walkWest);
 
             function setSprite(src) {
-                if (diver.src !== src) {
-                    diver.src = src;
-                }
+                // Clear sprite sheet classes
+                ramona.classList.remove(
+                    "ramona-sitting-wink",
+                    "ramona-sitting-yawn",
+                );
+                ramona.style.backgroundImage = `url('${src}')`;
+            }
+
+            function setSpriteSheet(sheetUrl, animClass) {
+                ramona.style.backgroundImage = `url('${sheetUrl}')`;
+                ramona.classList.remove(
+                    "ramona-sitting-wink",
+                    "ramona-sitting-yawn",
+                );
+                ramona.classList.add(animClass);
+            }
+
+            // Create dirt puff behind Ramona when running
+            function createDirt(footX, footY) {
+                const dirt = document.createElement("div");
+                dirt.className = "ramona-dirt";
+                // Offset behind Ramona based on direction
+                const offsetX = direction === 1 ? -10 : 10;
+                dirt.style.left =
+                    footX + offsetX + (Math.random() - 0.5) * 10 + "px";
+                dirt.style.top = footY + (Math.random() - 0.5) * 5 + "px";
+                // Random size
+                const size = 6 + Math.random() * 6;
+                dirt.style.width = size + "px";
+                dirt.style.height = size + "px";
+                document.body.appendChild(dirt);
+                setTimeout(() => dirt.remove(), 500);
+            }
+
+            // Create heart above Ramona when idle
+            function createHeart() {
+                const heart = document.createElement("div");
+                heart.className = "ramona-heart";
+                heart.textContent = "♥";
+                const offsetX = (Math.random() - 0.5) * 30;
+                heart.style.left =
+                    bounds.left + x + spriteSize / 2 + offsetX + "px";
+                heart.style.top = bounds.top - 114 + 20 + "px";
+                const size = 12 + Math.random() * 12;
+                heart.style.fontSize = size + "px";
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 1500);
             }
 
             function startWalking() {
-                isIdle = false;
+                state = "walking";
+                speed = 1.5;
                 setSprite(
                     direction === 1 ? sprites.walkEast : sprites.walkWest,
                 );
             }
 
+            function startRunning() {
+                state = "running";
+                speed = 3;
+                setSprite(direction === 1 ? sprites.runEast : sprites.runWest);
+                // Run for 1-3 seconds then go back to walking
+                setTimeout(startWalking, 1000 + Math.random() * 2000);
+            }
+
             function startIdling() {
-                isIdle = true;
+                state = "idle";
+                idleStartTime = Date.now();
                 const randomIdle =
                     idleSprites[Math.floor(Math.random() * idleSprites.length)];
                 setSprite(randomIdle);
+                // Resume walking after 2-5 seconds
+                const idleTime = 2000 + Math.random() * 3000;
+                setTimeout(() => {
+                    if (state === "idle") startWalking();
+                }, idleTime);
+            }
 
-                // Resume walking after random time (2-6 seconds)
-                const idleTime = 2000 + Math.random() * 4000;
-                setTimeout(startWalking, idleTime);
+            function startYawning() {
+                state = "yawning";
+                const randomYawn =
+                    yawningSprites[
+                        Math.floor(Math.random() * yawningSprites.length)
+                    ];
+                setSprite(randomYawn);
+                // Yawn for 3-4 seconds then walk
+                setTimeout(startWalking, 3000 + Math.random() * 1000);
+            }
+
+            function startSitting() {
+                // Randomly choose winking or yawning while sitting
+                const isWinking = Math.random() > 0.5;
+                if (isWinking) {
+                    state = "sittingWink";
+                    setSpriteSheet(
+                        spriteSheets.sittingWink,
+                        "ramona-sitting-wink",
+                    );
+                } else {
+                    state = "sittingYawn";
+                    setSpriteSheet(
+                        spriteSheets.sittingYawn,
+                        "ramona-sitting-yawn",
+                    );
+                }
+                // Sit for 2-4 seconds then walk
+                setTimeout(startWalking, 2000 + Math.random() * 2000);
+            }
+
+            function startJumping() {
+                state = "jumping";
+                jumpFrame = 0;
+                setSprite(
+                    direction === 1 ? sprites.jumpEast : sprites.jumpWest,
+                );
+                // Jump animation lasts about 500ms
+                setTimeout(startWalking, 500);
+            }
+
+            function startTurning(newDirection) {
+                state = "turning";
+                const sequence = newDirection === -1 ? turnEastToWest : turnWestToEast;
+                let frameIndex = 0;
+                const turnInterval = setInterval(() => {
+                    if (frameIndex < sequence.length) {
+                        setSprite(sequence[frameIndex]);
+                        frameIndex++;
+                    } else {
+                        clearInterval(turnInterval);
+                        direction = newDirection;
+                        startWalking();
+                    }
+                }, 80); // 80ms per frame for smooth turn
             }
 
             function animate() {
                 bounds = getContainerBounds();
 
-                if (!isIdle) {
+                if (state === "walking" || state === "running") {
                     x += speed * direction;
 
-                    // Check boundaries (constrained to container width)
-                    const maxX = bounds.width - diverSize;
-                    if (x >= maxX) {
-                        x = maxX;
-                        direction = -1;
-                        setSprite(sprites.walkWest);
-                    } else if (x <= 0) {
-                        x = 0;
-                        direction = 1;
-                        setSprite(sprites.walkEast);
+                    // Spawn dirt when running
+                    if (state === "running") {
+                        const footX =
+                            bounds.left +
+                            x +
+                            (direction === 1 ? 40 : spriteSize - 40);
+                        const footY = bounds.top + 10;
+                        createDirt(footX, footY);
                     }
 
-                    // Random chance to stop and idle (0.3% per frame)
-                    if (Math.random() < 0.003) {
+                    // Check boundaries
+                    const maxX = bounds.width - spriteSize;
+                    if (x >= maxX) {
+                        x = maxX;
+                        // Jump when hitting edge (20% chance), otherwise turn
+                        if (Math.random() < 0.2) {
+                            direction = -1;
+                            startJumping();
+                        } else {
+                            startTurning(-1);
+                        }
+                    } else if (x <= 0) {
+                        x = 0;
+                        if (Math.random() < 0.2) {
+                            direction = 1;
+                            startJumping();
+                        } else {
+                            startTurning(1);
+                        }
+                    }
+
+                    // Random behaviors
+                    const rand = Math.random();
+                    if (rand < 0.002) {
                         startIdling();
+                    } else if (rand < 0.003 && state === "walking") {
+                        startRunning();
                     }
                 }
 
-                // Update position (stays fixed relative to container top border)
-                diver.style.top = bounds.top - 52 + "px";
-                diver.style.left = bounds.left + x + "px";
+                // Spawn hearts when idle
+                if (state === "idle" && Math.random() < 0.02) {
+                    createHeart();
+                }
+
+                // Check if idle long enough to yawn or sit (5+ seconds)
+                if (state === "idle" && Date.now() - idleStartTime > 5000) {
+                    const rand = Math.random();
+                    if (rand < 0.005) {
+                        startYawning();
+                    } else if (rand < 0.01) {
+                        startSitting();
+                    }
+                }
+
+                // Update position
+                ramona.style.top = bounds.top - 114 + "px";
+                ramona.style.left = bounds.left + x + "px";
 
                 requestAnimationFrame(animate);
             }
 
             // Start animation
             animate();
-        });
-
-        // Save all diver states on page unload
-        window.addEventListener("beforeunload", () => {
-            // States are saved by individual intervals
         });
     })();
 </script>
