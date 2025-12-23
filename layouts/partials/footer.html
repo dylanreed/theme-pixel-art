@@ -64,14 +64,15 @@
             const savedState = JSON.parse(
                 localStorage.getItem(stateKey) || "null",
             );
-            let x = savedState?.x ?? Math.random() * (bounds.width - 48);
+            const diverSize = 96; // Diver is 96px wide (2x scale)
+            let x = savedState?.x ?? Math.random() * (bounds.width - diverSize);
             let direction =
                 savedState?.direction ?? (Math.random() > 0.5 ? 1 : -1);
             let isIdle = false;
             let speed = 1.5;
 
             // Clamp x to valid bounds
-            x = Math.max(0, Math.min(x, bounds.width - 48));
+            x = Math.max(0, Math.min(x, bounds.width - diverSize));
 
             // Save state periodically
             function saveDiverState() {
@@ -115,7 +116,7 @@
                     x += speed * direction;
 
                     // Check boundaries (constrained to container width)
-                    const maxX = bounds.width - 48;
+                    const maxX = bounds.width - diverSize;
                     if (x >= maxX) {
                         x = maxX;
                         direction = -1;
@@ -133,7 +134,7 @@
                 }
 
                 // Update position (stays fixed relative to container top border)
-                diver.style.top = bounds.top - 26 + "px";
+                diver.style.top = bounds.top - 52 + "px";
                 diver.style.left = bounds.left + x + "px";
 
                 requestAnimationFrame(animate);

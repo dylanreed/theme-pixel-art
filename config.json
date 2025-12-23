@@ -3,5 +3,19 @@
   "params": {
     "site_title": "dylan's blog",
     "footer_text": "Powered by chaos goblin energy"
+  },
+  "menus": {
+    "main": [
+      {
+        "name": "Archive",
+        "url": "/archive/",
+        "weight": 1
+      },
+      {
+        "name": "Photos",
+        "url": "/photos/",
+        "weight": 2
+      }
+    ]
   }
 }

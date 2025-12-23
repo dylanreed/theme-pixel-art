@@ -1513,6 +1513,7 @@ html.night .site-footer p {
 /* Archive styles */
 .archive-container {
     position: relative;
+    z-index: 1; /* Above floating sprites (z-index: -1) */
     background: transparent;
     image-rendering: pixelated;
     border: 64px solid transparent;
@@ -1960,7 +1961,7 @@ html.night .note-scroll object {
     top: -10px;
     left: 0;
     width: 100%;
-    height: 48px;
+    height: 96px;
     pointer-events: none;
     z-index: 1000;
     overflow: visible;
@@ -1968,8 +1969,8 @@ html.night .note-scroll object {
 
 .diver {
     position: absolute;
-    width: 48px;
-    height: 48px;
+    width: 96px;
+    height: 96px;
     image-rendering: pixelated;
     transition: none;
 }
@@ -1983,6 +1984,24 @@ html.night .note-scroll object {
     .post-sprite,
     .category-sprite-large {
         display: none !important;
+    }
+
+    /* Disable scroll roll-up on mobile - not touch-friendly */
+    .scroll-bottom-clickable {
+        display: none !important;
+    }
+
+    .note-scroll.rolled-up {
+        height: auto !important;
+        margin-top: 0 !important;
+    }
+
+    .note-scroll.rolled-up .note-content,
+    .note-scroll.rolled-up .note-meta {
+        max-height: none !important;
+        padding: inherit !important;
+        margin: inherit !important;
+        opacity: 1 !important;
     }
 }
 
@@ -2303,6 +2322,10 @@ html.night .pagination-info {
         background-size: contain;
     }
 
+    .note-scroll::after {
+        margin-top: -5px;
+    }
+
     .note-scroll .note-content {
         max-width: 100%;
         font-size: 16px;
@@ -2435,6 +2458,10 @@ html.night .pagination-info {
     .note-scroll::before,
     .note-scroll::after {
         height: 150px;
+    }
+
+    .note-scroll::after {
+        margin-top: -5px;
     }
 
     .note-scroll .note-content {

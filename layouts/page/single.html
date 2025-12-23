@@ -1,0 +1,13 @@
+{{/* ABOUTME: Template for regular pages (about, contact, etc.) */}}
+{{/* ABOUTME: Uses page-container styling consistent with other page types */}}
+{{ define "main" }}
+<div class="page-container">
+    {{ if .Title }}
+    <h1 class="page-title">{{ .Title }}</h1>
+    {{ end }}
+
+    <div class="page-content">
+        {{ .Content }}
+    </div>
+</div>
+{{ end }}
