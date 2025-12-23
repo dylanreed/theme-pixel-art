@@ -4,9 +4,10 @@
 (function() {
     'use strict';
 
-    // Disable roll-up functionality on mobile devices
+    // Disable roll-up functionality on mobile/touch devices
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
-    if (isMobile) return;
+    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    if (isMobile || isTouch) return;
 
     const scrolls = document.querySelectorAll('.note-scroll');
 

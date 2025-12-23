@@ -1913,6 +1913,10 @@ html.night .note-scroll {
     filter: invert(0.85) hue-rotate(180deg);
 }
 
+html.night .note-scroll.rolled-up:hover {
+    filter: invert(0.85) hue-rotate(180deg) brightness(1.1);
+}
+
 html.night .note-scroll .note-content {
     color: #3a2a18;
 }
