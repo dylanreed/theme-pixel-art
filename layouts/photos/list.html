@@ -1,0 +1,25 @@
+{{/* ABOUTME: Template for micro.blog's built-in photos section */}}
+{{/* ABOUTME: Displays a grid of photos from posts with images */}}
+{{ define "main" }}
+<div class="page-container">
+    <h1 class="page-title">Photos</h1>
+
+    <div class="photo-grid">
+        {{ $seen := slice }}
+        {{ range .Pages }}
+            {{ $permalink := .Permalink }}
+            {{/* Extract images from post content */}}
+            {{ $content := .Content }}
+            {{ range findRE `src="(https://[^"]+\.(jpg|jpeg|png|gif|webp))"` $content }}
+                {{ $src := replaceRE `src="([^"]+)"` "$1" . }}
+                {{ if not (in $seen $src) }}
+                    {{ $seen = $seen | append $src }}
+                    <a href="{{ $permalink }}" class="photo-item">
+                        <img src="{{ $src }}" alt="Photo from blog post" loading="lazy">
+                    </a>
+                {{ end }}
+            {{ end }}
+        {{ end }}
+    </div>
+</div>
+{{ end }}
