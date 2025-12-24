@@ -1,0 +1,162 @@
+/* ABOUTME: Theme switching styles for fantasy, sci-fi, and cyberpunk themes */
+/* ABOUTME: Fantasy is default (no class), others use html.theme-* classes */
+
+/* ═══════════════════════════════════════════════════════════════
+   THEME: SCI-FI
+   Assets in: /static/sci-fi/{backgrounds,headers,tiles}
+   Styles in: chaos.css (html.theme-sci-fi selectors)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Sci-fi styles are in chaos.css using html.theme-sci-fi selectors */
+
+
+/* ═══════════════════════════════════════════════════════════════
+   THEME: CYBERPUNK
+   Assets in: /static/cyberpunk/{backgrounds,headers,tiles}
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Cyberpunk background - day */
+html.theme-cyberpunk body {
+    background-image: url("/cyberpunk/backgrounds/3.png") !important;
+}
+
+/* Cyberpunk background - night */
+html.theme-cyberpunk.night body {
+    background-image: url("/cyberpunk/backgrounds/3_night.png") !important;
+}
+
+/* Cyberpunk border overlay */
+html.theme-cyberpunk .border-overlay {
+    border-image-source: url("/cyberpunk/tiles/day_tiles.png");
+}
+
+html.theme-cyberpunk.night .border-overlay {
+    border-image-source: url("/cyberpunk/tiles/tiles_night.png");
+}
+
+/* Hide original borders when using overlay */
+html.theme-cyberpunk .posts-container,
+html.theme-cyberpunk .post-container,
+html.theme-cyberpunk .page-container,
+html.theme-cyberpunk .archive-container {
+    border-image-source: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CYBERPUNK HEADERS - Day mode
+   ═══════════════════════════════════════════════════════════════ */
+
+html.theme-cyberpunk .header-image[style*="home.webp"] {
+    background-image: url("/cyberpunk/headers/home.png") !important;
+}
+html.theme-cyberpunk .header-image[style*="default.webp"] {
+    background-image: url("/cyberpunk/headers/default.png") !important;
+}
+html.theme-cyberpunk .header-image[style*="health.webp"] {
+    background-image: url("/cyberpunk/headers/health.png") !important;
+}
+html.theme-cyberpunk .header-image[style*="tech.webp"] {
+    background-image: url("/cyberpunk/headers/tech.png") !important;
+}
+html.theme-cyberpunk .header-image[style*="gaming.webp"] {
+    background-image: url("/cyberpunk/headers/gaming.png") !important;
+}
+html.theme-cyberpunk .header-image[style*="cooking.webp"] {
+    background-image: url("/cyberpunk/headers/cooking.png") !important;
+}
+html.theme-cyberpunk .header-image[style*="reading.webp"] {
+    background-image: url("/cyberpunk/headers/reading.png") !important;
+}
+html.theme-cyberpunk .header-image[style*="music.webp"] {
+    background-image: url("/cyberpunk/headers/music.png") !important;
+}
+html.theme-cyberpunk .header-image[style*="writing.webp"] {
+    background-image: url("/cyberpunk/headers/writing.png") !important;
+}
+html.theme-cyberpunk .header-image[style*="crafting.webp"] {
+    background-image: url("/cyberpunk/headers/crafting.png") !important;
+}
+html.theme-cyberpunk .header-image[style*="pets.webp"] {
+    background-image: url("/cyberpunk/headers/pets.png") !important;
+}
+html.theme-cyberpunk .header-image[style*="travel.webp"] {
+    background-image: url("/cyberpunk/headers/travel.png") !important;
+}
+html.theme-cyberpunk .header-image[style*="tabletop.webp"] {
+    background-image: url("/cyberpunk/headers/tabletop.png") !important;
+}
+html.theme-cyberpunk .header-image[style*="garden.webp"] {
+    background-image: url("/cyberpunk/headers/garden.png") !important;
+}
+html.theme-cyberpunk .header-image[style*="adhd.webp"] {
+    background-image: url("/cyberpunk/headers/adhd.png") !important;
+}
+html.theme-cyberpunk .header-image[style*="clown.webp"] {
+    background-image: url("/cyberpunk/headers/clown.png") !important;
+}
+
+/* Cyberpunk header frame */
+html.theme-cyberpunk .header-frame {
+    background-image: url("/cyberpunk/headers/ornate frame.png");
+}
+
+/* Cyberpunk cursors */
+html.theme-cyberpunk * {
+    cursor: url("/cyberpunk/cursors/pointer.png"), auto !important;
+}
+
+html.theme-cyberpunk a,
+html.theme-cyberpunk button,
+html.theme-cyberpunk input[type="submit"],
+html.theme-cyberpunk input[type="button"],
+html.theme-cyberpunk select,
+html.theme-cyberpunk label,
+html.theme-cyberpunk .nav-sign,
+html.theme-cyberpunk .nav-hamburger,
+html.theme-cyberpunk .post-tag,
+html.theme-cyberpunk .archive-tag,
+html.theme-cyberpunk .archive-entry,
+html.theme-cyberpunk .mode-toggle,
+html.theme-cyberpunk .photo-item,
+html.theme-cyberpunk .sierra-btn,
+html.theme-cyberpunk .sierra-trigger,
+html.theme-cyberpunk .post-link,
+html.theme-cyberpunk .pagination a,
+html.theme-cyberpunk .note-date,
+html.theme-cyberpunk .theme-switcher,
+html.theme-cyberpunk [role="button"],
+html.theme-cyberpunk [onclick] {
+    cursor: url("/cyberpunk/cursors/hand.png"), pointer !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SCI-FI CURSORS
+   ═══════════════════════════════════════════════════════════════ */
+
+html.theme-sci-fi * {
+    cursor: url("/sci-fi/cursors/pointer.png"), auto !important;
+}
+
+html.theme-sci-fi a,
+html.theme-sci-fi button,
+html.theme-sci-fi input[type="submit"],
+html.theme-sci-fi input[type="button"],
+html.theme-sci-fi select,
+html.theme-sci-fi label,
+html.theme-sci-fi .nav-sign,
+html.theme-sci-fi .nav-hamburger,
+html.theme-sci-fi .post-tag,
+html.theme-sci-fi .archive-tag,
+html.theme-sci-fi .archive-entry,
+html.theme-sci-fi .mode-toggle,
+html.theme-sci-fi .photo-item,
+html.theme-sci-fi .sierra-btn,
+html.theme-sci-fi .sierra-trigger,
+html.theme-sci-fi .post-link,
+html.theme-sci-fi .pagination a,
+html.theme-sci-fi .note-date,
+html.theme-sci-fi .theme-switcher,
+html.theme-sci-fi [role="button"],
+html.theme-sci-fi [onclick] {
+    cursor: url("/sci-fi/cursors/hand.png"), pointer !important;
+}

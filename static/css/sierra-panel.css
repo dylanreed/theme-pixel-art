@@ -2,6 +2,108 @@
    ABOUTME: Contains all UI buttons (theme toggle, chaos, achievements, etc.) */
 
 /* ═══════════════════════════════════════════════════════════════════════════
+   THEME SWITCHER - floating button separate from dropdown panel
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.theme-switcher {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 9997;
+    width: 48px;
+    height: 48px;
+    padding: 4px;
+    background: linear-gradient(180deg, #d4a854 0%, #8b6914 50%, #6b4f0f 100%);
+    border: 3px solid #4a3810;
+    border-radius: 8px;
+    box-shadow:
+        inset 1px 1px 0 rgba(255, 255, 255, 0.3),
+        inset -1px -1px 0 rgba(0, 0, 0, 0.2),
+        2px 2px 4px rgba(0, 0, 0, 0.4);
+    cursor: url("/fantasy/cursors/hand.png"), pointer;
+    image-rendering: pixelated;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.theme-switcher:hover {
+    transform: scale(1.1);
+    box-shadow:
+        inset 1px 1px 0 rgba(255, 255, 255, 0.4),
+        inset -1px -1px 0 rgba(0, 0, 0, 0.2),
+        3px 3px 8px rgba(0, 0, 0, 0.5);
+}
+
+.theme-switcher:active {
+    transform: scale(0.95);
+}
+
+.theme-switcher img {
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated;
+}
+
+.theme-switcher.active {
+    box-shadow:
+        inset 1px 1px 0 rgba(255, 255, 255, 0.3),
+        inset -1px -1px 0 rgba(0, 0, 0, 0.2),
+        0 0 8px rgba(255, 200, 50, 0.6),
+        2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Tooltip */
+.theme-switcher::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 8px;
+    background: #2a1a0a;
+    color: #c9a227;
+    font-family: "MedievalSharp", cursive;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.theme-switcher:hover::after {
+    opacity: 1;
+}
+
+/* Night mode adjustment */
+html.night .theme-switcher {
+    background: linear-gradient(180deg, #5a4a3a 0%, #3d3020 50%, #2a2015 100%);
+    border-color: #1a1510;
+}
+
+/* Responsive */
+@media (max-width: 550px) {
+    .theme-switcher {
+        width: 40px;
+        height: 40px;
+        top: 8px;
+        right: 8px;
+    }
+}
+
+@media (max-width: 400px) {
+    .theme-switcher {
+        width: 36px;
+        height: 36px;
+        top: 6px;
+        right: 6px;
+    }
+
+    .theme-switcher::after {
+        display: none;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
    TRIGGER ZONE - invisible area at top that activates dropdown
    ═══════════════════════════════════════════════════════════════════════════ */
 
@@ -13,7 +115,7 @@
     width: 400px;
     height: 20px;
     z-index: 9998;
-    cursor: url("/cursors/hand.png"), pointer;
+    cursor: url("/fantasy/cursors/hand.png"), pointer;
 }
 
 /* Small tab indicator showing panel is available */
@@ -103,7 +205,7 @@
     height: 62px; /* ADJUST: button height */
     background: transparent;
     border: none;
-    cursor: url("/cursors/hand.png"), pointer;
+    cursor: url("/fantasy/cursors/hand.png"), pointer;
     display: flex;
     align-items: center;
     justify-content: center;

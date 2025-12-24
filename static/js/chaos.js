@@ -423,23 +423,38 @@
     // SECRET COMMANDS (Console fun)
     // ═══════════════════════════════════════════════════════════════
 
+    // Border overlay management - adds overlay to all containers for border-on-top effect
+    function addBorderOverlays() {
+        const containers = document.querySelectorAll('.posts-container, .post-container, .page-container, .archive-container');
+        containers.forEach(container => {
+            // Don't add if already exists
+            if (container.querySelector('.border-overlay')) return;
+
+            const overlay = document.createElement('div');
+            overlay.className = 'border-overlay';
+            container.appendChild(overlay);
+        });
+    }
+
     window.chaos = {
         enable: () => {
             chaosMode = true;
             document.body.classList.add('chaos-mode');
+            localStorage.setItem('chaosMode', 'true');
             startParticles();
             startFloatingSprites();
             startFloatingRunes();
             document.addEventListener('mousemove', handleMouseMove);
             document.addEventListener('click', handleClick);
-            console.log('🌀 CHAOS ENABLED');
+            console.log('🌀 CHAOS ENABLED - Particles, sprites, and sparkles activated!');
         },
         disable: () => {
             chaosMode = false;
             document.body.classList.remove('chaos-mode');
+            localStorage.removeItem('chaosMode');
             document.removeEventListener('mousemove', handleMouseMove);
             document.removeEventListener('click', handleClick);
-            console.log('Chaos disabled');
+            console.log('Chaos disabled - Back to calm');
         },
         rainbow: () => {
             rainbowMode = !rainbowMode;
@@ -478,11 +493,11 @@
             console.log(`
 🌀 CHAOS GOBLIN CONSOLE COMMANDS 🌀
 ====================================
-chaos.enable()      - Enable chaos mode
-chaos.disable()     - Disable chaos mode
-chaos.rainbow()     - Toggle rainbow mode
-chaos.vaporwave()   - Toggle vaporwave mode
-chaos.shake()       - Shake the screen
+chaos.enable()       - Enable chaos mode (particles, sprites, sparkles)
+chaos.disable()      - Disable chaos mode
+chaos.rainbow()      - Toggle rainbow mode
+chaos.vaporwave()    - Toggle vaporwave mode
+chaos.shake()        - Shake the screen
 chaos.weather.rain() - Start rain
 chaos.weather.snow() - Start snow
 chaos.weather.stop() - Stop weather
@@ -632,6 +647,17 @@ KONAMI CODE: ↑↑↓↓←→←→BA
 
         // Start seasonal effects
         startSeasonalEffects();
+
+        // Add border overlays to all containers (for border-on-top effect)
+        addBorderOverlays();
+
+        // Restore chaos mode from localStorage
+        if (localStorage.getItem('chaosMode') === 'true') {
+            window.chaos.enable();
+            // Update Sierra panel button state
+            const chaosBtn = document.querySelector('[data-action="chaos"]');
+            if (chaosBtn) chaosBtn.classList.add('active');
+        }
 
         // Easter egg hint in console
         console.log('💡 Hint: Try the Konami Code... ↑↑↓↓←→←→BA');

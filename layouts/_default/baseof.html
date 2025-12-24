@@ -5,6 +5,11 @@
 </head>
 <body>
 
+    <!-- Theme Style Switcher (separate from dropdown) -->
+    <button class="theme-switcher" data-tooltip="Theme: Fantasy">
+        <img class="theme-icon" src="/modes/fantasy.png" alt="Cycle visual theme">
+    </button>
+
     <!-- Sierra-style Control Panel -->
     <div class="sierra-trigger"></div>
     <div class="sierra-panel">
@@ -59,6 +64,63 @@
                 rain: '/sprites/drop_down_icons/rain.png',
                 snow: '/sprites/drop_down_icons/snow.png'
             };
+
+            // Theme style state (fantasy, sci-fi, cyberpunk)
+            const themes = ['fantasy', 'sci-fi', 'cyberpunk'];
+            const themeNames = {
+                'fantasy': 'Fantasy',
+                'sci-fi': 'Sci-Fi',
+                'cyberpunk': 'Cyberpunk'
+            };
+            const themeIcons = {
+                'fantasy': '/modes/fantasy.png',
+                'sci-fi': '/modes/sci-fi.png',
+                'cyberpunk': '/modes/cyberpunk.png'
+            };
+            let currentThemeIndex = 0;
+
+            // Initialize theme from localStorage
+            function initThemeStyle() {
+                const savedTheme = localStorage.getItem('themeStyle') || 'fantasy';
+                currentThemeIndex = themes.indexOf(savedTheme);
+                if (currentThemeIndex === -1) currentThemeIndex = 0;
+                applyThemeStyle(themes[currentThemeIndex]);
+            }
+
+            function applyThemeStyle(theme) {
+                // Remove all theme classes
+                themes.forEach(t => {
+                    if (t !== 'fantasy') {
+                        document.documentElement.classList.remove('theme-' + t);
+                    }
+                });
+                // Apply new theme (fantasy is default, no class needed)
+                if (theme !== 'fantasy') {
+                    document.documentElement.classList.add('theme-' + theme);
+                }
+                // Update button icon, tooltip and active state
+                const themeBtn = document.querySelector('.theme-switcher');
+                if (themeBtn) {
+                    const icon = themeBtn.querySelector('.theme-icon');
+                    if (icon) icon.src = themeIcons[theme];
+                    themeBtn.dataset.tooltip = 'Theme: ' + themeNames[theme];
+                    themeBtn.classList.toggle('active', theme !== 'fantasy');
+                }
+                localStorage.setItem('themeStyle', theme);
+            }
+
+            initThemeStyle();
+
+            // Theme switcher click handler (outside panel)
+            const themeSwitcher = document.querySelector('.theme-switcher');
+            if (themeSwitcher) {
+                themeSwitcher.addEventListener('click', () => {
+                    currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+                    applyThemeStyle(themes[currentThemeIndex]);
+                    // Reload to update theme-dependent elements (cat sprites, etc.)
+                    location.reload();
+                });
+            }
 
             panel.addEventListener('click', (e) => {
                 const btn = e.target.closest('.sierra-btn');

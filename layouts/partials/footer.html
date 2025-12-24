@@ -13,35 +13,33 @@
         );
         if (containers.length === 0) return;
 
-        // Ramona sprite paths
+        // Get current theme for sprite paths
+        const currentTheme = localStorage.getItem('themeStyle') || 'fantasy';
+        const spritePath = `/${currentTheme}/sprites/cat`;
+
+        // Cat sprite paths (theme-aware)
         const sprites = {
             // Walking - all 8 directions
-            walkNorth: "/sprites/ramona/ramona_walk_north.gif",
-            walkNortheast: "/sprites/ramona/ramona_walk_northeast.gif",
-            walkEast: "/sprites/ramona/ramona_walk_east.gif",
-            walkSoutheast: "/sprites/ramona/ramona_walk_southeast.gif",
-            walkSouth: "/sprites/ramona/ramona_walk_south.gif",
-            walkSouthwest: "/sprites/ramona/ramona_walk_southwest.gif",
-            walkWest: "/sprites/ramona/ramona_walk_west.gif",
-            walkNorthwest: "/sprites/ramona/ramona_walk_northwest.gif",
+            walkNorth: `${spritePath}/walk_north.gif`,
+            walkNortheast: `${spritePath}/walk_northeast.gif`,
+            walkEast: `${spritePath}/walk_east.gif`,
+            walkSoutheast: `${spritePath}/walk_southeast.gif`,
+            walkSouth: `${spritePath}/walk_south.gif`,
+            walkSouthwest: `${spritePath}/walk_southwest.gif`,
+            walkWest: `${spritePath}/walk_west.gif`,
+            walkNorthwest: `${spritePath}/walk_northwest.gif`,
             // Running
-            runEast: "/sprites/ramona/ramona_run_east.gif",
-            runWest: "/sprites/ramona/ramona_run_west.gif",
+            runEast: `${spritePath}/run_east.gif`,
+            runWest: `${spritePath}/run_west.gif`,
             // Idle - all 8 directions
-            idleNorth: "/sprites/ramona/ramona_idle_north.gif",
-            idleNortheast: "/sprites/ramona/ramona_idle_northeast.gif",
-            idleEast: "/sprites/ramona/ramona_idle_east.gif",
-            idleSoutheast: "/sprites/ramona/ramona_idle_southeast.gif",
-            idleSouth: "/sprites/ramona/ramona_idle_south.gif",
-            idleSouthwest: "/sprites/ramona/ramona_idle_southwest.gif",
-            idleWest: "/sprites/ramona/ramona_idle_west.gif",
-            idleNorthwest: "/sprites/ramona/ramona_idle_northwest.gif",
-            // Special idle animations
-            yawning: "/sprites/ramona/ramona_yawning.gif",
-            yawningSouthwest: "/sprites/ramona/ramona_yawning_southwest.gif",
-            // Jump
-            jumpEast: "/sprites/ramona/ramona_jump_east.gif",
-            jumpWest: "/sprites/ramona/ramona_jump_west.gif",
+            idleNorth: `${spritePath}/idle_north.gif`,
+            idleNortheast: `${spritePath}/idle_northeast.gif`,
+            idleEast: `${spritePath}/idle_east.gif`,
+            idleSoutheast: `${spritePath}/idle_southeast.gif`,
+            idleSouth: `${spritePath}/idle_south.gif`,
+            idleSouthwest: `${spritePath}/idle_southwest.gif`,
+            idleWest: `${spritePath}/idle_west.gif`,
+            idleNorthwest: `${spritePath}/idle_northwest.gif`,
         };
 
         const idleSprites = [
@@ -54,8 +52,6 @@
             sprites.idleWest,
             sprites.idleNorthwest,
         ];
-
-        const yawningSprites = [sprites.yawning, sprites.yawningSouthwest];
 
         // Turn sequences for animated direction changes (using walk sprites)
         const turnEastToWest = [
@@ -72,12 +68,6 @@
             sprites.walkSoutheast,
             sprites.walkEast,
         ];
-
-        // Sprite sheet paths (for CSS animation)
-        const spriteSheets = {
-            sittingWink: "/sprites/ramona/ramona_winking_spritesheet.png",
-            sittingYawn: "/sprites/ramona/ramona_yawning_spritesheet.png",
-        };
 
         // Preload all sprites to prevent blinking during animation
         Object.values(sprites).forEach((src) => {
@@ -117,10 +107,8 @@
                 savedState?.x ?? Math.random() * (bounds.width - spriteSize);
             let direction =
                 savedState?.direction ?? (Math.random() > 0.5 ? 1 : -1);
-            let state = "walking"; // walking, running, idle, yawning, jumping
-            let speed = 1.5;
-            let idleStartTime = 0;
-            let jumpFrame = 0;
+            let state = "walking"; // walking, running, idle, turning
+            let speed = 1.25;
 
             // Clamp x to valid bounds
             x = Math.max(0, Math.min(x, bounds.width - spriteSize));
@@ -137,21 +125,7 @@
             setSprite(direction === 1 ? sprites.walkEast : sprites.walkWest);
 
             function setSprite(src) {
-                // Clear sprite sheet classes
-                ramona.classList.remove(
-                    "ramona-sitting-wink",
-                    "ramona-sitting-yawn",
-                );
                 ramona.style.backgroundImage = `url('${src}')`;
-            }
-
-            function setSpriteSheet(sheetUrl, animClass) {
-                ramona.style.backgroundImage = `url('${sheetUrl}')`;
-                ramona.classList.remove(
-                    "ramona-sitting-wink",
-                    "ramona-sitting-yawn",
-                );
-                ramona.classList.add(animClass);
             }
 
             // Create dirt puff behind Ramona when running
@@ -188,7 +162,7 @@
 
             function startWalking() {
                 state = "walking";
-                speed = 1.5;
+                speed = 1.25;
                 setSprite(
                     direction === 1 ? sprites.walkEast : sprites.walkWest,
                 );
@@ -196,7 +170,7 @@
 
             function startRunning() {
                 state = "running";
-                speed = 3;
+                speed = 3.5;
                 setSprite(direction === 1 ? sprites.runEast : sprites.runWest);
                 // Run for 1-3 seconds then go back to walking
                 setTimeout(startWalking, 1000 + Math.random() * 2000);
@@ -204,56 +178,14 @@
 
             function startIdling() {
                 state = "idle";
-                idleStartTime = Date.now();
                 const randomIdle =
                     idleSprites[Math.floor(Math.random() * idleSprites.length)];
                 setSprite(randomIdle);
-                // Resume walking after 2-5 seconds
-                const idleTime = 2000 + Math.random() * 3000;
+                // Resume walking after 2-12 seconds
+                const idleTime = 2000 + Math.random() * 10000;
                 setTimeout(() => {
                     if (state === "idle") startWalking();
                 }, idleTime);
-            }
-
-            function startYawning() {
-                state = "yawning";
-                const randomYawn =
-                    yawningSprites[
-                        Math.floor(Math.random() * yawningSprites.length)
-                    ];
-                setSprite(randomYawn);
-                // Yawn for 3-4 seconds then walk
-                setTimeout(startWalking, 3000 + Math.random() * 1000);
-            }
-
-            function startSitting() {
-                // Randomly choose winking or yawning while sitting
-                const isWinking = Math.random() > 0.5;
-                if (isWinking) {
-                    state = "sittingWink";
-                    setSpriteSheet(
-                        spriteSheets.sittingWink,
-                        "ramona-sitting-wink",
-                    );
-                } else {
-                    state = "sittingYawn";
-                    setSpriteSheet(
-                        spriteSheets.sittingYawn,
-                        "ramona-sitting-yawn",
-                    );
-                }
-                // Sit for 2-4 seconds then walk
-                setTimeout(startWalking, 2000 + Math.random() * 2000);
-            }
-
-            function startJumping() {
-                state = "jumping";
-                jumpFrame = 0;
-                setSprite(
-                    direction === 1 ? sprites.jumpEast : sprites.jumpWest,
-                );
-                // Jump animation lasts about 500ms
-                setTimeout(startWalking, 500);
             }
 
             function startTurning(newDirection) {
@@ -292,28 +224,17 @@
                     const maxX = bounds.width - spriteSize;
                     if (x >= maxX) {
                         x = maxX;
-                        // Jump when hitting edge (20% chance), otherwise turn
-                        if (Math.random() < 0.2) {
-                            direction = -1;
-                            startJumping();
-                        } else {
-                            startTurning(-1);
-                        }
+                        startTurning(-1);
                     } else if (x <= 0) {
                         x = 0;
-                        if (Math.random() < 0.2) {
-                            direction = 1;
-                            startJumping();
-                        } else {
-                            startTurning(1);
-                        }
+                        startTurning(1);
                     }
 
                     // Random behaviors
                     const rand = Math.random();
-                    if (rand < 0.002) {
+                    if (rand < 0.01) {
                         startIdling();
-                    } else if (rand < 0.003 && state === "walking") {
+                    } else if (rand < 0.02 && state === "walking") {
                         startRunning();
                     }
                 }
@@ -321,16 +242,6 @@
                 // Spawn hearts when idle
                 if (state === "idle" && Math.random() < 0.02) {
                     createHeart();
-                }
-
-                // Check if idle long enough to yawn or sit (5+ seconds)
-                if (state === "idle" && Date.now() - idleStartTime > 5000) {
-                    const rand = Math.random();
-                    if (rand < 0.005) {
-                        startYawning();
-                    } else if (rand < 0.01) {
-                        startSitting();
-                    }
                 }
 
                 // Update position

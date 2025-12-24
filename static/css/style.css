@@ -5,7 +5,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    cursor: url("/cursors/pointer.png"), auto;
+    cursor: url("/fantasy/cursors/pointer.png"), auto;
 }
 
 /* All clickable elements get hand cursor */
@@ -29,7 +29,7 @@ label,
 .note-date,
 [role="button"],
 [onclick] {
-    cursor: url("/cursors/hand.png"), pointer;
+    cursor: url("/fantasy/cursors/hand.png"), pointer;
 }
 
 html {
@@ -39,8 +39,8 @@ html {
 body {
     font-family: "Spectral", Georgia, serif;
     min-height: 100vh;
-    background-color: #87CEEB;
-    background-image: url("/background/3.webp");
+    background-color: #87ceeb;
+    background-image: url("/fantasy/backgrounds/3.webp");
     background-repeat: repeat;
     image-rendering: pixelated;
     overflow-x: hidden;
@@ -134,7 +134,7 @@ html.night {
     min-width: 160px;
     padding: 0 10px;
     height: 150px;
-    background: url("/menu/wooden_sign.webp") no-repeat center center;
+    background: url("/fantasy/menu/sign.webp") no-repeat center center;
     background-size: 100% 100%;
     image-rendering: pixelated;
     text-decoration: none;
@@ -191,11 +191,11 @@ html.night {
     gap: 6px;
     width: 60px;
     height: 60px;
-    background: url("/menu/wooden_sign.webp") no-repeat center center;
+    background: url("/fantasy/menu/sign.webp") no-repeat center center;
     background-size: 100% 100%;
     image-rendering: pixelated;
     border: none;
-    cursor: url("/cursors/hand.png"), pointer;
+    cursor: url("/fantasy/cursors/hand.png"), pointer;
     padding: 15px;
     margin: 0 auto;
     position: relative;
@@ -236,7 +236,7 @@ html.night {
     background: url("/sprites/switch_box.png") no-repeat center center;
     background-size: 100% 100%;
     border: none;
-    cursor: url("/cursors/hand.png"), pointer;
+    cursor: url("/fantasy/cursors/hand.png"), pointer;
     z-index: 1000;
     image-rendering: pixelated;
     transition:
@@ -281,7 +281,7 @@ html.night .mode-toggle .mode-icon {
 /* Night mode background */
 html.night body {
     background-color: #1a2030;
-    background-image: url("/background/3_night.webp");
+    background-image: url("/fantasy/backgrounds/3_night.webp");
     background-repeat: repeat;
 }
 
@@ -298,57 +298,62 @@ html.night .posts-container,
 html.night .post-container,
 html.night .page-container,
 html.night .archive-container {
-    border-image-source: url("/tiles/tiles_night.png");
+    border-image-source: url("/fantasy/tiles/tiles_night.png");
+}
+
+/* Night mode border overlay */
+html.night .border-overlay {
+    border-image-source: url("/fantasy/tiles/tiles_night.png");
 }
 
 /* Night mode headers - swap to night versions */
 html.night .header-image[style*="home.webp"] {
-    background-image: url("/headers/home_night.webp") !important;
+    background-image: url("/fantasy/headers/home_night.webp") !important;
 }
 html.night .header-image[style*="default.webp"] {
-    background-image: url("/headers/default_night.webp") !important;
+    background-image: url("/fantasy/headers/default_night.webp") !important;
 }
 html.night .header-image[style*="health.webp"] {
-    background-image: url("/headers/health_night.webp") !important;
+    background-image: url("/fantasy/headers/health_night.webp") !important;
 }
 html.night .header-image[style*="tabletop.webp"] {
-    background-image: url("/headers/tabletop_night.webp") !important;
+    background-image: url("/fantasy/headers/tabletop_night.webp") !important;
 }
 html.night .header-image[style*="gaming.webp"] {
-    background-image: url("/headers/gaming_night.webp") !important;
+    background-image: url("/fantasy/headers/gaming_night.webp") !important;
 }
 html.night .header-image[style*="clown.webp"] {
-    background-image: url("/headers/clown_night.webp") !important;
+    background-image: url("/fantasy/headers/clown_night.webp") !important;
 }
 html.night .header-image[style*="writing.webp"] {
-    background-image: url("/headers/writing_night.webp") !important;
+    background-image: url("/fantasy/headers/writing_night.webp") !important;
 }
 html.night .header-image[style*="cooking.webp"] {
-    background-image: url("/headers/cooking_night.webp") !important;
+    background-image: url("/fantasy/headers/cooking_night.webp") !important;
 }
 html.night .header-image[style*="music.webp"] {
-    background-image: url("/headers/music_night.webp") !important;
+    background-image: url("/fantasy/headers/music_night.webp") !important;
 }
 html.night .header-image[style*="travel.webp"] {
-    background-image: url("/headers/travel_night.webp") !important;
+    background-image: url("/fantasy/headers/travel_night.webp") !important;
 }
 html.night .header-image[style*="reading.webp"] {
-    background-image: url("/headers/reading_night.webp") !important;
+    background-image: url("/fantasy/headers/reading_night.webp") !important;
 }
 html.night .header-image[style*="crafting.webp"] {
-    background-image: url("/headers/crafting_night.webp") !important;
+    background-image: url("/fantasy/headers/crafting_night.webp") !important;
 }
 html.night .header-image[style*="garden.webp"] {
-    background-image: url("/headers/garden_night.webp") !important;
+    background-image: url("/fantasy/headers/garden_night.webp") !important;
 }
 html.night .header-image[style*="tech.webp"] {
-    background-image: url("/headers/tech_night.webp") !important;
+    background-image: url("/fantasy/headers/tech_night.webp") !important;
 }
 html.night .header-image[style*="pets.webp"] {
-    background-image: url("/headers/pets_night.webp") !important;
+    background-image: url("/fantasy/headers/pets_night.webp") !important;
 }
 html.night .header-image[style*="adhd.webp"] {
-    background-image: url("/headers/adhd_night.webp") !important;
+    background-image: url("/fantasy/headers/adhd_night.webp") !important;
 }
 
 /* Night mode text adjustments for readability */
@@ -458,7 +463,7 @@ html.night .archive-tag:hover {
 .header-image {
     width: 100%;
     height: 300px;
-    background-image: url("/headers/home.png");
+    background-image: url("/fantasy/headers/home.png");
     background-size: cover;
     background-position: center;
     image-rendering: pixelated;
@@ -488,7 +493,7 @@ html.night .archive-tag:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("/headers/ornate frome.png");
+    background-image: url("/fantasy/headers/ornate frame.png");
     background-size: 100% 100%;
     image-rendering: pixelated;
     pointer-events: none;
@@ -528,7 +533,7 @@ html.night .archive-tag:hover {
     background: transparent;
     image-rendering: pixelated;
     border: 64px solid transparent;
-    border-image-source: url("/tiles/day_tiles.png");
+    border-image-source: url("/fantasy/tiles/day_tiles.png");
     border-image-slice: 64 96 64 96;
     border-image-width: 64px 96px 64px 96px;
     border-image-repeat: round;
@@ -547,6 +552,31 @@ html.night .archive-tag:hover {
     bottom: -20px;
     background: #f1e9d2;
     z-index: -1;
+}
+
+/* Border overlay - injected by JS, sits on top of content so tiles aren't cut off */
+.border-overlay {
+    position: absolute;
+    top: -64px;
+    left: -64px;
+    right: -64px;
+    bottom: -64px;
+    border: 64px solid transparent;
+    border-image-source: url("/fantasy/tiles/day_tiles.png");
+    border-image-slice: 64 96 64 96;
+    border-image-width: 64px 96px 64px 96px;
+    border-image-repeat: round;
+    pointer-events: none;
+    z-index: 100;
+    image-rendering: pixelated;
+}
+
+/* Hide original border when overlay is present */
+.posts-container:has(.border-overlay),
+.post-container:has(.border-overlay),
+.page-container:has(.border-overlay),
+.archive-container:has(.border-overlay) {
+    border-image-source: none;
 }
 
 /* Post list */
@@ -1424,7 +1454,7 @@ html.night .page-content td {
     border-radius: 8px;
     font-size: 24px;
     font-weight: bold;
-    cursor: url("/cursors/hand.png"), pointer;
+    cursor: url("/fantasy/cursors/hand.png"), pointer;
     transition:
         transform 0.15s ease,
         background 0.15s ease;
@@ -1442,7 +1472,7 @@ html.night .page-content td {
     background: #ccc;
     border-color: #888;
     color: #555;
-    cursor: url("/cursors/pointer.png"), auto;
+    cursor: url("/fantasy/cursors/pointer.png"), auto;
     opacity: 0.6;
 }
 
@@ -1517,7 +1547,7 @@ html.night .site-footer p {
     background: transparent;
     image-rendering: pixelated;
     border: 64px solid transparent;
-    border-image-source: url("/tiles/day_tiles.png");
+    border-image-source: url("/fantasy/tiles/day_tiles.png");
     border-image-slice: 64 96 64 96;
     border-image-width: 64px 96px 64px 96px;
     border-image-repeat: round;
@@ -1800,7 +1830,7 @@ html.night .site-footer p {
     left: 0;
     right: 0;
     height: 318px; /* Match scroll-bottom.png height */
-    cursor: url("/cursors/hand.png"), pointer;
+    cursor: url("/fantasy/cursors/hand.png"), pointer;
     z-index: 5;
     transition: filter 0.2s ease;
 }
@@ -1989,19 +2019,39 @@ html.night .note-scroll object {
 
 /* 2x2 sprite sheet animation - cycles through 4 frames */
 @keyframes sprite-wink {
-    0% { background-position: 0% 0%; }
-    25% { background-position: 100% 0%; }
-    50% { background-position: 0% 100%; }
-    75% { background-position: 100% 100%; }
-    100% { background-position: 0% 0%; }
+    0% {
+        background-position: 0% 0%;
+    }
+    25% {
+        background-position: 100% 0%;
+    }
+    50% {
+        background-position: 0% 100%;
+    }
+    75% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
 }
 
 @keyframes sprite-yawn {
-    0% { background-position: 0% 0%; }
-    25% { background-position: 100% 0%; }
-    50% { background-position: 0% 100%; }
-    75% { background-position: 100% 100%; }
-    100% { background-position: 0% 0%; }
+    0% {
+        background-position: 0% 0%;
+    }
+    25% {
+        background-position: 100% 0%;
+    }
+    50% {
+        background-position: 0% 100%;
+    }
+    75% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
 }
 
 /* Hide decorative sprites on mobile for cleaner experience */
@@ -2064,6 +2114,15 @@ html.night .note-scroll object {
     .page-container,
     .archive-container,
     .category-page {
+        border-width: 32px;
+        border-image-width: 32px 48px 32px 48px;
+    }
+
+    .border-overlay {
+        top: -32px;
+        left: -32px;
+        right: -32px;
+        bottom: -32px;
         border-width: 32px;
         border-image-width: 32px 48px 32px 48px;
     }
@@ -2294,6 +2353,15 @@ html.night .pagination-info {
         padding: 15px;
     }
 
+    .border-overlay {
+        top: -24px;
+        left: -24px;
+        right: -24px;
+        bottom: -24px;
+        border-width: 24px;
+        border-image-width: 24px 36px 24px 36px;
+    }
+
     /* Post content */
     .post-content,
     .page-content {
@@ -2455,6 +2523,15 @@ html.night .pagination-info {
         border-width: 16px;
         border-image-width: 16px 24px 16px 24px;
         padding: 10px;
+    }
+
+    .border-overlay {
+        top: -16px;
+        left: -16px;
+        right: -16px;
+        bottom: -16px;
+        border-width: 16px;
+        border-image-width: 16px 24px 16px 24px;
     }
 
     /* Posts */

@@ -852,7 +852,7 @@ html.night .click-ripple {
     background-size: 300% 300%;
     border: 3px solid #333;
     border-radius: 0;
-    cursor: url("/cursors/hand.png"), pointer;
+    cursor: url("/fantasy/cursors/hand.png"), pointer;
     z-index: 1001;
     font-size: 24px;
     display: flex;
@@ -1256,7 +1256,7 @@ html.night .ramona-dirt {
     color: #2a1a0a;
     font-family: "MedievalSharp", cursive;
     font-size: 14px;
-    cursor: url("/cursors/hand.png"), pointer;
+    cursor: url("/fantasy/cursors/hand.png"), pointer;
     box-shadow:
         inset 1px 1px 0 rgba(255, 255, 255, 0.3),
         inset -1px -1px 0 rgba(0, 0, 0, 0.2);
@@ -1286,6 +1286,114 @@ html.night .help-popup-close {
     background: linear-gradient(to bottom, #4a5a7a 0%, #3a4a6a 100%);
     border-color: #2a3a5a;
     color: #c0d0e0;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SCI-FI MODE - Space opera theme with epic backgrounds
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Sci-fi background - day */
+html.theme-sci-fi body {
+    background-image: url("/sci-fi/backgrounds/3.png") !important;
+}
+
+/* Sci-fi background - night */
+html.theme-sci-fi.night body {
+    background-image: url("/sci-fi/backgrounds/3_night.png") !important;
+}
+
+/* Sci-fi border - hide original border when overlay is present */
+html.theme-sci-fi .posts-container,
+html.theme-sci-fi .post-container,
+html.theme-sci-fi .page-container,
+html.theme-sci-fi .archive-container {
+    border-image-source: none !important;
+}
+
+/* Sci-fi border overlay - override the standard overlay with sci-fi tiles */
+html.theme-sci-fi .border-overlay {
+    border-image-source: url("/sci-fi/tiles/day_tiles.png");
+}
+
+/* Sci-fi border overlay - night */
+html.theme-sci-fi.night .border-overlay {
+    border-image-source: url("/sci-fi/tiles/tiles_night.png");
+}
+
+/* Sci-fi headers - day mode (using same selector pattern as night mode) */
+html.theme-sci-fi .header-image[style*="home.webp"] {
+    background-image: url("/sci-fi/headers/home.png") !important;
+}
+html.theme-sci-fi .header-image[style*="default.webp"] {
+    background-image: url("/sci-fi/headers/default.png") !important;
+}
+html.theme-sci-fi .header-image[style*="health.webp"] {
+    background-image: url("/sci-fi/headers/health.png") !important;
+}
+html.theme-sci-fi .header-image[style*="tabletop.webp"] {
+    background-image: url("/sci-fi/headers/tabletop.png") !important;
+}
+html.theme-sci-fi .header-image[style*="gaming.webp"] {
+    background-image: url("/sci-fi/headers/gaming.png") !important;
+}
+html.theme-sci-fi .header-image[style*="clown.webp"] {
+    background-image: url("/sci-fi/headers/clown.png") !important;
+}
+html.theme-sci-fi .header-image[style*="writing.webp"] {
+    background-image: url("/sci-fi/headers/writing.png") !important;
+}
+html.theme-sci-fi .header-image[style*="cooking.webp"] {
+    background-image: url("/sci-fi/headers/cooking.png") !important;
+}
+html.theme-sci-fi .header-image[style*="music.webp"] {
+    background-image: url("/sci-fi/headers/music.png") !important;
+}
+html.theme-sci-fi .header-image[style*="travel.webp"] {
+    background-image: url("/sci-fi/headers/travel.png") !important;
+}
+html.theme-sci-fi .header-image[style*="reading.webp"] {
+    background-image: url("/sci-fi/headers/reading.png") !important;
+}
+html.theme-sci-fi .header-image[style*="crafting.webp"] {
+    background-image: url("/sci-fi/headers/crafting.png") !important;
+}
+html.theme-sci-fi .header-image[style*="garden.webp"] {
+    background-image: url("/sci-fi/headers/garden.png") !important;
+}
+html.theme-sci-fi .header-image[style*="tech.webp"] {
+    background-image: url("/sci-fi/headers/tech.png") !important;
+}
+html.theme-sci-fi .header-image[style*="pets.webp"] {
+    background-image: url("/sci-fi/headers/pets.png") !important;
+}
+html.theme-sci-fi .header-image[style*="adhd.webp"] {
+    background-image: url("/sci-fi/headers/adhd.png") !important;
+}
+
+/* Sci-fi header frame */
+html.theme-sci-fi .header-frame {
+    background-image: url("/sci-fi/headers/ornate frame.png");
+}
+
+/* Sci-fi mode visual enhancements */
+html.theme-sci-fi .site-title a {
+    text-shadow:
+        0 0 10px rgba(100, 150, 255, 0.5),
+        0 0 20px rgba(100, 150, 255, 0.3);
+}
+
+html.theme-sci-fi .posts-container::before,
+html.theme-sci-fi .post-container::before,
+html.theme-sci-fi .page-container::before,
+html.theme-sci-fi .archive-container::before {
+    background: linear-gradient(135deg, #1a2535 0%, #0d1520 100%);
+}
+
+html.theme-sci-fi.night .posts-container::before,
+html.theme-sci-fi.night .post-container::before,
+html.theme-sci-fi.night .page-container::before,
+html.theme-sci-fi.night .archive-container::before {
+    background: linear-gradient(135deg, #0a1525 0%, #050a10 100%);
 }
 
 /* Respect reduced motion */

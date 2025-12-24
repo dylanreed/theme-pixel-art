@@ -14,7 +14,7 @@
     background: linear-gradient(180deg, #d4a030 0%, #a07820 100%);
     border: 3px solid #6b4c10;
     border-radius: 0;
-    cursor: url('/cursors/hand.png'), pointer;
+    cursor: url('/fantasy/cursors/hand.png'), pointer;
     z-index: 1001;
     font-size: 24px;
     display: flex;
@@ -143,7 +143,7 @@ html.night .achievement-panel {
     border: 2px solid #6b1810;
     color: #fff;
     font-size: 16px;
-    cursor: url('/cursors/hand.png'), pointer;
+    cursor: url('/fantasy/cursors/hand.png'), pointer;
     display: flex;
     align-items: center;
     justify-content: center;
