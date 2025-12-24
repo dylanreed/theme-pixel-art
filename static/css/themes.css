@@ -100,6 +100,12 @@ html.theme-cyberpunk .header-frame {
     background-image: url("/cyberpunk/headers/ornate frame.png");
 }
 
+/* Cyberpunk menu signs */
+html.theme-cyberpunk .nav-sign,
+html.theme-cyberpunk .nav-hamburger {
+    background-image: url("/cyberpunk/menu/sign.webp") !important;
+}
+
 /* Cyberpunk cursors */
 html.theme-cyberpunk * {
     cursor: url("/cyberpunk/cursors/pointer.png"), auto !important;
@@ -127,6 +133,15 @@ html.theme-cyberpunk .theme-switcher,
 html.theme-cyberpunk [role="button"],
 html.theme-cyberpunk [onclick] {
     cursor: url("/cyberpunk/cursors/hand.png"), pointer !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SCI-FI MENU SIGNS
+   ═══════════════════════════════════════════════════════════════ */
+
+html.theme-sci-fi .nav-sign,
+html.theme-sci-fi .nav-hamburger {
+    background-image: url("/sci-fi/menu/sign.webp") !important;
 }
 
 /* ═══════════════════════════════════════════════════════════════
