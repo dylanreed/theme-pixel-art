@@ -137,6 +137,35 @@ html.theme-cyberpunk .nav-hamburger {
     background-image: url("/cyberpunk/menu/sign.webp") !important;
 }
 
+/* Cyberpunk active menu - glowing pink neon */
+html.theme-cyberpunk .nav-sign.active span {
+    color: #ff00ff;
+    text-shadow:
+        0 0 5px #ff00ff,
+        0 0 10px #ff00ff,
+        0 0 20px #ff00ff,
+        0 0 40px #ff00ff;
+    animation: cyberpunk-neon-pulse 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes cyberpunk-neon-pulse {
+    from {
+        text-shadow:
+            0 0 5px #ff00ff,
+            0 0 10px #ff00ff,
+            0 0 20px #ff00ff,
+            0 0 40px #ff00ff;
+    }
+    to {
+        text-shadow:
+            0 0 2px #ff00ff,
+            0 0 5px #ff00ff,
+            0 0 10px #ff00ff,
+            0 0 20px #ff00ff,
+            0 0 60px #ff00ff;
+    }
+}
+
 /* Cyberpunk cursors */
 html.theme-cyberpunk * {
     cursor: url("/cyberpunk/cursors/pointer.png"), auto !important;

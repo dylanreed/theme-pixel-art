@@ -95,7 +95,7 @@
     </button>
     <div class="nav-links">
         <a href="{{ .Site.BaseURL }}" class="nav-sign{{ if .IsHome }} active{{ end }}">
-            <span>Home</span>
+            <span>home</span>
         </a>
         {{ range .Site.Menus.main }}
         {{ $isActive := or ($.IsMenuCurrent "main" .) ($.HasMenuCurrent "main" .) (eq $.RelPermalink .URL) (hasPrefix $.RelPermalink .URL) }}
