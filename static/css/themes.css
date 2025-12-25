@@ -17,13 +17,13 @@
 
 /* Cyberpunk background - day */
 html.theme-cyberpunk body {
-    background-image: url("/cyberpunk/backgrounds/3.png") !important;
+    background-image: url("/cyberpunk/backgrounds/3.webp") !important;
     background-size: 66.67% !important;
 }
 
 /* Cyberpunk background - night */
 html.theme-cyberpunk.night body {
-    background-image: url("/cyberpunk/backgrounds/3_night.png") !important;
+    background-image: url("/cyberpunk/backgrounds/3_night.webp") !important;
     background-size: 66.67% !important;
 }
 
@@ -49,52 +49,52 @@ html.theme-cyberpunk .archive-container {
    ═══════════════════════════════════════════════════════════════ */
 
 html.theme-cyberpunk .header-image[style*="home.webp"] {
-    background-image: url("/cyberpunk/headers/home.png") !important;
+    background-image: url("/cyberpunk/headers/home.webp") !important;
 }
 html.theme-cyberpunk .header-image[style*="default.webp"] {
-    background-image: url("/cyberpunk/headers/default.png") !important;
+    background-image: url("/cyberpunk/headers/default.webp") !important;
 }
 html.theme-cyberpunk .header-image[style*="health.webp"] {
-    background-image: url("/cyberpunk/headers/health.png") !important;
+    background-image: url("/cyberpunk/headers/health.webp") !important;
 }
 html.theme-cyberpunk .header-image[style*="tech.webp"] {
-    background-image: url("/cyberpunk/headers/tech.png") !important;
+    background-image: url("/cyberpunk/headers/tech.webp") !important;
 }
 html.theme-cyberpunk .header-image[style*="gaming.webp"] {
-    background-image: url("/cyberpunk/headers/gaming.png") !important;
+    background-image: url("/cyberpunk/headers/gaming.webp") !important;
 }
 html.theme-cyberpunk .header-image[style*="cooking.webp"] {
-    background-image: url("/cyberpunk/headers/cooking.png") !important;
+    background-image: url("/cyberpunk/headers/cooking.webp") !important;
 }
 html.theme-cyberpunk .header-image[style*="reading.webp"] {
-    background-image: url("/cyberpunk/headers/reading.png") !important;
+    background-image: url("/cyberpunk/headers/reading.webp") !important;
 }
 html.theme-cyberpunk .header-image[style*="music.webp"] {
-    background-image: url("/cyberpunk/headers/music.png") !important;
+    background-image: url("/cyberpunk/headers/music.webp") !important;
 }
 html.theme-cyberpunk .header-image[style*="writing.webp"] {
-    background-image: url("/cyberpunk/headers/writing.png") !important;
+    background-image: url("/cyberpunk/headers/writing.webp") !important;
 }
 html.theme-cyberpunk .header-image[style*="crafting.webp"] {
-    background-image: url("/cyberpunk/headers/crafting.png") !important;
+    background-image: url("/cyberpunk/headers/crafting.webp") !important;
 }
 html.theme-cyberpunk .header-image[style*="pets.webp"] {
-    background-image: url("/cyberpunk/headers/pets.png") !important;
+    background-image: url("/cyberpunk/headers/pets.webp") !important;
 }
 html.theme-cyberpunk .header-image[style*="travel.webp"] {
-    background-image: url("/cyberpunk/headers/travel.png") !important;
+    background-image: url("/cyberpunk/headers/travel.webp") !important;
 }
 html.theme-cyberpunk .header-image[style*="tabletop.webp"] {
-    background-image: url("/cyberpunk/headers/tabletop.png") !important;
+    background-image: url("/cyberpunk/headers/tabletop.webp") !important;
 }
 html.theme-cyberpunk .header-image[style*="garden.webp"] {
-    background-image: url("/cyberpunk/headers/garden.png") !important;
+    background-image: url("/cyberpunk/headers/garden.webp") !important;
 }
 html.theme-cyberpunk .header-image[style*="adhd.webp"] {
-    background-image: url("/cyberpunk/headers/adhd.png") !important;
+    background-image: url("/cyberpunk/headers/adhd.webp") !important;
 }
 html.theme-cyberpunk .header-image[style*="clown.webp"] {
-    background-image: url("/cyberpunk/headers/clown.png") !important;
+    background-image: url("/cyberpunk/headers/clown.webp") !important;
 }
 
 /* Cyberpunk header frame */
@@ -128,7 +128,7 @@ html.theme-cyberpunk .note-scroll .note-content a:hover {
 
 /* Cyberpunk closed note */
 html.theme-cyberpunk .note-scroll.rolled-up {
-    background-image: url("/cyberpunk/notes/closed.png");
+    background-image: url("/cyberpunk/notes/closed.webp");
 }
 
 /* Cyberpunk menu signs */
@@ -212,15 +212,15 @@ html.theme-sci-fi [onclick] {
    ═══════════════════════════════════════════════════════════════ */
 
 html.theme-sci-fi .note-scroll::before {
-    background-image: url("/sci-fi/notes/top.png");
+    background-image: url("/sci-fi/notes/top.webp");
 }
 
 html.theme-sci-fi .note-scroll::after {
-    background-image: url("/sci-fi/notes/bottom.png");
+    background-image: url("/sci-fi/notes/bottom.webp");
 }
 
 html.theme-sci-fi .note-scroll .note-content {
-    background-image: url("/sci-fi/notes/middle.png");
+    background-image: url("/sci-fi/notes/middle.webp");
     color: #ffffff;
     text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
 }
@@ -236,7 +236,7 @@ html.theme-sci-fi .note-scroll .note-content a:hover {
 
 /* Sci-Fi closed note */
 html.theme-sci-fi .note-scroll.rolled-up {
-    background-image: url("/sci-fi/notes/closed.png");
+    background-image: url("/sci-fi/notes/closed.webp");
 }
 
 /* ═══════════════════════════════════════════════════════════════

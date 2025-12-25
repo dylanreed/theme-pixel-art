@@ -1294,13 +1294,13 @@ html.night .help-popup-close {
 
 /* Sci-fi background - day */
 html.theme-sci-fi body {
-    background-image: url("/sci-fi/backgrounds/3.png") !important;
+    background-image: url("/sci-fi/backgrounds/3.webp") !important;
     background-size: 66.67% !important;
 }
 
 /* Sci-fi background - night */
 html.theme-sci-fi.night body {
-    background-image: url("/sci-fi/backgrounds/3_night.png") !important;
+    background-image: url("/sci-fi/backgrounds/3_night.webp") !important;
     background-size: 66.67% !important;
 }
 
@@ -1324,57 +1324,57 @@ html.theme-sci-fi.night .border-overlay {
 
 /* Sci-fi headers - day mode (using same selector pattern as night mode) */
 html.theme-sci-fi .header-image[style*="home.webp"] {
-    background-image: url("/sci-fi/headers/home.png") !important;
+    background-image: url("/sci-fi/headers/home.webp") !important;
 }
 html.theme-sci-fi .header-image[style*="default.webp"] {
-    background-image: url("/sci-fi/headers/default.png") !important;
+    background-image: url("/sci-fi/headers/default.webp") !important;
 }
 html.theme-sci-fi .header-image[style*="health.webp"] {
-    background-image: url("/sci-fi/headers/health.png") !important;
+    background-image: url("/sci-fi/headers/health.webp") !important;
 }
 html.theme-sci-fi .header-image[style*="tabletop.webp"] {
-    background-image: url("/sci-fi/headers/tabletop.png") !important;
+    background-image: url("/sci-fi/headers/tabletop.webp") !important;
 }
 html.theme-sci-fi .header-image[style*="gaming.webp"] {
-    background-image: url("/sci-fi/headers/gaming.png") !important;
+    background-image: url("/sci-fi/headers/gaming.webp") !important;
 }
 html.theme-sci-fi .header-image[style*="clown.webp"] {
-    background-image: url("/sci-fi/headers/clown.png") !important;
+    background-image: url("/sci-fi/headers/clown.webp") !important;
 }
 html.theme-sci-fi .header-image[style*="writing.webp"] {
-    background-image: url("/sci-fi/headers/writing.png") !important;
+    background-image: url("/sci-fi/headers/writing.webp") !important;
 }
 html.theme-sci-fi .header-image[style*="cooking.webp"] {
-    background-image: url("/sci-fi/headers/cooking.png") !important;
+    background-image: url("/sci-fi/headers/cooking.webp") !important;
 }
 html.theme-sci-fi .header-image[style*="music.webp"] {
-    background-image: url("/sci-fi/headers/music.png") !important;
+    background-image: url("/sci-fi/headers/music.webp") !important;
 }
 html.theme-sci-fi .header-image[style*="travel.webp"] {
-    background-image: url("/sci-fi/headers/travel.png") !important;
+    background-image: url("/sci-fi/headers/travel.webp") !important;
 }
 html.theme-sci-fi .header-image[style*="reading.webp"] {
-    background-image: url("/sci-fi/headers/reading.png") !important;
+    background-image: url("/sci-fi/headers/reading.webp") !important;
 }
 html.theme-sci-fi .header-image[style*="crafting.webp"] {
-    background-image: url("/sci-fi/headers/crafting.png") !important;
+    background-image: url("/sci-fi/headers/crafting.webp") !important;
 }
 html.theme-sci-fi .header-image[style*="garden.webp"] {
-    background-image: url("/sci-fi/headers/garden.png") !important;
+    background-image: url("/sci-fi/headers/garden.webp") !important;
 }
 html.theme-sci-fi .header-image[style*="tech.webp"] {
-    background-image: url("/sci-fi/headers/tech.png") !important;
+    background-image: url("/sci-fi/headers/tech.webp") !important;
 }
 html.theme-sci-fi .header-image[style*="pets.webp"] {
-    background-image: url("/sci-fi/headers/pets.png") !important;
+    background-image: url("/sci-fi/headers/pets.webp") !important;
 }
 html.theme-sci-fi .header-image[style*="adhd.webp"] {
-    background-image: url("/sci-fi/headers/adhd.png") !important;
+    background-image: url("/sci-fi/headers/adhd.webp") !important;
 }
 
 /* Sci-fi header frame */
 html.theme-sci-fi .header-frame {
-    background-image: url("/sci-fi/headers/ornate frame.png");
+    background-image: url("/sci-fi/headers/ornate frame.webp");
 }
 
 /* Sci-fi mode visual enhancements */
