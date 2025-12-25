@@ -59,3 +59,25 @@ Create cyberpunk styled category visuals:
 - Neon glow effects
 - Magenta/cyan accent colors
 - Glitchy/digital aesthetic
+
+## Cozy Cabin Theme
+Create a new "cozy cabin" theme with warm, rustic aesthetic:
+
+### Asset Checklist
+- [ ] Background tiles (day and night)
+- [ ] Border tiles (day and night)
+- [ ] Ornate frame for headers
+- [ ] 16 category headers (day versions)
+- [ ] 16 category headers (night versions)
+- [ ] Note scroll assets (top, middle, bottom, closed)
+- [ ] Menu sign
+- [ ] Custom cursors (pointer, hand)
+- [ ] Cat sprite set (if unique style needed)
+
+### CSS Setup
+- Add `html.theme-cabin` selectors to themes.css
+- Add night mode with `html.theme-cabin.night`
+- Define cabin-specific fonts
+- Set up category colors with warm tones
+
+See `cabin_prompts.md` for AI image generation prompts.
