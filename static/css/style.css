@@ -42,6 +42,7 @@ body {
     background-color: #87ceeb;
     background-image: url("/fantasy/backgrounds/3.webp");
     background-repeat: repeat;
+    background-size: 66.67%; /* Scale tiles 1.5x smaller to show more */
     image-rendering: pixelated;
     overflow-x: hidden;
     width: 100%;
@@ -147,7 +148,7 @@ html.night {
     font-size: 26px;
     color: #4a3520;
     text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
-    padding-top: 67px; /* Offset for chain area */
+    padding-top: 30px; /* Offset for chain area */
     text-align: center;
     line-height: 1.1;
     pointer-events: none; /* Let clicks pass through to parent link */
@@ -283,6 +284,7 @@ html.night body {
     background-color: #1a2030;
     background-image: url("/fantasy/backgrounds/3_night.webp");
     background-repeat: repeat;
+    background-size: 66.67%;
 }
 
 /* Night mode content background */
@@ -1274,162 +1276,188 @@ html.night .page-content td {
 
 /* Sprite-specific title glow and tag colors */
 .sprite-skele ~ .post-body .post-title,
-.category-health .post-title {
+.category-health .post-title,
+.category-health .archive-title {
     text-shadow:
         0 0 8px #5de2a3,
         2px 2px 0 rgba(255, 255, 255, 0.3);
 }
 .sprite-skele ~ .post-body .post-tag,
-.category-health .post-tag {
+.category-health .post-tag,
+.category-health .archive-tag {
     background: #5de2a3;
     color: #1a3a2a;
 }
 
 .sprite-knight ~ .post-body .post-title,
-.category-gaming .post-title {
+.category-gaming .post-title,
+.category-gaming .archive-title {
     text-shadow:
         0 0 8px #40c8d8,
         2px 2px 0 rgba(255, 255, 255, 0.3);
 }
 .sprite-knight ~ .post-body .post-tag,
-.category-gaming .post-tag {
+.category-gaming .post-tag,
+.category-gaming .archive-tag {
     background: #40c8d8;
     color: #1a3a3a;
 }
 
 .sprite-dragon ~ .post-body .post-title,
-.category-tabletop .post-title {
+.category-tabletop .post-title,
+.category-tabletop .archive-title {
     text-shadow:
         0 0 8px #40c8d8,
         2px 2px 0 rgba(255, 255, 255, 0.3);
 }
 
 .sprite-dragon ~ .post-body .post-tag,
-.category-tabletop .post-tag {
+.category-tabletop .post-tag,
+.category-tabletop .archive-tag {
     background: #40c8d8;
     color: #1a3a3a;
 }
 
 .sprite-clown ~ .post-body .post-title,
-.category-personal .post-title {
+.category-personal .post-title,
+.category-personal .archive-title {
     text-shadow:
         0 0 8px #7050a0,
         2px 2px 0 rgba(255, 255, 255, 0.3);
 }
 
 .sprite-clown ~ .post-body .post-tag,
-.category-personal .post-tag {
+.category-personal .post-tag,
+.category-personal .archive-tag {
     background: #7050a0;
     color: #fff;
 }
 
 .sprite-golem ~ .post-body .post-title,
-.category-tech .post-title {
+.category-tech .post-title,
+.category-tech .archive-title {
     text-shadow:
         0 0 8px #6cd9e8,
         2px 2px 0 rgba(255, 255, 255, 0.3);
 }
 .sprite-golem ~ .post-body .post-tag,
-.category-tech .post-tag {
+.category-tech .post-tag,
+.category-tech .archive-tag {
     background: #6cd9e8;
     color: #1a3a3a;
 }
 
 .sprite-wizard ~ .post-body .post-tag,
 .sprite-banjo ~ .post-body .post-title,
-.category-music .post-title {
+.category-music .post-title,
+.category-music .archive-title {
     text-shadow:
         0 0 8px #e8c546,
         2px 2px 0 rgba(255, 255, 255, 0.3);
 }
 
 .sprite-banjo ~ .post-body .post-tag,
-.category-music .post-tag {
+.category-music .post-tag,
+.category-music .archive-tag {
     background: #e8c546;
     color: #3a3020;
 }
 .sprite-adventure ~ .post-body .post-title,
-.category-travel .post-title {
+.category-travel .post-title,
+.category-travel .archive-title {
     text-shadow:
         0 0 8px #5a9e5a,
         2px 2px 0 rgba(255, 255, 255, 0.3);
 }
 .sprite-adventure ~ .post-body .post-tag,
-.category-travel .post-tag {
+.category-travel .post-tag,
+.category-travel .archive-tag {
     background: #5a9e5a;
     color: #fff;
 }
 
 .sprite-donkey ~ .post-body .post-title,
-.category-adhd .post-title {
+.category-adhd .post-title,
+.category-adhd .archive-title {
     text-shadow:
         0 0 8px #5a9e5a,
         2px 2px 0 rgba(255, 255, 255, 0.3);
 }
 .sprite-donkey ~ .post-body .post-tag,
-.category-adhd .post-tag {
+.category-adhd .post-tag,
+.category-adhd .archive-tag {
     background: #5a9e5a;
     color: #fff;
 }
 
 .sprite-quill ~ .post-body .post-title,
-.category-writing .post-title {
+.category-writing .post-title,
+.category-writing .archive-title {
     text-shadow:
         0 0 8px #c4a060,
         2px 2px 0 rgba(255, 255, 255, 0.3);
 }
 
 .sprite-quill ~ .post-body .post-tag,
-.category-writing .post-tag {
+.category-writing .post-tag,
+.category-writing .archive-tag {
     background: #c4a060;
     color: #2a2010;
 }
 
 .sprite-muse ~ .post-body .post-title,
-.category-crafting .post-title {
+.category-crafting .post-title,
+.category-crafting .archive-title {
     text-shadow:
         0 0 8px #c4a060,
         2px 2px 0 rgba(255, 255, 255, 0.3);
 }
 
 .sprite-muse ~ .post-body .post-tag,
-.category-crafting .post-tag {
+.category-crafting .post-tag,
+.category-crafting .archive-tag {
     background: #c4a060;
     color: #2a2010;
 }
 .sprite-cauldron ~ .post-body .post-title,
-.category-cooking .post-title {
+.category-cooking .post-title,
+.category-cooking .archive-title {
     text-shadow:
         0 0 8px #e07040,
         2px 2px 0 rgba(255, 255, 255, 0.3);
 }
 
 .sprite-cauldron ~ .post-body .post-tag,
-.category-cooking .post-tag {
+.category-cooking .post-tag,
+.category-cooking .archive-tag {
     background: #e07040;
     color: #fff;
 }
 
 .sprite-book ~ .post-body .post-title,
-.category-reading .post-title {
+.category-reading .post-title,
+.category-reading .archive-title {
     text-shadow:
         0 0 8px #8060c0,
         2px 2px 0 rgba(255, 255, 255, 0.3);
 }
 .sprite-book ~ .post-body .post-tag,
-.category-reading .post-tag {
+.category-reading .post-tag,
+.category-reading .archive-tag {
     background: #8060c0;
     color: #fff;
 }
 
 .sprite-cat ~ .post-body .post-title,
-.category-pets .post-title {
+.category-pets .post-title,
+.category-pets .archive-title {
     text-shadow:
         0 0 8px #e0a080,
         2px 2px 0 rgba(255, 255, 255, 0.3);
 }
 .sprite-cat ~ .post-body .post-tag,
-.category-pets .post-tag {
+.category-pets .post-tag,
+.category-pets .archive-tag {
     background: #e0a080;
     color: #3a2010;
 }
@@ -1585,6 +1613,8 @@ html.night .site-footer p {
 
 .archive-list {
     list-style: none;
+    position: relative;
+    z-index: 1; /* Ensure list is above ::before background */
 }
 
 .archive-entry {
@@ -1594,6 +1624,7 @@ html.night .site-footer p {
     padding: 8px 0;
     border-bottom: 1px solid rgba(139, 90, 43, 0.2);
     transition: background 0.2s;
+    position: relative; /* Ensure clickable above background */
 }
 
 .archive-entry:hover {
@@ -1737,7 +1768,7 @@ html.night .site-footer p {
     width: 100%;
     max-width: 753px;
     height: 318px;
-    background: url("/sprites/scroll-top.png") no-repeat center bottom;
+    background: url("/fantasy/notes/top.png") no-repeat center bottom;
     background-size: 100% auto;
     image-rendering: pixelated;
 }
@@ -1748,7 +1779,7 @@ html.night .site-footer p {
     width: 100%;
     height: 318px;
     max-width: 753px;
-    background: url("/sprites/scroll-bottom.png") no-repeat center top;
+    background: url("/fantasy/notes/bottom.png") no-repeat center top;
     background-size: 100% auto;
     image-rendering: pixelated;
 }
@@ -1763,7 +1794,7 @@ html.night .site-footer p {
     max-width: 753px;
     padding: 20px 18.5% 30px 18.5%;
     box-sizing: border-box;
-    background: url("/sprites/scroll-middle.png") repeat-y center top;
+    background: url("/fantasy/notes/middle.png") repeat-y center top;
     background-size: 100% auto;
     image-rendering: pixelated;
     margin-top: 0px;
@@ -1885,15 +1916,15 @@ html.night .site-footer p {
     transition: none !important;
 }
 
-/* Rolled up state */
+/* Rolled up state - show closed scroll image */
 .note-scroll.rolled-up {
-    /* Fixed height = top (57px) + bottom (98px) */
     height: 155px;
     overflow: hidden;
-    /* Adjust to keep top aligned when rolled */
     margin-top: 10px;
-    /* Match the gap that exists when open */
     margin-bottom: 100px;
+    background: url("/fantasy/notes/closed.png") no-repeat center top;
+    background-size: 100% auto;
+    image-rendering: pixelated;
 }
 
 .note-scroll.rolled-up .note-content,
@@ -1905,20 +1936,10 @@ html.night .site-footer p {
     margin: 0 !important;
 }
 
-/* Top scroll - 35% of scaled height (~57px) */
-.note-scroll.rolled-up::before {
-    height: 57px;
-    background-position: center top;
-}
-
-/* Bottom scroll - 60% from bottom of scaled height (~98px) */
+/* Hide top/bottom when rolled - using closed image instead */
+.note-scroll.rolled-up::before,
 .note-scroll.rolled-up::after {
-    position: absolute;
-    top: 57px;
-    left: 0;
-    right: 0;
-    height: 98px;
-    background-position: center bottom;
+    display: none;
 }
 
 /* Clickable zone covers whole scroll when rolled */
@@ -2238,6 +2259,7 @@ html.night .pagination-info {
         padding: 0 10px;
         margin-top: -30px;
         gap: 0;
+        z-index: 10; /* Above header-container (z-index: 2) so hamburger is clickable */
     }
 
     .nav-hamburger {

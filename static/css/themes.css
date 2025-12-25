@@ -18,11 +18,13 @@
 /* Cyberpunk background - day */
 html.theme-cyberpunk body {
     background-image: url("/cyberpunk/backgrounds/3.png") !important;
+    background-size: 66.67% !important;
 }
 
 /* Cyberpunk background - night */
 html.theme-cyberpunk.night body {
     background-image: url("/cyberpunk/backgrounds/3_night.png") !important;
+    background-size: 66.67% !important;
 }
 
 /* Cyberpunk border overlay */
@@ -100,6 +102,35 @@ html.theme-cyberpunk .header-frame {
     background-image: url("/cyberpunk/headers/ornate frame.png");
 }
 
+/* Cyberpunk note scroll assets */
+html.theme-cyberpunk .note-scroll::before {
+    background-image: url("/cyberpunk/notes/top.webp");
+}
+
+html.theme-cyberpunk .note-scroll::after {
+    background-image: url("/cyberpunk/notes/bottom.webp");
+}
+
+html.theme-cyberpunk .note-scroll .note-content {
+    background-image: url("/cyberpunk/notes/middle.webp");
+    color: #33ff33; /* CRT phosphor green */
+    text-shadow: 0 0 8px rgba(51, 255, 51, 0.6);
+}
+
+html.theme-cyberpunk .note-scroll .note-content a {
+    color: #66ff66;
+}
+
+html.theme-cyberpunk .note-scroll .note-content a:hover {
+    color: #99ff99;
+    text-shadow: 0 0 12px rgba(51, 255, 51, 0.8);
+}
+
+/* Cyberpunk closed note */
+html.theme-cyberpunk .note-scroll.rolled-up {
+    background-image: url("/cyberpunk/notes/closed.png");
+}
+
 /* Cyberpunk menu signs */
 html.theme-cyberpunk .nav-sign,
 html.theme-cyberpunk .nav-hamburger {
@@ -174,4 +205,158 @@ html.theme-sci-fi .theme-switcher,
 html.theme-sci-fi [role="button"],
 html.theme-sci-fi [onclick] {
     cursor: url("/sci-fi/cursors/hand.png"), pointer !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SCI-FI NOTE SCROLL ASSETS
+   ═══════════════════════════════════════════════════════════════ */
+
+html.theme-sci-fi .note-scroll::before {
+    background-image: url("/sci-fi/notes/top.png");
+}
+
+html.theme-sci-fi .note-scroll::after {
+    background-image: url("/sci-fi/notes/bottom.png");
+}
+
+html.theme-sci-fi .note-scroll .note-content {
+    background-image: url("/sci-fi/notes/middle.png");
+    color: #ffffff;
+    text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+html.theme-sci-fi .note-scroll .note-content a {
+    color: #80d0ff;
+}
+
+html.theme-sci-fi .note-scroll .note-content a:hover {
+    color: #a0e0ff;
+    text-shadow: 0 0 8px rgba(128, 208, 255, 0.6);
+}
+
+/* Sci-Fi closed note */
+html.theme-sci-fi .note-scroll.rolled-up {
+    background-image: url("/sci-fi/notes/closed.png");
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SCI-FI FONTS
+   Retro analog aesthetic (70s NASA, Alien)
+   - Title: Orbitron (geometric, control room)
+   - Menus: Share Tech Mono (terminal readout)
+   - Body: IBM Plex Mono (retro-tech heritage)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Sci-Fi site title */
+html.theme-sci-fi .site-title {
+    font-family: "Orbitron", sans-serif;
+}
+
+/* Sci-Fi menu/UI elements */
+html.theme-sci-fi .nav-sign span,
+html.theme-sci-fi .post-tag,
+html.theme-sci-fi .post-title,
+html.theme-sci-fi .post-link,
+html.theme-sci-fi .archive-tag,
+html.theme-sci-fi .pagination,
+html.theme-sci-fi .note-date,
+html.theme-sci-fi .post-meta,
+html.theme-sci-fi .sierra-btn::after,
+html.theme-sci-fi .theme-switcher::after {
+    font-family: "Share Tech Mono", monospace;
+}
+
+/* Sci-Fi body text */
+html.theme-sci-fi body,
+html.theme-sci-fi .post-excerpt,
+html.theme-sci-fi .post-content,
+html.theme-sci-fi .page-content,
+html.theme-sci-fi .note-content,
+html.theme-sci-fi article p {
+    font-family: "IBM Plex Mono", monospace;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CYBERPUNK FONTS
+   Gritty neon aesthetic (Blade Runner, CP2077)
+   - Title: Teko (angular, aggressive)
+   - Menus: Rajdhani (sharp edges, readable)
+   - Body: Fira Code (hacker terminal)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Cyberpunk site title */
+html.theme-cyberpunk .site-title {
+    font-family: "Teko", sans-serif;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+/* Cyberpunk menu/UI elements */
+html.theme-cyberpunk .nav-sign span,
+html.theme-cyberpunk .post-tag,
+html.theme-cyberpunk .post-title,
+html.theme-cyberpunk .post-link,
+html.theme-cyberpunk .archive-tag,
+html.theme-cyberpunk .pagination,
+html.theme-cyberpunk .note-date,
+html.theme-cyberpunk .post-meta,
+html.theme-cyberpunk .sierra-btn::after,
+html.theme-cyberpunk .theme-switcher::after {
+    font-family: "Rajdhani", sans-serif;
+    font-weight: 600;
+}
+
+/* Cyberpunk body text */
+html.theme-cyberpunk body,
+html.theme-cyberpunk .post-excerpt,
+html.theme-cyberpunk .post-content,
+html.theme-cyberpunk .page-content,
+html.theme-cyberpunk .note-content,
+html.theme-cyberpunk article p {
+    font-family: "Fira Code", monospace;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SCI-FI ARCHIVE COLORS
+   Blue/tech tones - year headers and dates only (category colors handle titles/tags)
+   ═══════════════════════════════════════════════════════════════ */
+
+html.theme-sci-fi .archive-date {
+    color: #4a6a8a;
+}
+
+html.theme-sci-fi .year-header {
+    color: #1a3a5c;
+    border-bottom-color: #3a6a9a;
+}
+
+html.theme-sci-fi .archive-entry {
+    border-bottom-color: rgba(42, 106, 156, 0.2);
+}
+
+html.theme-sci-fi .archive-entry:hover {
+    background: rgba(42, 106, 156, 0.1);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CYBERPUNK ARCHIVE COLORS
+   Neon tones - year headers and dates only (category colors handle titles/tags)
+   ═══════════════════════════════════════════════════════════════ */
+
+html.theme-cyberpunk .archive-date {
+    color: #ff66ff;
+}
+
+html.theme-cyberpunk .year-header {
+    color: #ff00ff;
+    border-bottom-color: #00ffff;
+    text-shadow: 0 0 8px rgba(255, 0, 255, 0.4);
+}
+
+html.theme-cyberpunk .archive-entry {
+    border-bottom-color: rgba(255, 0, 255, 0.3);
+}
+
+html.theme-cyberpunk .archive-entry:hover {
+    background: rgba(255, 0, 255, 0.1);
 }

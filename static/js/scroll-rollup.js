@@ -13,7 +13,26 @@
 
     if (scrolls.length === 0) return;
 
-    scrolls.forEach(scroll => {
+    // Get storage key for current page
+    const pageKey = 'scroll_states_' + window.location.pathname;
+
+    // Load saved states for this page
+    function loadStates() {
+        try {
+            return JSON.parse(localStorage.getItem(pageKey)) || {};
+        } catch (e) {
+            return {};
+        }
+    }
+
+    // Save states for this page
+    function saveStates(states) {
+        localStorage.setItem(pageKey, JSON.stringify(states));
+    }
+
+    const savedStates = loadStates();
+
+    scrolls.forEach((scroll, index) => {
         // Create clickable zone (covers bottom when open, entire scroll when closed)
         const clickZone = document.createElement('div');
         clickZone.className = 'scroll-bottom-clickable';
@@ -24,6 +43,12 @@
 
         const content = scroll.querySelector('.note-content');
         const meta = scroll.querySelector('.note-meta');
+
+        // Restore saved state
+        if (savedStates[index] === true) {
+            scroll.classList.add('rolled-up');
+            clickZone.setAttribute('aria-label', 'Click to unroll scroll');
+        }
 
         // Toggle roll state
         const toggleRoll = () => {
@@ -50,6 +75,11 @@
                 scroll.style.marginTop = '';
 
                 clickZone.setAttribute('aria-label', 'Click to roll up scroll');
+
+                // Save unrolled state
+                const states = loadStates();
+                delete states[index];
+                saveStates(states);
             } else {
                 // Roll up - set current height explicitly first for smooth animation
                 if (content) {
@@ -65,6 +95,11 @@
                 // Now add rolled-up class which will animate to 0
                 scroll.classList.add('rolled-up');
                 clickZone.setAttribute('aria-label', 'Click to unroll scroll');
+
+                // Save rolled-up state
+                const states = loadStates();
+                states[index] = true;
+                saveStates(states);
 
                 // Trigger achievement on first roll
                 if (window.achievementHooks?.onScrollRolled) {

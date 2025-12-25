@@ -1295,11 +1295,13 @@ html.night .help-popup-close {
 /* Sci-fi background - day */
 html.theme-sci-fi body {
     background-image: url("/sci-fi/backgrounds/3.png") !important;
+    background-size: 66.67% !important;
 }
 
 /* Sci-fi background - night */
 html.theme-sci-fi.night body {
     background-image: url("/sci-fi/backgrounds/3_night.png") !important;
+    background-size: 66.67% !important;
 }
 
 /* Sci-fi border - hide original border when overlay is present */
