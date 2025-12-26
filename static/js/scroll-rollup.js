@@ -16,10 +16,10 @@
     // Get storage key for current page
     const pageKey = 'scroll_states_' + window.location.pathname;
 
-    // Load saved states for this page
+    // Load saved states for this page (sessionStorage clears on hard reload)
     function loadStates() {
         try {
-            return JSON.parse(localStorage.getItem(pageKey)) || {};
+            return JSON.parse(sessionStorage.getItem(pageKey)) || {};
         } catch (e) {
             return {};
         }
@@ -27,7 +27,7 @@
 
     // Save states for this page
     function saveStates(states) {
-        localStorage.setItem(pageKey, JSON.stringify(states));
+        sessionStorage.setItem(pageKey, JSON.stringify(states));
     }
 
     const savedStates = loadStates();
