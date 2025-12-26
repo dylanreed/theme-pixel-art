@@ -18,6 +18,20 @@
             spawnRate: 50, // ms between sparkles when moving
             lifetime: 800
         },
+        fallingSprites: {
+            // Base sprites fall on all themes (always active)
+            baseEnabled: true,
+            baseSpawnInterval: 3000,  // ms between base sprite spawns
+            // Chaos sprites only in chaos mode (theme-specific)
+            chaosSpawnInterval: 2000,
+            // Sprite sheet is 160x128, 5 cols x 4 rows = 20 sprites at 32x32 each
+            spriteSize: 32,
+            cols: 5,
+            rows: 4,
+            // Animation options
+            animations: ['tumble-fall-slow', 'tumble-fall-medium', 'tumble-fall-fast',
+                         'tumble-fall-reverse', 'tumble-fall-sway', 'tumble-fall-wobble']
+        },
         floatingSprites: {
             enabled: true,
             count: 3,
@@ -444,6 +458,7 @@
             startParticles();
             startFloatingSprites();
             startFloatingRunes();
+            startChaosFallingSprites();
             document.addEventListener('mousemove', handleMouseMove);
             document.addEventListener('click', handleClick);
             console.log('🌀 CHAOS ENABLED - Particles, sprites, and sparkles activated!');
@@ -452,6 +467,7 @@
             chaosMode = false;
             document.body.classList.remove('chaos-mode');
             localStorage.removeItem('chaosMode');
+            stopChaosFallingSprites();
             document.removeEventListener('mousemove', handleMouseMove);
             document.removeEventListener('click', handleClick);
             console.log('Chaos disabled - Back to calm');
@@ -546,6 +562,140 @@ KONAMI CODE: ↑↑↓↓←→←→BA
     function initRamonaTrail() {
         // Hearts now spawn from footer.html when Ramona is idle
         // This function is kept for potential future trail effects
+    }
+
+    // ═══════════════════════════════════════════════════════════════
+    // FALLING SPRITES - Tumbling pixel art objects
+    // ═══════════════════════════════════════════════════════════════
+
+    function getCurrentTheme() {
+        // Check for theme class on html element
+        const html = document.documentElement;
+        if (html.classList.contains('theme-sci-fi')) return 'sci-fi';
+        if (html.classList.contains('theme-cyberpunk')) return 'cyberpunk';
+        if (html.classList.contains('theme-cabin')) return 'cabin';
+        if (html.classList.contains('theme-underwater')) return 'underwater';
+        return 'fantasy'; // default
+    }
+
+    function getThemeSpriteSheet(theme) {
+        // Theme-specific sprite sheets (some use falling.png, some use falling_sprites.png)
+        const spriteFiles = {
+            'fantasy': '/fantasy/sprites/falling/falling.png',
+            'sci-fi': '/sci-fi/sprites/falling/falling_sprites.png',
+            'cyberpunk': '/cyberpunk/sprites/falling/falling.png',
+            'cabin': '/cabin/sprites/falling/falling_sprites.png',
+            'underwater': '/underwater/sprites/falling/falling_sprites.png'
+        };
+        return spriteFiles[theme] || spriteFiles['fantasy'];
+    }
+
+    function createFallingSprite(isChaosModeSprite) {
+        const cfg = CONFIG.fallingSprites;
+
+        // Determine which sprite sheet to use
+        let spriteSheet;
+        if (isChaosModeSprite) {
+            // Chaos mode uses theme-specific sprites
+            const theme = getCurrentTheme();
+            spriteSheet = getThemeSpriteSheet(theme);
+        } else {
+            // Base sprites use the generic sprite sheet
+            spriteSheet = '/sprites/falling/falling.png';
+        }
+
+        // Create sprite element
+        const sprite = document.createElement('div');
+        sprite.className = isChaosModeSprite ? 'chaos-sprite' : 'falling-sprite';
+
+        // Set sprite sheet as background
+        sprite.style.backgroundImage = `url('${spriteSheet}')`;
+        sprite.style.backgroundRepeat = 'no-repeat';
+
+        // Random size variation (0.8x to 1.5x for variety)
+        const scale = 0.8 + Math.random() * 0.7;
+        sprite.style.width = (cfg.spriteSize * scale) + 'px';
+        sprite.style.height = (cfg.spriteSize * scale) + 'px';
+        sprite.style.backgroundSize = `${160 * scale}px ${128 * scale}px`;
+
+        // Pick random sprite from the 5x4 grid
+        // Position must be scaled to match the scaled background-size
+        const col = Math.floor(Math.random() * cfg.cols);
+        const row = Math.floor(Math.random() * cfg.rows);
+        const xPos = col * cfg.spriteSize * scale;
+        const yPos = row * cfg.spriteSize * scale;
+        sprite.style.backgroundPosition = `-${xPos}px -${yPos}px`;
+
+        // Random horizontal position
+        sprite.style.left = Math.random() * 100 + 'vw';
+
+        // Pick random tumbling animation
+        const animation = cfg.animations[Math.floor(Math.random() * cfg.animations.length)];
+        const duration = 6 + Math.random() * 10; // 6-16 seconds
+        sprite.style.animationName = animation;
+        sprite.style.animationDuration = duration + 's';
+        sprite.style.animationTimingFunction = 'linear';
+        sprite.style.animationFillMode = 'forwards';
+
+        document.body.appendChild(sprite);
+
+        // Remove after animation completes
+        setTimeout(() => sprite.remove(), duration * 1000);
+    }
+
+    function startBaseFallingSprites() {
+        if (!CONFIG.fallingSprites.baseEnabled) return;
+
+        console.log('🍂 Base falling sprites activated');
+
+        // Spawn base sprites periodically
+        setInterval(() => {
+            // Only spawn if page is visible and not too many sprites
+            if (document.hidden) return;
+            const existingSprites = document.querySelectorAll('.falling-sprite');
+            if (existingSprites.length < 8) {
+                createFallingSprite(false);
+            }
+        }, CONFIG.fallingSprites.baseSpawnInterval);
+
+        // Spawn a few immediately on load
+        setTimeout(() => createFallingSprite(false), 500);
+        setTimeout(() => createFallingSprite(false), 1500);
+    }
+
+    function startChaosFallingSprites() {
+        // Interval ID stored so we can stop it when chaos mode disabled
+        if (window.chaosSpritesInterval) return; // Already running
+
+        const theme = getCurrentTheme();
+        console.log(`🌪️ Chaos falling sprites activated (${theme} theme)`);
+
+        window.chaosSpritesInterval = setInterval(() => {
+            if (!chaosMode) {
+                clearInterval(window.chaosSpritesInterval);
+                window.chaosSpritesInterval = null;
+                return;
+            }
+            if (document.hidden) return;
+            const existingSprites = document.querySelectorAll('.chaos-sprite');
+            if (existingSprites.length < 12) {
+                createFallingSprite(true);
+            }
+        }, CONFIG.fallingSprites.chaosSpawnInterval);
+
+        // Spawn a burst immediately
+        for (let i = 0; i < 3; i++) {
+            setTimeout(() => createFallingSprite(true), i * 300);
+        }
+    }
+
+    function stopChaosFallingSprites() {
+        if (window.chaosSpritesInterval) {
+            clearInterval(window.chaosSpritesInterval);
+            window.chaosSpritesInterval = null;
+        }
+        // Remove existing chaos sprites
+        document.querySelectorAll('.chaos-sprite').forEach(s => s.remove());
     }
 
     // ═══════════════════════════════════════════════════════════════
@@ -647,6 +797,9 @@ KONAMI CODE: ↑↑↓↓←→←→BA
 
         // Start seasonal effects
         startSeasonalEffects();
+
+        // Start base falling sprites (always active on all themes)
+        startBaseFallingSprites();
 
         // Add border overlays to all containers (for border-on-top effect)
         addBorderOverlays();

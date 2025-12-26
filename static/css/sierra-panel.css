@@ -1,107 +1,5 @@
 /* ABOUTME: Sierra-style dropdown control panel that slides down from top on hover
-   ABOUTME: Contains all UI buttons (theme toggle, chaos, achievements, etc.) */
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   THEME SWITCHER - floating button separate from dropdown panel
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-.theme-switcher {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    z-index: 9997;
-    width: 48px;
-    height: 48px;
-    padding: 4px;
-    background: linear-gradient(180deg, #d4a854 0%, #8b6914 50%, #6b4f0f 100%);
-    border: 3px solid #4a3810;
-    border-radius: 8px;
-    box-shadow:
-        inset 1px 1px 0 rgba(255, 255, 255, 0.3),
-        inset -1px -1px 0 rgba(0, 0, 0, 0.2),
-        2px 2px 4px rgba(0, 0, 0, 0.4);
-    cursor: url("/fantasy/cursors/hand.png"), pointer;
-    image-rendering: pixelated;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.theme-switcher:hover {
-    transform: scale(1.1);
-    box-shadow:
-        inset 1px 1px 0 rgba(255, 255, 255, 0.4),
-        inset -1px -1px 0 rgba(0, 0, 0, 0.2),
-        3px 3px 8px rgba(0, 0, 0, 0.5);
-}
-
-.theme-switcher:active {
-    transform: scale(0.95);
-}
-
-.theme-switcher img {
-    width: 100%;
-    height: 100%;
-    image-rendering: pixelated;
-}
-
-.theme-switcher.active {
-    box-shadow:
-        inset 1px 1px 0 rgba(255, 255, 255, 0.3),
-        inset -1px -1px 0 rgba(0, 0, 0, 0.2),
-        0 0 8px rgba(255, 200, 50, 0.6),
-        2px 2px 4px rgba(0, 0, 0, 0.4);
-}
-
-/* Tooltip */
-.theme-switcher::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    top: 100%;
-    right: 0;
-    margin-top: 8px;
-    background: #2a1a0a;
-    color: #c9a227;
-    font-family: "MedievalSharp", cursive;
-    font-size: 11px;
-    padding: 4px 10px;
-    border-radius: 4px;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s ease;
-}
-
-.theme-switcher:hover::after {
-    opacity: 1;
-}
-
-/* Night mode adjustment */
-html.night .theme-switcher {
-    background: linear-gradient(180deg, #5a4a3a 0%, #3d3020 50%, #2a2015 100%);
-    border-color: #1a1510;
-}
-
-/* Responsive */
-@media (max-width: 550px) {
-    .theme-switcher {
-        width: 40px;
-        height: 40px;
-        top: 8px;
-        right: 8px;
-    }
-}
-
-@media (max-width: 400px) {
-    .theme-switcher {
-        width: 36px;
-        height: 36px;
-        top: 6px;
-        right: 6px;
-    }
-
-    .theme-switcher::after {
-        display: none;
-    }
-}
+   ABOUTME: Contains all UI buttons (theme toggle, mode, achievements, etc.) */
 
 /* ═══════════════════════════════════════════════════════════════════════════
    TRIGGER ZONE - invisible area at top that activates dropdown
@@ -112,7 +10,7 @@ html.night .theme-switcher {
     top: -10px;
     left: 50%;
     transform: translateX(-50%);
-    width: 400px;
+    width: 500px;
     height: 20px;
     z-index: 9998;
     cursor: url("/fantasy/cursors/hand.png"), pointer;
@@ -150,7 +48,7 @@ html.night .theme-switcher {
 
 .sierra-panel {
     position: fixed;
-    top: -100px; /* ADJUST: negative height to hide panel */
+    top: -130px; /* Hide panel (height is ~122px) */
     left: 50%;
     transform: translateX(-50%);
     z-index: 9999;
@@ -161,15 +59,14 @@ html.night .theme-switcher {
 /* Show panel on trigger hover or panel hover */
 .sierra-trigger:hover + .sierra-panel,
 .sierra-panel:hover {
-    top: 0;
+    top: -5px;
 }
 
-/* Panel background - pixel art menu bar (scaled to match header width) */
+/* Panel background - dimensions only, theme-specific backgrounds in themes.css */
 .sierra-panel-bg {
-    width: 492px; /* 287 x 2 = scaled 2x */
-    height: 78px; /* 39 x 2 = scaled 2x */
-    background: url("/sprites/drop_down_menu.png");
-    background-size: 574px 78px;
+    width: 500px;
+    height: 122px;
+    background-size: 500px 122px;
     image-rendering: pixelated;
     position: relative;
 }
@@ -200,9 +97,9 @@ html.night .theme-switcher {
 
 .sierra-btn {
     position: absolute;
-    top: 8px; /* ADJUST: vertical offset from top */
-    width: 84px; /* ADJUST: button width */
-    height: 62px; /* ADJUST: button height */
+    top: 34px;
+    width: 56px;
+    height: 56px;
     background: transparent;
     border: none;
     cursor: url("/fantasy/cursors/hand.png"), pointer;
@@ -214,29 +111,31 @@ html.night .theme-switcher {
     padding: 0;
 }
 
-/* Individual button positions - ADJUST left values to align with slots */
+/* Individual button positions - aligned to 7 circular slots in 500px panel */
 .sierra-btn:nth-child(1) {
-    left: 0px;
-} /* Theme toggle */
+    left: 29px;
+} /* Day/Night */
 .sierra-btn:nth-child(2) {
-    left: 83px;
-} /* Chaos */
-.sierra-btn:nth-child(3) {
-    left: 166px;
-} /* Achievements */
-.sierra-btn:nth-child(4) {
-    left: 245px;
-} /* Rainbow */
-.sierra-btn:nth-child(5) {
-    left: 326px;
+    left: 93px;
 } /* Weather */
+.sierra-btn:nth-child(3) {
+    left: 156px;
+} /* Rainbow */
+.sierra-btn:nth-child(4) {
+    left: 222px;
+} /* Achievements */
+.sierra-btn:nth-child(5) {
+    left: 287px;
+} /* Mode */
 .sierra-btn:nth-child(6) {
-    left: 406px;
+    left: 349px;
+} /* Chaos */
+.sierra-btn:nth-child(7) {
+    left: 413px;
 } /* Help */
 
 .sierra-btn:hover {
     transform: scale(1.05);
-    filter: brightness(1.2);
 }
 
 .sierra-btn:active {
@@ -245,8 +144,8 @@ html.night .theme-switcher {
 
 /* Button icons */
 .sierra-btn img {
-    width: 48px; /* ADJUST: icon size */
-    height: 48px;
+    width: 39px;
+    height: 39px;
     image-rendering: pixelated;
 }
 
@@ -255,27 +154,12 @@ html.night .theme-switcher {
     line-height: 1;
 }
 
-/* Wood-carved look for chaos and rainbow icons when inactive */
-.sierra-btn[data-action="chaos"] img,
-.sierra-btn[data-action="rainbow"] img {
-    filter: sepia(1) saturate(0.3) brightness(0.7);
-    transition: filter 0.3s ease;
+/* Snow icon should be white */
+.sierra-btn .weather-icon[src*="snow"] {
+    filter: brightness(0) invert(1);
 }
 
-/* Active state for toggleable buttons */
-.sierra-btn.active {
-    filter: drop-shadow(0 0 4px rgba(255, 200, 50, 0.8));
-}
-
-.sierra-btn.active img {
-    filter: brightness(1.3);
-}
-
-/* Restore full color when chaos/rainbow are active */
-.sierra-btn[data-action="chaos"].active img,
-.sierra-btn[data-action="rainbow"].active img {
-    filter: brightness(1.3) saturate(1.2);
-}
+/* No special button effects - keep icons clean */
 
 /* Tooltip on hover */
 .sierra-btn::after {
@@ -372,23 +256,38 @@ html.night .sierra-btn::after {
 /* Tablet and below - scale down panel */
 @media (max-width: 550px) {
     .sierra-panel-bg {
-        width: 350px;
-        height: 56px;
-        background-size: 410px 56px;
+        width: 380px;
+        height: 93px;
+        background-size: 380px 93px;
     }
 
     .sierra-btn {
-        width: 60px;
-        height: 44px;
-        top: 6px;
+        width: 44px;
+        height: 52px;
+        top: 20px;
     }
 
-    .sierra-btn:nth-child(1) { left: 0px; }
-    .sierra-btn:nth-child(2) { left: 59px; }
-    .sierra-btn:nth-child(3) { left: 118px; }
-    .sierra-btn:nth-child(4) { left: 174px; }
-    .sierra-btn:nth-child(5) { left: 232px; }
-    .sierra-btn:nth-child(6) { left: 290px; }
+    .sierra-btn:nth-child(1) {
+        left: 16px;
+    }
+    .sierra-btn:nth-child(2) {
+        left: 68px;
+    }
+    .sierra-btn:nth-child(3) {
+        left: 122px;
+    }
+    .sierra-btn:nth-child(4) {
+        left: 176px;
+    }
+    .sierra-btn:nth-child(5) {
+        left: 230px;
+    }
+    .sierra-btn:nth-child(6) {
+        left: 284px;
+    }
+    .sierra-btn:nth-child(7) {
+        left: 330px;
+    }
 
     .sierra-btn img {
         width: 36px;
@@ -396,7 +295,7 @@ html.night .sierra-btn::after {
     }
 
     .sierra-trigger {
-        width: 300px;
+        width: 380px;
     }
 
     .sierra-trigger::after {
@@ -406,69 +305,53 @@ html.night .sierra-btn::after {
 }
 
 /* Small phones */
-@media (max-width: 400px) {
+@media (max-width: 420px) {
     .sierra-panel-bg {
-        width: 280px;
+        width: 300px;
         max-width: calc(100vw - 20px);
-        height: 48px;
-        background-size: cover;
-        background-position: center;
+        height: 73px;
+        background-size: 300px 73px;
     }
 
     .sierra-btn {
-        width: 44px;
-        height: 38px;
-        top: 5px;
+        width: 34px;
+        height: 44px;
+        top: 14px;
     }
 
-    .sierra-btn:nth-child(1) { left: 2px; }
-    .sierra-btn:nth-child(2) { left: 48px; }
-    .sierra-btn:nth-child(3) { left: 94px; }
-    .sierra-btn:nth-child(4) { left: 140px; }
-    .sierra-btn:nth-child(5) { left: 186px; }
-    .sierra-btn:nth-child(6) { left: 232px; }
+    .sierra-btn:nth-child(1) {
+        left: 10px;
+    }
+    .sierra-btn:nth-child(2) {
+        left: 52px;
+    }
+    .sierra-btn:nth-child(3) {
+        left: 95px;
+    }
+    .sierra-btn:nth-child(4) {
+        left: 137px;
+    }
+    .sierra-btn:nth-child(5) {
+        left: 180px;
+    }
+    .sierra-btn:nth-child(6) {
+        left: 222px;
+    }
+    .sierra-btn:nth-child(7) {
+        left: 260px;
+    }
 
     .sierra-btn img {
-        width: 26px;
-        height: 26px;
+        width: 28px;
+        height: 28px;
     }
 
     .sierra-trigger {
-        width: 250px;
+        width: 300px;
         max-width: calc(100vw - 40px);
     }
 
     .sierra-btn::after {
         display: none; /* Hide tooltips on very small screens */
-    }
-}
-
-/* Very small phones (320px and below) */
-@media (max-width: 320px) {
-    .sierra-panel-bg {
-        width: 240px;
-        height: 42px;
-    }
-
-    .sierra-btn {
-        width: 38px;
-        height: 34px;
-        top: 4px;
-    }
-
-    .sierra-btn:nth-child(1) { left: 2px; }
-    .sierra-btn:nth-child(2) { left: 41px; }
-    .sierra-btn:nth-child(3) { left: 80px; }
-    .sierra-btn:nth-child(4) { left: 119px; }
-    .sierra-btn:nth-child(5) { left: 158px; }
-    .sierra-btn:nth-child(6) { left: 197px; }
-
-    .sierra-btn img {
-        width: 22px;
-        height: 22px;
-    }
-
-    .sierra-trigger {
-        width: 200px;
     }
 }

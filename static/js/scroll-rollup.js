@@ -33,6 +33,9 @@
     const savedStates = loadStates();
 
     scrolls.forEach((scroll, index) => {
+        // Set z-index so later notes stack on top (prevents click zone conflicts)
+        scroll.style.zIndex = 10 + index;
+
         // Create clickable zone (covers bottom when open, entire scroll when closed)
         const clickZone = document.createElement('div');
         clickZone.className = 'scroll-bottom-clickable';

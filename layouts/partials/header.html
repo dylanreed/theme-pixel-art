@@ -87,13 +87,13 @@
 })();
 </script>
 
-<nav class="site-nav">
-    <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
+<nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
         <span class="hamburger-bar"></span>
         <span class="hamburger-bar"></span>
         <span class="hamburger-bar"></span>
     </button>
-    <div class="nav-links">
+    <div class="nav-links" id="nav-links">
         <a href="{{ .Site.BaseURL }}" class="nav-sign{{ if .IsHome }} active{{ end }}">
             <span>home</span>
         </a>

@@ -5,10 +5,8 @@
 </head>
 <body>
 
-    <!-- Theme Style Switcher (separate from dropdown) -->
-    <button class="theme-switcher" data-tooltip="Theme: Fantasy">
-        <img class="theme-icon" src="/modes/fantasy.png" alt="Cycle visual theme">
-    </button>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <!-- Sierra-style Control Panel -->
     <div class="sierra-trigger"></div>
@@ -20,17 +18,20 @@
                     <img class="btn-icon day-icon" src="/sprites/drop_down_icons/day.png" alt="Switch to day mode">
                     <img class="btn-icon night-icon" src="/sprites/drop_down_icons/night.png" alt="Switch to night mode" style="display:none">
                 </button>
-                <button class="sierra-btn" data-action="chaos" data-tooltip="Chaos Mode">
-                    <img class="btn-icon" src="/sprites/drop_down_icons/swirl.png" alt="Toggle chaos mode effects">
-                </button>
-                <button class="sierra-btn" data-action="achievements" data-tooltip="Achievements">
-                    <img class="btn-icon" src="/sprites/drop_down_icons/trophey.png" alt="View achievements panel">
+                <button class="sierra-btn" data-action="weather" data-tooltip="Weather">
+                    <img class="btn-icon weather-icon" src="/sprites/drop_down_icons/sun.png" alt="Cycle weather effects">
                 </button>
                 <button class="sierra-btn" data-action="rainbow" data-tooltip="Rainbow">
                     <img class="btn-icon" src="/sprites/drop_down_icons/rainbow.png" alt="Toggle rainbow mode">
                 </button>
-                <button class="sierra-btn" data-action="weather" data-tooltip="Weather">
-                    <img class="btn-icon weather-icon" src="/sprites/drop_down_icons/sun.png" alt="Cycle weather effects">
+                <button class="sierra-btn" data-action="achievements" data-tooltip="Achievements">
+                    <img class="btn-icon" src="/sprites/drop_down_icons/trophey.png" alt="View achievements panel">
+                </button>
+                <button class="sierra-btn" data-action="mode" data-tooltip="Theme: Fantasy">
+                    <img class="btn-icon mode-icon" src="/modes/fantasy.png" alt="Cycle visual theme">
+                </button>
+                <button class="sierra-btn" data-action="chaos" data-tooltip="Chaos">
+                    <img class="btn-icon" src="/sprites/drop_down_icons/swirl.png" alt="Toggle chaos mode">
                 </button>
                 <button class="sierra-btn" data-action="help" data-tooltip="Help">
                     <img class="btn-icon" src="/sprites/drop_down_icons/help.png" alt="Show help information">
@@ -65,29 +66,39 @@
                 snow: '/sprites/drop_down_icons/snow.png'
             };
 
-            // Theme style state (fantasy, sci-fi, cyberpunk)
-            const themes = ['fantasy', 'sci-fi', 'cyberpunk'];
+            // Theme style state (fantasy, sci-fi, cyberpunk, cabin, underwater)
+            const themes = ['fantasy', 'sci-fi', 'cyberpunk', 'cabin', 'underwater'];
             const themeNames = {
                 'fantasy': 'Fantasy',
                 'sci-fi': 'Sci-Fi',
-                'cyberpunk': 'Cyberpunk'
+                'cyberpunk': 'Cyberpunk',
+                'cabin': 'Cabin',
+                'underwater': 'Underwater'
             };
             const themeIcons = {
                 'fantasy': '/modes/fantasy.png',
                 'sci-fi': '/modes/sci-fi.png',
-                'cyberpunk': '/modes/cyberpunk.png'
+                'cyberpunk': '/modes/cyberpunk.png',
+                'cabin': '/modes/cabin.png',
+                'underwater': '/modes/underwater.png'
             };
             let currentThemeIndex = 0;
+
+            // Chaos mode easter egg tracking
+            let modeClickCount = parseInt(localStorage.getItem('modeClickCount') || '0');
+            let chaosUnlocked = localStorage.getItem('chaosUnlocked') === 'true';
+            const CHAOS_CLICK_THRESHOLD = 25;
+            const CHAOS_TIME_THRESHOLD = 5 * 60 * 1000; // 5 minutes in ms
 
             // Initialize theme from localStorage
             function initThemeStyle() {
                 const savedTheme = localStorage.getItem('themeStyle') || 'fantasy';
                 currentThemeIndex = themes.indexOf(savedTheme);
                 if (currentThemeIndex === -1) currentThemeIndex = 0;
-                applyThemeStyle(themes[currentThemeIndex]);
+                applyThemeStyle(themes[currentThemeIndex], false);
             }
 
-            function applyThemeStyle(theme) {
+            function applyThemeStyle(theme, updateStorage = true) {
                 // Remove all theme classes
                 themes.forEach(t => {
                     if (t !== 'fantasy') {
@@ -99,28 +110,54 @@
                     document.documentElement.classList.add('theme-' + theme);
                 }
                 // Update button icon, tooltip and active state
-                const themeBtn = document.querySelector('.theme-switcher');
-                if (themeBtn) {
-                    const icon = themeBtn.querySelector('.theme-icon');
-                    if (icon) icon.src = themeIcons[theme];
-                    themeBtn.dataset.tooltip = 'Theme: ' + themeNames[theme];
-                    themeBtn.classList.toggle('active', theme !== 'fantasy');
+                const modeBtn = panel.querySelector('[data-action="mode"]');
+                if (modeBtn) {
+                    const icon = modeBtn.querySelector('.mode-icon');
+                    if (icon) {
+                        icon.src = themeIcons[theme];
+                        // Fallback to fantasy icon if theme icon fails to load
+                        icon.onerror = function() {
+                            this.src = '/modes/fantasy.png';
+                            this.onerror = null;
+                        };
+                    }
+                    modeBtn.dataset.tooltip = 'Theme: ' + themeNames[theme];
+                    modeBtn.classList.toggle('active', theme !== 'fantasy');
                 }
-                localStorage.setItem('themeStyle', theme);
+                if (updateStorage) {
+                    localStorage.setItem('themeStyle', theme);
+                }
+            }
+
+            // Chaos mode easter egg - unlock after 25 clicks or 5 minutes
+            function checkChaosUnlock() {
+                if (chaosUnlocked) return;
+
+                if (modeClickCount >= CHAOS_CLICK_THRESHOLD) {
+                    unlockChaos('You clicked the theme button ' + CHAOS_CLICK_THRESHOLD + ' times! Chaos mode unlocked!');
+                }
+            }
+
+            function unlockChaos(message) {
+                if (chaosUnlocked) return;
+                chaosUnlocked = true;
+                localStorage.setItem('chaosUnlocked', 'true');
+
+                // Enable chaos mode
+                if (window.chaos) {
+                    window.chaos.enable();
+                    console.log('%c' + message, 'color: #ff00ff; font-size: 16px; font-weight: bold;');
+                }
+            }
+
+            // Time-based chaos unlock (5 minutes on site)
+            if (!chaosUnlocked) {
+                setTimeout(() => {
+                    unlockChaos('You\'ve been here for 5 minutes! Chaos mode unlocked!');
+                }, CHAOS_TIME_THRESHOLD);
             }
 
             initThemeStyle();
-
-            // Theme switcher click handler (outside panel)
-            const themeSwitcher = document.querySelector('.theme-switcher');
-            if (themeSwitcher) {
-                themeSwitcher.addEventListener('click', () => {
-                    currentThemeIndex = (currentThemeIndex + 1) % themes.length;
-                    applyThemeStyle(themes[currentThemeIndex]);
-                    // Reload to update theme-dependent elements (cat sprites, etc.)
-                    location.reload();
-                });
-            }
 
             panel.addEventListener('click', (e) => {
                 const btn = e.target.closest('.sierra-btn');
@@ -135,15 +172,17 @@
                         updateThemeButton();
                         break;
 
-                    case 'chaos':
-                        if (window.chaos) {
-                            if (document.body.classList.contains('chaos-mode')) {
-                                window.chaos.disable();
-                            } else {
-                                window.chaos.enable();
-                            }
-                            btn.classList.toggle('active', document.body.classList.contains('chaos-mode'));
-                        }
+                    case 'mode':
+                        // Increment click count for chaos easter egg
+                        modeClickCount++;
+                        localStorage.setItem('modeClickCount', modeClickCount.toString());
+                        checkChaosUnlock();
+
+                        // Cycle theme
+                        currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+                        applyThemeStyle(themes[currentThemeIndex]);
+                        // Reload to update theme-dependent elements (cat sprites, etc.)
+                        location.reload();
                         break;
 
                     case 'achievements':
@@ -178,6 +217,17 @@
                                 if (weatherIcon) weatherIcon.src = weatherIcons.sun;
                             }
                             btn.classList.toggle('active', currentWeather !== null);
+                        }
+                        break;
+
+                    case 'chaos':
+                        if (window.chaos) {
+                            if (document.body.classList.contains('chaos-mode')) {
+                                window.chaos.disable();
+                            } else {
+                                window.chaos.enable();
+                            }
+                            btn.classList.toggle('active', document.body.classList.contains('chaos-mode'));
                         }
                         break;
 
@@ -269,7 +319,7 @@
         })();
     </script>
 
-    <main class="main-content">
+    <main id="main-content" class="main-content">
         {{- block "main" . }}{{- end }}
     </main>
 

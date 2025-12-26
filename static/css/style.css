@@ -42,7 +42,7 @@ body {
     background-color: #87ceeb;
     background-image: url("/fantasy/backgrounds/3.webp");
     background-repeat: repeat;
-    background-size: 66.67%; /* Scale tiles 1.5x smaller to show more */
+    background-size: 75%;
     image-rendering: pixelated;
     overflow-x: hidden;
     width: 100%;
@@ -120,7 +120,7 @@ html.night {
     max-width: 964px;
     margin: 0 auto;
     padding: 0 40px;
-    margin-top: -50px;
+    margin-top: -53px;
     display: flex;
     justify-content: center;
     gap: 40px;
@@ -145,7 +145,7 @@ html.night {
 
 .nav-sign span {
     font-family: "MedievalSharp", cursive;
-    font-size: 26px;
+    font-size: 27px;
     color: #4a3520;
     text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
     padding-top: 30px; /* Offset for chain area */
@@ -159,11 +159,11 @@ html.night {
 }
 
 .nav-sign.active {
-    transform: translateY(25px);
+    transform: translateY(15px);
 }
 
 .nav-sign.active:hover {
-    transform: rotate(-4deg) translateY(22px);
+    transform: rotate(-4deg) translateY(12px);
 }
 
 /* Hide old nav images, show text spans */
@@ -284,7 +284,7 @@ html.night body {
     background-color: #1a2030;
     background-image: url("/fantasy/backgrounds/3_night.webp");
     background-repeat: repeat;
-    background-size: 66.67%;
+    background-size: 75%;
 }
 
 /* Night mode content background */
@@ -540,6 +540,8 @@ html.night .archive-tag:hover {
     border-image-width: 64px 96px 64px 96px;
     border-image-repeat: round;
     padding: 20px;
+    margin-top: 160px;
+    margin-bottom: 160px;
 }
 
 /* Cream background inside border - extends into border to fill transparent gap */
@@ -629,7 +631,7 @@ html.night .archive-tag:hover {
     color: #f5e6d3;
     padding: 4px 12px;
     border-radius: 0;
-    font-size: 11px;
+    font-size: 12px;
     font-family: "MedievalSharp", cursive;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -717,8 +719,10 @@ html.night .archive-tag:hover {
 .post-content a,
 .page-content a {
     color: #8b5a2b;
-    text-decoration: none;
-    border-bottom: 2px solid transparent;
+    text-decoration: underline;
+    text-decoration-color: rgba(139, 90, 43, 0.4);
+    text-underline-offset: 2px;
+    border-bottom: none;
     padding-bottom: 1px;
     transition: all 0.15s ease;
     background: linear-gradient(
@@ -731,7 +735,7 @@ html.night .archive-tag:hover {
 .post-content a:hover,
 .page-content a:hover {
     color: #6b4423;
-    border-bottom-color: #c4a060;
+    text-decoration-color: #c4a060;
     background: linear-gradient(
         180deg,
         transparent 60%,
@@ -1402,7 +1406,7 @@ html.night .page-content td {
 .category-writing .post-tag,
 .category-writing .archive-tag {
     background: #c4a060;
-    color: #2a2010;
+    color: #1a1408;
 }
 
 .sprite-muse ~ .post-body .post-title,
@@ -1417,7 +1421,7 @@ html.night .page-content td {
 .category-crafting .post-tag,
 .category-crafting .archive-tag {
     background: #c4a060;
-    color: #2a2010;
+    color: #1a1408;
 }
 .sprite-cauldron ~ .post-body .post-title,
 .category-cooking .post-title,
@@ -1459,7 +1463,7 @@ html.night .page-content td {
 .category-pets .post-tag,
 .category-pets .archive-tag {
     background: #e0a080;
-    color: #3a2010;
+    color: #2a1008;
 }
 
 /* Single post navigation arrows */
@@ -1687,7 +1691,7 @@ html.night .site-footer p {
     color: #f5e6d3;
     padding: 3px 8px;
     border-radius: 0;
-    font-size: 10px;
+    font-size: 12px;
     font-family: "MedievalSharp", cursive;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -1753,7 +1757,7 @@ html.night .site-footer p {
     position: relative;
     z-index: 1;
     margin: -150px auto;
-    max-width: 753px;
+    max-width: 800px;
     display: flex;
     flex-direction: column;
 }
@@ -1766,8 +1770,8 @@ html.night .site-footer p {
     content: "";
     display: block;
     width: 100%;
-    max-width: 753px;
-    height: 318px;
+    max-width: 800px;
+    height: 200px;
     background: url("/fantasy/notes/top.webp") no-repeat center bottom;
     background-size: 100% auto;
     image-rendering: pixelated;
@@ -1777,8 +1781,8 @@ html.night .site-footer p {
     content: "";
     display: block;
     width: 100%;
-    height: 318px;
-    max-width: 753px;
+    height: 200px;
+    max-width: 800px;
     background: url("/fantasy/notes/bottom.webp") no-repeat center top;
     background-size: 100% auto;
     image-rendering: pixelated;
@@ -1791,8 +1795,8 @@ html.night .site-footer p {
     color: #4a3520;
     text-align: center;
     width: 100%;
-    max-width: 753px;
-    padding: 20px 18.5% 30px 18.5%;
+    max-width: 800px;
+    padding: 20px 15% 30px 15%;
     box-sizing: border-box;
     background: url("/fantasy/notes/middle.webp") repeat-y center top;
     background-size: 100% auto;
@@ -1835,7 +1839,11 @@ html.night .site-footer p {
 
 .note-scroll .note-meta {
     text-align: center;
-    margin-top: 16px;
+    position: absolute;
+    bottom: 90px;
+    left: 0;
+    right: 0;
+    z-index: 10;
 }
 
 .note-scroll .note-date {
@@ -1860,7 +1868,7 @@ html.night .site-footer p {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 318px; /* Match scroll-bottom.png height */
+    height: 100px;
     cursor: url("/fantasy/cursors/hand.png"), pointer;
     z-index: 5;
     transition: filter 0.2s ease;
@@ -1918,10 +1926,10 @@ html.night .site-footer p {
 
 /* Rolled up state - show closed scroll image */
 .note-scroll.rolled-up {
+    width: 100%;
     height: 155px;
     overflow: hidden;
-    margin-top: 10px;
-    margin-bottom: 100px;
+    margin: 10px auto 100px auto;
     background: url("/fantasy/notes/closed.webp") no-repeat center top;
     background-size: 100% auto;
     image-rendering: pixelated;
@@ -1949,9 +1957,13 @@ html.night .site-footer p {
     bottom: 0;
 }
 
-/* Hide focus outline on clickable zone */
+/* Focus visible styles for clickable zone */
 .scroll-bottom-clickable:focus {
     outline: none;
+}
+.scroll-bottom-clickable:focus-visible {
+    outline: 3px solid #8b5a2b;
+    outline-offset: 2px;
 }
 
 /* Hover effect */
@@ -2615,5 +2627,131 @@ html.night .pagination-info {
     /* Photo grid */
     .photo-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ACCESSIBILITY - Focus states, skip links, reduced motion
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Skip to content link - hidden until focused */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #4a3520;
+    color: #f5e6d3;
+    padding: 12px 24px;
+    font-family: "MedievalSharp", cursive;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 0 0 8px 8px;
+    z-index: 100000;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 3px solid #c4a060;
+    outline-offset: 2px;
+}
+
+html.night .skip-link {
+    background: #2a3040;
+    color: #d0d8e0;
+}
+
+html.night .skip-link:focus {
+    outline-color: #6a8ab0;
+}
+
+/* Global focus-visible styles for interactive elements */
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid #8b5a2b;
+    outline-offset: 2px;
+}
+
+html.night a:focus-visible,
+html.night button:focus-visible,
+html.night [role="button"]:focus-visible,
+html.night input:focus-visible,
+html.night select:focus-visible,
+html.night textarea:focus-visible {
+    outline-color: #6a8ab0;
+}
+
+/* Navigation focus styles */
+.nav-sign:focus-visible,
+.nav-hamburger:focus-visible {
+    outline: 3px solid #8b5a2b;
+    outline-offset: 4px;
+}
+
+html.night .nav-sign:focus-visible,
+html.night .nav-hamburger:focus-visible {
+    outline-color: #6a8ab0;
+}
+
+/* Tag and button focus styles */
+.post-tag:focus-visible,
+.archive-tag:focus-visible,
+.pagination a:focus-visible,
+.nav-arrow:focus-visible {
+    outline: 3px solid #8b5a2b;
+    outline-offset: 2px;
+    transform: translateY(-2px);
+}
+
+html.night .post-tag:focus-visible,
+html.night .archive-tag:focus-visible,
+html.night .pagination a:focus-visible,
+html.night .nav-arrow:focus-visible {
+    outline-color: #6a8ab0;
+}
+
+/* Post link focus styles */
+.post-link:focus-visible {
+    outline: 3px solid #8b5a2b;
+    outline-offset: 4px;
+}
+
+html.night .post-link:focus-visible {
+    outline-color: #6a8ab0;
+}
+
+/* Note scroll focus */
+.note-scroll:focus-visible {
+    outline: 3px solid #8b5a2b;
+    outline-offset: 4px;
+}
+
+html.night .note-scroll:focus-visible {
+    outline-color: #6a8ab0;
+}
+
+/* Prefers reduced motion - disable all animations */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    /* Keep essential transitions but make them instant */
+    .nav-links,
+    .sierra-panel,
+    .post-tag,
+    .archive-tag,
+    .pagination a {
+        transition: none !important;
     }
 }

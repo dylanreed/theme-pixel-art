@@ -9,7 +9,6 @@
 
 /* Sci-fi styles are in chaos.css using html.theme-sci-fi selectors */
 
-
 /* ═══════════════════════════════════════════════════════════════
    THEME: CYBERPUNK
    Assets in: /static/cyberpunk/{backgrounds,headers,tiles}
@@ -18,13 +17,13 @@
 /* Cyberpunk background - day */
 html.theme-cyberpunk body {
     background-image: url("/cyberpunk/backgrounds/3.webp") !important;
-    background-size: 66.67% !important;
+    background-size: 75% !important;
 }
 
 /* Cyberpunk background - night */
 html.theme-cyberpunk.night body {
     background-image: url("/cyberpunk/backgrounds/3_night.webp") !important;
-    background-size: 66.67% !important;
+    background-size: 75% !important;
 }
 
 /* Cyberpunk border overlay */
@@ -346,6 +345,100 @@ html.theme-cyberpunk article p {
 }
 
 /* ═══════════════════════════════════════════════════════════════
+   CABIN FONTS
+   Storybook cozy aesthetic (hygge, children's book, warm)
+   - Title: Fredericka the Great (sketchy, hand-drawn storybook)
+   - Menus: Quicksand (soft, rounded, friendly)
+   - Body: Literata (warm book-like serif)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Cabin site title */
+html.theme-cabin .site-title {
+    font-family: "Fredericka the Great", cursive;
+}
+
+/* Cabin menu/UI elements */
+html.theme-cabin .nav-sign span,
+html.theme-cabin .post-tag,
+html.theme-cabin .post-title,
+html.theme-cabin .post-link,
+html.theme-cabin .archive-tag,
+html.theme-cabin .archive-title,
+html.theme-cabin .pagination,
+html.theme-cabin .note-date,
+html.theme-cabin .post-meta,
+html.theme-cabin .post-counter,
+html.theme-cabin .page-title,
+html.theme-cabin .year-header,
+html.theme-cabin .category-title,
+html.theme-cabin .sierra-btn::after,
+html.theme-cabin .theme-switcher::after {
+    font-family: "Quicksand", sans-serif;
+    font-weight: 500;
+}
+
+/* Cabin body text */
+html.theme-cabin body,
+html.theme-cabin .post-excerpt,
+html.theme-cabin .post-content,
+html.theme-cabin .post-content h2,
+html.theme-cabin .post-content h3,
+html.theme-cabin .page-content,
+html.theme-cabin .page-content th,
+html.theme-cabin .note-content,
+html.theme-cabin .note-scroll .note-content,
+html.theme-cabin article p {
+    font-family: "Literata", serif;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   UNDERWATER FONTS
+   Nautical/maritime aesthetic (captain's log, old maps, diving bells)
+   - Title: IM Fell English (18th century maritime documents)
+   - Menus: Vollkorn (warm, sturdy, classic)
+   - Body: EB Garamond (elegant old-world serif)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Underwater site title */
+html.theme-underwater .site-title {
+    font-family: "IM Fell English", serif;
+}
+
+/* Underwater menu/UI elements */
+html.theme-underwater .nav-sign span,
+html.theme-underwater .post-tag,
+html.theme-underwater .post-title,
+html.theme-underwater .post-link,
+html.theme-underwater .archive-tag,
+html.theme-underwater .archive-title,
+html.theme-underwater .pagination,
+html.theme-underwater .note-date,
+html.theme-underwater .post-meta,
+html.theme-underwater .post-counter,
+html.theme-underwater .page-title,
+html.theme-underwater .year-header,
+html.theme-underwater .category-title,
+html.theme-underwater .sierra-btn::after,
+html.theme-underwater .theme-switcher::after {
+    font-family: "Vollkorn", serif;
+    font-weight: 500;
+}
+
+/* Underwater body text */
+html.theme-underwater body,
+html.theme-underwater .post-excerpt,
+html.theme-underwater .post-content,
+html.theme-underwater .post-content h2,
+html.theme-underwater .post-content h3,
+html.theme-underwater .page-content,
+html.theme-underwater .page-content th,
+html.theme-underwater .note-content,
+html.theme-underwater .note-scroll .note-content,
+html.theme-underwater article p {
+    font-family: "EB Garamond", serif;
+}
+
+/* ═══════════════════════════════════════════════════════════════
    SCI-FI ARCHIVE COLORS
    Blue/tech tones - year headers and dates only (category colors handle titles/tags)
    ═══════════════════════════════════════════════════════════════ */
@@ -388,4 +481,692 @@ html.theme-cyberpunk .archive-entry {
 
 html.theme-cyberpunk .archive-entry:hover {
     background: rgba(255, 0, 255, 0.1);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   THEME: CABIN
+   Assets in: /static/cabin/{backgrounds,headers,tiles,notes,menu}
+   Cozy mountain retreat, warm wood, firelight, rustic comfort
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Cabin background - day */
+html.theme-cabin body {
+    background-image: url("/cabin/backgrounds/3.webp") !important;
+    background-size: 75% !important;
+}
+
+/* Cabin background - night */
+html.theme-cabin.night body {
+    background-image: url("/cabin/backgrounds/3_night.webp") !important;
+    background-size: 75% !important;
+}
+
+/* Cabin border overlay */
+html.theme-cabin .border-overlay {
+    border-image-source: url("/cabin/tiles/day_tiles.webp");
+}
+
+html.theme-cabin.night .border-overlay {
+    border-image-source: url("/cabin/tiles/tile_night.webp");
+}
+
+/* Hide original borders when using overlay */
+html.theme-cabin .posts-container,
+html.theme-cabin .post-container,
+html.theme-cabin .page-container,
+html.theme-cabin .archive-container {
+    border-image-source: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CABIN HEADERS - Day mode
+   ═══════════════════════════════════════════════════════════════ */
+
+html.theme-cabin .header-image[style*="home.webp"] {
+    background-image: url("/cabin/headers/home.webp") !important;
+}
+html.theme-cabin .header-image[style*="default.webp"] {
+    background-image: url("/cabin/headers/default.webp") !important;
+}
+html.theme-cabin .header-image[style*="health.webp"] {
+    background-image: url("/cabin/headers/health.webp") !important;
+}
+html.theme-cabin .header-image[style*="tech.webp"] {
+    background-image: url("/cabin/headers/tech.webp") !important;
+}
+html.theme-cabin .header-image[style*="gaming.webp"] {
+    background-image: url("/cabin/headers/gaming.webp") !important;
+}
+html.theme-cabin .header-image[style*="cooking.webp"] {
+    background-image: url("/cabin/headers/cooking.webp") !important;
+}
+html.theme-cabin .header-image[style*="reading.webp"] {
+    background-image: url("/cabin/headers/reading.webp") !important;
+}
+html.theme-cabin .header-image[style*="music.webp"] {
+    background-image: url("/cabin/headers/music.webp") !important;
+}
+html.theme-cabin .header-image[style*="writing.webp"] {
+    background-image: url("/cabin/headers/writing.webp") !important;
+}
+html.theme-cabin .header-image[style*="crafting.webp"] {
+    background-image: url("/cabin/headers/crafting.webp") !important;
+}
+html.theme-cabin .header-image[style*="pets.webp"] {
+    background-image: url("/cabin/headers/pets.webp") !important;
+}
+html.theme-cabin .header-image[style*="travel.webp"] {
+    background-image: url("/cabin/headers/travel.webp") !important;
+}
+html.theme-cabin .header-image[style*="tabletop.webp"] {
+    background-image: url("/cabin/headers/tabletop.webp") !important;
+}
+html.theme-cabin .header-image[style*="garden.webp"] {
+    background-image: url("/cabin/headers/garden.webp") !important;
+}
+html.theme-cabin .header-image[style*="adhd.webp"] {
+    background-image: url("/cabin/headers/adhd.webp") !important;
+}
+html.theme-cabin .header-image[style*="clown.webp"] {
+    background-image: url("/cabin/headers/clown.webp") !important;
+}
+
+/* Cabin header frame */
+html.theme-cabin .header-frame {
+    background-image: url("/cabin/headers/ornate_frame.webp");
+}
+
+/* Cabin menu signs */
+html.theme-cabin .nav-sign,
+html.theme-cabin .nav-hamburger {
+    background-image: url("/cabin/menu/sign.webp") !important;
+}
+
+/* Cabin active menu - warm golden glow */
+html.theme-cabin .nav-sign.active span {
+    color: #ffbf00;
+    text-shadow:
+        0 0 5px #ff8c00,
+        0 0 10px #ff8c00,
+        0 0 15px #cd853f;
+}
+
+/* Cabin cursors */
+html.theme-cabin * {
+    cursor: url("/cabin/cursors/pointer.png"), auto !important;
+}
+
+html.theme-cabin a,
+html.theme-cabin button,
+html.theme-cabin input[type="submit"],
+html.theme-cabin input[type="button"],
+html.theme-cabin select,
+html.theme-cabin label,
+html.theme-cabin .nav-sign,
+html.theme-cabin .nav-hamburger,
+html.theme-cabin .post-tag,
+html.theme-cabin .archive-tag,
+html.theme-cabin .archive-entry,
+html.theme-cabin .mode-toggle,
+html.theme-cabin .photo-item,
+html.theme-cabin .sierra-btn,
+html.theme-cabin .sierra-trigger,
+html.theme-cabin .post-link,
+html.theme-cabin .pagination a,
+html.theme-cabin .note-date,
+html.theme-cabin .theme-switcher,
+html.theme-cabin [role="button"],
+html.theme-cabin [onclick] {
+    cursor: url("/cabin/cursors/hand.png"), pointer !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CABIN FONTS
+   Cozy rustic aesthetic (mountain lodge, handcrafted)
+   - Title: Amatic SC (hand-drawn, rustic)
+   - Menus: Cabin (clean, friendly)
+   - Body: Merriweather (readable, warm serif)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Cabin site title */
+html.theme-cabin .site-title {
+    font-family: "Amatic SC", cursive;
+    font-weight: 700;
+    font-size: 2.5em;
+}
+
+/* Cabin menu/UI elements */
+html.theme-cabin .nav-sign span,
+html.theme-cabin .post-tag,
+html.theme-cabin .post-title,
+html.theme-cabin .post-link,
+html.theme-cabin .archive-tag,
+html.theme-cabin .pagination,
+html.theme-cabin .note-date,
+html.theme-cabin .post-meta,
+html.theme-cabin .sierra-btn::after,
+html.theme-cabin .theme-switcher::after {
+    font-family: "Cabin", sans-serif;
+}
+
+/* Cabin body text */
+html.theme-cabin body,
+html.theme-cabin .post-excerpt,
+html.theme-cabin .post-content,
+html.theme-cabin .page-content,
+html.theme-cabin .note-content,
+html.theme-cabin article p {
+    font-family: "Merriweather", serif;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CABIN ARCHIVE COLORS
+   Warm wood and amber tones
+   ═══════════════════════════════════════════════════════════════ */
+
+html.theme-cabin .archive-date {
+    color: #8b6914;
+}
+
+html.theme-cabin .year-header {
+    color: #6b4423;
+    border-bottom-color: #a0522d;
+}
+
+html.theme-cabin .archive-entry {
+    border-bottom-color: rgba(139, 105, 20, 0.2);
+}
+
+html.theme-cabin .archive-entry:hover {
+    background: rgba(255, 191, 0, 0.1);
+}
+
+/* Cabin note scroll assets */
+html.theme-cabin .note-scroll::before {
+    background-image: url("/cabin/notes/top.webp");
+}
+
+html.theme-cabin .note-scroll::after {
+    background-image: url("/cabin/notes/bottom.webp");
+}
+
+html.theme-cabin .note-scroll .note-content {
+    background-image: url("/cabin/notes/middle.webp");
+    color: #4a3728;
+    text-shadow: none;
+}
+
+html.theme-cabin .note-scroll .note-content a {
+    color: #8b4513;
+}
+
+html.theme-cabin .note-scroll .note-content a:hover {
+    color: #a0522d;
+}
+
+/* Cabin closed note */
+html.theme-cabin .note-scroll.rolled-up {
+    background-image: url("/cabin/notes/closed.webp");
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   THEME: UNDERWATER
+   Assets in: /static/underwater/{backgrounds,headers,tiles,notes,menu}
+   Nautical maritime, captain's log, treasure maps, brass fittings
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Underwater background - day (use fantasy fallback if missing) */
+html.theme-underwater body {
+    background-image:
+        url("/underwater/backgrounds/3.webp"),
+        url("/fantasy/backgrounds/3.webp") !important;
+    background-size: 75% !important;
+}
+
+/* Underwater background - night (use fantasy fallback if missing) */
+html.theme-underwater.night body {
+    background-image:
+        url("/underwater/backgrounds/3_night.webp"),
+        url("/fantasy/backgrounds/3_night.webp") !important;
+    background-size: 75% !important;
+}
+
+/* Underwater border overlay */
+html.theme-underwater .border-overlay {
+    border-image-source: url("/underwater/tiles/day_tiles.webp");
+}
+
+html.theme-underwater.night .border-overlay {
+    border-image-source: url("/underwater/tiles/tiles_night.webp");
+}
+
+/* Hide original borders when using overlay */
+html.theme-underwater .posts-container,
+html.theme-underwater .post-container,
+html.theme-underwater .page-container,
+html.theme-underwater .archive-container {
+    border-image-source: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   UNDERWATER HEADERS - Day mode
+   ═══════════════════════════════════════════════════════════════ */
+
+html.theme-underwater .header-image[style*="home.webp"] {
+    background-image: url("/underwater/headers/home.webp") !important;
+}
+html.theme-underwater .header-image[style*="default.webp"] {
+    background-image: url("/underwater/headers/default.webp") !important;
+}
+html.theme-underwater .header-image[style*="health.webp"] {
+    background-image: url("/underwater/headers/health.webp") !important;
+}
+html.theme-underwater .header-image[style*="tech.webp"] {
+    background-image: url("/underwater/headers/tech.webp") !important;
+}
+html.theme-underwater .header-image[style*="gaming.webp"] {
+    background-image: url("/underwater/headers/gaming.webp") !important;
+}
+html.theme-underwater .header-image[style*="cooking.webp"] {
+    background-image: url("/underwater/headers/cooking.webp") !important;
+}
+html.theme-underwater .header-image[style*="reading.webp"] {
+    background-image: url("/underwater/headers/reading.webp") !important;
+}
+html.theme-underwater .header-image[style*="music.webp"] {
+    background-image: url("/underwater/headers/music.webp") !important;
+}
+html.theme-underwater .header-image[style*="writing.webp"] {
+    background-image: url("/underwater/headers/writing.webp") !important;
+}
+html.theme-underwater .header-image[style*="crafting.webp"] {
+    background-image: url("/underwater/headers/crafting.webp") !important;
+}
+html.theme-underwater .header-image[style*="pets.webp"] {
+    background-image: url("/underwater/headers/pets.webp") !important;
+}
+html.theme-underwater .header-image[style*="travel.webp"] {
+    background-image: url("/underwater/headers/travel.webp") !important;
+}
+html.theme-underwater .header-image[style*="tabletop.webp"] {
+    background-image: url("/underwater/headers/tabletop.webp") !important;
+}
+html.theme-underwater .header-image[style*="garden.webp"] {
+    background-image: url("/underwater/headers/garden.webp") !important;
+}
+html.theme-underwater .header-image[style*="adhd.webp"] {
+    background-image: url("/underwater/headers/adhd.webp") !important;
+}
+html.theme-underwater .header-image[style*="clown.webp"] {
+    background-image: url("/underwater/headers/clown.webp") !important;
+}
+
+/* Underwater header frame */
+html.theme-underwater .header-frame {
+    background-image: url("/underwater/headers/ornate_name.webp");
+}
+
+/* Underwater menu signs */
+html.theme-underwater .nav-sign,
+html.theme-underwater .nav-hamburger {
+    background-image: url("/underwater/menu/sign.webp") !important;
+}
+
+/* Underwater active menu - brass nautical style */
+html.theme-underwater .nav-sign.active span {
+    color: #c9a227;
+    text-shadow:
+        1px 1px 0 #8b6914,
+        -1px -1px 0 #e8d48b,
+        2px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Underwater note scroll assets - nautical treasure map style */
+html.theme-underwater .note-scroll::before {
+    background-image: url("/underwater/notes/top.webp");
+}
+
+html.theme-underwater .note-scroll::after {
+    background-image: url("/underwater/notes/bottom.webp");
+}
+
+html.theme-underwater .note-scroll .note-content {
+    background-image: url("/underwater/notes/middle.webp");
+    color: #3a2a1a;
+    text-shadow: none;
+}
+
+html.theme-underwater .note-scroll .note-content a {
+    color: #5a3a2a;
+}
+
+html.theme-underwater .note-scroll .note-content a:hover {
+    color: #7a4a3a;
+}
+
+/* Underwater closed note */
+html.theme-underwater .note-scroll.rolled-up {
+    background-image: url("/underwater/notes/closed.webp");
+}
+
+/* Underwater cursors */
+html.theme-underwater * {
+    cursor: url("/underwater/cursors/pointer.png"), auto !important;
+}
+
+html.theme-underwater a,
+html.theme-underwater button,
+html.theme-underwater input[type="submit"],
+html.theme-underwater input[type="button"],
+html.theme-underwater select,
+html.theme-underwater label,
+html.theme-underwater .nav-sign,
+html.theme-underwater .nav-hamburger,
+html.theme-underwater .post-tag,
+html.theme-underwater .archive-tag,
+html.theme-underwater .archive-entry,
+html.theme-underwater .mode-toggle,
+html.theme-underwater .photo-item,
+html.theme-underwater .sierra-btn,
+html.theme-underwater .sierra-trigger,
+html.theme-underwater .post-link,
+html.theme-underwater .pagination a,
+html.theme-underwater .note-date,
+html.theme-underwater .theme-switcher,
+html.theme-underwater [role="button"],
+html.theme-underwater [onclick] {
+    cursor: url("/underwater/cursors/hand.png"), pointer !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   UNDERWATER FONTS
+   Deep sea aesthetic (nautical, mysterious, ancient)
+   - Title: Cinzel (ancient, atlantean)
+   - Menus: Quicksand (flowing, rounded like bubbles)
+   - Body: Source Sans Pro (clean, readable)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Underwater site title */
+html.theme-underwater .site-title {
+    font-family: "Cinzel", serif;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+/* Underwater menu/UI elements */
+html.theme-underwater .nav-sign span,
+html.theme-underwater .post-tag,
+html.theme-underwater .post-title,
+html.theme-underwater .post-link,
+html.theme-underwater .archive-tag,
+html.theme-underwater .pagination,
+html.theme-underwater .note-date,
+html.theme-underwater .post-meta,
+html.theme-underwater .sierra-btn::after,
+html.theme-underwater .theme-switcher::after {
+    font-family: "Quicksand", sans-serif;
+    font-weight: 500;
+}
+
+/* Underwater body text */
+html.theme-underwater body,
+html.theme-underwater .post-excerpt,
+html.theme-underwater .post-content,
+html.theme-underwater .page-content,
+html.theme-underwater .note-content,
+html.theme-underwater article p {
+    font-family: "Source Sans Pro", sans-serif;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   UNDERWATER ARCHIVE COLORS
+   Nautical brass and parchment tones
+   ═══════════════════════════════════════════════════════════════ */
+
+html.theme-underwater .archive-date {
+    color: #6a5a4a;
+}
+
+html.theme-underwater .year-header {
+    color: #8b6914;
+    border-bottom-color: #c9a227;
+}
+
+html.theme-underwater .archive-entry {
+    border-bottom-color: rgba(139, 105, 20, 0.2);
+}
+
+html.theme-underwater .archive-entry:hover {
+    background: rgba(201, 162, 39, 0.1);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   THEME-SPECIFIC DROPDOWN PANELS
+   All panels are 926x226 native, scaled to ~500px display width
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Fantasy dropdown (base/default) */
+.sierra-panel-bg {
+    width: 500px !important;
+    height: 122px !important;
+    background: url("/fantasy/dropdown/drop_down_menu.png") !important;
+    background-size: 500px 122px !important;
+    image-rendering: pixelated !important;
+}
+
+/* Sci-Fi dropdown */
+html.theme-sci-fi .sierra-panel-bg {
+    background: url("/sci-fi/dropdown/drop_down_menu.png") !important;
+    background-size: 500px 122px !important;
+}
+
+/* Cyberpunk dropdown */
+html.theme-cyberpunk .sierra-panel-bg {
+    background: url("/cyberpunk/dropdown/drop_down_menu.png") !important;
+    background-size: 500px 122px !important;
+}
+
+/* Cabin dropdown */
+html.theme-cabin .sierra-panel-bg {
+    background: url("/cabin/dropdown/drop_down_menu.png") !important;
+    background-size: 500px 122px !important;
+}
+
+/* Underwater dropdown */
+html.theme-underwater .sierra-panel-bg {
+    background: url("/underwater/dropdown/drop_down_menu.png") !important;
+    background-size: 500px 122px !important;
+}
+
+/* Adjusted button positions for new panel size (7 buttons) */
+.sierra-btn {
+    top: 30px !important;
+    width: 56px !important;
+    height: 66px !important;
+}
+
+.sierra-btn:nth-child(1) {
+    left: 29px !important;
+}
+.sierra-btn:nth-child(2) {
+    left: 93px !important;
+}
+.sierra-btn:nth-child(3) {
+    left: 156px !important;
+}
+.sierra-btn:nth-child(4) {
+    left: 222px !important;
+}
+.sierra-btn:nth-child(5) {
+    left: 289px !important;
+}
+.sierra-btn:nth-child(6) {
+    left: 350px !important;
+}
+.sierra-btn:nth-child(7) {
+    left: 415px !important;
+}
+
+/* Button icon size for new panels */
+.sierra-btn img {
+    width: 32px !important;
+    height: 32px !important;
+    image-rendering: pixelated !important;
+}
+
+/* Responsive - tablet */
+@media (max-width: 550px) {
+    .sierra-panel-bg {
+        width: 380px !important;
+        height: 93px !important;
+        background-size: 380px 93px !important;
+    }
+
+    .sierra-btn {
+        top: 20px !important;
+        width: 44px !important;
+        height: 52px !important;
+    }
+
+    .sierra-btn:nth-child(1) {
+        left: 16px !important;
+    }
+    .sierra-btn:nth-child(2) {
+        left: 68px !important;
+    }
+    .sierra-btn:nth-child(3) {
+        left: 122px !important;
+    }
+    .sierra-btn:nth-child(4) {
+        left: 176px !important;
+    }
+    .sierra-btn:nth-child(5) {
+        left: 230px !important;
+    }
+    .sierra-btn:nth-child(6) {
+        left: 284px !important;
+    }
+    .sierra-btn:nth-child(7) {
+        left: 328px !important;
+    }
+
+    .sierra-btn img {
+        width: 36px !important;
+        height: 36px !important;
+        image-rendering: pixelated !important;
+    }
+}
+
+/* Responsive - small phones */
+@media (max-width: 420px) {
+    .sierra-panel-bg {
+        width: 300px !important;
+        height: 73px !important;
+        background-size: 300px 73px !important;
+    }
+
+    .sierra-btn {
+        top: 14px !important;
+        width: 34px !important;
+        height: 44px !important;
+    }
+
+    .sierra-btn:nth-child(1) {
+        left: 10px !important;
+    }
+    .sierra-btn:nth-child(2) {
+        left: 52px !important;
+    }
+    .sierra-btn:nth-child(3) {
+        left: 95px !important;
+    }
+    .sierra-btn:nth-child(4) {
+        left: 137px !important;
+    }
+    .sierra-btn:nth-child(5) {
+        left: 180px !important;
+    }
+    .sierra-btn:nth-child(6) {
+        left: 222px !important;
+    }
+    .sierra-btn:nth-child(7) {
+        left: 258px !important;
+    }
+
+    .sierra-btn img {
+        width: 28px !important;
+        height: 28px !important;
+        image-rendering: pixelated !important;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   THEME-SPECIFIC ACCESSIBILITY - Focus colors per theme
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Sci-Fi focus colors - blue/cyan tech */
+html.theme-sci-fi a:focus-visible,
+html.theme-sci-fi button:focus-visible,
+html.theme-sci-fi [role="button"]:focus-visible {
+    outline-color: #4a9aca;
+}
+
+html.theme-sci-fi .skip-link {
+    background: #1a3a5c;
+    color: #c0d8e8;
+}
+
+html.theme-sci-fi .skip-link:focus {
+    outline-color: #4a9aca;
+}
+
+/* Cyberpunk focus colors - neon magenta/cyan */
+html.theme-cyberpunk a:focus-visible,
+html.theme-cyberpunk button:focus-visible,
+html.theme-cyberpunk [role="button"]:focus-visible {
+    outline-color: #ff00ff;
+    box-shadow: 0 0 8px rgba(255, 0, 255, 0.5);
+}
+
+html.theme-cyberpunk .skip-link {
+    background: #1a0a2a;
+    color: #ff66ff;
+    border: 1px solid #ff00ff;
+}
+
+html.theme-cyberpunk .skip-link:focus {
+    outline-color: #00ffff;
+    box-shadow: 0 0 12px rgba(0, 255, 255, 0.5);
+}
+
+/* Cabin focus colors - warm amber/brown */
+html.theme-cabin a:focus-visible,
+html.theme-cabin button:focus-visible,
+html.theme-cabin [role="button"]:focus-visible {
+    outline-color: #c4956a;
+}
+
+html.theme-cabin .skip-link {
+    background: #5a3a2a;
+    color: #f5e8d8;
+}
+
+html.theme-cabin .skip-link:focus {
+    outline-color: #c4956a;
+}
+
+/* Underwater focus colors - teal/seafoam */
+html.theme-underwater a:focus-visible,
+html.theme-underwater button:focus-visible,
+html.theme-underwater [role="button"]:focus-visible {
+    outline-color: #4a9a8a;
+}
+
+html.theme-underwater .skip-link {
+    background: #1a3a4a;
+    color: #c0e8e0;
+}
+
+html.theme-underwater .skip-link:focus {
+    outline-color: #4a9a8a;
 }

@@ -16,31 +16,78 @@
         // Get current theme for sprite paths
         const currentTheme = localStorage.getItem('themeStyle') || 'fantasy';
         const spritePath = `/${currentTheme}/sprites/cat`;
+        const sheetPath = `${spritePath}/sheets`;
 
-        // Cat sprite paths (theme-aware)
-        const sprites = {
-            // Walking - all 8 directions
-            walkNorth: `${spritePath}/walk_north.gif`,
-            walkNortheast: `${spritePath}/walk_northeast.gif`,
-            walkEast: `${spritePath}/walk_east.gif`,
-            walkSoutheast: `${spritePath}/walk_southeast.gif`,
-            walkSouth: `${spritePath}/walk_south.gif`,
-            walkSouthwest: `${spritePath}/walk_southwest.gif`,
-            walkWest: `${spritePath}/walk_west.gif`,
-            walkNorthwest: `${spritePath}/walk_northwest.gif`,
-            // Running
-            runEast: `${spritePath}/run_east.gif`,
-            runWest: `${spritePath}/run_west.gif`,
-            // Idle - all 8 directions
-            idleNorth: `${spritePath}/idle_north.gif`,
-            idleNortheast: `${spritePath}/idle_northeast.gif`,
-            idleEast: `${spritePath}/idle_east.gif`,
-            idleSoutheast: `${spritePath}/idle_southeast.gif`,
-            idleSouth: `${spritePath}/idle_south.gif`,
-            idleSouthwest: `${spritePath}/idle_southwest.gif`,
-            idleWest: `${spritePath}/idle_west.gif`,
-            idleNorthwest: `${spritePath}/idle_northwest.gif`,
+        // All themes now use sprite sheets
+        const usesSpriteSheets = true;
+
+        // Sprite sheet config: frameWidth, frameCount, animationDuration
+        const sheetConfig = {
+            walk: { frames: 6, duration: 600 },
+            run: { frames: 6, duration: 400 },
+            idle: { frames: 8, duration: 800 }
         };
+        const frameWidth = 140;
+
+        // Sprite sheet paths (all themes)
+        const sprites = {
+            walkNorth: `${sheetPath}/walk_north.png`,
+            walkNortheast: `${sheetPath}/walk_north-east.png`,
+            walkEast: `${sheetPath}/walk_east.png`,
+            walkSoutheast: `${sheetPath}/walk_south-east.png`,
+            walkSouth: `${sheetPath}/walk_south.png`,
+            walkSouthwest: `${sheetPath}/walk_south-west.png`,
+            walkWest: `${sheetPath}/walk_west.png`,
+            walkNorthwest: `${sheetPath}/walk_north-west.png`,
+            runNorth: `${sheetPath}/run_north.png`,
+            runNortheast: `${sheetPath}/run_north-east.png`,
+            runEast: `${sheetPath}/run_east.png`,
+            runSoutheast: `${sheetPath}/run_south-east.png`,
+            runSouth: `${sheetPath}/run_south.png`,
+            runSouthwest: `${sheetPath}/run_south-west.png`,
+            runWest: `${sheetPath}/run_west.png`,
+            runNorthwest: `${sheetPath}/run_north-west.png`,
+            idleNorth: `${sheetPath}/idle_north.png`,
+            idleNortheast: `${sheetPath}/idle_north-east.png`,
+            idleEast: `${sheetPath}/idle_east.png`,
+            idleSoutheast: `${sheetPath}/idle_south-east.png`,
+            idleSouth: `${sheetPath}/idle_south.png`,
+            idleSouthwest: `${sheetPath}/idle_south-west.png`,
+            idleWest: `${sheetPath}/idle_west.png`,
+            idleNorthwest: `${sheetPath}/idle_north-west.png`,
+        };
+
+        // GIF fallbacks for themes missing some sprite sheets
+        const gifFallbacks = {
+            walkNorth: `${spritePath}/walk_north.gif`,
+            walkNortheast: `${spritePath}/walk_north_east.gif`,
+            walkEast: `${spritePath}/walk_east.gif`,
+            walkSoutheast: `${spritePath}/walk_south_east.gif`,
+            walkSouth: `${spritePath}/walk_south.gif`,
+            walkSouthwest: `${spritePath}/walk_south_west.gif`,
+            walkWest: `${spritePath}/walk_west.gif`,
+            walkNorthwest: `${spritePath}/walk_north_west.gif`,
+            runNorth: `${spritePath}/run_north.gif`,
+            runNortheast: `${spritePath}/run_north_east.gif`,
+            runEast: `${spritePath}/run_east.gif`,
+            runSoutheast: `${spritePath}/run_south_east.gif`,
+            runSouth: `${spritePath}/run_south.gif`,
+            runSouthwest: `${spritePath}/run_south_west.gif`,
+            runWest: `${spritePath}/run_west.gif`,
+            runNorthwest: `${spritePath}/run_north_west.gif`,
+            idleNorth: `${spritePath}/idle_north.gif`,
+            idleNortheast: `${spritePath}/idle_north_east.gif`,
+            idleEast: `${spritePath}/idle_east.gif`,
+            idleSoutheast: `${spritePath}/idle_south_east.gif`,
+            idleSouth: `${spritePath}/idle_south.gif`,
+            idleSouthwest: `${spritePath}/idle_south_west.gif`,
+            idleWest: `${spritePath}/idle_west.gif`,
+            idleNorthwest: `${spritePath}/idle_north_west.gif`,
+        };
+
+        // Track which sprite sheets loaded successfully
+        const loadedSheets = new Set();
+        const failedSheets = new Set();
 
         const idleSprites = [
             sprites.idleNorth,
@@ -69,16 +116,45 @@
             sprites.walkEast,
         ];
 
-        // Preload all sprites to prevent blinking during animation
-        Object.values(sprites).forEach((src) => {
+        // Preload all sprites and track which ones load successfully
+        Object.entries(sprites).forEach(([key, src]) => {
             const img = new Image();
+            img.onload = () => loadedSheets.add(src);
+            img.onerror = () => {
+                failedSheets.add(src);
+                // Preload the GIF fallback
+                const fallbackImg = new Image();
+                fallbackImg.src = gifFallbacks[key];
+            };
             img.src = src;
         });
+
+        // Inject sprite sheet CSS animations if needed
+        if (usesSpriteSheets) {
+            const style = document.createElement('style');
+            // Element is 192px, frames are 140px, so scale factor is 192/140 ≈ 1.371
+            const scale = 192 / 140;
+            const walkSheetWidth = Math.round(frameWidth * sheetConfig.walk.frames * scale);
+            const runSheetWidth = Math.round(frameWidth * sheetConfig.run.frames * scale);
+            const idleSheetWidth = Math.round(frameWidth * sheetConfig.idle.frames * scale);
+            const scaledHeight = Math.round(140 * scale);
+
+            style.textContent = `
+                @keyframes sprite-walk { from { background-position-x: 0; } to { background-position-x: -${walkSheetWidth}px; } }
+                @keyframes sprite-run { from { background-position-x: 0; } to { background-position-x: -${runSheetWidth}px; } }
+                @keyframes sprite-idle { from { background-position-x: 0; } to { background-position-x: -${idleSheetWidth}px; } }
+                .ramona.sprite-sheet { background-repeat: no-repeat; background-position: 0 0; image-rendering: pixelated; }
+                .ramona.sprite-sheet.anim-walk { background-size: ${walkSheetWidth}px ${scaledHeight}px; animation: sprite-walk ${sheetConfig.walk.duration}ms steps(${sheetConfig.walk.frames}) infinite; }
+                .ramona.sprite-sheet.anim-run { background-size: ${runSheetWidth}px ${scaledHeight}px; animation: sprite-run ${sheetConfig.run.duration}ms steps(${sheetConfig.run.frames}) infinite; }
+                .ramona.sprite-sheet.anim-idle { background-size: ${idleSheetWidth}px ${scaledHeight}px; animation: sprite-idle ${sheetConfig.idle.duration}ms steps(${sheetConfig.idle.frames}) infinite; }
+            `;
+            document.head.appendChild(style);
+        }
 
         // Create Ramona for the first container only (persists across pages)
         const container = containers[0];
         const ramona = document.createElement("div");
-        ramona.className = "ramona";
+        ramona.className = usesSpriteSheets ? "ramona sprite-sheet" : "ramona";
         ramona.setAttribute("role", "img");
         ramona.setAttribute("aria-label", "Ramona the cat");
         ramona.style.position = "fixed";
@@ -110,6 +186,7 @@
             savedState?.direction ?? (Math.random() > 0.5 ? 1 : -1);
         let state = "walking"; // Always start walking - don't restore idle/turning states
         let speed = 1.25;
+        let currentAnimClass = '';
 
         // Clamp x to valid bounds
         x = Math.max(0, Math.min(x, bounds.width - spriteSize));
@@ -124,10 +201,29 @@
         }
         setInterval(saveState, 500); // Save more frequently
 
-        setSprite(direction === 1 ? sprites.walkEast : sprites.walkWest);
+        setSprite(direction === 1 ? sprites.walkEast : sprites.walkWest, 'walk');
 
-        function setSprite(src) {
-            ramona.style.backgroundImage = `url('${src}')`;
+        function setSprite(src, animType) {
+            // Check if this sprite sheet failed to load - use GIF fallback
+            const useGifFallback = failedSheets.has(src);
+            const spriteKey = Object.keys(sprites).find(k => sprites[k] === src);
+            const actualSrc = useGifFallback && spriteKey ? gifFallbacks[spriteKey] : src;
+
+            ramona.style.backgroundImage = `url('${actualSrc}')`;
+
+            // Remove old animation class
+            if (currentAnimClass) ramona.classList.remove(currentAnimClass);
+
+            if (useGifFallback) {
+                // GIF fallback - no CSS animation needed, reset background-size
+                ramona.style.backgroundSize = 'contain';
+                currentAnimClass = '';
+            } else if (usesSpriteSheets && animType) {
+                // Sprite sheet - use CSS stepping animation
+                ramona.style.backgroundSize = ''; // Let CSS class handle it
+                currentAnimClass = `anim-${animType}`;
+                ramona.classList.add(currentAnimClass);
+            }
         }
 
         // Create dirt puff behind Ramona when running
@@ -167,13 +263,14 @@
             speed = 1.25;
             setSprite(
                 direction === 1 ? sprites.walkEast : sprites.walkWest,
+                'walk'
             );
         }
 
         function startRunning() {
             state = "running";
             speed = 3.5;
-            setSprite(direction === 1 ? sprites.runEast : sprites.runWest);
+            setSprite(direction === 1 ? sprites.runEast : sprites.runWest, 'run');
             // Run for 1-3 seconds then go back to walking
             setTimeout(startWalking, 1000 + Math.random() * 2000);
         }
@@ -182,7 +279,7 @@
             state = "idle";
             const randomIdle =
                 idleSprites[Math.floor(Math.random() * idleSprites.length)];
-            setSprite(randomIdle);
+            setSprite(randomIdle, 'idle');
             // Resume walking after 2-12 seconds
             const idleTime = 2000 + Math.random() * 10000;
             setTimeout(() => {
@@ -196,7 +293,7 @@
             let frameIndex = 0;
             const turnInterval = setInterval(() => {
                 if (frameIndex < sequence.length) {
-                    setSprite(sequence[frameIndex]);
+                    setSprite(sequence[frameIndex], 'walk');
                     frameIndex++;
                 } else {
                     clearInterval(turnInterval);

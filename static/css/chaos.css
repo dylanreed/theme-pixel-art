@@ -654,6 +654,10 @@ html.night .sparkle-pixel {
     animation: sign-swing 3s ease-in-out infinite;
 }
 
+.chaos-mode .nav-sign.active {
+    animation: sign-swing-active 3s ease-in-out infinite;
+}
+
 @keyframes sign-swing {
     0%,
     100% {
@@ -661,6 +665,16 @@ html.night .sparkle-pixel {
     }
     50% {
         transform: rotate(2deg);
+    }
+}
+
+@keyframes sign-swing-active {
+    0%,
+    100% {
+        transform: translateY(15px) rotate(-2deg);
+    }
+    50% {
+        transform: translateY(15px) rotate(2deg);
     }
 }
 
@@ -1193,6 +1207,165 @@ html.night .ramona-dirt {
 }
 
 /* ═══════════════════════════════════════════════════════════════
+   FALLING SPRITES - Tumbling pixel art objects
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Base falling sprites - always active on all themes */
+.falling-sprite {
+    position: fixed;
+    top: -40px;
+    width: 32px;
+    height: 32px;
+    pointer-events: none;
+    z-index: 50;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    opacity: 0.85;
+    filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+/* Chaos mode sprites - theme-specific, more intense */
+.chaos-sprite {
+    position: fixed;
+    top: -40px;
+    width: 32px;
+    height: 32px;
+    pointer-events: none;
+    z-index: 85;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    opacity: 0.9;
+    filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.4));
+}
+
+/* Tumbling animations - multiple rotation speeds */
+@keyframes tumble-fall-slow {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    5% {
+        opacity: 0.85;
+    }
+    90% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(calc(100vh + 60px)) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+@keyframes tumble-fall-medium {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    5% {
+        opacity: 0.85;
+    }
+    90% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(calc(100vh + 60px)) rotate(1080deg);
+        opacity: 0;
+    }
+}
+
+@keyframes tumble-fall-fast {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    5% {
+        opacity: 0.85;
+    }
+    90% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(calc(100vh + 60px)) rotate(1440deg);
+        opacity: 0;
+    }
+}
+
+/* Counter-clockwise tumbling */
+@keyframes tumble-fall-reverse {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    5% {
+        opacity: 0.85;
+    }
+    90% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(calc(100vh + 60px)) rotate(-1080deg);
+        opacity: 0;
+    }
+}
+
+/* Tumbling with sway */
+@keyframes tumble-fall-sway {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    5% {
+        opacity: 0.85;
+    }
+    25% {
+        transform: translateY(25vh) translateX(30px) rotate(270deg);
+    }
+    50% {
+        transform: translateY(50vh) translateX(-25px) rotate(540deg);
+    }
+    75% {
+        transform: translateY(75vh) translateX(20px) rotate(810deg);
+    }
+    90% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(calc(100vh + 60px)) translateX(0) rotate(1080deg);
+        opacity: 0;
+    }
+}
+
+/* Wobbling tumble - chaotic motion */
+@keyframes tumble-fall-wobble {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+        opacity: 0;
+    }
+    5% {
+        opacity: 0.9;
+    }
+    20% {
+        transform: translateY(20vh) translateX(15px) rotate(180deg) scale(1.1);
+    }
+    40% {
+        transform: translateY(40vh) translateX(-20px) rotate(400deg) scale(0.9);
+    }
+    60% {
+        transform: translateY(60vh) translateX(25px) rotate(600deg) scale(1.05);
+    }
+    80% {
+        transform: translateY(80vh) translateX(-15px) rotate(850deg) scale(0.95);
+    }
+    90% {
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(calc(100vh + 60px)) translateX(0) rotate(1080deg) scale(1);
+        opacity: 0;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════
    HELP POPUP - Sarcastic pixel art dialog
    ═══════════════════════════════════════════════════════════════ */
 
@@ -1295,13 +1468,13 @@ html.night .help-popup-close {
 /* Sci-fi background - day */
 html.theme-sci-fi body {
     background-image: url("/sci-fi/backgrounds/3.webp") !important;
-    background-size: 66.67% !important;
+    background-size: 75% !important;
 }
 
 /* Sci-fi background - night */
 html.theme-sci-fi.night body {
     background-image: url("/sci-fi/backgrounds/3_night.webp") !important;
-    background-size: 66.67% !important;
+    background-size: 75% !important;
 }
 
 /* Sci-fi border - hide original border when overlay is present */
