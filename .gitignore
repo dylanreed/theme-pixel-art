@@ -1,2 +1,5 @@
 .DS_Store
 *.zip
+
+# Local test posts (synced from micro.blog, not tracked in git)
+content/post/
