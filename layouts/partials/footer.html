@@ -21,11 +21,19 @@
         // All themes now use sprite sheets
         const usesSpriteSheets = true;
 
-        // Sprite sheet config: frameWidth, frameCount, animationDuration
+        // Sprite sheet config varies by theme (different sprite sheets have different frame counts)
+        const themeSheetConfigs = {
+            'fantasy': { walk: 8, run: 8, idle: 8 },
+            'cabin': { walk: 8, run: 8, idle: 8 },
+            'sci-fi': { walk: 6, run: 6, idle: 8 },
+            'cyberpunk': { walk: 6, run: 6, idle: 8 },
+            'underwater': { walk: 6, run: 8, idle: 8 }
+        };
+        const themeFrames = themeSheetConfigs[currentTheme] || themeSheetConfigs['fantasy'];
         const sheetConfig = {
-            walk: { frames: 6, duration: 600 },
-            run: { frames: 6, duration: 400 },
-            idle: { frames: 8, duration: 800 }
+            walk: { frames: themeFrames.walk, duration: 600 },
+            run: { frames: themeFrames.run, duration: 400 },
+            idle: { frames: themeFrames.idle, duration: 800 }
         };
         const frameWidth = 140;
 
