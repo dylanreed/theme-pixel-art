@@ -1,0 +1,963 @@
+<!doctype html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>dylan&#39;s blog</title>
+
+
+<link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
+<link rel="icon" type="image/x-icon" href="/favicon/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+<link rel="manifest" href="/favicon/site.webmanifest">
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    
+        
+    
+
+
+
+
+
+
+
+
+    
+
+
+
+<meta name="description" content="Every adventurer remembers their first dungeon. The flickering torchlight, the distant drip of water, and that unmistakable feeling that something is watching …">
+
+
+<link rel="canonical" href="//localhost:1313/post/dungeon-crawling-tips_copy/">
+
+
+<meta property="og:title" content="dylan&#39;s blog">
+<meta property="og:description" content="Every adventurer remembers their first dungeon. The flickering torchlight, the distant drip of water, and that unmistakable feeling that something is watching …">
+<meta property="og:type" content="article">
+<meta property="og:url" content="//localhost:1313/post/dungeon-crawling-tips_copy/">
+<meta property="og:site_name" content="dylan&#39;s blog">
+
+<meta property="og:image" content="//localhost:1313/og/gaming.gif">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+
+<meta property="article:published_time" content="2025-12-23T10:00:00-10:00">
+<meta property="article:modified_time" content="2025-12-23T10:00:00-10:00">
+
+<meta property="article:section" content="gaming">
+
+
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="dylan&#39;s blog">
+<meta name="twitter:description" content="Every adventurer remembers their first dungeon. The flickering torchlight, the distant drip of water, and that unmistakable feeling that something is watching …">
+<meta name="twitter:image" content="//localhost:1313/og/gaming.gif">
+
+
+
+
+
+<script>
+(function() {
+    var theme = localStorage.getItem('theme');
+    if (theme === 'night' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('night');
+    }
+})();
+</script>
+
+
+<link rel="preload" href="/background/3.webp" as="image" type="image/webp">
+<link rel="preload" href="/background/3_night.webp" as="image" type="image/webp">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Spectral:wght@400;600&family=Uncial+Antiqua&family=Orbitron:wght@400;700&family=Share+Tech+Mono&family=IBM+Plex+Mono:wght@400;600&family=Teko:wght@400;600&family=Rajdhani:wght@400;600&family=Fira+Code:wght@400;600&family=Amatic+SC:wght@400;700&family=Cabin:wght@400;600&family=Merriweather:wght@400;700&family=Cinzel:wght@400;600&family=Quicksand:wght@400;500;600&family=Source+Sans+Pro:wght@400;600&family=Fredericka+the+Great&family=Literata:wght@400;600&family=IM+Fell+English:ital@0;1&family=Vollkorn:wght@400;600&family=EB+Garamond:wght@400;600&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/chaos.css">
+<link rel="stylesheet" href="/css/themes.css">
+<link rel="stylesheet" href="/css/achievements.css">
+<link rel="stylesheet" href="/css/sierra-panel.css">
+
+
+
+
+
+
+<link rel="authorization_endpoint" href="https://micro.blog/indieauth/auth">
+<link rel="token_endpoint" href="https://micro.blog/indieauth/token">
+<link rel="micropub" href="https://micro.blog/micropub">
+<link rel="webmention" href="https://micro.blog/webmention">
+<link rel="microsub" href="https://micro.blog/microsub">
+
+
+
+
+
+
+
+<link rel="alternate" type="application/rss+xml" title="dylan&#39;s blog" href="//localhost:1313/feed.xml">
+<link rel="alternate" type="application/json" title="dylan&#39;s blog" href="//localhost:1313/feed.json">
+
+
+
+
+
+
+</head>
+<body>
+
+    
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    
+    <div class="sierra-trigger"></div>
+    <div class="sierra-panel">
+        <div class="sierra-panel-bg">
+            <div class="sierra-title"><span>Controls</span></div>
+            <div class="sierra-buttons">
+                <button class="sierra-btn" data-action="theme" data-tooltip="Day/Night">
+                    <img class="btn-icon day-icon" src="/sprites/drop_down_icons/day.png" alt="Switch to day mode">
+                    <img class="btn-icon night-icon" src="/sprites/drop_down_icons/night.png" alt="Switch to night mode" style="display:none">
+                </button>
+                <button class="sierra-btn" data-action="weather" data-tooltip="Weather">
+                    <img class="btn-icon weather-icon" src="/sprites/drop_down_icons/sun.png" alt="Cycle weather effects">
+                </button>
+                <button class="sierra-btn" data-action="rainbow" data-tooltip="Rainbow">
+                    <img class="btn-icon" src="/sprites/drop_down_icons/rainbow.png" alt="Toggle rainbow mode">
+                </button>
+                <button class="sierra-btn" data-action="achievements" data-tooltip="Achievements">
+                    <img class="btn-icon" src="/sprites/drop_down_icons/trophey.png" alt="View achievements panel">
+                </button>
+                <button class="sierra-btn" data-action="mode" data-tooltip="Theme: Fantasy">
+                    <img class="btn-icon mode-icon" src="/modes/fantasy.png" alt="Cycle visual theme">
+                </button>
+                <button class="sierra-btn" data-action="chaos" data-tooltip="Chaos">
+                    <img class="btn-icon" src="/sprites/drop_down_icons/swirl.png" alt="Toggle chaos mode">
+                </button>
+                <button class="sierra-btn" data-action="help" data-tooltip="Help">
+                    <img class="btn-icon" src="/sprites/drop_down_icons/help.png" alt="Show help information">
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        
+        (function() {
+            const panel = document.querySelector('.sierra-panel');
+            if (!panel) return;
+
+            
+            function updateThemeButton() {
+                const dayIcon = panel.querySelector('[data-action="theme"] .day-icon');
+                const nightIcon = panel.querySelector('[data-action="theme"] .night-icon');
+                const isNight = document.documentElement.classList.contains('night');
+                
+                
+                if (dayIcon) dayIcon.style.display = isNight ? 'block' : 'none';
+                if (nightIcon) nightIcon.style.display = isNight ? 'none' : 'block';
+            }
+            updateThemeButton();
+
+            
+            let currentWeather = null;
+            const weatherIcons = {
+                sun: '/sprites/drop_down_icons/sun.png',
+                rain: '/sprites/drop_down_icons/rain.png',
+                snow: '/sprites/drop_down_icons/snow.png'
+            };
+
+            
+            const themes = ['fantasy', 'sci-fi', 'cyberpunk', 'cabin', 'underwater'];
+            const themeNames = {
+                'fantasy': 'Fantasy',
+                'sci-fi': 'Sci-Fi',
+                'cyberpunk': 'Cyberpunk',
+                'cabin': 'Cabin',
+                'underwater': 'Underwater'
+            };
+            const themeIcons = {
+                'fantasy': '/modes/fantasy.png',
+                'sci-fi': '/modes/sci-fi.png',
+                'cyberpunk': '/modes/cyberpunk.png',
+                'cabin': '/modes/cabin.png',
+                'underwater': '/modes/underwater.png'
+            };
+            let currentThemeIndex = 0;
+
+            
+            let modeClickCount = parseInt(localStorage.getItem('modeClickCount') || '0');
+            let chaosUnlocked = localStorage.getItem('chaosUnlocked') === 'true';
+            const CHAOS_CLICK_THRESHOLD = 25;
+            const CHAOS_TIME_THRESHOLD = 5 * 60 * 1000; 
+
+            
+            function initThemeStyle() {
+                const savedTheme = localStorage.getItem('themeStyle') || 'fantasy';
+                currentThemeIndex = themes.indexOf(savedTheme);
+                if (currentThemeIndex === -1) currentThemeIndex = 0;
+                applyThemeStyle(themes[currentThemeIndex], false);
+            }
+
+            function applyThemeStyle(theme, updateStorage = true) {
+                
+                themes.forEach(t => {
+                    if (t !== 'fantasy') {
+                        document.documentElement.classList.remove('theme-' + t);
+                    }
+                });
+                
+                if (theme !== 'fantasy') {
+                    document.documentElement.classList.add('theme-' + theme);
+                }
+                
+                const modeBtn = panel.querySelector('[data-action="mode"]');
+                if (modeBtn) {
+                    const icon = modeBtn.querySelector('.mode-icon');
+                    if (icon) {
+                        icon.src = themeIcons[theme];
+                        
+                        icon.onerror = function() {
+                            this.src = '/modes/fantasy.png';
+                            this.onerror = null;
+                        };
+                    }
+                    modeBtn.dataset.tooltip = 'Theme: ' + themeNames[theme];
+                    modeBtn.classList.toggle('active', theme !== 'fantasy');
+                }
+                if (updateStorage) {
+                    localStorage.setItem('themeStyle', theme);
+                }
+            }
+
+            
+            function checkChaosUnlock() {
+                if (chaosUnlocked) return;
+
+                if (modeClickCount >= CHAOS_CLICK_THRESHOLD) {
+                    unlockChaos('You clicked the theme button ' + CHAOS_CLICK_THRESHOLD + ' times! Chaos mode unlocked!');
+                }
+            }
+
+            function unlockChaos(message) {
+                if (chaosUnlocked) return;
+                chaosUnlocked = true;
+                localStorage.setItem('chaosUnlocked', 'true');
+
+                
+                if (window.chaos) {
+                    window.chaos.enable();
+                    console.log('%c' + message, 'color: #ff00ff; font-size: 16px; font-weight: bold;');
+                }
+            }
+
+            
+            if (!chaosUnlocked) {
+                setTimeout(() => {
+                    unlockChaos('You\'ve been here for 5 minutes! Chaos mode unlocked!');
+                }, CHAOS_TIME_THRESHOLD);
+            }
+
+            initThemeStyle();
+
+            panel.addEventListener('click', (e) => {
+                const btn = e.target.closest('.sierra-btn');
+                if (!btn) return;
+
+                const action = btn.dataset.action;
+
+                switch(action) {
+                    case 'theme':
+                        const isNight = document.documentElement.classList.toggle('night');
+                        localStorage.setItem('theme', isNight ? 'night' : 'day');
+                        updateThemeButton();
+                        break;
+
+                    case 'mode':
+                        
+                        modeClickCount++;
+                        localStorage.setItem('modeClickCount', modeClickCount.toString());
+                        checkChaosUnlock();
+
+                        
+                        currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+                        applyThemeStyle(themes[currentThemeIndex]);
+                        
+                        location.reload();
+                        break;
+
+                    case 'achievements':
+                        if (window.achievementPanel) {
+                            window.achievementPanel.toggle();
+                            const achPanel = document.getElementById('achievements-panel');
+                            btn.classList.toggle('active', achPanel && achPanel.classList.contains('open'));
+                        }
+                        break;
+
+                    case 'rainbow':
+                        if (window.chaos) {
+                            window.chaos.rainbow();
+                            btn.classList.toggle('active', document.body.classList.contains('rainbow-mode'));
+                        }
+                        break;
+
+                    case 'weather':
+                        const weatherIcon = btn.querySelector('.weather-icon');
+                        if (window.chaosWeather) {
+                            if (currentWeather === null) {
+                                window.chaosWeather.rain();
+                                currentWeather = 'rain';
+                                if (weatherIcon) weatherIcon.src = weatherIcons.rain;
+                            } else if (currentWeather === 'rain') {
+                                window.chaosWeather.snow();
+                                currentWeather = 'snow';
+                                if (weatherIcon) weatherIcon.src = weatherIcons.snow;
+                            } else {
+                                window.chaosWeather.stop();
+                                currentWeather = null;
+                                if (weatherIcon) weatherIcon.src = weatherIcons.sun;
+                            }
+                            btn.classList.toggle('active', currentWeather !== null);
+                        }
+                        break;
+
+                    case 'chaos':
+                        if (window.chaos) {
+                            if (document.body.classList.contains('chaos-mode')) {
+                                window.chaos.disable();
+                            } else {
+                                window.chaos.enable();
+                            }
+                            btn.classList.toggle('active', document.body.classList.contains('chaos-mode'));
+                        }
+                        break;
+
+                    case 'help':
+                        showHelpPopup();
+                        break;
+                }
+            });
+
+            
+            function showHelpPopup() {
+                
+                const existing = document.querySelector('.help-popup');
+                if (existing) existing.remove();
+
+                
+                if (window.achievementHooks?.onHelpClicked) {
+                    window.achievementHooks.onHelpClicked();
+                }
+
+                const popup = document.createElement('div');
+                popup.className = 'help-popup';
+                popup.innerHTML = `
+                    It's a website... why do you need help?
+                    <button class="help-popup-close">OK, fair enough</button>
+                `;
+
+                document.body.appendChild(popup);
+
+                
+                requestAnimationFrame(() => {
+                    popup.classList.add('visible');
+                });
+
+                
+                popup.querySelector('.help-popup-close').addEventListener('click', () => {
+                    popup.classList.remove('visible');
+                    setTimeout(() => popup.remove(), 300);
+                    
+                    if (window.chaos) {
+                        window.chaos.help();
+                    }
+                });
+
+                
+                popup.addEventListener('click', (e) => {
+                    if (e.target === popup) {
+                        popup.classList.remove('visible');
+                        setTimeout(() => popup.remove(), 300);
+                    }
+                });
+            }
+        })();
+    </script>
+
+
+
+
+
+    
+        
+    
+
+
+
+
+    
+        
+    
+
+
+
+
+
+<header class="site-header">
+    <div class="header-container">
+        <div class="header-image" style="background-image: url('/headers/gaming.webp');">
+            
+            
+            
+            <h1 class="site-title">
+                <a href="//localhost:1313/">dylan&#39;s blog</a>
+            </h1>
+        </div>
+        <div class="header-frame"></div>
+    </div>
+</header>
+
+<script>
+
+(function() {
+    const container = document.querySelector('.header-container');
+    const video = document.querySelector('.header-video');
+    if (!container || !video) return;
+
+    container.addEventListener('mouseenter', () => {
+        video.style.opacity = '1';
+        video.play();
+    });
+
+    container.addEventListener('mouseleave', () => {
+        video.pause();
+        
+    });
+})();
+</script>
+
+<nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+    </button>
+    <div class="nav-links" id="nav-links">
+        <a href="//localhost:1313/" class="nav-sign">
+            <span>home</span>
+        </a>
+        
+        
+        <a href="/archive/" class="nav-sign">
+            <span>Archive</span>
+        </a>
+        
+        
+        <a href="/photos/" class="nav-sign">
+            <span>Photos</span>
+        </a>
+        
+    </div>
+</nav>
+<script>
+        
+        (function() {
+            const hamburger = document.querySelector('.nav-hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            if (!hamburger || !navLinks) return;
+
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('open');
+                navLinks.classList.toggle('open');
+                hamburger.setAttribute('aria-expanded',
+                    hamburger.classList.contains('open'));
+            });
+
+            
+            navLinks.querySelectorAll('.nav-sign').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('open');
+                    navLinks.classList.remove('open');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                });
+            });
+
+            
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.site-nav') && navLinks.classList.contains('open')) {
+                    hamburger.classList.remove('open');
+                    navLinks.classList.remove('open');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                }
+            });
+        })();
+    </script>
+
+    <main id="main-content" class="main-content">
+<article class="post-container category-gaming">
+    <header class="post-header">
+        
+        
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+<div class="post-sprite sprite-dragon" data-category="gaming">
+    <img src="/sprites/category/Dragon%20-%20Tabletop.png" alt="Animated dragon sprite for gaming category">
+</div>
+
+
+
+        <div class="post-header-content">
+            
+            
+                
+                <a href="/categories/gaming/" class="post-tag">gaming</a>
+                
+            
+
+            
+            
+
+            
+            <div class="post-meta">December 23, 2025</div>
+        </div>
+    </header>
+
+    
+    
+    
+
+    
+    
+
+    <div class="post-content">
+        
+        <p>Every adventurer remembers their first dungeon. The flickering torchlight, the distant drip of water, and that unmistakable feeling that something is watching from the shadows. Whether you&rsquo;re rolling dice around a table or navigating pixelated corridors, these fundamentals will keep you alive longer than the average tavern brawler.</p>
+<p>First rule: never split the party. I know the rogue wants to scout ahead, but there&rsquo;s safety in numbers when a gelatinous cube drops from the ceiling. Second, always check for traps. That treasure chest looks inviting, but so did the last three that launched poison darts.</p>
+<p>Keep your inventory organized. Nothing worse than fumbling for a healing potion while an owlbear is using your wizard as a chew toy. Map as you go, mark dead ends, and for the love of all that is holy, bring extra torches.</p>
+<p>Finally, talk to everything that doesn&rsquo;t immediately try to eat you. That goblin might know a shortcut. That skeleton might be cursed and grateful for conversation. The dungeon rewards curiosity almost as often as it punishes it.</p>
+<p>Now get in there and find some loot.</p>
+
+    </div>
+
+    
+    
+</article>
+
+    </main><footer class="site-footer">
+    <p>
+        dylan&#39;s blog &copy; 2025 &middot; Powered by chaos goblin
+        energy
+    </p>
+</footer>
+
+<script>
+    (function () {
+        
+        const containers = document.querySelectorAll(
+            ".posts-container, .post-container, .page-container, .archive-container, .note-scroll-single",
+        );
+        if (containers.length === 0) return;
+
+        
+        const currentTheme = localStorage.getItem('themeStyle') || 'fantasy';
+        const spritePath = `/${currentTheme}/sprites/cat`;
+        const sheetPath = `${spritePath}/sheets`;
+
+        
+        const usesSpriteSheets = true;
+
+        
+        const sheetConfig = {
+            walk: { frames: 8, duration: 600 },
+            run: { frames: 8, duration: 400 },
+            idle: { frames: 8, duration: 800 }
+        };
+        const frameWidth = 140;
+
+        
+        const sprites = {
+            walkNorth: `${sheetPath}/walk_north.png`,
+            walkNortheast: `${sheetPath}/walk_north-east.png`,
+            walkEast: `${sheetPath}/walk_east.png`,
+            walkSoutheast: `${sheetPath}/walk_south-east.png`,
+            walkSouth: `${sheetPath}/walk_south.png`,
+            walkSouthwest: `${sheetPath}/walk_south-west.png`,
+            walkWest: `${sheetPath}/walk_west.png`,
+            walkNorthwest: `${sheetPath}/walk_north-west.png`,
+            runNorth: `${sheetPath}/run_north.png`,
+            runNortheast: `${sheetPath}/run_north-east.png`,
+            runEast: `${sheetPath}/run_east.png`,
+            runSoutheast: `${sheetPath}/run_south-east.png`,
+            runSouth: `${sheetPath}/run_south.png`,
+            runSouthwest: `${sheetPath}/run_south-west.png`,
+            runWest: `${sheetPath}/run_west.png`,
+            runNorthwest: `${sheetPath}/run_north-west.png`,
+            idleNorth: `${sheetPath}/idle_north.png`,
+            idleNortheast: `${sheetPath}/idle_north-east.png`,
+            idleEast: `${sheetPath}/idle_east.png`,
+            idleSoutheast: `${sheetPath}/idle_south-east.png`,
+            idleSouth: `${sheetPath}/idle_south.png`,
+            idleSouthwest: `${sheetPath}/idle_south-west.png`,
+            idleWest: `${sheetPath}/idle_west.png`,
+            idleNorthwest: `${sheetPath}/idle_north-west.png`,
+        };
+
+        
+        const gifFallbacks = {
+            walkNorth: `${spritePath}/walk_north.gif`,
+            walkNortheast: `${spritePath}/walk_north_east.gif`,
+            walkEast: `${spritePath}/walk_east.gif`,
+            walkSoutheast: `${spritePath}/walk_south_east.gif`,
+            walkSouth: `${spritePath}/walk_south.gif`,
+            walkSouthwest: `${spritePath}/walk_south_west.gif`,
+            walkWest: `${spritePath}/walk_west.gif`,
+            walkNorthwest: `${spritePath}/walk_north_west.gif`,
+            runNorth: `${spritePath}/run_north.gif`,
+            runNortheast: `${spritePath}/run_north_east.gif`,
+            runEast: `${spritePath}/run_east.gif`,
+            runSoutheast: `${spritePath}/run_south_east.gif`,
+            runSouth: `${spritePath}/run_south.gif`,
+            runSouthwest: `${spritePath}/run_south_west.gif`,
+            runWest: `${spritePath}/run_west.gif`,
+            runNorthwest: `${spritePath}/run_north_west.gif`,
+            idleNorth: `${spritePath}/idle_north.gif`,
+            idleNortheast: `${spritePath}/idle_north_east.gif`,
+            idleEast: `${spritePath}/idle_east.gif`,
+            idleSoutheast: `${spritePath}/idle_south_east.gif`,
+            idleSouth: `${spritePath}/idle_south.gif`,
+            idleSouthwest: `${spritePath}/idle_south_west.gif`,
+            idleWest: `${spritePath}/idle_west.gif`,
+            idleNorthwest: `${spritePath}/idle_north_west.gif`,
+        };
+
+        
+        const loadedSheets = new Set();
+        const failedSheets = new Set();
+
+        const idleSprites = [
+            sprites.idleNorth,
+            sprites.idleNortheast,
+            sprites.idleEast,
+            sprites.idleSoutheast,
+            sprites.idleSouth,
+            sprites.idleSouthwest,
+            sprites.idleWest,
+            sprites.idleNorthwest,
+        ];
+
+        
+        const turnEastToWest = [
+            sprites.walkEast,
+            sprites.walkSoutheast,
+            sprites.walkSouth,
+            sprites.walkSouthwest,
+            sprites.walkWest,
+        ];
+        const turnWestToEast = [
+            sprites.walkWest,
+            sprites.walkSouthwest,
+            sprites.walkSouth,
+            sprites.walkSoutheast,
+            sprites.walkEast,
+        ];
+
+        
+        Object.entries(sprites).forEach(([key, src]) => {
+            const img = new Image();
+            img.onload = () => loadedSheets.add(src);
+            img.onerror = () => {
+                failedSheets.add(src);
+                
+                const fallbackImg = new Image();
+                fallbackImg.src = gifFallbacks[key];
+            };
+            img.src = src;
+        });
+
+        
+        if (usesSpriteSheets) {
+            const style = document.createElement('style');
+            
+            const scale = 192 / 140;
+            const walkSheetWidth = Math.round(frameWidth * sheetConfig.walk.frames * scale);
+            const runSheetWidth = Math.round(frameWidth * sheetConfig.run.frames * scale);
+            const idleSheetWidth = Math.round(frameWidth * sheetConfig.idle.frames * scale);
+            const scaledHeight = Math.round(140 * scale);
+
+            style.textContent = `
+                @keyframes sprite-walk { from { background-position-x: 0; } to { background-position-x: -${walkSheetWidth}px; } }
+                @keyframes sprite-run { from { background-position-x: 0; } to { background-position-x: -${runSheetWidth}px; } }
+                @keyframes sprite-idle { from { background-position-x: 0; } to { background-position-x: -${idleSheetWidth}px; } }
+                .ramona.sprite-sheet { background-repeat: no-repeat; background-position: 0 0; image-rendering: pixelated; }
+                .ramona.sprite-sheet.anim-walk { background-size: ${walkSheetWidth}px ${scaledHeight}px; animation: sprite-walk ${sheetConfig.walk.duration}ms steps(${sheetConfig.walk.frames}) infinite; }
+                .ramona.sprite-sheet.anim-run { background-size: ${runSheetWidth}px ${scaledHeight}px; animation: sprite-run ${sheetConfig.run.duration}ms steps(${sheetConfig.run.frames}) infinite; }
+                .ramona.sprite-sheet.anim-idle { background-size: ${idleSheetWidth}px ${scaledHeight}px; animation: sprite-idle ${sheetConfig.idle.duration}ms steps(${sheetConfig.idle.frames}) infinite; }
+            `;
+            document.head.appendChild(style);
+        }
+
+        
+        const container = containers[0];
+        const ramona = document.createElement("div");
+        ramona.className = usesSpriteSheets ? "ramona sprite-sheet" : "ramona";
+        ramona.setAttribute("role", "img");
+        ramona.setAttribute("aria-label", "Ramona the cat");
+        ramona.style.position = "fixed";
+        ramona.style.pointerEvents = "none";
+        ramona.style.zIndex = "1000";
+        document.body.appendChild(ramona);
+
+        
+        function getContainerBounds() {
+            const rect = container.getBoundingClientRect();
+            return {
+                left: rect.left,
+                width: rect.width,
+                top: rect.top,
+            };
+        }
+
+        
+        let bounds = getContainerBounds();
+        const stateKey = "ramona_state";
+        const savedState = JSON.parse(
+            localStorage.getItem(stateKey) || "null",
+        );
+        const spriteSize = 192;
+        
+        let xPercent = savedState?.xPercent ?? Math.random();
+        let x = xPercent * (bounds.width - spriteSize);
+        let direction =
+            savedState?.direction ?? (Math.random() > 0.5 ? 1 : -1);
+        let state = "walking"; 
+        let speed = 1.25;
+        let currentAnimClass = '';
+
+        
+        x = Math.max(0, Math.min(x, bounds.width - spriteSize));
+
+        
+        function saveState() {
+            const xPercent = x / Math.max(1, bounds.width - spriteSize);
+            localStorage.setItem(
+                stateKey,
+                JSON.stringify({ xPercent, direction, state }),
+            );
+        }
+        setInterval(saveState, 500); 
+
+        setSprite(direction === 1 ? sprites.walkEast : sprites.walkWest, 'walk');
+
+        function setSprite(src, animType) {
+            
+            const useGifFallback = failedSheets.has(src);
+            const spriteKey = Object.keys(sprites).find(k => sprites[k] === src);
+            const actualSrc = useGifFallback && spriteKey ? gifFallbacks[spriteKey] : src;
+
+            ramona.style.backgroundImage = `url('${actualSrc}')`;
+
+            
+            if (currentAnimClass) ramona.classList.remove(currentAnimClass);
+
+            if (useGifFallback) {
+                
+                ramona.style.backgroundSize = 'contain';
+                currentAnimClass = '';
+            } else if (usesSpriteSheets && animType) {
+                
+                ramona.style.backgroundSize = ''; 
+                currentAnimClass = `anim-${animType}`;
+                ramona.classList.add(currentAnimClass);
+            }
+        }
+
+        
+        function createDirt(footX, footY) {
+            const dirt = document.createElement("div");
+            dirt.className = "ramona-dirt";
+            
+            const offsetX = direction === 1 ? -10 : 10;
+            dirt.style.left =
+                footX + offsetX + (Math.random() - 0.5) * 10 + "px";
+            dirt.style.top = footY + (Math.random() - 0.5) * 5 + "px";
+            
+            const size = 6 + Math.random() * 6;
+            dirt.style.width = size + "px";
+            dirt.style.height = size + "px";
+            document.body.appendChild(dirt);
+            setTimeout(() => dirt.remove(), 500);
+        }
+
+        
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.className = "ramona-heart";
+            heart.textContent = "♥";
+            const offsetX = (Math.random() - 0.5) * 30;
+            heart.style.left =
+                bounds.left + x + spriteSize / 2 + offsetX + "px";
+            heart.style.top = bounds.top - 114 + 20 + "px";
+            const size = 12 + Math.random() * 12;
+            heart.style.fontSize = size + "px";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 1500);
+        }
+
+        function startWalking() {
+            state = "walking";
+            speed = 1.25;
+            setSprite(
+                direction === 1 ? sprites.walkEast : sprites.walkWest,
+                'walk'
+            );
+        }
+
+        function startRunning() {
+            state = "running";
+            speed = 3.5;
+            setSprite(direction === 1 ? sprites.runEast : sprites.runWest, 'run');
+            
+            setTimeout(startWalking, 1000 + Math.random() * 2000);
+        }
+
+        function startIdling() {
+            state = "idle";
+            const randomIdle =
+                idleSprites[Math.floor(Math.random() * idleSprites.length)];
+            setSprite(randomIdle, 'idle');
+            
+            const idleTime = 2000 + Math.random() * 10000;
+            setTimeout(() => {
+                if (state === "idle") startWalking();
+            }, idleTime);
+        }
+
+        function startTurning(newDirection) {
+            state = "turning";
+            const sequence = newDirection === -1 ? turnEastToWest : turnWestToEast;
+            let frameIndex = 0;
+            const turnInterval = setInterval(() => {
+                if (frameIndex < sequence.length) {
+                    setSprite(sequence[frameIndex], 'walk');
+                    frameIndex++;
+                } else {
+                    clearInterval(turnInterval);
+                    direction = newDirection;
+                    startWalking();
+                }
+            }, 80); 
+        }
+
+        function animate() {
+            bounds = getContainerBounds();
+
+            if (state === "walking" || state === "running") {
+                x += speed * direction;
+
+                
+                if (state === "running") {
+                    const footX =
+                        bounds.left +
+                        x +
+                        (direction === 1 ? 40 : spriteSize - 40);
+                    const footY = bounds.top + 10;
+                    createDirt(footX, footY);
+                }
+
+                
+                const maxX = bounds.width - spriteSize;
+                if (x >= maxX) {
+                    x = maxX;
+                    startTurning(-1);
+                } else if (x <= 0) {
+                    x = 0;
+                    startTurning(1);
+                }
+
+                
+                const rand = Math.random();
+                if (rand < 0.01) {
+                    startIdling();
+                } else if (rand < 0.02 && state === "walking") {
+                    startRunning();
+                }
+            }
+
+            
+            if (state === "idle" && Math.random() < 0.02) {
+                createHeart();
+            }
+
+            
+            ramona.style.top = bounds.top - 114 + "px";
+            ramona.style.left = bounds.left + x + "px";
+
+            requestAnimationFrame(animate);
+        }
+
+        
+        animate();
+    })();
+</script>
+
+
+    
+
+
+    
+    <script src="/js/chaos.js?v=1766863592"></script>
+    <script src="/js/achievements.js?v=1766863592"></script>
+    <script src="/js/scroll-tiles.js?v=1766863592"></script>
+    <script src="/js/scroll-rollup.js?v=1766863592"></script>
+</body>
+</html>

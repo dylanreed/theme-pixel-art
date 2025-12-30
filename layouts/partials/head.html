@@ -19,12 +19,70 @@
     if (theme === 'night' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         document.documentElement.classList.add('night');
     }
+    // Apply theme style class before CSS loads
+    var themeStyle = localStorage.getItem('themeStyle') || 'fantasy';
+    if (themeStyle !== 'fantasy') {
+        document.documentElement.classList.add('theme-' + themeStyle);
+    }
 })();
 </script>
 
 <!-- Preload background images -->
 <link rel="preload" href="/background/3.webp" as="image" type="image/webp">
 <link rel="preload" href="/background/3_night.webp" as="image" type="image/webp">
+
+<!-- Theme asset preloader -->
+<script>
+(function() {
+    var currentTheme = localStorage.getItem('themeStyle') || 'fantasy';
+
+    // Key assets to preload per theme
+    function getThemeAssets(theme) {
+        var base = '/' + theme;
+        return [
+            base + '/tiles/day_tiles.webp',
+            base + '/tiles/tiles_night.webp',
+            base + '/dropdown/drop_down_menu.webp',
+            base + '/notes/top.webp',
+            base + '/notes/middle.webp',
+            base + '/notes/bottom.webp',
+            base + '/notes/closed.webp',
+            base + '/menu/sign.webp',
+            base + '/sprites/cat/sheets/walk_east.png',
+            base + '/sprites/cat/sheets/walk_west.png',
+            base + '/sprites/cat/sheets/idle_south.png'
+        ];
+    }
+
+    // Preload current theme assets
+    var assets = getThemeAssets(currentTheme);
+    assets.forEach(function(src) {
+        var img = new Image();
+        img.src = src;
+    });
+
+    // Expose preloader for theme switching
+    window.preloadTheme = function(theme) {
+        return new Promise(function(resolve) {
+            var themeAssets = getThemeAssets(theme);
+            var loaded = 0;
+            var total = themeAssets.length;
+
+            themeAssets.forEach(function(src) {
+                var img = new Image();
+                img.onload = img.onerror = function() {
+                    loaded++;
+                    if (loaded >= total) resolve();
+                };
+                img.src = src;
+            });
+
+            // Timeout fallback after 3 seconds
+            setTimeout(resolve, 3000);
+        });
+    };
+})();
+</script>
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">

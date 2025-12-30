@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyberpunk Theme Test</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Spectral:wght@400;600&family=Uncial+Antiqua&display=swap" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/chaos.css">
+
+    <style>
+        /* Override background to use cyberpunk */
+        body {
+            background-image: url("/cyberpunk/backgrounds/3.png") !important;
+        }
+        html.night body {
+            background-image: url("/cyberpunk/backgrounds/3_night.png") !important;
+        }
+
+        /* Override tiles to use cyberpunk */
+        .posts-container,
+        .post-container,
+        .page-container {
+            border-image-source: url("/cyberpunk/tiles/day_tiles.png") !important;
+        }
+
+        /* Theme toggle button */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #ff00ff;
+            color: #00ffff;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+        .theme-toggle:hover {
+            background: #ff00ff;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">Toggle Day/Night</button>
+
+    <!-- Site Header -->
+    <header class="site-header">
+        <div class="header-container">
+            <div class="header-image" style="background-image: url('/cyberpunk/headers/home.png')"></div>
+            <h1 class="site-title">Cyberpunk Theme Test</h1>
+        </div>
+    </header>
+
+    <!-- Posts Container -->
+    <div class="posts-container">
+        <div class="posts">
+
+            <!-- Default -->
+            <article class="post featured-post">
+                <div class="header-image" style="background-image: url('/cyberpunk/headers/default.png'); height: 200px; margin-bottom: 20px;"></div>
+                <div class="post-body">
+                    <span class="post-tag">Default</span>
+                    <h2 class="post-title"><a href="#">Welcome to the Sprawl</a></h2>
+                    <div class="post-meta">December 23, 2077</div>
+                    <div class="post-excerpt">The neon lights flicker outside your window. Another night in the megacity. The rain hasn't stopped for days.</div>
+                    <a href="#" class="post-link">Read more &rarr;</a>
+                </div>
+            </article>
+
+            <!-- Tech -->
+            <article class="post">
+                <div class="header-image" style="background-image: url('/cyberpunk/headers/tech.png'); height: 200px; margin-bottom: 20px;"></div>
+                <div class="post-body">
+                    <span class="post-tag">Tech</span>
+                    <h2 class="post-title"><a href="#">Hacking the Mainframe</a></h2>
+                    <div class="post-meta">December 23, 2077</div>
+                </div>
+            </article>
+
+            <!-- Gaming -->
+            <article class="post">
+                <div class="header-image" style="background-image: url('/cyberpunk/headers/gaming.png'); height: 200px; margin-bottom: 20px;"></div>
+                <div class="post-body">
+                    <span class="post-tag">Gaming</span>
+                    <h2 class="post-title"><a href="#">Braindance Sessions</a></h2>
+                    <div class="post-meta">December 23, 2077</div>
+                </div>
+            </article>
+
+            <!-- Reading -->
+            <article class="post">
+                <div class="header-image" style="background-image: url('/cyberpunk/headers/reading.png'); height: 200px; margin-bottom: 20px;"></div>
+                <div class="post-body">
+                    <span class="post-tag">Reading</span>
+                    <h2 class="post-title"><a href="#">Paper Books in a Digital Age</a></h2>
+                    <div class="post-meta">December 23, 2077</div>
+                </div>
+            </article>
+
+            <!-- Music -->
+            <article class="post">
+                <div class="header-image" style="background-image: url('/cyberpunk/headers/music.png'); height: 200px; margin-bottom: 20px;"></div>
+                <div class="post-body">
+                    <span class="post-tag">Music</span>
+                    <h2 class="post-title"><a href="#">Synthwave Dreams</a></h2>
+                    <div class="post-meta">December 23, 2077</div>
+                </div>
+            </article>
+
+            <!-- Writing -->
+            <article class="post">
+                <div class="header-image" style="background-image: url('/cyberpunk/headers/writing.png'); height: 200px; margin-bottom: 20px;"></div>
+                <div class="post-body">
+                    <span class="post-tag">Writing</span>
+                    <h2 class="post-title"><a href="#">The Truth Must Be Told</a></h2>
+                    <div class="post-meta">December 23, 2077</div>
+                </div>
+            </article>
+
+            <!-- Cooking -->
+            <article class="post">
+                <div class="header-image" style="background-image: url('/cyberpunk/headers/cooking.png'); height: 200px; margin-bottom: 20px;"></div>
+                <div class="post-body">
+                    <span class="post-tag">Cooking</span>
+                    <h2 class="post-title"><a href="#">Real Food, Real Flavor</a></h2>
+                    <div class="post-meta">December 23, 2077</div>
+                </div>
+            </article>
+
+            <!-- Crafting -->
+            <article class="post">
+                <div class="header-image" style="background-image: url('/cyberpunk/headers/crafting.png'); height: 200px; margin-bottom: 20px;"></div>
+                <div class="post-body">
+                    <span class="post-tag">Crafting</span>
+                    <h2 class="post-title"><a href="#">Chrome and Steel</a></h2>
+                    <div class="post-meta">December 23, 2077</div>
+                </div>
+            </article>
+
+            <!-- Pets -->
+            <article class="post">
+                <div class="header-image" style="background-image: url('/cyberpunk/headers/pets.png'); height: 200px; margin-bottom: 20px;"></div>
+                <div class="post-body">
+                    <span class="post-tag">Pets</span>
+                    <h2 class="post-title"><a href="#">Synthetic Companions</a></h2>
+                    <div class="post-meta">December 23, 2077</div>
+                </div>
+            </article>
+
+            <!-- Health -->
+            <article class="post">
+                <div class="header-image" style="background-image: url('/cyberpunk/headers/health.png'); height: 200px; margin-bottom: 20px;"></div>
+                <div class="post-body">
+                    <span class="post-tag">Health</span>
+                    <h2 class="post-title"><a href="#">Underground Medicine</a></h2>
+                    <div class="post-meta">December 23, 2077</div>
+                </div>
+            </article>
+
+            <!-- Travel -->
+            <article class="post">
+                <div class="header-image" style="background-image: url('/cyberpunk/headers/travel.png'); height: 200px; margin-bottom: 20px;"></div>
+                <div class="post-body">
+                    <span class="post-tag">Travel</span>
+                    <h2 class="post-title"><a href="#">Night City Nights</a></h2>
+                    <div class="post-meta">December 23, 2077</div>
+                </div>
+            </article>
+
+            <!-- Tabletop -->
+            <article class="post">
+                <div class="header-image" style="background-image: url('/cyberpunk/headers/tabletop.png'); height: 200px; margin-bottom: 20px;"></div>
+                <div class="post-body">
+                    <span class="post-tag">Tabletop</span>
+                    <h2 class="post-title"><a href="#">Roll for Initiative</a></h2>
+                    <div class="post-meta">December 23, 2077</div>
+                </div>
+            </article>
+
+            <!-- Garden -->
+            <article class="post">
+                <div class="header-image" style="background-image: url('/cyberpunk/headers/garden.png'); height: 200px; margin-bottom: 20px;"></div>
+                <div class="post-body">
+                    <span class="post-tag">Garden</span>
+                    <h2 class="post-title"><a href="#">Green in the Grey</a></h2>
+                    <div class="post-meta">December 23, 2077</div>
+                </div>
+            </article>
+
+            <!-- ADHD -->
+            <article class="post">
+                <div class="header-image" style="background-image: url('/cyberpunk/headers/adhd.png'); height: 200px; margin-bottom: 20px;"></div>
+                <div class="post-body">
+                    <span class="post-tag">ADHD</span>
+                    <h2 class="post-title"><a href="#">Beautiful Chaos</a></h2>
+                    <div class="post-meta">December 23, 2077</div>
+                </div>
+            </article>
+
+            <!-- Clown -->
+            <article class="post">
+                <div class="header-image" style="background-image: url('/cyberpunk/headers/clown.png'); height: 200px; margin-bottom: 20px;"></div>
+                <div class="post-body">
+                    <span class="post-tag">Clown</span>
+                    <h2 class="post-title"><a href="#">Subversive Entertainment</a></h2>
+                    <div class="post-meta">December 23, 2077</div>
+                </div>
+            </article>
+
+            <!-- Home -->
+            <article class="post">
+                <div class="header-image" style="background-image: url('/cyberpunk/headers/home.png'); height: 200px; margin-bottom: 20px;"></div>
+                <div class="post-body">
+                    <span class="post-tag">Home</span>
+                    <h2 class="post-title"><a href="#">Micro-Apartment Life</a></h2>
+                    <div class="post-meta">December 23, 2077</div>
+                </div>
+            </article>
+
+        </div>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            document.documentElement.classList.toggle('night');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramona Animation Test</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #1a1a2e;
+            color: #eee;
+            min-height: 100vh;
+        }
+        .controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.8);
+            padding: 20px;
+            border-radius: 10px;
+            width: 320px;
+            max-height: 90vh;
+            overflow-y: auto;
+            z-index: 2000;
+        }
+        .controls h2 {
+            margin-top: 0;
+            border-bottom: 1px solid #444;
+            padding-bottom: 10px;
+        }
+        .controls h3 {
+            margin: 15px 0 10px;
+            color: #88f;
+            font-size: 14px;
+        }
+        .control-group {
+            margin-bottom: 15px;
+        }
+        .control-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 13px;
+        }
+        .control-group input[type="range"] {
+            width: 100%;
+        }
+        .control-group .value {
+            font-size: 12px;
+            color: #aaa;
+            text-align: right;
+        }
+        .container {
+            width: 800px;
+            height: 200px;
+            background: linear-gradient(to bottom, #87CEEB 0%, #87CEEB 70%, #90EE90 70%, #228B22 100%);
+            border: 4px solid #333;
+            border-radius: 10px;
+            position: relative;
+            margin: 100px auto;
+        }
+        .ramona {
+            width: 192px;
+            height: 192px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: absolute;
+            pointer-events: none;
+            image-rendering: pixelated;
+        }
+        .state-display {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.8);
+            padding: 15px;
+            border-radius: 10px;
+            font-family: monospace;
+        }
+        .state-display .state {
+            font-size: 24px;
+            color: #0f0;
+        }
+        .state-display .info {
+            font-size: 12px;
+            color: #888;
+            margin-top: 5px;
+        }
+        button {
+            background: #4a4a8a;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px 5px 5px 0;
+        }
+        button:hover {
+            background: #6a6aaa;
+        }
+        .trigger-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 10px;
+        }
+        .trigger-buttons button {
+            font-size: 11px;
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <h2>Ramona Tuner</h2>
+
+        <h3>Idle Timing</h3>
+        <div class="control-group">
+            <label>Idle Duration Min (ms): <span class="value" id="idleMinVal">2000</span></label>
+            <input type="range" id="idleMin" min="500" max="5000" value="2000" step="100">
+        </div>
+        <div class="control-group">
+            <label>Idle Duration Range (ms): <span class="value" id="idleRangeVal">4000</span></label>
+            <input type="range" id="idleRange" min="1000" max="10000" value="4000" step="100">
+        </div>
+        <div class="control-group">
+            <label>Special Behavior Threshold (ms): <span class="value" id="thresholdVal">3000</span></label>
+            <input type="range" id="threshold" min="1000" max="8000" value="3000" step="100">
+        </div>
+
+        <h3>Behavior Chances (per frame when idle)</h3>
+        <div class="control-group">
+            <label>Yawning: <span class="value" id="yawnChanceVal">5%</span></label>
+            <input type="range" id="yawnChance" min="0" max="20" value="5" step="0.5">
+        </div>
+        <div class="control-group">
+            <label>Sitting: <span class="value" id="sitChanceVal">5%</span></label>
+            <input type="range" id="sitChance" min="0" max="20" value="5" step="0.5">
+        </div>
+        <div class="control-group">
+            <label>Sleeping (East only): <span class="value" id="sleepChanceVal">4%</span></label>
+            <input type="range" id="sleepChance" min="0" max="20" value="4" step="0.5">
+        </div>
+        <div class="control-group">
+            <label>Cleaning Face: <span class="value" id="cleanChanceVal">4%</span></label>
+            <input type="range" id="cleanChance" min="0" max="20" value="4" step="0.5">
+        </div>
+
+        <h3>Movement</h3>
+        <div class="control-group">
+            <label>Walk Speed: <span class="value" id="walkSpeedVal">1.5</span></label>
+            <input type="range" id="walkSpeed" min="0.5" max="5" value="1.5" step="0.1">
+        </div>
+        <div class="control-group">
+            <label>Run Speed: <span class="value" id="runSpeedVal">3</span></label>
+            <input type="range" id="runSpeed" min="1" max="8" value="3" step="0.1">
+        </div>
+
+        <h3>Random Behavior While Walking</h3>
+        <div class="control-group">
+            <label>Chance to Idle: <span class="value" id="idleChanceVal">0.2%</span></label>
+            <input type="range" id="idleChance" min="0" max="2" value="0.2" step="0.1">
+        </div>
+        <div class="control-group">
+            <label>Chance to Run: <span class="value" id="runChanceVal">0.1%</span></label>
+            <input type="range" id="runChance" min="0" max="2" value="0.1" step="0.1">
+        </div>
+
+        <h3>Manual Triggers</h3>
+        <div class="trigger-buttons">
+            <button onclick="triggerState('idle')">Idle</button>
+            <button onclick="triggerState('yawning')">Yawn</button>
+            <button onclick="triggerState('sitting')">Sit</button>
+            <button onclick="triggerState('sleeping')">Sleep</button>
+            <button onclick="triggerState('cleaning')">Clean</button>
+            <button onclick="triggerState('running')">Run</button>
+            <button onclick="triggerState('jumping')">Jump</button>
+        </div>
+    </div>
+
+    <div class="container" id="container"></div>
+
+    <div class="state-display">
+        <div class="state" id="stateDisplay">walking</div>
+        <div class="info">
+            Direction: <span id="dirDisplay">east</span> |
+            Idle time: <span id="idleTimeDisplay">0</span>s
+        </div>
+    </div>
+
+    <script>
+        const container = document.getElementById('container');
+
+        // Config object that UI controls modify
+        const config = {
+            idleMin: 2000,
+            idleRange: 4000,
+            threshold: 3000,
+            yawnChance: 0.05,
+            sitChance: 0.05,
+            sleepChance: 0.04,
+            cleanChance: 0.04,
+            walkSpeed: 1.5,
+            runSpeed: 3,
+            idleChance: 0.002,
+            runChance: 0.001
+        };
+
+        // Wire up controls
+        function setupControl(id, configKey, displaySuffix = '', multiplier = 1) {
+            const input = document.getElementById(id);
+            const display = document.getElementById(id + 'Val');
+            input.addEventListener('input', () => {
+                const val = parseFloat(input.value);
+                config[configKey] = val * multiplier;
+                display.textContent = val + displaySuffix;
+            });
+        }
+
+        setupControl('idleMin', 'idleMin');
+        setupControl('idleRange', 'idleRange');
+        setupControl('threshold', 'threshold');
+        setupControl('yawnChance', 'yawnChance', '%', 0.01);
+        setupControl('sitChance', 'sitChance', '%', 0.01);
+        setupControl('sleepChance', 'sleepChance', '%', 0.01);
+        setupControl('cleanChance', 'cleanChance', '%', 0.01);
+        setupControl('walkSpeed', 'walkSpeed');
+        setupControl('runSpeed', 'runSpeed');
+        setupControl('idleChance', 'idleChance', '%', 0.01);
+        setupControl('runChance', 'runChance', '%', 0.01);
+
+        // Sprites
+        const sprites = {
+            walkEast: "/fantasy/sprites/cat/walk_east.gif",
+            walkWest: "/fantasy/sprites/cat/walk_west.gif",
+            walkSouth: "/fantasy/sprites/cat/walk_south.gif",
+            walkSoutheast: "/fantasy/sprites/cat/walk_southeast.gif",
+            walkSouthwest: "/fantasy/sprites/cat/walk_southwest.gif",
+            runEast: "/fantasy/sprites/cat/run_east.gif",
+            runWest: "/fantasy/sprites/cat/run_west.gif",
+            idleEast: "/fantasy/sprites/cat/idle_east.gif",
+            idleWest: "/fantasy/sprites/cat/idle_west.gif",
+            idleSouth: "/fantasy/sprites/cat/idle_south.gif",
+            yawning: "/fantasy/sprites/cat/yawning.gif",
+            yawningSouthwest: "/fantasy/sprites/cat/yawning_southwest.gif",
+            jumpEast: "/fantasy/sprites/cat/jump_east.gif",
+            jumpWest: "/fantasy/sprites/cat/jump_west.gif",
+            layingDown: "/fantasy/sprites/cat/laying_down.gif",
+            sleeping: "/fantasy/sprites/cat/sleeping.gif",
+            wakingUp: "/fantasy/sprites/cat/waking_up.gif",
+            cleaningFace: "/fantasy/sprites/cat/cleaning_face.gif",
+        };
+
+        const spriteSheets = {
+            sittingWink: "/fantasy/sprites/cat/winking_spritesheet.png",
+            sittingYawn: "/fantasy/sprites/cat/yawning_spritesheet.png",
+        };
+
+        const turnEastToWest = [
+            sprites.walkEast, sprites.walkSoutheast, sprites.walkSouth,
+            sprites.walkSouthwest, sprites.walkWest
+        ];
+        const turnWestToEast = [
+            sprites.walkWest, sprites.walkSouthwest, sprites.walkSouth,
+            sprites.walkSoutheast, sprites.walkEast
+        ];
+
+        // Preload
+        Object.values(sprites).forEach(src => { new Image().src = src; });
+        Object.values(spriteSheets).forEach(src => { new Image().src = src; });
+
+        // Create Ramona
+        const ramona = document.createElement('div');
+        ramona.className = 'ramona';
+        container.appendChild(ramona);
+
+        const spriteSize = 192;
+        const bounds = { width: 800 - spriteSize, height: 200 };
+        let x = bounds.width / 2;
+        let direction = 1;
+        let state = 'walking';
+        let speed = config.walkSpeed;
+        let idleStartTime = 0;
+
+        function setSprite(src) {
+            ramona.classList.remove('ramona-sitting-wink', 'ramona-sitting-yawn');
+            ramona.style.backgroundImage = `url('${src}')`;
+        }
+
+        function setSpriteSheet(sheetUrl, animClass) {
+            ramona.style.backgroundImage = `url('${sheetUrl}')`;
+            ramona.classList.remove('ramona-sitting-wink', 'ramona-sitting-yawn');
+            ramona.classList.add(animClass);
+        }
+
+        function updateDisplay() {
+            document.getElementById('stateDisplay').textContent = state;
+            document.getElementById('dirDisplay').textContent = direction === 1 ? 'east' : 'west';
+            const idleTime = state === 'idle' ? ((Date.now() - idleStartTime) / 1000).toFixed(1) : '0';
+            document.getElementById('idleTimeDisplay').textContent = idleTime;
+        }
+
+        function startWalking() {
+            state = 'walking';
+            speed = config.walkSpeed;
+            setSprite(direction === 1 ? sprites.walkEast : sprites.walkWest);
+        }
+
+        function startRunning() {
+            state = 'running';
+            speed = config.runSpeed;
+            setSprite(direction === 1 ? sprites.runEast : sprites.runWest);
+            setTimeout(startWalking, 1000 + Math.random() * 2000);
+        }
+
+        function startIdling() {
+            state = 'idle';
+            idleStartTime = Date.now();
+            setSprite(direction === 1 ? sprites.idleEast : sprites.idleWest);
+            const idleTime = config.idleMin + Math.random() * config.idleRange;
+            setTimeout(() => { if (state === 'idle') startWalking(); }, idleTime);
+        }
+
+        function startYawning() {
+            state = 'yawning';
+            setSprite(Math.random() > 0.5 ? sprites.yawning : sprites.yawningSouthwest);
+            setTimeout(startWalking, 3000 + Math.random() * 1000);
+        }
+
+        function startSitting() {
+            const isWinking = Math.random() > 0.5;
+            state = isWinking ? 'sittingWink' : 'sittingYawn';
+            setSpriteSheet(
+                isWinking ? spriteSheets.sittingWink : spriteSheets.sittingYawn,
+                isWinking ? 'ramona-sitting-wink' : 'ramona-sitting-yawn'
+            );
+            setTimeout(startWalking, 2000 + Math.random() * 2000);
+        }
+
+        function startSleeping() {
+            state = 'sleeping';
+            const sleepLoops = 1 + Math.floor(Math.random() * 5);
+            const layDownDuration = 600;
+            const sleepLoopDuration = 1200;
+            const wakeUpDuration = 1800;
+
+            setSprite(sprites.layingDown);
+            setTimeout(() => { if (state === 'sleeping') setSprite(sprites.sleeping); }, layDownDuration);
+            setTimeout(() => { if (state === 'sleeping') setSprite(sprites.wakingUp); },
+                layDownDuration + sleepLoopDuration * sleepLoops);
+            setTimeout(() => { if (state === 'sleeping') startWalking(); },
+                layDownDuration + sleepLoopDuration * sleepLoops + wakeUpDuration);
+        }
+
+        function startCleaningFace() {
+            state = 'cleaning';
+            setSprite(sprites.cleaningFace);
+            setTimeout(startWalking, 1680);
+        }
+
+        function startJumping() {
+            state = 'jumping';
+            setSprite(direction === 1 ? sprites.jumpEast : sprites.jumpWest);
+            setTimeout(startWalking, 500);
+        }
+
+        function startTurning(newDirection) {
+            state = 'turning';
+            const sequence = newDirection === -1 ? turnEastToWest : turnWestToEast;
+            let frameIndex = 0;
+            const turnInterval = setInterval(() => {
+                if (frameIndex < sequence.length) {
+                    setSprite(sequence[frameIndex]);
+                    frameIndex++;
+                } else {
+                    clearInterval(turnInterval);
+                    direction = newDirection;
+                    startWalking();
+                }
+            }, 80);
+        }
+
+        // Manual trigger function
+        window.triggerState = function(newState) {
+            switch(newState) {
+                case 'idle': startIdling(); break;
+                case 'yawning': startYawning(); break;
+                case 'sitting': startSitting(); break;
+                case 'sleeping': startSleeping(); break;
+                case 'cleaning': startCleaningFace(); break;
+                case 'running': startRunning(); break;
+                case 'jumping': startJumping(); break;
+            }
+        };
+
+        setSprite(sprites.walkEast);
+
+        function animate() {
+            if (state === 'walking' || state === 'running') {
+                speed = state === 'running' ? config.runSpeed : config.walkSpeed;
+                x += speed * direction;
+
+                if (x >= bounds.width) {
+                    x = bounds.width;
+                    if (Math.random() < 0.2) {
+                        direction = -1;
+                        startJumping();
+                    } else {
+                        startTurning(-1);
+                    }
+                } else if (x <= 0) {
+                    x = 0;
+                    if (Math.random() < 0.2) {
+                        direction = 1;
+                        startJumping();
+                    } else {
+                        startTurning(1);
+                    }
+                }
+
+                const rand = Math.random();
+                if (rand < config.idleChance) {
+                    startIdling();
+                } else if (rand < config.idleChance + config.runChance && state === 'walking') {
+                    startRunning();
+                }
+            }
+
+            // Special behaviors when idle long enough
+            if (state === 'idle' && Date.now() - idleStartTime > config.threshold) {
+                const rand = Math.random();
+                if (rand < config.yawnChance) {
+                    startYawning();
+                } else if (rand < config.yawnChance + config.sitChance) {
+                    startSitting();
+                } else if (rand < config.yawnChance + config.sitChance + config.sleepChance && direction === 1) {
+                    startSleeping();
+                } else if (rand < config.yawnChance + config.sitChance + config.sleepChance + config.cleanChance) {
+                    startCleaningFace();
+                }
+            }
+
+            ramona.style.left = x + 'px';
+            ramona.style.bottom = '0px';
+
+            updateDisplay();
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+
+    <style>
+        .ramona-sitting-wink {
+            animation: sprite-wink 1.2s steps(1) infinite;
+        }
+        .ramona-sitting-yawn {
+            animation: sprite-yawn 2s steps(1) infinite;
+        }
+        @keyframes sprite-wink {
+            0% { background-position: 0% 0%; }
+            25% { background-position: 100% 0%; }
+            50% { background-position: 0% 100%; }
+            75% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+        @keyframes sprite-yawn {
+            0% { background-position: 0% 0%; }
+            25% { background-position: 100% 0%; }
+            50% { background-position: 0% 100%; }
+            75% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+    </style>
+</body>
+</html>

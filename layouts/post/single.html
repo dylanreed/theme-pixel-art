@@ -22,16 +22,6 @@
         </div>
     </header>
 
-    {{/* Extract and display images from content below title */}}
-    {{ $images := findRE `<img[^>]+>` .Content }}
-    {{ if $images }}
-    <div class="post-images">
-        {{ range $images }}
-            {{ . | safeHTML }}
-        {{ end }}
-    </div>
-    {{ end }}
-
     {{/* Hero image if specified in front matter */}}
     {{ with .Params.image }}
     <div class="post-hero-image">
@@ -40,8 +30,7 @@
     {{ end }}
 
     <div class="post-content">
-        {{/* Remove images from content since we displayed them above */}}
-        {{ .Content | replaceRE `<img[^>]+>` "" | safeHTML }}
+        {{ .Content }}
     </div>
 
     {{/* Conversations/Webmentions */}}

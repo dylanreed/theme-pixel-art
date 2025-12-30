@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pets on dylan&#39;s blog</title>
+    <link>//localhost:1313/categories/pets/</link>
+    <description>Recent content in Pets on dylan&#39;s blog</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 27 Dec 2025 10:11:00 -0700</lastBuildDate>
+    <atom:link href="//localhost:1313/categories/pets/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Tales from the Cat&#39;s Perspective</title>
+      <link>//localhost:1313/post/pets/</link>
+      <pubDate>Sat, 27 Dec 2025 10:11:00 -0700</pubDate>
+      <guid>//localhost:1313/post/pets/</guid>
+      <description>&lt;p&gt;The humans think they own me. How adorable. I allow them to provide food and warmth.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

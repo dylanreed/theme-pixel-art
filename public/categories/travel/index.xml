@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Travel on dylan&#39;s blog</title>
+    <link>//localhost:1313/categories/travel/</link>
+    <description>Recent content in Travel on dylan&#39;s blog</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 27 Dec 2025 10:07:00 -0700</lastBuildDate>
+    <atom:link href="//localhost:1313/categories/travel/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Adventures Beyond the Map&#39;s Edge</title>
+      <link>//localhost:1313/post/travel/</link>
+      <pubDate>Sat, 27 Dec 2025 10:07:00 -0700</pubDate>
+      <guid>//localhost:1313/post/travel/</guid>
+      <description>&lt;p&gt;The adventurer&amp;rsquo;s motto: if it&amp;rsquo;s not on the map, that&amp;rsquo;s where the interesting things are.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

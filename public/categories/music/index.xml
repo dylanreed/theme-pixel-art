@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Music on dylan&#39;s blog</title>
+    <link>//localhost:1313/categories/music/</link>
+    <description>Recent content in Music on dylan&#39;s blog</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 27 Dec 2025 10:06:00 -0700</lastBuildDate>
+    <atom:link href="//localhost:1313/categories/music/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Strumming Through the Day</title>
+      <link>//localhost:1313/post/music/</link>
+      <pubDate>Sat, 27 Dec 2025 10:06:00 -0700</pubDate>
+      <guid>//localhost:1313/post/music/</guid>
+      <description>&lt;p&gt;The banjo doesn&amp;rsquo;t care if you hit a wrong note. It just wants you to keep playing.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

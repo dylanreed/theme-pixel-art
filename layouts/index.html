@@ -11,7 +11,7 @@
 {{ end }}
 
 {{/* Paginate the posts */}}
-{{ $paginator := .Paginate $posts 10 }}
+{{ $paginator := .Paginate $posts 25 }}
 
 {{/* Track state for grouping blogs vs notes */}}
 {{ $.Scratch.Set "inBlogGroup" false }}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Crafting on dylan&#39;s blog</title>
+    <link>//localhost:1313/categories/crafting/</link>
+    <description>Recent content in Crafting on dylan&#39;s blog</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 27 Dec 2025 10:09:00 -0700</lastBuildDate>
+    <atom:link href="//localhost:1313/categories/crafting/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The Muse&#39;s Workshop</title>
+      <link>//localhost:1313/post/crafting/</link>
+      <pubDate>Sat, 27 Dec 2025 10:09:00 -0700</pubDate>
+      <guid>//localhost:1313/post/crafting/</guid>
+      <description>&lt;p&gt;Creating something with your hands is magic without the spell components. The muse whispers, and we build.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

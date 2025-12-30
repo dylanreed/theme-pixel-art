@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Personal on dylan&#39;s blog</title>
+    <link>//localhost:1313/categories/personal/</link>
+    <description>Recent content in Personal on dylan&#39;s blog</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 27 Dec 2025 10:03:00 -0700</lastBuildDate>
+    <atom:link href="//localhost:1313/categories/personal/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Life Updates from the Circus</title>
+      <link>//localhost:1313/post/personal/</link>
+      <pubDate>Sat, 27 Dec 2025 10:03:00 -0700</pubDate>
+      <guid>//localhost:1313/post/personal/</guid>
+      <description>&lt;p&gt;Sometimes you just need to share what&amp;rsquo;s going on. Today I learned three new juggling patterns.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

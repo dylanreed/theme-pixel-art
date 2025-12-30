@@ -59,7 +59,7 @@ cabin woodworking workshop, hand tools on pegboard, half-carved wooden duck, woo
 
 ### Pets (Cabin with Loyal Dog)
 ```
-cozy cabin living room with golden retriever by fireplace, dog bed with plaid cushion, chew toys scattered, leash by door for walks, snow boots ready, loyal companion content, pixel art, 16-bit style, detailed pixels, heartwarming scene, --ar 3:1 --s 250 --v 7
+cozy cabin living room with ginger cat by fireplace, dog bed with plaid cushion, chew toys scattered, leash by door for walks, snow boots ready, loyal companion content, pixel art, 16-bit style, detailed pixels, heartwarming scene, --ar 3:1 --s 250 --v 7
 ```
 
 ### Health (Cabin Sauna/Wellness)
@@ -98,22 +98,22 @@ cabin corner with vintage circus memorabilia, juggling pins, old magic kit, sill
 
 ### Day Version
 ```
-mountain cabin landscape, snow-capped peaks in distance, pine forest, frozen lake, cozy cabin with smoke from chimney, wooden dock, blue sky with wispy clouds, winter wonderland, pixel art, 16-bit style, detailed pixels, crisp daylight, seamless tileable, --ar 16:9 --s 250 --v 7
+mountain cabin landscape, snow-capped peaks in distance, pine forest, frozen lake, cozy cabin with smoke from chimney, wooden dock, blue sky with wispy clouds, winter wonderland, pixel art, 16-bit style, detailed pixels, crisp daylight, seamless tileable, --ar 16:9 --s 250 --v 7 --tile
 ```
 
 ### Night Version
 ```
-mountain cabin at night, northern lights in sky, stars visible, warm glow from cabin windows, moonlight on snow, pine trees silhouettes, peaceful winter night, quiet solitude, pixel art, 16-bit style, detailed pixels, deep blue and aurora green, seamless tileable, --ar 16:9 --s 250 --v 7
+mountain cabin at night, northern lights in sky, stars visible, warm glow from cabin windows, moonlight on snow, pine trees silhouettes, peaceful winter night, quiet solitude, pixel art, 16-bit style, detailed pixels, deep blue and aurora green, seamless tileable, --ar 16:9 --s 250 --v 7 --tile
 ```
 
 ### Alternative - Snowy Forest Path
 ```
-snow-covered forest trail, tall pines with heavy snow, animal tracks in snow, distant cabin smoke, golden sunlight through trees, winter hiking path, pixel art, 16-bit style, detailed pixels, cold but beautiful, seamless tileable, --ar 16:9 --s 250 --v 7
+snow-covered forest trail, tall pines with heavy snow, animal tracks in snow, distant cabin smoke, golden sunlight through trees, winter hiking path, pixel art, 16-bit style, detailed pixels, cold but beautiful, seamless tileable, --ar 16:9 --s 250 --v 7 --tile
 ```
 
 ### Alternative - Frozen Lake View
 ```
-frozen mountain lake panorama, ice fishing huts, snow-covered shore, mountain reflection in ice, cabin on distant shore, peaceful isolation, pixel art, 16-bit style, detailed pixels, winter stillness, seamless tileable, --ar 16:9 --s 250 --v 7
+frozen mountain lake panorama, ice fishing huts, snow-covered shore, mountain reflection in ice, cabin on distant shore, peaceful isolation, pixel art, 16-bit style, detailed pixels, winter stillness, seamless tileable, --ar 16:9 --s 250 --v 7 --tile
 ```
 
 ---
@@ -203,7 +203,7 @@ pixel art cursor, wooden arrow shape, carved wood texture, small and precise, ca
 
 ### Hand (Clickable/Hover)
 ```
-pixel art hand cursor, cozy mitten or work glove, pointing finger, warm fabric texture, 32x32 pixels, pixel art, 16-bit style, transparent background, --ar 1:1 --s 250 --v 7
+pixel art hand cursor, cozy hand knit glove, pointing finger, warm fabric texture, 32x32 pixels, pixel art, 16-bit style, transparent background, --ar 1:1 --s 250 --v 7
 ```
 
 ---

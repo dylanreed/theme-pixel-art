@@ -15,26 +15,26 @@
             <div class="sierra-title"><span>Controls</span></div>
             <div class="sierra-buttons">
                 <button class="sierra-btn" data-action="theme" data-tooltip="Day/Night">
-                    <img class="btn-icon day-icon" src="/sprites/drop_down_icons/day.png" alt="Switch to day mode">
-                    <img class="btn-icon night-icon" src="/sprites/drop_down_icons/night.png" alt="Switch to night mode" style="display:none">
+                    <img class="btn-icon day-icon" src="/sprites/drop_down_icons/day.webp" alt="Switch to day mode">
+                    <img class="btn-icon night-icon" src="/sprites/drop_down_icons/night.webp" alt="Switch to night mode" style="display:none">
                 </button>
                 <button class="sierra-btn" data-action="weather" data-tooltip="Weather">
-                    <img class="btn-icon weather-icon" src="/sprites/drop_down_icons/sun.png" alt="Cycle weather effects">
+                    <img class="btn-icon weather-icon" src="/sprites/drop_down_icons/sun.webp" alt="Cycle weather effects">
                 </button>
                 <button class="sierra-btn" data-action="rainbow" data-tooltip="Rainbow">
-                    <img class="btn-icon" src="/sprites/drop_down_icons/rainbow.png" alt="Toggle rainbow mode">
+                    <img class="btn-icon" src="/sprites/drop_down_icons/rainbow.webp" alt="Toggle rainbow mode">
                 </button>
                 <button class="sierra-btn" data-action="achievements" data-tooltip="Achievements">
-                    <img class="btn-icon" src="/sprites/drop_down_icons/trophey.png" alt="View achievements panel">
+                    <img class="btn-icon" src="/sprites/drop_down_icons/trophey.webp" alt="View achievements panel">
                 </button>
                 <button class="sierra-btn" data-action="mode" data-tooltip="Theme: Fantasy">
-                    <img class="btn-icon mode-icon" src="/modes/fantasy.png" alt="Cycle visual theme">
+                    <img class="btn-icon mode-icon" src="/modes/fantasy.webp" alt="Cycle visual theme">
                 </button>
                 <button class="sierra-btn" data-action="chaos" data-tooltip="Chaos">
-                    <img class="btn-icon" src="/sprites/drop_down_icons/swirl.png" alt="Toggle chaos mode">
+                    <img class="btn-icon" src="/sprites/drop_down_icons/swirl.webp" alt="Toggle chaos mode">
                 </button>
                 <button class="sierra-btn" data-action="help" data-tooltip="Help">
-                    <img class="btn-icon" src="/sprites/drop_down_icons/help.png" alt="Show help information">
+                    <img class="btn-icon" src="/sprites/drop_down_icons/help.webp" alt="Show help information">
                 </button>
             </div>
         </div>
@@ -61,9 +61,9 @@
             // Weather state and icons
             let currentWeather = null;
             const weatherIcons = {
-                sun: '/sprites/drop_down_icons/sun.png',
-                rain: '/sprites/drop_down_icons/rain.png',
-                snow: '/sprites/drop_down_icons/snow.png'
+                sun: '/sprites/drop_down_icons/sun.webp',
+                rain: '/sprites/drop_down_icons/rain.webp',
+                snow: '/sprites/drop_down_icons/snow.webp'
             };
 
             // Theme style state (fantasy, sci-fi, cyberpunk, cabin, underwater)
@@ -76,11 +76,11 @@
                 'underwater': 'Underwater'
             };
             const themeIcons = {
-                'fantasy': '/modes/fantasy.png',
-                'sci-fi': '/modes/sci-fi.png',
-                'cyberpunk': '/modes/cyberpunk.png',
-                'cabin': '/modes/cabin.png',
-                'underwater': '/modes/underwater.png'
+                'fantasy': '/modes/fantasy.webp',
+                'sci-fi': '/modes/sci-fi.webp',
+                'cyberpunk': '/modes/cyberpunk.webp',
+                'cabin': '/modes/cabin.webp',
+                'underwater': '/modes/underwater.webp'
             };
             let currentThemeIndex = 0;
 
@@ -117,7 +117,7 @@
                         icon.src = themeIcons[theme];
                         // Fallback to fantasy icon if theme icon fails to load
                         icon.onerror = function() {
-                            this.src = '/modes/fantasy.png';
+                            this.src = '/modes/fantasy.webp';
                             this.onerror = null;
                         };
                     }
@@ -180,9 +180,19 @@
 
                         // Cycle theme
                         currentThemeIndex = (currentThemeIndex + 1) % themes.length;
-                        applyThemeStyle(themes[currentThemeIndex]);
-                        // Reload to update theme-dependent elements (cat sprites, etc.)
-                        location.reload();
+                        var newTheme = themes[currentThemeIndex];
+                        applyThemeStyle(newTheme);
+
+                        // Preload new theme assets before reloading
+                        if (window.preloadTheme) {
+                            btn.style.opacity = '0.5';
+                            btn.style.pointerEvents = 'none';
+                            window.preloadTheme(newTheme).then(function() {
+                                location.reload();
+                            });
+                        } else {
+                            location.reload();
+                        }
                         break;
 
                     case 'achievements':
