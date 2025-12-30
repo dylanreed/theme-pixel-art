@@ -6,6 +6,20 @@
 </footer>
 
 <script>
+    // Update category sprites to use current theme
+    (function() {
+        const theme = localStorage.getItem('themeStyle') || 'fantasy';
+        document.querySelectorAll('.theme-sprite-6x3[data-sprite]').forEach(container => {
+            const sprite = container.dataset.sprite;
+            const img = container.querySelector('img');
+            if (img && sprite) {
+                img.src = `/${theme}/sprites/category/${sprite}.png`;
+            }
+        });
+    })();
+</script>
+
+<script>
     (function () {
         // Find ALL content containers with grass borders
         const containers = document.querySelectorAll(

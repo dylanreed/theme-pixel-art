@@ -12,72 +12,19 @@
     {{ end }}
 {{ end }}
 
-{{/* Map categories to sprites - canonical list
-     Category        Sprite Class    Sprite File
-     ------------------------------------------------
-     health          skele           skele-health.png
-     tabletop        knight          knight - tabletop.png
-     gaming          dragon          Dragon - Tabletop.png
-     personal        clown           clown - clown.png
-     clown           balloon         balloon dog - clown.png
-     writing         quill           quill - Writing.png
-     cooking         cauldron        cauldren - cooking.png
-     music           banjo           banjo - music.png
-     travel          adventure       Adventure - Travel.png
-     reading         book            book-reading.png
-     crafting        muse            Muse - Writing.png
-     adhd            donkey          Donkey - Travel.png
-     pets            cat             Cat - Health.png
-     tech            tech            golem - tech.png
-     (default)       bard            bard - music.png
-*/}}
-{{ $spriteClass := "bard" }}
-{{ $spriteFile := "bard - music.png" }}
+{{/* 18-frame sprite sheets (6x3 grid, 64x64 frames)
+     Located at /{theme}/sprites/category/{category}.png
+     Theme is read from localStorage, defaults to fantasy
 
-{{ if eq $category "health" }}
-    {{ $spriteClass = "skele" }}
-    {{ $spriteFile = "skele-health.png" }}
-{{ else if eq $category "tabletop" }}
-    {{ $spriteClass = "knight" }}
-    {{ $spriteFile = "knight - tabletop.png" }}
-{{ else if eq $category "gaming" }}
-    {{ $spriteClass = "dragon" }}
-    {{ $spriteFile = "Dragon - Tabletop.png" }}
-{{ else if eq $category "personal" }}
-    {{ $spriteClass = "clown" }}
-    {{ $spriteFile = "clown - clown.png" }}
-{{ else if eq $category "clown" }}
-    {{ $spriteClass = "balloon" }}
-    {{ $spriteFile = "balloon dog - clown.png" }}
-{{ else if eq $category "writing" }}
-    {{ $spriteClass = "quill" }}
-    {{ $spriteFile = "quill - Writing.png" }}
-{{ else if eq $category "cooking" }}
-    {{ $spriteClass = "cauldron" }}
-    {{ $spriteFile = "cauldren - cooking.png" }}
-{{ else if eq $category "music" }}
-    {{ $spriteClass = "banjo" }}
-    {{ $spriteFile = "banjo - music.png" }}
-{{ else if eq $category "travel" }}
-    {{ $spriteClass = "adventure" }}
-    {{ $spriteFile = "Adventure - Travel.png" }}
-{{ else if eq $category "reading" }}
-    {{ $spriteClass = "book" }}
-    {{ $spriteFile = "book-reading.png" }}
-{{ else if eq $category "crafting" }}
-    {{ $spriteClass = "muse" }}
-    {{ $spriteFile = "Muse - Writing.png" }}
-{{ else if eq $category "adhd" }}
-    {{ $spriteClass = "donkey" }}
-    {{ $spriteFile = "Donkey - Travel.png" }}
-{{ else if eq $category "pets" }}
-    {{ $spriteClass = "cat" }}
-    {{ $spriteFile = "Cat - Health.png" }}
-{{ else if eq $category "tech" }}
-    {{ $spriteClass = "tech" }}
-    {{ $spriteFile = "golem - tech.png" }}
+     Categories: health, tabletop, gaming, personal, clown, writing,
+                 cooking, music, travel, reading, crafting, adhd, pets, tech
+     Default: default.png
+*/}}
+{{ $spriteFile := $category }}
+{{ if eq $spriteFile "" }}
+    {{ $spriteFile = "default" }}
 {{ end }}
 
-<div class="{{ if $isArchive }}archive-sprite{{ else }}post-sprite{{ end }} sprite-{{ $spriteClass }}">
-    <img src="/sprites/{{ $spriteFile }}" alt="Animated {{ $spriteClass }} sprite for {{ $category | default "default" }} category">
+<div class="{{ if $isArchive }}archive-sprite{{ else }}post-sprite{{ end }} theme-sprite-6x3" data-category="{{ $category }}" data-sprite="{{ $spriteFile }}">
+    <img src="/fantasy/sprites/category/{{ $spriteFile }}.png" alt="Animated sprite for {{ $category | default "default" }} category">
 </div>

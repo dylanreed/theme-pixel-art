@@ -345,6 +345,171 @@ html.theme-cyberpunk article p {
 }
 
 /* ═══════════════════════════════════════════════════════════════
+   THEME-SPECIFIC "READ MORE" BUTTONS
+   Each theme gets a unique button style matching its aesthetic
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Sci-Fi: Holographic tech panel button */
+html.theme-sci-fi .post-link {
+    background: linear-gradient(180deg, #1a3a4a 0%, #0d1f28 100%);
+    border: 2px solid #00d4ff;
+    color: #00d4ff;
+    box-shadow:
+        inset 0 1px 0 rgba(0, 212, 255, 0.3),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.5),
+        0 0 10px rgba(0, 212, 255, 0.3),
+        0 2px 4px rgba(0, 0, 0, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 12px;
+}
+
+html.theme-sci-fi .post-link:hover {
+    background: linear-gradient(180deg, #2a4a5a 0%, #1a2f38 100%);
+    border-color: #40e4ff;
+    color: #40e4ff;
+    box-shadow:
+        inset 0 1px 0 rgba(0, 212, 255, 0.5),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.5),
+        0 0 20px rgba(0, 212, 255, 0.5),
+        0 0 40px rgba(0, 212, 255, 0.2),
+        0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+html.theme-sci-fi .post-link:active {
+    background: linear-gradient(180deg, #0d1f28 0%, #1a3a4a 100%);
+    box-shadow:
+        inset 0 2px 4px rgba(0, 0, 0, 0.5),
+        0 0 10px rgba(0, 212, 255, 0.3);
+}
+
+/* Cyberpunk: Neon glitch button */
+html.theme-cyberpunk .post-link {
+    background: linear-gradient(180deg, #1a0a1a 0%, #0d050d 100%);
+    border: 2px solid #ff00ff;
+    color: #ff00ff;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 0, 255, 0.3),
+        0 0 10px rgba(255, 0, 255, 0.5),
+        0 0 20px rgba(255, 0, 255, 0.2),
+        2px 2px 0 #00ffff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+html.theme-cyberpunk .post-link:hover {
+    background: linear-gradient(180deg, #2a102a 0%, #1a081a 100%);
+    border-color: #ff40ff;
+    color: #ff40ff;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 0, 255, 0.5),
+        0 0 20px rgba(255, 0, 255, 0.7),
+        0 0 40px rgba(255, 0, 255, 0.3),
+        3px 3px 0 #00ffff,
+        -1px -1px 0 #ff0000;
+    text-shadow: 0 0 10px #ff00ff;
+}
+
+html.theme-cyberpunk .post-link:active {
+    background: linear-gradient(180deg, #0d050d 0%, #1a0a1a 100%);
+    box-shadow:
+        inset 0 2px 4px rgba(0, 0, 0, 0.5),
+        0 0 10px rgba(255, 0, 255, 0.5),
+        1px 1px 0 #00ffff;
+    transform: translateY(1px) translateX(1px);
+}
+
+/* Cabin: Cozy stitched fabric/leather button */
+html.theme-cabin .post-link {
+    background: linear-gradient(180deg, #8b6b4a 0%, #6b503a 100%);
+    border: 3px solid #5a4030;
+    color: #fff5e6;
+    box-shadow:
+        inset 1px 1px 0 #a88060,
+        inset -1px -1px 0 #4a3525,
+        2px 2px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    position: relative;
+}
+
+/* Stitching effect */
+html.theme-cabin .post-link::before {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    right: 3px;
+    bottom: 3px;
+    border: 2px dashed rgba(255, 245, 230, 0.3);
+    border-radius: 3px;
+    pointer-events: none;
+}
+
+html.theme-cabin .post-link:hover {
+    background: linear-gradient(180deg, #9b7b5a 0%, #7b6048 100%);
+    color: #ffffff;
+    box-shadow:
+        inset 1px 1px 0 #b89070,
+        inset -1px -1px 0 #5a4530,
+        3px 3px 0 rgba(0, 0, 0, 0.25);
+}
+
+html.theme-cabin .post-link:active {
+    background: linear-gradient(180deg, #6b503a 0%, #8b6b4a 100%);
+    box-shadow:
+        inset -1px -1px 0 #a88060,
+        inset 1px 1px 0 #4a3525,
+        1px 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Underwater: Coral/shell nautical button */
+html.theme-underwater .post-link {
+    background: linear-gradient(180deg, #2a5a6a 0%, #1a3a4a 100%);
+    border: 3px solid #3a8a9a;
+    color: #b0e0e8;
+    box-shadow:
+        inset 1px 1px 0 rgba(176, 224, 232, 0.3),
+        inset -1px -1px 0 rgba(0, 0, 0, 0.3),
+        0 0 15px rgba(58, 138, 154, 0.3),
+        2px 2px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    position: relative;
+}
+
+/* Bubble accent */
+html.theme-underwater .post-link::before {
+    content: "○";
+    position: absolute;
+    top: -4px;
+    right: 8px;
+    font-size: 8px;
+    color: rgba(176, 224, 232, 0.6);
+    text-shadow: 4px 2px 0 rgba(176, 224, 232, 0.4), 8px 6px 0 rgba(176, 224, 232, 0.2);
+}
+
+html.theme-underwater .post-link:hover {
+    background: linear-gradient(180deg, #3a6a7a 0%, #2a4a5a 100%);
+    border-color: #4a9aaa;
+    color: #d0f0f8;
+    box-shadow:
+        inset 1px 1px 0 rgba(208, 240, 248, 0.4),
+        inset -1px -1px 0 rgba(0, 0, 0, 0.3),
+        0 0 25px rgba(58, 138, 154, 0.5),
+        0 0 50px rgba(58, 138, 154, 0.2),
+        3px 3px 0 rgba(0, 0, 0, 0.25);
+}
+
+html.theme-underwater .post-link:active {
+    background: linear-gradient(180deg, #1a3a4a 0%, #2a5a6a 100%);
+    box-shadow:
+        inset -1px -1px 0 rgba(176, 224, 232, 0.3),
+        inset 1px 1px 0 rgba(0, 0, 0, 0.3),
+        0 0 10px rgba(58, 138, 154, 0.3),
+        1px 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* ═══════════════════════════════════════════════════════════════
    CABIN FONTS
    Storybook cozy aesthetic (hygge, children's book, warm)
    - Title: Fredericka the Great (sketchy, hand-drawn storybook)
