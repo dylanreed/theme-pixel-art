@@ -97,9 +97,9 @@
 
 .sierra-btn {
     position: absolute;
-    top: 30px;
-    width: 64px;
-    height: 64px;
+    top: 34px;
+    width: 56px;
+    height: 56px;
     background: transparent;
     border: none;
     cursor: url("/fantasy/cursors/hand.png"), pointer;
@@ -113,25 +113,25 @@
 
 /* Individual button positions - aligned to 7 circular slots in 500px panel */
 .sierra-btn:nth-child(1) {
-    left: 25px;
+    left: 30px;
 } /* Day/Night */
 .sierra-btn:nth-child(2) {
-    left: 89px;
+    left: 93px;
 } /* Weather */
 .sierra-btn:nth-child(3) {
-    left: 153px;
+    left: 158px;
 } /* Rainbow */
 .sierra-btn:nth-child(4) {
-    left: 218px;
+    left: 222px;
 } /* Achievements */
 .sierra-btn:nth-child(5) {
-    left: 283px;
+    left: 287px;
 } /* Mode */
 .sierra-btn:nth-child(6) {
-    left: 346px;
+    left: 350px;
 } /* Chaos */
 .sierra-btn:nth-child(7) {
-    left: 411px;
+    left: 415px;
 } /* Help */
 
 .sierra-btn:hover {
@@ -144,8 +144,8 @@
 
 /* Button icons */
 .sierra-btn img {
-    width: 36px;
-    height: 36px;
+    width: 48px;
+    height: 48px;
     image-rendering: pixelated;
 }
 
