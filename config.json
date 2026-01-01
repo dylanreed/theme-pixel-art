@@ -15,6 +15,11 @@
         "name": "Photos",
         "url": "/photos/",
         "weight": 2
+      },
+      {
+        "name": "Jokes",
+        "url": "/jokes/",
+        "weight": 3
       }
     ]
   }

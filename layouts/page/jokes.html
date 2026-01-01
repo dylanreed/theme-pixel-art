@@ -1,0 +1,264 @@
+{{ define "main" }}
+<style>
+/* ABOUTME: Retro TV styles using pixel-art frame overlay */
+/* ABOUTME: Video plays behind the TV frame image with clickable button areas */
+
+.jokes-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.tv-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 544px;
+}
+
+.tv-frame-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 88.2%; /* 960/1088 aspect ratio */
+}
+
+.tv-screen {
+    position: absolute;
+    top: 4%;
+    left: 7%;
+    width: 86%;
+    height: 67%;
+    background: #000;
+    overflow: hidden;
+}
+
+.tv-screen video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #000;
+}
+
+.tv-frame-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/frames/tv/video-frame.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Clickable button areas positioned over the frame's buttons */
+/* Frame is 1088x960, 3 buttons at bottom */
+.tv-buttons {
+    position: absolute;
+    bottom: 6%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 1.5%;
+    z-index: 20;
+}
+
+.tv-btn {
+    width: 11%;
+    height: 9%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s;
+    min-width: 45px;
+    min-height: 35px;
+}
+
+.tv-btn:hover {
+    opacity: 0.3;
+    background: rgba(200, 230, 150, 0.3);
+}
+
+.tv-btn:active {
+    opacity: 0.5;
+    background: rgba(200, 230, 150, 0.5);
+}
+
+.joke-info {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.joke-title {
+    font-family: monospace;
+    color: var(--text-color, #333);
+    font-size: 1.1rem;
+    min-height: 1.5em;
+    margin: 0;
+}
+
+.joke-counter {
+    font-family: monospace;
+    color: var(--text-muted, #666);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+.keyboard-hint {
+    font-family: monospace;
+    color: var(--text-muted, #888);
+    font-size: 0.75rem;
+    margin-top: 1rem;
+    opacity: 0.7;
+}
+
+/* Night mode */
+.night .joke-title {
+    color: #e0e0e0;
+}
+
+.night .joke-counter,
+.night .keyboard-hint {
+    color: #aaa;
+}
+
+/* Responsive adjustments */
+@media (max-width: 400px) {
+    .tv-btn {
+        min-width: 28px;
+        min-height: 24px;
+    }
+}
+</style>
+
+<div class="jokes-container">
+    <h1 class="page-title">Joke-a-Tron</h1>
+
+    <div class="tv-wrapper">
+        <div class="tv-frame-container">
+            <!-- Video behind the frame -->
+            <div class="tv-screen" id="tvScreen">
+                <video id="jokeVideo" playsinline>
+                    <source src="" type="video/mp4">
+                </video>
+            </div>
+
+            <!-- Frame overlay -->
+            <div class="tv-frame-overlay"></div>
+
+            <!-- Invisible clickable buttons over the frame's 3 buttons -->
+            <div class="tv-buttons">
+                <button class="tv-btn" id="playBtn" title="Play"></button>
+                <button class="tv-btn" id="pauseBtn" title="Pause"></button>
+                <button class="tv-btn" id="randomBtn" title="Random"></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="joke-info">
+        <p class="joke-title" id="jokeTitle">Loading...</p>
+        <p class="joke-counter" id="jokeCounter"></p>
+        <p class="keyboard-hint">Space: play/pause | R: random | Arrows: prev/next</p>
+    </div>
+</div>
+
+<script>
+(function() {
+    const jokes = [
+        {{ range $index, $joke := .Site.Data.jokes.jokes }}
+        {{ if $index }},{{ end }}
+        {
+            id: {{ $joke.id | jsonify }},
+            title: {{ $joke.title | jsonify }},
+            video_url: {{ $joke.video_url | jsonify }}
+        }
+        {{ end }}
+    ];
+
+    // Fallback test video if no jokes loaded
+    const TEST_VIDEO = 'https://res.cloudinary.com/dbz84hlvk/video/upload/v1752542888/joke-a-tron/What_Do_You_Call.mp4';
+
+    if (jokes.length === 0) {
+        jokes.push({ id: 'test', title: 'What Do You Call', video_url: TEST_VIDEO });
+    }
+
+    let currentIndex = 0;
+    const video = document.getElementById('jokeVideo');
+    const playBtn = document.getElementById('playBtn');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const randomBtn = document.getElementById('randomBtn');
+    const titleEl = document.getElementById('jokeTitle');
+    const counterEl = document.getElementById('jokeCounter');
+
+    function loadJoke(index) {
+        currentIndex = index;
+        const joke = jokes[index];
+        video.src = joke.video_url;
+        video.load();
+        titleEl.textContent = joke.title;
+        counterEl.textContent = (index + 1) + ' / ' + jokes.length;
+    }
+
+    function play() {
+        video.play().catch(function() {});
+    }
+
+    function pause() {
+        video.pause();
+    }
+
+    function togglePlay() {
+        video.paused ? play() : pause();
+    }
+
+    function randomJoke() {
+        var newIndex;
+        do {
+            newIndex = Math.floor(Math.random() * jokes.length);
+        } while (newIndex === currentIndex && jokes.length > 1);
+        loadJoke(newIndex);
+        play();
+    }
+
+    function nextJoke() {
+        loadJoke((currentIndex + 1) % jokes.length);
+        play();
+    }
+
+    function prevJoke() {
+        loadJoke((currentIndex - 1 + jokes.length) % jokes.length);
+        play();
+    }
+
+    // Button clicks
+    playBtn.addEventListener('click', play);
+    pauseBtn.addEventListener('click', pause);
+    randomBtn.addEventListener('click', randomJoke);
+
+    // Auto-advance on video end
+    video.addEventListener('ended', nextJoke);
+
+    // Keyboard controls
+    document.addEventListener('keydown', function(e) {
+        if (e.code === 'Space') {
+            e.preventDefault();
+            togglePlay();
+        } else if (e.code === 'ArrowRight') {
+            nextJoke();
+        } else if (e.code === 'ArrowLeft') {
+            prevJoke();
+        } else if (e.code === 'KeyR') {
+            randomJoke();
+        }
+    });
+
+    // Load first joke
+    loadJoke(0);
+})();
+</script>
+{{ end }}
