@@ -335,6 +335,71 @@
 
     {{- partial "footer.html" . -}}
 
+    <!-- Fixed UI Buttons -->
+    <button id="back-to-top" class="fixed-btn fixed-btn-right" aria-label="Back to top" style="display: none;">
+        ↑ TOP
+    </button>
+    <button id="easy-read-toggle" class="fixed-btn fixed-btn-left" aria-label="Toggle easy read mode">
+        <span class="easy-label">👁 EASY</span>
+        <span class="fancy-label" style="display: none;">✨ FANCY</span>
+    </button>
+
+    <script>
+        // Back to Top Button
+        (function() {
+            const btn = document.getElementById('back-to-top');
+            if (!btn) return;
+
+            // Show/hide based on scroll position
+            function checkScroll() {
+                if (window.scrollY > 300) {
+                    btn.style.display = 'block';
+                } else {
+                    btn.style.display = 'none';
+                }
+            }
+
+            window.addEventListener('scroll', checkScroll, { passive: true });
+            checkScroll();
+
+            // Smooth scroll to top
+            btn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        })();
+
+        // Easy Read Mode Toggle
+        (function() {
+            const btn = document.getElementById('easy-read-toggle');
+            if (!btn) return;
+
+            const easyLabel = btn.querySelector('.easy-label');
+            const fancyLabel = btn.querySelector('.fancy-label');
+
+            // Initialize from localStorage
+            const isEasyRead = localStorage.getItem('easyReadMode') === 'true';
+            if (isEasyRead) {
+                document.documentElement.classList.add('easy-read');
+                easyLabel.style.display = 'none';
+                fancyLabel.style.display = 'inline';
+            }
+
+            btn.addEventListener('click', () => {
+                const willBeEasy = !document.documentElement.classList.contains('easy-read');
+                document.documentElement.classList.toggle('easy-read', willBeEasy);
+                localStorage.setItem('easyReadMode', willBeEasy);
+
+                if (willBeEasy) {
+                    easyLabel.style.display = 'none';
+                    fancyLabel.style.display = 'inline';
+                } else {
+                    easyLabel.style.display = 'inline';
+                    fancyLabel.style.display = 'none';
+                }
+            });
+        })();
+    </script>
+
     {{ partial "custom_footer.html" . }}
     {{ partial "plugin_js.html" . }}
 

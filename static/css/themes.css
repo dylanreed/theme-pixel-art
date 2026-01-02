@@ -1355,3 +1355,201 @@ html.theme-underwater .skip-link {
 html.theme-underwater .skip-link:focus {
     outline-color: #4a9a8a;
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   EASY READ MODE - CORPORATE THEME OVERRIDES
+   Must be at end of file to override all theme-specific styles
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Corporate background - override ANY theme */
+html.easy-read body,
+html.easy-read.theme-sci-fi body,
+html.easy-read.theme-cyberpunk body,
+html.easy-read.theme-cabin body,
+html.easy-read.theme-underwater body,
+html.easy-read.theme-western body,
+html.easy-read.theme-kaiju body {
+    background: url("/corporate/backgrounds/3.png") !important;
+    background-size: 75% !important;
+    background-repeat: repeat !important;
+}
+
+/* Corporate container ::before backgrounds - white (this is where the actual bg color lives) */
+html.easy-read .posts-container::before,
+html.easy-read .post-container::before,
+html.easy-read .page-container::before,
+html.easy-read .archive-container::before,
+html.easy-read.night .posts-container::before,
+html.easy-read.night .post-container::before,
+html.easy-read.night .page-container::before,
+html.easy-read.night .archive-container::before,
+html.easy-read.theme-sci-fi .posts-container::before,
+html.easy-read.theme-sci-fi .post-container::before,
+html.easy-read.theme-sci-fi .page-container::before,
+html.easy-read.theme-sci-fi .archive-container::before,
+html.easy-read.theme-sci-fi.night .posts-container::before,
+html.easy-read.theme-sci-fi.night .post-container::before,
+html.easy-read.theme-sci-fi.night .page-container::before,
+html.easy-read.theme-sci-fi.night .archive-container::before,
+html.easy-read.theme-cyberpunk .posts-container::before,
+html.easy-read.theme-cyberpunk .post-container::before,
+html.easy-read.theme-cyberpunk .page-container::before,
+html.easy-read.theme-cyberpunk .archive-container::before,
+html.easy-read.theme-cyberpunk.night .posts-container::before,
+html.easy-read.theme-cyberpunk.night .post-container::before,
+html.easy-read.theme-cyberpunk.night .page-container::before,
+html.easy-read.theme-cyberpunk.night .archive-container::before,
+html.easy-read.theme-cabin .posts-container::before,
+html.easy-read.theme-cabin .post-container::before,
+html.easy-read.theme-cabin .page-container::before,
+html.easy-read.theme-cabin .archive-container::before,
+html.easy-read.theme-cabin.night .posts-container::before,
+html.easy-read.theme-cabin.night .post-container::before,
+html.easy-read.theme-cabin.night .page-container::before,
+html.easy-read.theme-cabin.night .archive-container::before,
+html.easy-read.theme-underwater .posts-container::before,
+html.easy-read.theme-underwater .post-container::before,
+html.easy-read.theme-underwater .page-container::before,
+html.easy-read.theme-underwater .archive-container::before,
+html.easy-read.theme-underwater.night .posts-container::before,
+html.easy-read.theme-underwater.night .post-container::before,
+html.easy-read.theme-underwater.night .page-container::before,
+html.easy-read.theme-underwater.night .archive-container::before {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    background-image: none !important;
+}
+
+/* Corporate header - ALL categories get same boring header */
+html.easy-read .header-image,
+html.easy-read .header-image[style*="home.webp"],
+html.easy-read .header-image[style*="default.webp"],
+html.easy-read .header-image[style*="health.webp"],
+html.easy-read .header-image[style*="tech.webp"],
+html.easy-read .header-image[style*="gaming.webp"],
+html.easy-read .header-image[style*="cooking.webp"],
+html.easy-read .header-image[style*="reading.webp"],
+html.easy-read .header-image[style*="music.webp"],
+html.easy-read .header-image[style*="writing.webp"],
+html.easy-read .header-image[style*="crafting.webp"],
+html.easy-read .header-image[style*="pets.webp"],
+html.easy-read .header-image[style*="travel.webp"],
+html.easy-read .header-image[style*="tabletop.webp"],
+html.easy-read .header-image[style*="garden.webp"],
+html.easy-read .header-image[style*="adhd.webp"],
+html.easy-read .header-image[style*="clown.webp"],
+html.easy-read.theme-sci-fi .header-image,
+html.easy-read.theme-sci-fi .header-image[style*="home.webp"],
+html.easy-read.theme-sci-fi .header-image[style*="default.webp"],
+html.easy-read.theme-cyberpunk .header-image,
+html.easy-read.theme-cyberpunk .header-image[style*="home.webp"],
+html.easy-read.theme-cyberpunk .header-image[style*="default.webp"],
+html.easy-read.theme-cabin .header-image,
+html.easy-read.theme-cabin .header-image[style*="home.webp"],
+html.easy-read.theme-cabin .header-image[style*="default.webp"],
+html.easy-read.theme-underwater .header-image,
+html.easy-read.theme-underwater .header-image[style*="home.webp"],
+html.easy-read.theme-underwater .header-image[style*="default.webp"] {
+    background-image: url("/corporate/headers/default.png") !important;
+}
+
+/* Corporate header frame - just swap the image */
+html.easy-read .header-frame,
+html.easy-read.theme-sci-fi .header-frame,
+html.easy-read.theme-cyberpunk .header-frame,
+html.easy-read.theme-cabin .header-frame,
+html.easy-read.theme-underwater .header-frame {
+    background-image: url("/corporate/headers/ornate frame.webp") !important;
+}
+
+/* Corporate border - use border-overlay instead of container border for consistency */
+html.easy-read .border-overlay,
+html.easy-read.theme-sci-fi .border-overlay,
+html.easy-read.theme-cyberpunk .border-overlay,
+html.easy-read.theme-cabin .border-overlay,
+html.easy-read.theme-underwater .border-overlay {
+    display: block !important; /* Override the hide rule */
+    border-image-source: url("/corporate/tiles/day_tiles.webp") !important;
+}
+
+/* Corporate border - night mode */
+html.easy-read.night .border-overlay,
+html.easy-read.theme-sci-fi.night .border-overlay,
+html.easy-read.theme-cyberpunk.night .border-overlay,
+html.easy-read.theme-cabin.night .border-overlay,
+html.easy-read.theme-underwater.night .border-overlay {
+    display: block !important;
+    border-image-source: url("/corporate/tiles/night_tiles.webp") !important;
+}
+
+/* Corporate navigation signs - just swap the image, keep original sizing */
+html.easy-read .nav-sign,
+html.easy-read .nav-hamburger,
+html.easy-read.theme-sci-fi .nav-sign,
+html.easy-read.theme-sci-fi .nav-hamburger,
+html.easy-read.theme-cyberpunk .nav-sign,
+html.easy-read.theme-cyberpunk .nav-hamburger,
+html.easy-read.theme-cabin .nav-sign,
+html.easy-read.theme-cabin .nav-hamburger,
+html.easy-read.theme-underwater .nav-sign,
+html.easy-read.theme-underwater .nav-hamburger {
+    background: url("/corporate/menu/sign.webp") no-repeat center center !important;
+    background-size: 100% 100% !important;
+}
+
+/* Corporate note scrolls */
+html.easy-read .note-scroll::before,
+html.easy-read.theme-sci-fi .note-scroll::before,
+html.easy-read.theme-cyberpunk .note-scroll::before,
+html.easy-read.theme-cabin .note-scroll::before,
+html.easy-read.theme-underwater .note-scroll::before {
+    background-image: url("/corporate/notes/top.webp") !important;
+}
+
+html.easy-read .note-scroll::after,
+html.easy-read.theme-sci-fi .note-scroll::after,
+html.easy-read.theme-cyberpunk .note-scroll::after,
+html.easy-read.theme-cabin .note-scroll::after,
+html.easy-read.theme-underwater .note-scroll::after {
+    background-image: url("/corporate/notes/bottom.webp") !important;
+}
+
+html.easy-read .note-scroll .note-content,
+html.easy-read.theme-sci-fi .note-scroll .note-content,
+html.easy-read.theme-cyberpunk .note-scroll .note-content,
+html.easy-read.theme-cabin .note-scroll .note-content,
+html.easy-read.theme-underwater .note-scroll .note-content {
+    background-image: url("/corporate/notes/middle.webp") !important;
+}
+
+html.easy-read .note-scroll.rolled-up,
+html.easy-read.theme-sci-fi .note-scroll.rolled-up,
+html.easy-read.theme-cyberpunk .note-scroll.rolled-up,
+html.easy-read.theme-cabin .note-scroll.rolled-up,
+html.easy-read.theme-underwater .note-scroll.rolled-up {
+    background-image: url("/corporate/notes/closed.webp") !important;
+}
+
+/* Corporate dropdown panel - hidden in easy read */
+html.easy-read .sierra-panel,
+html.easy-read .sierra-trigger {
+    display: none !important;
+}
+
+/* Corporate cursors - use system defaults */
+html.easy-read *,
+html.easy-read.theme-sci-fi *,
+html.easy-read.theme-cyberpunk *,
+html.easy-read.theme-cabin *,
+html.easy-read.theme-underwater * {
+    cursor: auto !important;
+}
+
+html.easy-read a,
+html.easy-read button,
+html.easy-read [role="button"],
+html.easy-read .nav-sign,
+html.easy-read .post-tag,
+html.easy-read .pagination a {
+    cursor: pointer !important;
+}
