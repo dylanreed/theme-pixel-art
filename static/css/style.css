@@ -120,7 +120,7 @@ html.night {
     max-width: 964px;
     margin: 0 auto;
     padding: 0 40px;
-    margin-top: -53px;
+    margin-top: -63px;
     display: flex;
     justify-content: center;
     gap: 40px;
@@ -542,8 +542,8 @@ html.night .archive-tag:hover {
     border-image-width: 64px 96px 64px 96px;
     border-image-repeat: round;
     padding: 20px;
-    margin-top: 160px;
-    margin-bottom: 160px;
+    margin-top: 10px;
+    margin-bottom: 80px;
 }
 
 /* Cream background inside border - extends into border to fill transparent gap */
@@ -1581,8 +1581,8 @@ html.night .page-content td {
 /* Footer - Pixel Art Style */
 .site-footer {
     max-width: 964px;
-    margin: 40px auto;
-    padding: 30px 20px;
+    margin: 20px auto;
+    padding: 20px 20px;
     text-align: center;
     color: #5c4030;
     font-size: 14px;
@@ -2224,6 +2224,8 @@ html.night .note-scroll object {
     .category-page {
         border-width: 32px;
         border-image-width: 32px 48px 32px 48px;
+        margin-top: 5px;
+        margin-bottom: 50px;
     }
 
     .border-overlay {
@@ -2344,9 +2346,18 @@ html.night .pagination-info {
         flex-direction: column;
         align-items: center;
         padding: 0 10px;
-        margin-top: -30px;
+        margin-top: -40px;
         gap: 0;
         z-index: 10; /* Above header-container (z-index: 2) so hamburger is clickable */
+    }
+
+    /* Tighter container margins on mobile */
+    .posts-container,
+    .post-container,
+    .page-container,
+    .archive-container {
+        margin-top: 5px;
+        margin-bottom: 40px;
     }
 
     .nav-hamburger {
@@ -2358,8 +2369,8 @@ html.night .pagination-info {
         flex-direction: column;
         align-items: center;
         gap: 0;
-        width: 100%;
-        max-width: 280px;
+        width: 90%;
+        max-width: 320px;
         background: linear-gradient(
             180deg,
             rgba(212, 196, 168, 0.98) 0%,
@@ -2371,7 +2382,7 @@ html.night .pagination-info {
             inset 2px 2px 0 rgba(255, 255, 255, 0.3),
             inset -2px -2px 0 rgba(0, 0, 0, 0.1),
             0 4px 12px rgba(0, 0, 0, 0.3);
-        margin-top: 10px;
+        margin-top: 5px;
         overflow: hidden;
     }
 
@@ -2439,36 +2450,42 @@ html.night .pagination-info {
 
     /* Header adjustments */
     .site-header {
-        padding: 10px 10px 0;
+        padding: 5px 5px 0;
     }
 
     .header-image {
-        height: 150px;
+        height: 130px;
     }
 
     .site-title {
-        font-size: 22px;
-        left: 15px;
-        bottom: 15px;
+        font-size: 20px;
+        left: 12px;
+        bottom: 12px;
     }
 
-    /* Content containers - smaller borders */
+    /* Content containers - smaller borders, full width */
     .posts-container,
     .post-container,
     .page-container,
     .archive-container {
-        border-width: 24px;
-        border-image-width: 24px 36px 24px 36px;
-        padding: 15px;
+        border-width: 20px;
+        border-image-width: 20px 30px 20px 30px;
+        padding: 12px;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    .main-content {
+        padding: 0 5px;
     }
 
     .border-overlay {
-        top: -24px;
-        left: -24px;
-        right: -24px;
-        bottom: -24px;
-        border-width: 24px;
-        border-image-width: 24px 36px 24px 36px;
+        top: -20px;
+        left: -20px;
+        right: -20px;
+        bottom: -20px;
+        border-width: 20px;
+        border-image-width: 20px 30px 20px 30px;
     }
 
     /* Post content */
