@@ -1357,6 +1357,107 @@ html.theme-underwater .skip-link:focus {
 }
 
 /* ═══════════════════════════════════════════════════════════════
+   THEME-SPECIFIC HEADER STYLES (from calibration tool)
+   Contains header heights, site title, and nav sign styles per theme
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Sci-Fi header styles */
+html.theme-sci-fi .header-image {
+    box-shadow: 0 4px 20px rgba(0, 100, 200, 0.3);
+}
+
+html.theme-sci-fi .site-title {
+    font-size: 42px;
+    bottom: 30px;
+    left: 100px;
+    color: #00d4ff;
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+html.theme-sci-fi .nav-sign span {
+    color: #1a3a5c;
+    text-shadow: 0 0 4px rgba(0, 212, 255, 0.3);
+    padding-top: 23px;
+}
+
+html.theme-sci-fi .nav-sign.active span {
+    color: #00d4ff;
+    text-shadow: 0 0 12px rgba(0, 212, 255, 0.7);
+}
+
+/* Cyberpunk header styles */
+html.theme-cyberpunk .header-image {
+    box-shadow: 0 4px 20px rgba(255, 0, 255, 0.3);
+}
+
+html.theme-cyberpunk .site-title {
+    font-size: 48px;
+    bottom: 100px;
+    left: 200px;
+    color: #ff00ff;
+    text-shadow: 0 0 10px #ff00ff, 2px 2px 0 #00ffff;
+}
+
+html.theme-cyberpunk .nav-sign span {
+    color: #000000;
+    text-shadow: 0 0 4px rgba(255, 0, 255, 0.5);
+    padding-top: 30px;
+}
+
+html.theme-cyberpunk .nav-sign.active span {
+    color: #ff00ff;
+    text-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff;
+}
+
+/* Cabin header styles */
+html.theme-cabin .header-image {
+    box-shadow: 0 4px 20px rgba(90, 60, 30, 0.4);
+}
+
+html.theme-cabin .site-title {
+    font-size: 52px;
+    bottom: 30px;
+    left: 100px;
+    color: #fff5e6;
+    text-shadow: 2px 2px 4px rgba(60, 40, 20, 0.8);
+}
+
+html.theme-cabin .nav-sign span {
+    color: #5a3a2a;
+    text-shadow: 1px 1px 0 rgba(255, 245, 230, 0.3);
+    padding-top: 30px;
+}
+
+html.theme-cabin .nav-sign.active span {
+    color: #2e260f;
+    text-shadow: 0 0 5px #ff8c00, 0 0 10px #ff8c00;
+}
+
+/* Underwater header styles */
+html.theme-underwater .header-image {
+    box-shadow: 0 4px 20px rgba(30, 80, 100, 0.4);
+}
+
+html.theme-underwater .site-title {
+    font-size: 42px;
+    bottom: 30px;
+    left: 100px;
+    color: #c0e8e0;
+    text-shadow: 2px 2px 4px rgba(20, 40, 50, 0.8);
+}
+
+html.theme-underwater .nav-sign span {
+    color: #3a5a4a;
+    text-shadow: 1px 1px 0 rgba(192, 232, 224, 0.3);
+    padding-top: 30px;
+}
+
+html.theme-underwater .nav-sign.active span {
+    color: #c9a227;
+    text-shadow: 1px 1px 0 #8b6914, -1px -1px 0 #e8d48b;
+}
+
+/* ═══════════════════════════════════════════════════════════════
    EASY READ MODE - CORPORATE THEME OVERRIDES
    Must be at end of file to override all theme-specific styles
    ═══════════════════════════════════════════════════════════════ */

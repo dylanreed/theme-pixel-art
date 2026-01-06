@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<!-- ABOUTME: TV frame calibration tool for aligning button hitboxes -->
+<!-- ABOUTME: Adjust each button independently to match frame graphics -->
+<html>
+<head>
+    <title>TV Frame Button Calibration</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: monospace;
+            background: #1a1a2e;
+            color: #eee;
+            padding: 20px;
+            margin: 0;
+        }
+        h1 { text-align: center; color: #0ff; }
+
+        .layout {
+            display: flex;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .controls-panel {
+            flex: 0 0 320px;
+            background: #2a2a4e;
+            padding: 15px;
+            border-radius: 8px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .control-section {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #444;
+        }
+
+        .control-section h3 {
+            margin: 0 0 10px 0;
+            color: #0ff;
+        }
+
+        .control-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            gap: 10px;
+        }
+
+        .control-row label {
+            flex: 0 0 60px;
+            color: #aaa;
+        }
+
+        .control-row input[type="range"] {
+            flex: 1;
+        }
+
+        .control-row .value {
+            flex: 0 0 45px;
+            color: #ff0;
+            text-align: right;
+        }
+
+        select {
+            width: 100%;
+            padding: 8px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .preview-panel {
+            flex: 1;
+        }
+
+        .tv-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 544px;
+            margin: 0 auto;
+        }
+
+        .tv-frame-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 88.2%;
+        }
+
+        .tv-screen {
+            position: absolute;
+            background: transparent;
+            border: 2px dashed #0f0;
+            z-index: 15;
+        }
+
+        .tv-frame-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .tv-btn {
+            position: absolute;
+            background: rgba(255, 0, 0, 0.5);
+            border: 2px solid #f00;
+            cursor: move;
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 1px 1px 0 #000;
+        }
+
+        .tv-btn:hover {
+            background: rgba(0, 255, 0, 0.5);
+            border-color: #0f0;
+        }
+
+        .tv-btn.btn-play { background: rgba(255, 0, 0, 0.5); }
+        .tv-btn.btn-pause { background: rgba(0, 0, 255, 0.5); border-color: #00f; }
+        .tv-btn.btn-random { background: rgba(255, 165, 0, 0.5); border-color: #fa0; }
+
+        .output {
+            background: #000;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .output h3 {
+            color: #0ff;
+            margin-top: 0;
+        }
+
+        .output pre {
+            background: #1a1a2e;
+            padding: 10px;
+            overflow-x: auto;
+            color: #0f0;
+            font-size: 11px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .copy-btn {
+            background: #0ff;
+            color: #000;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-family: monospace;
+            margin-top: 10px;
+        }
+
+        .copy-btn:hover {
+            background: #0f0;
+        }
+
+        .btn-color {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+        .btn-color.play { background: rgba(255, 0, 0, 0.7); }
+        .btn-color.pause { background: rgba(0, 0, 255, 0.7); }
+        .btn-color.random { background: rgba(255, 165, 0, 0.7); }
+    </style>
+</head>
+<body>
+    <h1>TV Frame Button Calibration</h1>
+
+    <div class="layout">
+        <div class="controls-panel">
+            <div class="control-section">
+                <h3>Theme</h3>
+                <select id="themeSelect">
+                    <option value="fantasy">Fantasy</option>
+                    <option value="sci-fi">Sci-Fi</option>
+                    <option value="cyberpunk">Cyberpunk</option>
+                    <option value="cabin">Cabin</option>
+                    <option value="underwater">Underwater</option>
+                </select>
+            </div>
+
+            <div class="control-section">
+                <h3 style="color: #0f0;">Screen Area</h3>
+                <div class="control-row">
+                    <label>Top:</label>
+                    <input type="range" id="screen-top" min="0" max="30" value="6" step="0.5">
+                    <span class="value" id="screen-top-val">6%</span>
+                </div>
+                <div class="control-row">
+                    <label>Left:</label>
+                    <input type="range" id="screen-left" min="0" max="30" value="8" step="0.5">
+                    <span class="value" id="screen-left-val">8%</span>
+                </div>
+                <div class="control-row">
+                    <label>Width:</label>
+                    <input type="range" id="screen-width" min="50" max="100" value="84" step="0.5">
+                    <span class="value" id="screen-width-val">84%</span>
+                </div>
+                <div class="control-row">
+                    <label>Height:</label>
+                    <input type="range" id="screen-height" min="40" max="80" value="62" step="0.5">
+                    <span class="value" id="screen-height-val">62%</span>
+                </div>
+            </div>
+
+            <div class="control-section">
+                <h3><span class="btn-color play"></span>Play Button</h3>
+                <div class="control-row">
+                    <label>Left:</label>
+                    <input type="range" id="play-left" min="0" max="100" value="30" step="0.5">
+                    <span class="value" id="play-left-val">30%</span>
+                </div>
+                <div class="control-row">
+                    <label>Bottom:</label>
+                    <input type="range" id="play-bottom" min="0" max="40" value="6" step="0.5">
+                    <span class="value" id="play-bottom-val">6%</span>
+                </div>
+                <div class="control-row">
+                    <label>Width:</label>
+                    <input type="range" id="play-width" min="20" max="150" value="60">
+                    <span class="value" id="play-width-val">60px</span>
+                </div>
+                <div class="control-row">
+                    <label>Height:</label>
+                    <input type="range" id="play-height" min="20" max="100" value="45">
+                    <span class="value" id="play-height-val">45px</span>
+                </div>
+            </div>
+
+            <div class="control-section">
+                <h3><span class="btn-color pause"></span>Pause Button</h3>
+                <div class="control-row">
+                    <label>Left:</label>
+                    <input type="range" id="pause-left" min="0" max="100" value="42" step="0.5">
+                    <span class="value" id="pause-left-val">42%</span>
+                </div>
+                <div class="control-row">
+                    <label>Bottom:</label>
+                    <input type="range" id="pause-bottom" min="0" max="40" value="6" step="0.5">
+                    <span class="value" id="pause-bottom-val">6%</span>
+                </div>
+                <div class="control-row">
+                    <label>Width:</label>
+                    <input type="range" id="pause-width" min="20" max="150" value="60">
+                    <span class="value" id="pause-width-val">60px</span>
+                </div>
+                <div class="control-row">
+                    <label>Height:</label>
+                    <input type="range" id="pause-height" min="20" max="100" value="45">
+                    <span class="value" id="pause-height-val">45px</span>
+                </div>
+            </div>
+
+            <div class="control-section">
+                <h3><span class="btn-color random"></span>Random Button</h3>
+                <div class="control-row">
+                    <label>Left:</label>
+                    <input type="range" id="random-left" min="0" max="100" value="54" step="0.5">
+                    <span class="value" id="random-left-val">54%</span>
+                </div>
+                <div class="control-row">
+                    <label>Bottom:</label>
+                    <input type="range" id="random-bottom" min="0" max="40" value="6" step="0.5">
+                    <span class="value" id="random-bottom-val">6%</span>
+                </div>
+                <div class="control-row">
+                    <label>Width:</label>
+                    <input type="range" id="random-width" min="20" max="150" value="60">
+                    <span class="value" id="random-width-val">60px</span>
+                </div>
+                <div class="control-row">
+                    <label>Height:</label>
+                    <input type="range" id="random-height" min="20" max="100" value="45">
+                    <span class="value" id="random-height-val">45px</span>
+                </div>
+            </div>
+
+            <div class="output">
+                <h3>CSS Output</h3>
+                <pre id="cssOutput"></pre>
+                <button class="copy-btn" onclick="copyCSS()">Copy CSS</button>
+            </div>
+        </div>
+
+        <div class="preview-panel">
+            <div class="tv-wrapper">
+                <div class="tv-frame-container">
+                    <div class="tv-screen" id="tvScreen"></div>
+                    <div class="tv-frame-overlay" id="frameOverlay"></div>
+                    <div class="tv-btn btn-play" id="btnPlay">▶</div>
+                    <div class="tv-btn btn-pause" id="btnPause">⏸</div>
+                    <div class="tv-btn btn-random" id="btnRandom">⟳</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const frames = {
+            'fantasy': '/fantasy/frames/tv-frame.png',
+            'sci-fi': '/sci-fi/frames/tv-frame.png',
+            'cyberpunk': '/cyberpunk/frames/tv-frame.png',
+            'cabin': '/cabin/frames/tv-frame.png',
+            'underwater': '/underwater/frames/tv-frame.png'
+        };
+
+        // Default values per theme (will be updated as you calibrate)
+        const savedValues = {
+            'fantasy': {
+                screen: { top: 6, left: 8, width: 84, height: 62 },
+                play: { left: 34, bottom: 15.5, width: 50, height: 39 },
+                pause: { left: 45.5, bottom: 15.5, width: 50, height: 39 },
+                random: { left: 56.5, bottom: 15.5, width: 50, height: 39 }
+            },
+            'sci-fi': {
+                screen: { top: 10, left: 8, width: 84, height: 58 },
+                play: { left: 34, bottom: 16, width: 51, height: 39 },
+                pause: { left: 45.5, bottom: 16, width: 50, height: 39 },
+                random: { left: 57, bottom: 16, width: 50, height: 39 }
+            },
+            'cyberpunk': {
+                screen: { top: 12, left: 10, width: 80, height: 56 },
+                play: { left: 33, bottom: 16, width: 50, height: 39 },
+                pause: { left: 44.5, bottom: 16, width: 50, height: 39 },
+                random: { left: 56.5, bottom: 16, width: 50, height: 39 }
+            },
+            'cabin': {
+                screen: { top: 4, left: 7, width: 86, height: 67 },
+                play: { left: 33.5, bottom: 15.5, width: 50, height: 39 },
+                pause: { left: 45, bottom: 15.5, width: 50, height: 39 },
+                random: { left: 56, bottom: 15.5, width: 50, height: 39 }
+            },
+            'underwater': {
+                screen: { top: 6, left: 9, width: 82, height: 62 },
+                play: { left: 33, bottom: 16.5, width: 50, height: 39 },
+                pause: { left: 45, bottom: 16.5, width: 50, height: 39 },
+                random: { left: 56.5, bottom: 16.5, width: 50, height: 39 }
+            }
+        };
+
+        const buttons = ['play', 'pause', 'random'];
+        const props = ['left', 'bottom', 'width', 'height'];
+        const screenProps = ['top', 'left', 'width', 'height'];
+
+        const themeSelect = document.getElementById('themeSelect');
+        const frameOverlay = document.getElementById('frameOverlay');
+        const tvScreen = document.getElementById('tvScreen');
+
+        function getControl(btn, prop) {
+            return document.getElementById(`${btn}-${prop}`);
+        }
+
+        function getDisplay(btn, prop) {
+            return document.getElementById(`${btn}-${prop}-val`);
+        }
+
+        function getBtnElement(btn) {
+            return document.getElementById(`btn${btn.charAt(0).toUpperCase() + btn.slice(1)}`);
+        }
+
+        function updateFrame() {
+            const theme = themeSelect.value;
+            frameOverlay.style.backgroundImage = `url('${frames[theme]}')`;
+
+            // Load saved values
+            const vals = savedValues[theme];
+
+            // Load screen values
+            screenProps.forEach(prop => {
+                getControl('screen', prop).value = vals.screen[prop];
+            });
+
+            // Load button values
+            buttons.forEach(btn => {
+                props.forEach(prop => {
+                    getControl(btn, prop).value = vals[btn][prop];
+                });
+            });
+
+            updateScreen();
+            updateAllButtons();
+        }
+
+        function updateScreen() {
+            const theme = themeSelect.value;
+            const vals = {};
+
+            screenProps.forEach(prop => {
+                const ctrl = getControl('screen', prop);
+                const val = parseFloat(ctrl.value);
+                vals[prop] = val;
+                getDisplay('screen', prop).textContent = val + '%';
+            });
+
+            // Save values
+            savedValues[theme].screen = vals;
+
+            // Apply to screen element
+            tvScreen.style.top = vals.top + '%';
+            tvScreen.style.left = vals.left + '%';
+            tvScreen.style.width = vals.width + '%';
+            tvScreen.style.height = vals.height + '%';
+
+            generateCSS();
+        }
+
+        function updateAllButtons() {
+            const theme = themeSelect.value;
+
+            buttons.forEach(btn => {
+                const el = getBtnElement(btn);
+                const vals = {};
+
+                props.forEach(prop => {
+                    const ctrl = getControl(btn, prop);
+                    const val = parseFloat(ctrl.value);
+                    vals[prop] = val;
+
+                    // Update display
+                    const unit = (prop === 'width' || prop === 'height') ? 'px' : '%';
+                    getDisplay(btn, prop).textContent = val + unit;
+                });
+
+                // Save values
+                savedValues[theme][btn] = vals;
+
+                // Apply to button
+                el.style.left = vals.left + '%';
+                el.style.bottom = vals.bottom + '%';
+                el.style.width = vals.width + 'px';
+                el.style.height = vals.height + 'px';
+            });
+
+            generateCSS();
+        }
+
+        function generateCSS() {
+            const theme = themeSelect.value;
+            const vals = savedValues[theme];
+
+            let css;
+            if (theme === 'fantasy') {
+                css = `/* Fantasy theme screen (default) */
+:root.theme-fantasy .tv-screen,
+:root:not([class*="theme-"]) .tv-screen {
+    top: ${vals.screen.top}%;
+    left: ${vals.screen.left}%;
+    width: ${vals.screen.width}%;
+    height: ${vals.screen.height}%;
+}
+
+/* Fantasy theme buttons (default) */
+:root.theme-fantasy #playBtn,
+:root:not([class*="theme-"]) #playBtn {
+    left: ${vals.play.left}%;
+    bottom: ${vals.play.bottom}%;
+    width: ${vals.play.width}px;
+    height: ${vals.play.height}px;
+}
+
+:root.theme-fantasy #pauseBtn,
+:root:not([class*="theme-"]) #pauseBtn {
+    left: ${vals.pause.left}%;
+    bottom: ${vals.pause.bottom}%;
+    width: ${vals.pause.width}px;
+    height: ${vals.pause.height}px;
+}
+
+:root.theme-fantasy #randomBtn,
+:root:not([class*="theme-"]) #randomBtn {
+    left: ${vals.random.left}%;
+    bottom: ${vals.random.bottom}%;
+    width: ${vals.random.width}px;
+    height: ${vals.random.height}px;
+}`;
+            } else {
+                css = `/* ${theme.charAt(0).toUpperCase() + theme.slice(1)} theme screen */
+:root.theme-${theme} .tv-screen {
+    top: ${vals.screen.top}%;
+    left: ${vals.screen.left}%;
+    width: ${vals.screen.width}%;
+    height: ${vals.screen.height}%;
+}
+
+/* ${theme.charAt(0).toUpperCase() + theme.slice(1)} theme buttons */
+:root.theme-${theme} #playBtn {
+    left: ${vals.play.left}%;
+    bottom: ${vals.play.bottom}%;
+    width: ${vals.play.width}px;
+    height: ${vals.play.height}px;
+}
+
+:root.theme-${theme} #pauseBtn {
+    left: ${vals.pause.left}%;
+    bottom: ${vals.pause.bottom}%;
+    width: ${vals.pause.width}px;
+    height: ${vals.pause.height}px;
+}
+
+:root.theme-${theme} #randomBtn {
+    left: ${vals.random.left}%;
+    bottom: ${vals.random.bottom}%;
+    width: ${vals.random.width}px;
+    height: ${vals.random.height}px;
+}`;
+            }
+
+            document.getElementById('cssOutput').textContent = css;
+        }
+
+        function copyCSS() {
+            navigator.clipboard.writeText(document.getElementById('cssOutput').textContent);
+            alert('CSS copied to clipboard!');
+        }
+
+        // Event listeners
+        themeSelect.addEventListener('change', updateFrame);
+
+        // Screen controls
+        screenProps.forEach(prop => {
+            getControl('screen', prop).addEventListener('input', updateScreen);
+        });
+
+        // Button controls
+        buttons.forEach(btn => {
+            props.forEach(prop => {
+                getControl(btn, prop).addEventListener('input', updateAllButtons);
+            });
+        });
+
+        // Initialize
+        updateFrame();
+    </script>
+</body>
+</html>

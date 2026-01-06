@@ -15,22 +15,56 @@ Use this base prompt structure for consistency:
 - **Cyberpunk**: neon pink and cyan, dark background contrast, chrome accents, gritty urban
 - **Cabin**: cozy rustic, warm oranges and browns, soft lighting, comfortable homey feel
 - **Underwater**: deep ocean blues and teals, bioluminescent accents, flowing movement, bubble details
+- **godzilla**: adorable chibi godzilla, soft pastel colors, cute expressions, kawaii style, rounded shapes, gentle vibes
+- **Western**: gritty frontier, weathered textures, dusty muted browns, harsh shadows, rugged worn details, spaghetti western tone
 
 ---
 
 ## Missing Sprites by Theme
 
 
-### Underwater (10 missing)
+### godzilla (16 missing)
 
 | Category | Character | Prompt |
 |----------|-----------|--------|
-| adhd | Distracted Fish | fish chasing multiple shiny objects at once, scattered attention, pixel art, sprite, deep ocean, sparkly distractions |
-| clown | Clownfish | cute clownfish with exaggerated smile, orange and white stripes, pixel art, sprite, deep ocean, bright orange |
-| cooking | Chef Fish | pufferfish chef with tiny chef hat, holding ladle, kitchen pose, pixel art, sprite, deep ocean blues, cute |
-| crafting | Pearl Crafter | mer-artisan crafting pearl jewelry, delicate work, pixel art, sprite, deep ocean, iridescent pearls |
-| gaming | Gaming Fish | tropical fish with tiny handheld console, pixel art, sprite, deep ocean blues, screen glow |
-| music | Mermaid Harper | mermaid playing shell harp, flowing hair, serene, pixel art, sprite, deep ocean teals, iridescent scales |
+| adhd | Distracted godzilla | adorable chibi godzilla chasing butterflies, scattered attention, pixel art, sprite, soft pastel colors, kawaii style, rounded shapes |
+| clown | Clown godzilla | cute chibi godzilla in pastel clown outfit, blushing cheeks, tiny horn, pixel art, sprite, soft pastels, kawaii style |
+| cooking | Chef godzilla | adorable chibi godzilla in tiny chef hat, stirring cute pot, happy expression, pixel art, sprite, pastel pinks and mints, kawaii |
+| crafting | Artisan godzilla | chibi godzilla carefully making friendship bracelet, concentrated cute face, pixel art, sprite, soft lavender and peach, kawaii |
+| default | Classic godzilla | adorable chibi godzilla waving hello, soft rounded shape, friendly smile, pixel art, sprite, pastel mint and pink, kawaii |
+| gaming | Gamer godzilla | chibi godzilla with tiny controller, tongue out in focus, pixel art, sprite, pastel purple and blue, kawaii, cute |
+| health | Medic godzilla | adorable chibi godzilla nurse with tiny bandaid, caring expression, pixel art, sprite, pastel pink and white, kawaii |
+| music | Singing godzilla | chibi godzilla singing happily, musical notes floating, eyes closed joy, pixel art, sprite, pastel yellow and pink, kawaii |
+| notes | Scribe godzilla | cute chibi godzilla with tiny pencil, studious glasses, pixel art, sprite, soft pastel blue and cream, kawaii |
+| personal | Sleepy godzilla | adorable chibi godzilla yawning, cozy pose, pixel art, sprite, soft lavender and pink, kawaii, gentle |
+| pets | Pet godzilla | chibi godzilla hugging tiny cat, pure joy expression, pixel art, sprite, pastel peach and mint, kawaii, heartwarming |
+| reading | Bookworm godzilla | cute chibi godzilla with oversized glasses, tiny book, fascinated expression, pixel art, sprite, pastel cream and sage, kawaii |
+| tabletop | Dice godzilla | adorable chibi godzilla excited about dice roll, sparkle eyes, pixel art, sprite, pastel purple and gold, kawaii |
+| tech | Tech godzilla | chibi godzilla with cute headphones, happy beeping, pixel art, sprite, pastel blue and silver, kawaii, soft glow |
+| travel | Tourist godzilla | adorable chibi godzilla with tiny backpack, excited explorer, pixel art, sprite, pastel coral and sky blue, kawaii |
+| writing | Author godzilla | cute chibi godzilla with oversized quill, dreamy expression, pixel art, sprite, pastel lilac and cream, kawaii
+
+
+### Western (16 missing)
+
+| Category | Character | Prompt |
+|----------|-----------|--------|
+| adhd | Twitchy Outlaw | grizzled outlaw eyes darting everywhere, paranoid stance, pixel art, sprite, gritty muted browns, harsh shadows, weathered |
+| clown | Hanged Man's Fool | sinister rodeo clown, cracked face paint, barrel with bullet holes, pixel art, sprite, gritty dusty tones, unsettling |
+| cooking | Chuckwagon Veteran | weathered trail cook, scarred hands stirring gruel, thousand-yard stare, pixel art, sprite, muddy browns, campfire harsh light |
+| crafting | One-Armed Smith | grizzled blacksmith missing arm, hammering with prosthetic, sparks and sweat, pixel art, sprite, forge glow, gritty textures |
+| default | Nameless Drifter | lone gunslinger silhouette, poncho tattered, cigar ember glow, pixel art, sprite, dusty sepia, harsh sunset, weathered |
+| gaming | Dead Man's Hand | scarred gambler holding aces and eights, cold eyes, saloon shadows, pixel art, sprite, dim candlelight, gritty browns |
+| health | Sawbones | weary frontier surgeon, bloodstained apron, whiskey bottle nearby, pixel art, sprite, muted tones, harsh shadows |
+| music | Gallows Guitarist | haggard musician playing worn guitar, noose scar on neck, pixel art, sprite, dusty browns, melancholy, weathered |
+| notes | Bounty Tracker | grizzled hunter marking map, scars and stubble, dim lantern, pixel art, sprite, parchment browns, harsh shadows |
+| personal | Whiskey Drifter | tired cowboy nursing drink, haunted expression, saloon corner, pixel art, sprite, amber and shadow, weathered face |
+| pets | Vulture Wrangler | scarred rider with trained vulture on shoulder, grim expression, pixel art, sprite, dusty blacks and browns, ominous |
+| reading | Warrant Reader | weathered lawman studying execution order, grim duty, pixel art, sprite, harsh lamplight, yellowed paper, stoic |
+| tabletop | Coffin Maker | undertaker measuring for casket, tape measure and nails, pixel art, sprite, dark wood tones, somber, gritty |
+| tech | Gatling Mechanic | grease-stained engineer with clockwork gun parts, goggles, pixel art, sprite, brass and oil stains, industrial grit |
+| travel | Bone Trail Rider | lone rider on skeletal horse, vultures circling, pixel art, sprite, bleached desert, harsh sun, desolate |
+| writing | Tombstone Carver | stoic craftsman etching epitaph, chisel and stone dust, pixel art, sprite, grey granite, solemn, weathered hands |
 
 
 ---
@@ -51,6 +85,12 @@ Use this base prompt structure for consistency:
 
 ### Underwater (4 done)
 - health, tabletop, travel, writing
+
+### godzilla (0 done)
+- (none yet)
+
+### Western (0 done)
+- (none yet)
 
 ---
 

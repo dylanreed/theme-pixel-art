@@ -552,6 +552,11 @@
             <span>Photos</span>
         </a>
         
+        
+        <a href="/jokes/" class="nav-sign">
+            <span>Jokes</span>
+        </a>
+        
     </div>
 </nav>
 <script>
@@ -605,7 +610,7 @@
 
     </main><footer class="site-footer">
     <p>
-        dylan&#39;s blog &copy; 2025 &middot; Powered by chaos goblin
+        dylan&#39;s blog &copy; 2026 &middot; Powered by chaos goblin
         energy
     </p>
 </footer>
@@ -982,14 +987,79 @@
     })();
 </script>
 
+    <button id="back-to-top" class="fixed-btn fixed-btn-right" aria-label="Back to top" style="display: none;">
+        ↑ TOP
+    </button>
+    <button id="easy-read-toggle" class="fixed-btn fixed-btn-left" aria-label="Toggle easy read mode">
+        <span class="easy-label">👁 EASY</span>
+        <span class="fancy-label" style="display: none;">✨ FANCY</span>
+    </button>
+
+    <script>
+        
+        (function() {
+            const btn = document.getElementById('back-to-top');
+            if (!btn) return;
+
+            
+            function checkScroll() {
+                if (window.scrollY > 300) {
+                    btn.style.display = 'block';
+                } else {
+                    btn.style.display = 'none';
+                }
+            }
+
+            window.addEventListener('scroll', checkScroll, { passive: true });
+            checkScroll();
+
+            
+            btn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        })();
+
+        
+        (function() {
+            const btn = document.getElementById('easy-read-toggle');
+            if (!btn) return;
+
+            const easyLabel = btn.querySelector('.easy-label');
+            const fancyLabel = btn.querySelector('.fancy-label');
+
+            
+            const isEasyRead = localStorage.getItem('easyReadMode') === 'true';
+            if (isEasyRead) {
+                document.documentElement.classList.add('easy-read');
+                easyLabel.style.display = 'none';
+                fancyLabel.style.display = 'inline';
+            }
+
+            btn.addEventListener('click', () => {
+                const willBeEasy = !document.documentElement.classList.contains('easy-read');
+                document.documentElement.classList.toggle('easy-read', willBeEasy);
+                localStorage.setItem('easyReadMode', willBeEasy);
+
+                if (willBeEasy) {
+                    easyLabel.style.display = 'none';
+                    fancyLabel.style.display = 'inline';
+                } else {
+                    easyLabel.style.display = 'inline';
+                    fancyLabel.style.display = 'none';
+                }
+            });
+        })();
+    </script>
+
+    
 
     
 
 
     
-    <script src="/js/chaos.js?v=1767115738"></script>
-    <script src="/js/achievements.js?v=1767115738"></script>
-    <script src="/js/scroll-tiles.js?v=1767115738"></script>
-    <script src="/js/scroll-rollup.js?v=1767115738"></script>
+    <script src="/js/chaos.js?v=1767483050"></script>
+    <script src="/js/achievements.js?v=1767483050"></script>
+    <script src="/js/scroll-tiles.js?v=1767483050"></script>
+    <script src="/js/scroll-rollup.js?v=1767483050"></script>
 </body>
 </html>

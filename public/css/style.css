@@ -120,7 +120,7 @@ html.night {
     max-width: 964px;
     margin: 0 auto;
     padding: 0 40px;
-    margin-top: -53px;
+    margin-top: -63px;
     display: flex;
     justify-content: center;
     gap: 40px;
@@ -134,7 +134,7 @@ html.night {
     justify-content: center;
     min-width: 160px;
     padding: 0 10px;
-    height: 150px;
+    height: 140px;
     background: url("/fantasy/menu/sign.webp") no-repeat center center;
     background-size: 100% 100%;
     image-rendering: pixelated;
@@ -160,6 +160,11 @@ html.night {
 
 .nav-sign.active {
     transform: translateY(15px);
+}
+
+.nav-sign.active span {
+    color: #381b00;
+    text-shadow: 0 0 8px rgba(139, 90, 43, 0.5);
 }
 
 .nav-sign.active:hover {
@@ -466,7 +471,7 @@ html.night .archive-tag:hover {
 
 .header-image {
     width: 100%;
-    height: 300px;
+    height: 215px;
     background-image: url("/fantasy/headers/home.webp");
     background-size: cover;
     background-position: center;
@@ -506,10 +511,10 @@ html.night .archive-tag:hover {
 
 .site-title {
     position: absolute;
-    bottom: 30px;
-    left: 100px;
+    bottom: 0px;
+    left: 65px;
     font-family: "Uncial Antiqua", cursive;
-    font-size: 42px;
+    font-size: 37px;
     color: #f5e6d3;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     z-index: 1;
@@ -542,8 +547,8 @@ html.night .archive-tag:hover {
     border-image-width: 64px 96px 64px 96px;
     border-image-repeat: round;
     padding: 20px;
-    margin-top: 160px;
-    margin-bottom: 160px;
+    margin-top: 10px;
+    margin-bottom: 80px;
 }
 
 /* Cream background inside border - extends into border to fill transparent gap */
@@ -1581,8 +1586,8 @@ html.night .page-content td {
 /* Footer - Pixel Art Style */
 .site-footer {
     max-width: 964px;
-    margin: 40px auto;
-    padding: 30px 20px;
+    margin: 20px auto;
+    padding: 20px 20px;
     text-align: center;
     color: #5c4030;
     font-size: 14px;
@@ -2224,6 +2229,8 @@ html.night .note-scroll object {
     .category-page {
         border-width: 32px;
         border-image-width: 32px 48px 32px 48px;
+        margin-top: 5px;
+        margin-bottom: 50px;
     }
 
     .border-overlay {
@@ -2344,9 +2351,18 @@ html.night .pagination-info {
         flex-direction: column;
         align-items: center;
         padding: 0 10px;
-        margin-top: -30px;
+        margin-top: -40px;
         gap: 0;
         z-index: 10; /* Above header-container (z-index: 2) so hamburger is clickable */
+    }
+
+    /* Tighter container margins on mobile */
+    .posts-container,
+    .post-container,
+    .page-container,
+    .archive-container {
+        margin-top: 5px;
+        margin-bottom: 40px;
     }
 
     .nav-hamburger {
@@ -2358,8 +2374,8 @@ html.night .pagination-info {
         flex-direction: column;
         align-items: center;
         gap: 0;
-        width: 100%;
-        max-width: 280px;
+        width: 90%;
+        max-width: 320px;
         background: linear-gradient(
             180deg,
             rgba(212, 196, 168, 0.98) 0%,
@@ -2371,7 +2387,7 @@ html.night .pagination-info {
             inset 2px 2px 0 rgba(255, 255, 255, 0.3),
             inset -2px -2px 0 rgba(0, 0, 0, 0.1),
             0 4px 12px rgba(0, 0, 0, 0.3);
-        margin-top: 10px;
+        margin-top: 5px;
         overflow: hidden;
     }
 
@@ -2439,36 +2455,42 @@ html.night .pagination-info {
 
     /* Header adjustments */
     .site-header {
-        padding: 10px 10px 0;
+        padding: 5px 5px 0;
     }
 
     .header-image {
-        height: 150px;
+        height: 130px;
     }
 
     .site-title {
-        font-size: 22px;
-        left: 15px;
-        bottom: 15px;
+        font-size: 20px;
+        left: 12px;
+        bottom: 12px;
     }
 
-    /* Content containers - smaller borders */
+    /* Content containers - smaller borders, full width */
     .posts-container,
     .post-container,
     .page-container,
     .archive-container {
-        border-width: 24px;
-        border-image-width: 24px 36px 24px 36px;
-        padding: 15px;
+        border-width: 20px;
+        border-image-width: 20px 30px 20px 30px;
+        padding: 12px;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    .main-content {
+        padding: 0 5px;
     }
 
     .border-overlay {
-        top: -24px;
-        left: -24px;
-        right: -24px;
-        bottom: -24px;
-        border-width: 24px;
-        border-image-width: 24px 36px 24px 36px;
+        top: -20px;
+        left: -20px;
+        right: -20px;
+        bottom: -20px;
+        border-width: 20px;
+        border-image-width: 20px 30px 20px 30px;
     }
 
     /* Post content */
@@ -2829,4 +2851,371 @@ html.night .note-scroll:focus-visible {
     .pagination a {
         transition: none !important;
     }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FIXED UI BUTTONS - Back to Top & Easy Read Toggle
+   ═══════════════════════════════════════════════════════════════ */
+
+.fixed-btn {
+    position: fixed;
+    bottom: 20px;
+    z-index: 9000;
+    padding: 10px 16px;
+    font-family: "MedievalSharp", cursive;
+    font-size: 14px;
+    color: #4a3520;
+    background: linear-gradient(180deg, #f5e6c8 0%, #e0d0a8 100%);
+    border: 3px solid #8b6914;
+    border-radius: 4px;
+    box-shadow:
+        inset 2px 2px 0 rgba(255, 255, 255, 0.4),
+        inset -2px -2px 0 rgba(0, 0, 0, 0.1),
+        3px 3px 0 rgba(0, 0, 0, 0.3);
+    cursor: url("/fantasy/cursors/hand.png"), pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.3s ease;
+    image-rendering: pixelated;
+}
+
+.fixed-btn-right {
+    right: 20px;
+}
+
+.fixed-btn-left {
+    left: 20px;
+}
+
+.fixed-btn:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        inset 2px 2px 0 rgba(255, 255, 255, 0.5),
+        inset -2px -2px 0 rgba(0, 0, 0, 0.1),
+        4px 4px 0 rgba(0, 0, 0, 0.35);
+}
+
+.fixed-btn:active {
+    transform: translateY(1px);
+    box-shadow:
+        inset -2px -2px 0 rgba(255, 255, 255, 0.4),
+        inset 2px 2px 0 rgba(0, 0, 0, 0.1),
+        1px 1px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Night mode fixed buttons */
+html.night .fixed-btn {
+    background: linear-gradient(180deg, #3a4a5a 0%, #2a3a4a 100%);
+    border-color: #1a2a3a;
+    color: #c0d0e0;
+    box-shadow:
+        inset 2px 2px 0 rgba(255, 255, 255, 0.1),
+        inset -2px -2px 0 rgba(0, 0, 0, 0.2),
+        3px 3px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* Mobile - larger touch targets */
+@media (max-width: 768px) {
+    .fixed-btn {
+        bottom: 15px;
+        padding: 12px 18px;
+        font-size: 13px;
+    }
+
+    .fixed-btn-right {
+        right: 15px;
+    }
+
+    .fixed-btn-left {
+        left: 15px;
+    }
+}
+
+/* Small phones - stack vertically or smaller */
+@media (max-width: 420px) {
+    .fixed-btn {
+        bottom: 10px;
+        padding: 10px 14px;
+        font-size: 12px;
+    }
+
+    .fixed-btn-right {
+        right: 10px;
+    }
+
+    .fixed-btn-left {
+        left: 10px;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PAGINATION Z-INDEX FIX
+   Ensure pagination sits above overlapping note scrolls
+   ═══════════════════════════════════════════════════════════════ */
+
+.pagination {
+    position: relative;
+    z-index: 10;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   EASY READ MODE - Corporate Pixel Art
+   Same pixel aesthetic, just boring and professional
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Corporate color palette */
+html.easy-read {
+    --corp-bg: #e8eaed;
+    --corp-panel: #ffffff;
+    --corp-border: #9aa0a6;
+    --corp-text: #3c4043;
+    --corp-text-light: #5f6368;
+    --corp-accent: #1a73e8;
+    --corp-accent-hover: #1557b0;
+    --corp-header-bg: #f1f3f4;
+}
+
+/* Corporate background - override any theme */
+html.easy-read body,
+html.easy-read.theme-sci-fi body,
+html.easy-read.theme-cyberpunk body,
+html.easy-read.theme-cabin body,
+html.easy-read.theme-underwater body,
+html.easy-read.theme-western body,
+html.easy-read.theme-kaiju body {
+    background: url("/corporate/backgrounds/3.png") !important;
+    background-size: 75% !important;
+    background-repeat: repeat !important;
+}
+
+/* Easy-read mode - hide chaos overlays only, everything else styled in themes.css */
+html.easy-read .crt-overlay,
+html.easy-read .vortex-bg {
+    display: none !important;
+}
+
+/* Keep pixel fonts but use more subdued styling */
+html.easy-read body,
+html.easy-read .post-content,
+html.easy-read .page-content,
+html.easy-read .post-excerpt,
+html.easy-read article p {
+    color: var(--corp-text) !important;
+    text-shadow: none !important;
+}
+
+html.easy-read .post-title,
+html.easy-read .post-title a,
+html.easy-read .page-title {
+    color: var(--corp-text) !important;
+    text-shadow: none !important;
+}
+
+html.easy-read .site-title {
+    color: var(--corp-text) !important;
+    text-shadow: none !important;
+}
+
+/* Corporate links - professional blue */
+html.easy-read a {
+    color: var(--corp-accent) !important;
+}
+
+html.easy-read a:hover {
+    color: var(--corp-accent-hover) !important;
+}
+
+/* Note scrolls become corporate memos */
+html.easy-read .note-scroll {
+    filter: none !important;
+}
+
+html.easy-read .note-scroll::before {
+    background-image: url("/corporate/notes/top.webp") !important;
+}
+
+html.easy-read .note-scroll::after {
+    background-image: url("/corporate/notes/bottom.webp") !important;
+}
+
+html.easy-read .note-scroll .note-content {
+    background-image: url("/corporate/notes/middle.webp") !important;
+    color: var(--corp-text) !important;
+}
+
+html.easy-read .note-scroll.rolled-up {
+    background-image: url("/corporate/notes/closed.webp") !important;
+}
+
+html.easy-read .note-scroll .note-date {
+    color: var(--corp-text-light) !important;
+}
+
+/* Hide animations and visual chaos */
+html.easy-read .falling-sprite,
+html.easy-read .chaos-sprite,
+html.easy-read .floating-sprite,
+html.easy-read .floating-rune,
+html.easy-read .particle,
+html.easy-read .sparkle,
+html.easy-read .seasonal-particle,
+html.easy-read .rain-drop,
+html.easy-read .snow-flake,
+html.easy-read .ramona,
+html.easy-read .ramona-heart,
+html.easy-read .ramona-dirt {
+    display: none !important;
+}
+
+/* Headers - use corporate header for ALL categories, override any theme */
+html.easy-read .header-image,
+html.easy-read .header-image[style*="home.webp"],
+html.easy-read .header-image[style*="default.webp"],
+html.easy-read .header-image[style*="health.webp"],
+html.easy-read .header-image[style*="tech.webp"],
+html.easy-read .header-image[style*="gaming.webp"],
+html.easy-read .header-image[style*="cooking.webp"],
+html.easy-read .header-image[style*="reading.webp"],
+html.easy-read .header-image[style*="music.webp"],
+html.easy-read .header-image[style*="writing.webp"],
+html.easy-read .header-image[style*="crafting.webp"],
+html.easy-read .header-image[style*="pets.webp"],
+html.easy-read .header-image[style*="travel.webp"],
+html.easy-read .header-image[style*="tabletop.webp"],
+html.easy-read .header-image[style*="garden.webp"],
+html.easy-read .header-image[style*="adhd.webp"],
+html.easy-read .header-image[style*="clown.webp"] {
+    background-image: url("/corporate/headers/default.png") !important;
+}
+
+html.easy-read .header-frame {
+    background-image: url("/corporate/headers/ornate frame.webp") !important;
+}
+
+/* Navigation - corporate pixel signs */
+html.easy-read .nav-sign,
+html.easy-read .nav-hamburger {
+    background-image: url("/corporate/menu/sign.webp") !important;
+}
+
+html.easy-read .nav-sign span {
+    color: var(--corp-text) !important;
+    text-shadow: none !important;
+}
+
+html.easy-read .nav-sign.active span {
+    color: var(--corp-accent) !important;
+    text-shadow: none !important;
+}
+
+/* Post tags - corporate badges */
+html.easy-read .post-tag,
+html.easy-read .archive-tag {
+    background: var(--corp-header-bg) !important;
+    border: 2px solid var(--corp-border) !important;
+    color: var(--corp-text) !important;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Pagination - corporate style */
+html.easy-read .pagination {
+    background: var(--corp-header-bg) !important;
+    border: 2px solid var(--corp-border) !important;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.15) !important;
+}
+
+html.easy-read .pagination a {
+    background: var(--corp-panel) !important;
+    border: 2px solid var(--corp-border) !important;
+    color: var(--corp-text) !important;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1) !important;
+}
+
+html.easy-read .pagination-info {
+    color: var(--corp-text-light) !important;
+}
+
+/* Footer - corporate gray */
+html.easy-read .site-footer {
+    background: var(--corp-header-bg) !important;
+    color: var(--corp-text-light) !important;
+    border-top: 2px solid var(--corp-border) !important;
+}
+
+/* HIDE Sierra dropdown panel completely in easy read */
+html.easy-read .sierra-panel,
+html.easy-read .sierra-trigger {
+    display: none !important;
+}
+
+/* Fixed buttons - corporate pixel style */
+html.easy-read .fixed-btn {
+    background: var(--corp-panel) !important;
+    border: 2px solid var(--corp-border) !important;
+    color: var(--corp-text) !important;
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2) !important;
+    border-radius: 0 !important;
+}
+
+html.easy-read .fixed-btn:hover {
+    background: var(--corp-header-bg) !important;
+}
+
+/* Category sprites - make grayscale corporate icons */
+html.easy-read .post-sprite {
+    filter: grayscale(100%) !important;
+    opacity: 0.5 !important;
+}
+
+/* Cursors - keep pixel but corporate */
+html.easy-read * {
+    cursor: auto !important;
+}
+
+html.easy-read a,
+html.easy-read button,
+html.easy-read [role="button"],
+html.easy-read .fixed-btn {
+    cursor: pointer !important;
+}
+
+/* Kill all animations - very professional */
+html.easy-read *,
+html.easy-read *::before,
+html.easy-read *::after {
+    animation: none !important;
+    transition: none !important;
+}
+
+/* Archive page adjustments */
+html.easy-read .archive-title,
+html.easy-read .year-header {
+    color: var(--corp-text) !important;
+    border-color: var(--corp-border) !important;
+}
+
+html.easy-read .archive-entry {
+    border-color: var(--corp-border) !important;
+}
+
+html.easy-read .archive-entry:hover {
+    background: var(--corp-header-bg) !important;
+}
+
+html.easy-read .archive-date {
+    color: var(--corp-text-light) !important;
+}
+
+/* Post content in easy read */
+html.easy-read .post-meta {
+    color: var(--corp-text-light) !important;
+}
+
+html.easy-read .post-link {
+    background: var(--corp-accent) !important;
+    border: 2px solid #1557b0 !important;
+    color: white !important;
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2) !important;
+}
+
+html.easy-read .post-link:hover {
+    background: var(--corp-accent-hover) !important;
 }

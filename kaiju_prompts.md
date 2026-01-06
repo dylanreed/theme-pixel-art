@@ -64,7 +64,7 @@ kawaii pet shop for baby kaiju, tiny Godzilla in terrarium, baby Mothra in cocoo
 
 ### Health (Monster Hospital)
 ```
-kawaii kaiju hospital, bandaged cute monster in bed, tiny doctor with stethoscope, get well soon balloons, "MONSTER GENERAL" sign, healing from battle, pixel art, 16-bit style, detailed pixels, caring medical scene, --ar 3:1 --s 250 --v 7
+kawaii kaiju hospital, bandaged cute monster in bed, tiny doctor with stethoscope, get well soon balloons, healing from battle, pixel art, 16-bit style, detailed pixels, caring medical scene, --ar 3:1 --s 250 --v 7
 ```
 
 ### Travel (Monster Island Ferry)
