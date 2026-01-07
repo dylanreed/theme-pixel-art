@@ -2,15 +2,73 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>//localhost:1313/archive/</loc>
+    <loc>//localhost:1313/post/2024-07-01-music-discovery/</loc>
+    <lastmod>2024-07-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>//localhost:1313/categories/</loc>
+    <lastmod>2024-07-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>//localhost:1313/</loc>
+    <lastmod>2024-07-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/categories/music/</loc>
+    <lastmod>2024-07-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/post/</loc>
+    <lastmod>2024-07-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/post/2024-06-20-another-note/</loc>
+    <lastmod>2024-06-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/categories/reading/</loc>
+    <lastmod>2024-06-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/post/2024-06-15-quick-note/</loc>
+    <lastmod>2024-06-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/categories/tech/</loc>
+    <lastmod>2024-06-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/post/2024-06-01-cat-nap/</loc>
+    <lastmod>2024-06-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/categories/pets/</loc>
+    <lastmod>2024-06-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/categories/health/</loc>
+    <lastmod>2024-05-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/post/2024-05-12-hiking-adventure/</loc>
+    <lastmod>2024-05-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/categories/crafting/</loc>
+    <lastmod>2024-04-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/post/2024-04-05-garden-progress/</loc>
+    <lastmod>2024-04-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/post/2024-03-10-sunset-views/</loc>
+    <lastmod>2024-03-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/categories/travel/</loc>
+    <lastmod>2024-03-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/post/2024-02-20-coffee-time/</loc>
+    <lastmod>2024-02-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/categories/cooking/</loc>
+    <lastmod>2024-02-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/post/2024-01-15-beach-day/</loc>
+    <lastmod>2024-01-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/archive/</loc>
   </url><url>
     <loc>//localhost:1313/jokes/</loc>
   </url><url>
     <loc>//localhost:1313/page/</loc>
+  </url><url>
+    <loc>//localhost:1313/photos/</loc>
   </url><url>
     <loc>//localhost:1313/photos/</loc>
   </url><url>

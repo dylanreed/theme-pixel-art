@@ -6,14 +6,21 @@
     <description>Recent content in Travel on dylan&#39;s blog</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 27 Dec 2025 10:07:00 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 10 Mar 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="//localhost:1313/categories/travel/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Adventures Beyond the Map&#39;s Edge</title>
-      <link>//localhost:1313/post/travel/</link>
-      <pubDate>Sat, 27 Dec 2025 10:07:00 -0700</pubDate>
-      <guid>//localhost:1313/post/travel/</guid>
-      <description>&lt;p&gt;The adventurer&amp;rsquo;s motto: if it&amp;rsquo;s not on the map, that&amp;rsquo;s where the interesting things are.&lt;/p&gt;</description>
+      <title>Sunset Views</title>
+      <link>//localhost:1313/post/2024-03-10-sunset-views/</link>
+      <pubDate>Sun, 10 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/post/2024-03-10-sunset-views/</guid>
+      <description>&lt;p&gt;Caught this incredible sunset from the rooftop.&lt;/p&gt;&#xA;&lt;img src=&#34;https://dylan.blog/uploads/2024/d3b03b1b69.jpg&#34; alt=&#34;Sunset&#34;&gt;&#xA;&lt;p&gt;Nature really knows how to put on a show.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Beach Day</title>
+      <link>//localhost:1313/post/2024-01-15-beach-day/</link>
+      <pubDate>Mon, 15 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/post/2024-01-15-beach-day/</guid>
+      <description>&lt;p&gt;What a gorgeous day at the beach! The water was crystal clear.&lt;/p&gt;&#xA;&lt;img src=&#34;https://dylan.blog/uploads/2024/49bba7d95e.jpg&#34; alt=&#34;Beach photo&#34;&gt;&#xA;&lt;p&gt;Definitely coming back here soon.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

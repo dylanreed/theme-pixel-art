@@ -1,4 +1,5 @@
 {{ define "main" }}
+<div class="page-container">
 <style>
 /* ABOUTME: Retro TV styles using pixel-art frame overlay */
 /* ABOUTME: Video plays behind the TV frame image with clickable button areas */
@@ -47,7 +48,6 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('/frames/tv/video-frame.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -56,27 +56,14 @@
 }
 
 /* Clickable button areas positioned over the frame's buttons */
-/* Frame is 1088x960, 3 buttons at bottom */
-.tv-buttons {
-    position: absolute;
-    bottom: 6%;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 1.5%;
-    z-index: 20;
-}
-
 .tv-btn {
-    width: 11%;
-    height: 9%;
+    position: absolute;
     background: transparent;
     border: none;
     cursor: pointer;
     opacity: 0;
     transition: opacity 0.2s;
-    min-width: 45px;
-    min-height: 35px;
+    z-index: 20;
 }
 
 .tv-btn:hover {
@@ -87,6 +74,160 @@
 .tv-btn:active {
     opacity: 0.5;
     background: rgba(200, 230, 150, 0.5);
+}
+
+/* Fantasy theme screen (default) */
+html.theme-fantasy .tv-screen,
+html:not([class*="theme-"]) .tv-screen {
+    top: 17%;
+    left: 10.5%;
+    width: 79.5%;
+    height: 53.5%;
+}
+
+/* Fantasy theme buttons (default) */
+html.theme-fantasy #playBtn,
+html:not([class*="theme-"]) #playBtn {
+    left: 34%;
+    bottom: 15.5%;
+    width: 50px;
+    height: 39px;
+}
+
+html.theme-fantasy #pauseBtn,
+html:not([class*="theme-"]) #pauseBtn {
+    left: 45.5%;
+    bottom: 15.5%;
+    width: 50px;
+    height: 39px;
+}
+
+html.theme-fantasy #randomBtn,
+html:not([class*="theme-"]) #randomBtn {
+    left: 56.5%;
+    bottom: 15.5%;
+    width: 50px;
+    height: 39px;
+}
+
+/* Cyberpunk theme screen */
+html.theme-cyberpunk .tv-screen {
+    top: 15.5%;
+    left: 10.5%;
+    width: 77.5%;
+    height: 53.5%;
+}
+
+/* Cyberpunk theme buttons */
+html.theme-cyberpunk #playBtn {
+    left: 33%;
+    bottom: 16%;
+    width: 50px;
+    height: 39px;
+}
+
+html.theme-cyberpunk #pauseBtn {
+    left: 44.5%;
+    bottom: 16%;
+    width: 50px;
+    height: 39px;
+}
+
+html.theme-cyberpunk #randomBtn {
+    left: 56.5%;
+    bottom: 16%;
+    width: 50px;
+    height: 39px;
+}
+
+/* Cabin theme screen */
+html.theme-cabin .tv-screen {
+    top: 16.5%;
+    left: 11%;
+    width: 77%;
+    height: 53%;
+}
+
+/* Cabin theme buttons */
+html.theme-cabin #playBtn {
+    left: 33.5%;
+    bottom: 15.5%;
+    width: 50px;
+    height: 39px;
+}
+
+html.theme-cabin #pauseBtn {
+    left: 45%;
+    bottom: 15.5%;
+    width: 50px;
+    height: 39px;
+}
+
+html.theme-cabin #randomBtn {
+    left: 56%;
+    bottom: 15.5%;
+    width: 50px;
+    height: 39px;
+}
+
+/* Sci-fi theme screen */
+html.theme-sci-fi .tv-screen {
+    top: 15.5%;
+    left: 11%;
+    width: 78%;
+    height: 54%;
+}
+
+/* Sci-fi theme buttons */
+html.theme-sci-fi #playBtn {
+    left: 34%;
+    bottom: 16%;
+    width: 51px;
+    height: 39px;
+}
+
+html.theme-sci-fi #pauseBtn {
+    left: 45.5%;
+    bottom: 16%;
+    width: 50px;
+    height: 39px;
+}
+
+html.theme-sci-fi #randomBtn {
+    left: 57%;
+    bottom: 16%;
+    width: 50px;
+    height: 39px;
+}
+
+/* Underwater theme screen */
+html.theme-underwater .tv-screen {
+    top: 16%;
+    left: 11.5%;
+    width: 77%;
+    height: 53%;
+}
+
+/* Underwater theme buttons */
+html.theme-underwater #playBtn {
+    left: 33%;
+    bottom: 16.5%;
+    width: 50px;
+    height: 39px;
+}
+
+html.theme-underwater #pauseBtn {
+    left: 45%;
+    bottom: 16.5%;
+    width: 50px;
+    height: 39px;
+}
+
+html.theme-underwater #randomBtn {
+    left: 56.5%;
+    bottom: 16.5%;
+    width: 50px;
+    height: 39px;
 }
 
 .joke-info {
@@ -152,11 +293,9 @@
             <div class="tv-frame-overlay"></div>
 
             <!-- Invisible clickable buttons over the frame's 3 buttons -->
-            <div class="tv-buttons">
-                <button class="tv-btn" id="playBtn" title="Play"></button>
-                <button class="tv-btn" id="pauseBtn" title="Pause"></button>
-                <button class="tv-btn" id="randomBtn" title="Random"></button>
-            </div>
+            <button class="tv-btn" id="playBtn" title="Play"></button>
+            <button class="tv-btn" id="pauseBtn" title="Pause"></button>
+            <button class="tv-btn" id="randomBtn" title="Random"></button>
         </div>
     </div>
 
@@ -169,16 +308,21 @@
 
 <script>
 (function() {
-    const jokes = [
-        {{ range $index, $joke := .Site.Data.jokes.jokes }}
-        {{ if $index }},{{ end }}
-        {
-            id: {{ $joke.id | jsonify }},
-            title: {{ $joke.title | jsonify }},
-            video_url: {{ $joke.video_url | jsonify }}
-        }
-        {{ end }}
-    ];
+    // Set TV frame based on current theme
+    const themeFrames = {
+        'fantasy': '/frames/tv/fantasy.png',
+        'sci-fi': '/frames/tv/sci-fi.png',
+        'cyberpunk': '/frames/tv/cyberpunk.png',
+        'cabin': '/frames/tv/cabin.png',
+        'underwater': '/frames/tv/underwater.png'
+    };
+    const currentTheme = localStorage.getItem('themeStyle') || 'fantasy';
+    const frameUrl = themeFrames[currentTheme] || themeFrames['fantasy'];
+    document.querySelector('.tv-frame-overlay').style.backgroundImage = 'url("' + frameUrl + '")';
+
+    {{- $today := now.Format "2006-01-02" -}}
+    {{- $publishedJokes := where .Site.Data.jokes.jokes "date" "le" $today -}}
+    const jokes = {{ $publishedJokes | jsonify | safeJS }};
 
     // Fallback test video if no jokes loaded
     const TEST_VIDEO = 'https://res.cloudinary.com/dbz84hlvk/video/upload/v1752542888/joke-a-tron/What_Do_You_Call.mp4';
@@ -261,4 +405,5 @@
     loadJoke(0);
 })();
 </script>
+</div>
 {{ end }}

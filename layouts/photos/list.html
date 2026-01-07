@@ -15,7 +15,8 @@
                 {{ if not (in $seen $src) }}
                     {{ $seen = $seen | append $src }}
                     <a href="{{ $permalink }}" class="photo-item">
-                        <img src="{{ $src }}" alt="Photo from blog post" loading="lazy">
+                        <img class="pixelated" src="https://micro.blog/photos/31x/{{ $src }}" alt="">
+                        <img class="clear" src="{{ $src }}" alt="Photo from blog post" loading="lazy">
                     </a>
                 {{ end }}
             {{ end }}

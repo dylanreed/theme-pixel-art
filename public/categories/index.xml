@@ -6,6 +6,63 @@
     <description>Recent content in Categories on dylan&#39;s blog</description>
     <generator>Hugo</generator>
     <language>en</language>
+    <lastBuildDate>Mon, 01 Jul 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="//localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Music</title>
+      <link>//localhost:1313/categories/music/</link>
+      <pubDate>Mon, 01 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/categories/music/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Reading</title>
+      <link>//localhost:1313/categories/reading/</link>
+      <pubDate>Thu, 20 Jun 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/categories/reading/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Tech</title>
+      <link>//localhost:1313/categories/tech/</link>
+      <pubDate>Sat, 15 Jun 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/categories/tech/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Pets</title>
+      <link>//localhost:1313/categories/pets/</link>
+      <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/categories/pets/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Health</title>
+      <link>//localhost:1313/categories/health/</link>
+      <pubDate>Sun, 12 May 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/categories/health/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Crafting</title>
+      <link>//localhost:1313/categories/crafting/</link>
+      <pubDate>Fri, 05 Apr 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/categories/crafting/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Travel</title>
+      <link>//localhost:1313/categories/travel/</link>
+      <pubDate>Sun, 10 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/categories/travel/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Cooking</title>
+      <link>//localhost:1313/categories/cooking/</link>
+      <pubDate>Tue, 20 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/categories/cooking/</guid>
+      <description></description>
+    </item>
   </channel>
 </rss>

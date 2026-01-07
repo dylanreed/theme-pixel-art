@@ -84,12 +84,70 @@
     if (theme === 'night' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         document.documentElement.classList.add('night');
     }
+    
+    var themeStyle = localStorage.getItem('themeStyle') || 'fantasy';
+    if (themeStyle !== 'fantasy') {
+        document.documentElement.classList.add('theme-' + themeStyle);
+    }
 })();
 </script>
 
 
 <link rel="preload" href="/background/3.webp" as="image" type="image/webp">
 <link rel="preload" href="/background/3_night.webp" as="image" type="image/webp">
+
+
+<script>
+(function() {
+    var currentTheme = localStorage.getItem('themeStyle') || 'fantasy';
+
+    
+    function getThemeAssets(theme) {
+        var base = '/' + theme;
+        return [
+            base + '/tiles/day_tiles.webp',
+            base + '/tiles/tiles_night.webp',
+            base + '/dropdown/drop_down_menu.webp',
+            base + '/notes/top.webp',
+            base + '/notes/middle.webp',
+            base + '/notes/bottom.webp',
+            base + '/notes/closed.webp',
+            base + '/menu/sign.webp',
+            base + '/sprites/cat/sheets/walk_east.png',
+            base + '/sprites/cat/sheets/walk_west.png',
+            base + '/sprites/cat/sheets/idle_south.png'
+        ];
+    }
+
+    
+    var assets = getThemeAssets(currentTheme);
+    assets.forEach(function(src) {
+        var img = new Image();
+        img.src = src;
+    });
+
+    
+    window.preloadTheme = function(theme) {
+        return new Promise(function(resolve) {
+            var themeAssets = getThemeAssets(theme);
+            var loaded = 0;
+            var total = themeAssets.length;
+
+            themeAssets.forEach(function(src) {
+                var img = new Image();
+                img.onload = img.onerror = function() {
+                    loaded++;
+                    if (loaded >= total) resolve();
+                };
+                img.src = src;
+            });
+
+            
+            setTimeout(resolve, 3000);
+        });
+    };
+})();
+</script>
 
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -141,26 +199,26 @@
             <div class="sierra-title"><span>Controls</span></div>
             <div class="sierra-buttons">
                 <button class="sierra-btn" data-action="theme" data-tooltip="Day/Night">
-                    <img class="btn-icon day-icon" src="/sprites/drop_down_icons/day.png" alt="Switch to day mode">
-                    <img class="btn-icon night-icon" src="/sprites/drop_down_icons/night.png" alt="Switch to night mode" style="display:none">
+                    <img class="btn-icon day-icon" src="/sprites/drop_down_icons/day.webp" alt="Switch to day mode">
+                    <img class="btn-icon night-icon" src="/sprites/drop_down_icons/night.webp" alt="Switch to night mode" style="display:none">
                 </button>
                 <button class="sierra-btn" data-action="weather" data-tooltip="Weather">
-                    <img class="btn-icon weather-icon" src="/sprites/drop_down_icons/sun.png" alt="Cycle weather effects">
+                    <img class="btn-icon weather-icon" src="/sprites/drop_down_icons/sun.webp" alt="Cycle weather effects">
                 </button>
                 <button class="sierra-btn" data-action="rainbow" data-tooltip="Rainbow">
-                    <img class="btn-icon" src="/sprites/drop_down_icons/rainbow.png" alt="Toggle rainbow mode">
+                    <img class="btn-icon" src="/sprites/drop_down_icons/rainbow.webp" alt="Toggle rainbow mode">
                 </button>
                 <button class="sierra-btn" data-action="achievements" data-tooltip="Achievements">
-                    <img class="btn-icon" src="/sprites/drop_down_icons/trophey.png" alt="View achievements panel">
+                    <img class="btn-icon" src="/sprites/drop_down_icons/trophey.webp" alt="View achievements panel">
                 </button>
                 <button class="sierra-btn" data-action="mode" data-tooltip="Theme: Fantasy">
-                    <img class="btn-icon mode-icon" src="/modes/fantasy.png" alt="Cycle visual theme">
+                    <img class="btn-icon mode-icon" src="/modes/fantasy.webp" alt="Cycle visual theme">
                 </button>
                 <button class="sierra-btn" data-action="chaos" data-tooltip="Chaos">
-                    <img class="btn-icon" src="/sprites/drop_down_icons/swirl.png" alt="Toggle chaos mode">
+                    <img class="btn-icon" src="/sprites/drop_down_icons/swirl.webp" alt="Toggle chaos mode">
                 </button>
                 <button class="sierra-btn" data-action="help" data-tooltip="Help">
-                    <img class="btn-icon" src="/sprites/drop_down_icons/help.png" alt="Show help information">
+                    <img class="btn-icon" src="/sprites/drop_down_icons/help.webp" alt="Show help information">
                 </button>
             </div>
         </div>
@@ -187,9 +245,9 @@
             
             let currentWeather = null;
             const weatherIcons = {
-                sun: '/sprites/drop_down_icons/sun.png',
-                rain: '/sprites/drop_down_icons/rain.png',
-                snow: '/sprites/drop_down_icons/snow.png'
+                sun: '/sprites/drop_down_icons/sun.webp',
+                rain: '/sprites/drop_down_icons/rain.webp',
+                snow: '/sprites/drop_down_icons/snow.webp'
             };
 
             
@@ -202,11 +260,11 @@
                 'underwater': 'Underwater'
             };
             const themeIcons = {
-                'fantasy': '/modes/fantasy.png',
-                'sci-fi': '/modes/sci-fi.png',
-                'cyberpunk': '/modes/cyberpunk.png',
-                'cabin': '/modes/cabin.png',
-                'underwater': '/modes/underwater.png'
+                'fantasy': '/modes/fantasy.webp',
+                'sci-fi': '/modes/sci-fi.webp',
+                'cyberpunk': '/modes/cyberpunk.webp',
+                'cabin': '/modes/cabin.webp',
+                'underwater': '/modes/underwater.webp'
             };
             let currentThemeIndex = 0;
 
@@ -243,7 +301,7 @@
                         icon.src = themeIcons[theme];
                         
                         icon.onerror = function() {
-                            this.src = '/modes/fantasy.png';
+                            this.src = '/modes/fantasy.webp';
                             this.onerror = null;
                         };
                     }
@@ -306,9 +364,19 @@
 
                         
                         currentThemeIndex = (currentThemeIndex + 1) % themes.length;
-                        applyThemeStyle(themes[currentThemeIndex]);
+                        var newTheme = themes[currentThemeIndex];
+                        applyThemeStyle(newTheme);
+
                         
-                        location.reload();
+                        if (window.preloadTheme) {
+                            btn.style.opacity = '0.5';
+                            btn.style.pointerEvents = 'none';
+                            window.preloadTheme(newTheme).then(function() {
+                                location.reload();
+                            });
+                        } else {
+                            location.reload();
+                        }
                         break;
 
                     case 'achievements':
@@ -481,6 +549,11 @@
             <span>Photos</span>
         </a>
         
+        
+        <a href="/jokes/" class="nav-sign">
+            <span>Jokes</span>
+        </a>
+        
     </div>
 </nav>
 <script>
@@ -544,7 +617,7 @@
 
 
 
-<div class="post-sprite theme-sprite-6x3" data-category="pets">
+<div class="post-sprite theme-sprite-6x3" data-category="pets" data-sprite="pets">
     <img src="/fantasy/sprites/category/pets.png" alt="Animated sprite for pets category">
 </div>
 
@@ -558,7 +631,7 @@
 
     
     <section class="archive-year">
-        <h2 class="year-header">2025</h2>
+        <h2 class="year-header">2024</h2>
         <ul class="archive-list">
             
             <li class="archive-entry category-pets">
@@ -580,14 +653,14 @@
 
 
 
-<div class="archive-sprite theme-sprite-6x3" data-category="pets">
+<div class="archive-sprite theme-sprite-6x3" data-category="pets" data-sprite="pets">
     <img src="/fantasy/sprites/category/pets.png" alt="Animated sprite for pets category">
 </div>
 
 
-                <span class="archive-date">Dec 27</span>
-                <a href="//localhost:1313/post/pets/" class="archive-title">
-                    Tales from the Cat&#39;s Perspective
+                <span class="archive-date">Jun 01</span>
+                <a href="//localhost:1313/post/2024-06-01-cat-nap/" class="archive-title">
+                    Cat Nap
                 </a>
             </li>
             
@@ -598,10 +671,24 @@
 
     </main><footer class="site-footer">
     <p>
-        dylan&#39;s blog &copy; 2025 &middot; Powered by chaos goblin
+        dylan&#39;s blog &copy; 2026 &middot; Powered by chaos goblin
         energy
     </p>
 </footer>
+
+<script>
+    
+    (function() {
+        const theme = localStorage.getItem('themeStyle') || 'fantasy';
+        document.querySelectorAll('.theme-sprite-6x3[data-sprite]').forEach(container => {
+            const sprite = container.dataset.sprite;
+            const img = container.querySelector('img');
+            if (img && sprite) {
+                img.src = `/${theme}/sprites/category/${sprite}.png`;
+            }
+        });
+    })();
+</script>
 
 <script>
     (function () {
@@ -620,10 +707,18 @@
         const usesSpriteSheets = true;
 
         
+        const themeSheetConfigs = {
+            'fantasy': { walk: 8, run: 8, idle: 8 },
+            'cabin': { walk: 8, run: 8, idle: 8 },
+            'sci-fi': { walk: 6, run: 6, idle: 8 },
+            'cyberpunk': { walk: 6, run: 6, idle: 8 },
+            'underwater': { walk: 6, run: 8, idle: 8 }
+        };
+        const themeFrames = themeSheetConfigs[currentTheme] || themeSheetConfigs['fantasy'];
         const sheetConfig = {
-            walk: { frames: 8, duration: 600 },
-            run: { frames: 8, duration: 400 },
-            idle: { frames: 8, duration: 800 }
+            walk: { frames: themeFrames.walk, duration: 600 },
+            run: { frames: themeFrames.run, duration: 400 },
+            idle: { frames: themeFrames.idle, duration: 800 }
         };
         const frameWidth = 140;
 
@@ -953,14 +1048,79 @@
     })();
 </script>
 
+    <button id="back-to-top" class="fixed-btn fixed-btn-right" aria-label="Back to top" style="display: none;">
+        ↑ TOP
+    </button>
+    <button id="easy-read-toggle" class="fixed-btn fixed-btn-left" aria-label="Toggle easy read mode">
+        <span class="easy-label">👁 EASY</span>
+        <span class="fancy-label" style="display: none;">✨ FANCY</span>
+    </button>
+
+    <script>
+        
+        (function() {
+            const btn = document.getElementById('back-to-top');
+            if (!btn) return;
+
+            
+            function checkScroll() {
+                if (window.scrollY > 300) {
+                    btn.style.display = 'block';
+                } else {
+                    btn.style.display = 'none';
+                }
+            }
+
+            window.addEventListener('scroll', checkScroll, { passive: true });
+            checkScroll();
+
+            
+            btn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        })();
+
+        
+        (function() {
+            const btn = document.getElementById('easy-read-toggle');
+            if (!btn) return;
+
+            const easyLabel = btn.querySelector('.easy-label');
+            const fancyLabel = btn.querySelector('.fancy-label');
+
+            
+            const isEasyRead = localStorage.getItem('easyReadMode') === 'true';
+            if (isEasyRead) {
+                document.documentElement.classList.add('easy-read');
+                easyLabel.style.display = 'none';
+                fancyLabel.style.display = 'inline';
+            }
+
+            btn.addEventListener('click', () => {
+                const willBeEasy = !document.documentElement.classList.contains('easy-read');
+                document.documentElement.classList.toggle('easy-read', willBeEasy);
+                localStorage.setItem('easyReadMode', willBeEasy);
+
+                if (willBeEasy) {
+                    easyLabel.style.display = 'none';
+                    fancyLabel.style.display = 'inline';
+                } else {
+                    easyLabel.style.display = 'inline';
+                    fancyLabel.style.display = 'none';
+                }
+            });
+        })();
+    </script>
+
+    
 
     
 
 
     
-    <script src="/js/chaos.js?v=1767053838"></script>
-    <script src="/js/achievements.js?v=1767053838"></script>
-    <script src="/js/scroll-tiles.js?v=1767053838"></script>
-    <script src="/js/scroll-rollup.js?v=1767053838"></script>
+    <script src="/js/chaos.js?v=1767743675"></script>
+    <script src="/js/achievements.js?v=1767743675"></script>
+    <script src="/js/scroll-tiles.js?v=1767743675"></script>
+    <script src="/js/scroll-rollup.js?v=1767743675"></script>
 </body>
 </html>

@@ -594,6 +594,7 @@
     </script>
 
     <main id="main-content" class="main-content">
+<div class="page-container">
 <style>
  
  
@@ -642,7 +643,6 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('/frames/tv/video-frame.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -651,27 +651,14 @@
 }
 
  
- 
-.tv-buttons {
-    position: absolute;
-    bottom: 6%;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 1.5%;
-    z-index: 20;
-}
-
 .tv-btn {
-    width: 11%;
-    height: 9%;
+    position: absolute;
     background: transparent;
     border: none;
     cursor: pointer;
     opacity: 0;
     transition: opacity 0.2s;
-    min-width: 45px;
-    min-height: 35px;
+    z-index: 20;
 }
 
 .tv-btn:hover {
@@ -682,6 +669,160 @@
 .tv-btn:active {
     opacity: 0.5;
     background: rgba(200, 230, 150, 0.5);
+}
+
+ 
+html.theme-fantasy .tv-screen,
+html:not([class*="theme-"]) .tv-screen {
+    top: 17%;
+    left: 10.5%;
+    width: 79.5%;
+    height: 53.5%;
+}
+
+ 
+html.theme-fantasy #playBtn,
+html:not([class*="theme-"]) #playBtn {
+    left: 34%;
+    bottom: 15.5%;
+    width: 50px;
+    height: 39px;
+}
+
+html.theme-fantasy #pauseBtn,
+html:not([class*="theme-"]) #pauseBtn {
+    left: 45.5%;
+    bottom: 15.5%;
+    width: 50px;
+    height: 39px;
+}
+
+html.theme-fantasy #randomBtn,
+html:not([class*="theme-"]) #randomBtn {
+    left: 56.5%;
+    bottom: 15.5%;
+    width: 50px;
+    height: 39px;
+}
+
+ 
+html.theme-cyberpunk .tv-screen {
+    top: 15.5%;
+    left: 10.5%;
+    width: 77.5%;
+    height: 53.5%;
+}
+
+ 
+html.theme-cyberpunk #playBtn {
+    left: 33%;
+    bottom: 16%;
+    width: 50px;
+    height: 39px;
+}
+
+html.theme-cyberpunk #pauseBtn {
+    left: 44.5%;
+    bottom: 16%;
+    width: 50px;
+    height: 39px;
+}
+
+html.theme-cyberpunk #randomBtn {
+    left: 56.5%;
+    bottom: 16%;
+    width: 50px;
+    height: 39px;
+}
+
+ 
+html.theme-cabin .tv-screen {
+    top: 16.5%;
+    left: 11%;
+    width: 77%;
+    height: 53%;
+}
+
+ 
+html.theme-cabin #playBtn {
+    left: 33.5%;
+    bottom: 15.5%;
+    width: 50px;
+    height: 39px;
+}
+
+html.theme-cabin #pauseBtn {
+    left: 45%;
+    bottom: 15.5%;
+    width: 50px;
+    height: 39px;
+}
+
+html.theme-cabin #randomBtn {
+    left: 56%;
+    bottom: 15.5%;
+    width: 50px;
+    height: 39px;
+}
+
+ 
+html.theme-sci-fi .tv-screen {
+    top: 15.5%;
+    left: 11%;
+    width: 78%;
+    height: 54%;
+}
+
+ 
+html.theme-sci-fi #playBtn {
+    left: 34%;
+    bottom: 16%;
+    width: 51px;
+    height: 39px;
+}
+
+html.theme-sci-fi #pauseBtn {
+    left: 45.5%;
+    bottom: 16%;
+    width: 50px;
+    height: 39px;
+}
+
+html.theme-sci-fi #randomBtn {
+    left: 57%;
+    bottom: 16%;
+    width: 50px;
+    height: 39px;
+}
+
+ 
+html.theme-underwater .tv-screen {
+    top: 16%;
+    left: 11.5%;
+    width: 77%;
+    height: 53%;
+}
+
+ 
+html.theme-underwater #playBtn {
+    left: 33%;
+    bottom: 16.5%;
+    width: 50px;
+    height: 39px;
+}
+
+html.theme-underwater #pauseBtn {
+    left: 45%;
+    bottom: 16.5%;
+    width: 50px;
+    height: 39px;
+}
+
+html.theme-underwater #randomBtn {
+    left: 56.5%;
+    bottom: 16.5%;
+    width: 50px;
+    height: 39px;
 }
 
 .joke-info {
@@ -747,11 +888,9 @@
             <div class="tv-frame-overlay"></div>
 
             
-            <div class="tv-buttons">
-                <button class="tv-btn" id="playBtn" title="Play"></button>
-                <button class="tv-btn" id="pauseBtn" title="Pause"></button>
-                <button class="tv-btn" id="randomBtn" title="Random"></button>
-            </div>
+            <button class="tv-btn" id="playBtn" title="Play"></button>
+            <button class="tv-btn" id="pauseBtn" title="Pause"></button>
+            <button class="tv-btn" id="randomBtn" title="Random"></button>
         </div>
     </div>
 
@@ -764,44 +903,17 @@
 
 <script>
 (function() {
-    const jokes = [
-        
-        
-        {
-            id: "\"VID_what_do_you_call_0000\"",
-            title: "\"What Do You Call\"",
-            video_url: "\"https://res.cloudinary.com/dbz84hlvk/video/upload/v1752542888/joke-a-tron/What_Do_You_Call.mp4\""
-        }
-        
-        ,
-        {
-            id: "\"VID_what_does_my_finger_0001\"",
-            title: "\"What Does My Finger\"",
-            video_url: "\"https://res.cloudinary.com/dbz84hlvk/video/upload/v1752542890/joke-a-tron/What_Does_My_Finger.mp4\""
-        }
-        
-        ,
-        {
-            id: "\"VID_what_do_you_get_0002\"",
-            title: "\"What Do You Get\"",
-            video_url: "\"https://res.cloudinary.com/dbz84hlvk/video/upload/v1752542891/joke-a-tron/What_Do_You_Get.mp4\""
-        }
-        
-        ,
-        {
-            id: "\"VID_what_did_the_ruler_0003\"",
-            title: "\"What Did The Ruler\"",
-            video_url: "\"https://res.cloudinary.com/dbz84hlvk/video/upload/v1752542892/joke-a-tron/What_Did_The_Ruler.mp4\""
-        }
-        
-        ,
-        {
-            id: "\"VID_what_was_bob_the_0004\"",
-            title: "\"What Was Bob The\"",
-            video_url: "\"https://res.cloudinary.com/dbz84hlvk/video/upload/v1752542894/joke-a-tron/What_Was_Bob_The.mp4\""
-        }
-        
-    ];
+    
+    const themeFrames = {
+        'fantasy': '/frames/tv/fantasy.png',
+        'sci-fi': '/frames/tv/sci-fi.png',
+        'cyberpunk': '/frames/tv/cyberpunk.png',
+        'cabin': '/frames/tv/cabin.png',
+        'underwater': '/frames/tv/underwater.png'
+    };
+    const currentTheme = localStorage.getItem('themeStyle') || 'fantasy';
+    const frameUrl = themeFrames[currentTheme] || themeFrames['fantasy'];
+    document.querySelector('.tv-frame-overlay').style.backgroundImage = 'url("' + frameUrl + '")';const jokes = [{"date":"2026-01-01","id":"VID_you_ve_heard_about_0876","thumbnail":null,"title":"RUNWAY_CALC.mem","video_url":"https://res.cloudinary.com/dbz84hlvk/video/upload/v1767712697/joke-a-tron/RUNWAY_CALC_mem.mp4"},{"date":"2026-01-01","id":"VID_you_re_on_top_0875","thumbnail":null,"title":"MOUNT.bak","video_url":"https://res.cloudinary.com/dbz84hlvk/video/upload/v1767712699/joke-a-tron/MOUNT_bak.mp4"},{"date":"2026-01-02","id":"VID_would_you_like_me_0874","thumbnail":null,"title":"YOURE.bin","video_url":"https://res.cloudinary.com/dbz84hlvk/video/upload/v1767712700/joke-a-tron/YOURE_bin.mp4"},{"date":"2026-01-02","id":"VID_why_wouldn_t_the_0873","thumbnail":null,"title":"ENCODE_ANYONE.cmd","video_url":"https://res.cloudinary.com/dbz84hlvk/video/upload/v1767712701/joke-a-tron/ENCODE_ANYONE_cmd.mp4"},{"date":"2026-01-03","id":"VID_why_won_t_a_0872","thumbnail":null,"title":"TIRED_PARSE.bat","video_url":"https://res.cloudinary.com/dbz84hlvk/video/upload/v1767712702/joke-a-tron/TIRED_PARSE_bat.mp4"},{"date":"2026-01-03","id":"VID_why_were_the_inventors_0871","thumbnail":null,"title":"PATCH839.app","video_url":"https://res.cloudinary.com/dbz84hlvk/video/upload/v1767712705/joke-a-tron/PATCH839_app.mp4"},{"date":"2026-01-04","id":"VID_why_were_screams_coming_0870","thumbnail":null,"title":"PROCESS211.scr","video_url":"https://res.cloudinary.com/dbz84hlvk/video/upload/v1767712706/joke-a-tron/PROCESS211_scr.mp4"},{"date":"2026-01-04","id":"VID_why_was_the_teacher_0869","thumbnail":null,"title":"TURBO_SYSTEM.dll","video_url":"https://res.cloudinary.com/dbz84hlvk/video/upload/v1767712707/joke-a-tron/TURBO_SYSTEM_dll.mp4"},{"date":"2026-01-05","id":"VID_why_was_the_robot_0868","thumbnail":null,"title":"WONDER_ROBOT_v4.04.doc","video_url":"https://res.cloudinary.com/dbz84hlvk/video/upload/v1767712708/joke-a-tron/WONDER_ROBOT_v4_04_doc.mp4"},{"date":"2026-01-05","id":"VID_why_was_the_professor_0867","thumbnail":null,"title":"CROSSEYED_PATCH.bat","video_url":"https://res.cloudinary.com/dbz84hlvk/video/upload/v1767712710/joke-a-tron/CROSSEYED_PATCH_bat.mp4"},{"date":"2026-01-06","id":"VID_why_was_the_musician_0866","thumbnail":null,"title":"SUPER_MUSICIAN_v86.dll","video_url":"https://res.cloudinary.com/dbz84hlvk/video/upload/v1767712711/joke-a-tron/SUPER_MUSICIAN_v86_dll.mp4"},{"date":"2026-01-06","id":"VID_why_was_the_lobster_0865","thumbnail":null,"title":"BECAUSE_LOAD.cfg","video_url":"https://res.cloudinary.com/dbz84hlvk/video/upload/v1767712712/joke-a-tron/BECAUSE_LOAD_cfg.mp4"},{"date":"2026-01-01","id":"VID_have_you_heard_about_1_0121","thumbnail":null,"title":"MOUNT399.rom","video_url":"https://res.cloudinary.com/dbz84hlvk/video/upload/v1767714544/joke-a-tron/MOUNT399_rom.mp4"},{"date":"2026-01-01","id":"VID_have_you_heard_about_0120","thumbnail":null,"title":"PILLOWS_BACKUP.scr","video_url":"https://res.cloudinary.com/dbz84hlvk/video/upload/v1767714545/joke-a-tron/PILLOWS_BACKUP_scr.mp4"},{"date":"2026-01-02","id":"VID_have_you_ever_seen_0119","thumbnail":null,"title":"VIRTUAL_DELETE.sav","video_url":"https://res.cloudinary.com/dbz84hlvk/video/upload/v1767714546/joke-a-tron/VIRTUAL_DELETE_sav.mp4"},{"date":"2026-01-02","id":"VID_guy_walks_into_a_1_0118","thumbnail":null,"title":"DIGITAL_DECODE.img","video_url":"https://res.cloudinary.com/dbz84hlvk/video/upload/v1767714548/joke-a-tron/DIGITAL_DECODE_img.mp4"},{"date":"2026-01-03","id":"VID_guy_walks_into_a_0117","thumbnail":null,"title":"VIRTUAL_MOVE.run","video_url":"https://res.cloudinary.com/dbz84hlvk/video/upload/v1767714549/joke-a-tron/VIRTUAL_MOVE_run.mp4"},{"date":"2026-01-03","id":"VID_god_asks_asks_adam_0116","thumbnail":null,"title":"DECODE_REALLY.txt","video_url":"https://res.cloudinary.com/dbz84hlvk/video/upload/v1767714550/joke-a-tron/DECODE_REALLY_txt.mp4"},{"date":"2026-01-04","id":"VID_farmer_wants_to_milk_0115","thumbnail":null,"title":"TAKES.bin","video_url":"https://res.cloudinary.com/dbz84hlvk/video/upload/v1767714552/joke-a-tron/TAKES_bin.mp4"},{"date":"2026-01-04","id":"VID_every_day_the_good_0114","thumbnail":null,"title":"PINCH_MODULE.dll","video_url":"https://res.cloudinary.com/dbz84hlvk/video/upload/v1767714553/joke-a-tron/PINCH_MODULE_dll.mp4"},{"date":"2026-01-05","id":"VID_energizer_bunny_arrested_charged_0113","thumbnail":null,"title":"MEGA_BATTERY_vv3.sys","video_url":"https://res.cloudinary.com/dbz84hlvk/video/upload/v1767714555/joke-a-tron/MEGA_BATTERY_vv3_sys.mp4"},{"date":"2026-01-05","id":"VID_does_a_roller_coaster_0112","thumbnail":null,"title":"DOWNS.bat","video_url":"https://res.cloudinary.com/dbz84hlvk/video/upload/v1767714556/joke-a-tron/DOWNS_bat.mp4"},{"date":"2026-01-06","id":"VID_doctor_i_ve_got_2_0111","thumbnail":null,"title":"AUTO_COMPRESS.app","video_url":"https://res.cloudinary.com/dbz84hlvk/video/upload/v1767714557/joke-a-tron/AUTO_COMPRESS_app.mp4"},{"date":"2026-01-06","id":"VID_doctor_i_ve_got_1_0110","thumbnail":null,"title":"QUICK_DOCTOR_vALPHA.exe","video_url":"https://res.cloudinary.com/dbz84hlvk/video/upload/v1767714559/joke-a-tron/QUICK_DOCTOR_vALPHA_exe.mp4"}];
 
     
     const TEST_VIDEO = 'https://res.cloudinary.com/dbz84hlvk/video/upload/v1752542888/joke-a-tron/What_Do_You_Call.mp4';
@@ -884,6 +996,7 @@
     loadJoke(0);
 })();
 </script>
+</div>
 
     </main><footer class="site-footer">
     <p>
@@ -1334,9 +1447,9 @@
 
 
     
-    <script src="/js/chaos.js?v=1767483050"></script>
-    <script src="/js/achievements.js?v=1767483050"></script>
-    <script src="/js/scroll-tiles.js?v=1767483050"></script>
-    <script src="/js/scroll-rollup.js?v=1767483050"></script>
+    <script src="/js/chaos.js?v=1767743675"></script>
+    <script src="/js/achievements.js?v=1767743675"></script>
+    <script src="/js/scroll-tiles.js?v=1767743675"></script>
+    <script src="/js/scroll-rollup.js?v=1767743675"></script>
 </body>
 </html>

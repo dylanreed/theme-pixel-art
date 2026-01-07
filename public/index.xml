@@ -6,7 +6,71 @@
     <description>Recent content on dylan&#39;s blog</description>
     <generator>Hugo</generator>
     <language>en</language>
+    <lastBuildDate>Mon, 01 Jul 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="//localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>//localhost:1313/post/2024-07-01-music-discovery/</link>
+      <pubDate>Mon, 01 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/post/2024-07-01-music-discovery/</guid>
+      <description>&lt;p&gt;Discovered a new band today and I&amp;rsquo;m obsessed. Sometimes the algorithm gets it right.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>//localhost:1313/post/2024-06-20-another-note/</link>
+      <pubDate>Thu, 20 Jun 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/post/2024-06-20-another-note/</guid>
+      <description>&lt;p&gt;Currently reading &amp;ldquo;Project Hail Mary&amp;rdquo; and I can&amp;rsquo;t put it down. Highly recommend!&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>//localhost:1313/post/2024-06-15-quick-note/</link>
+      <pubDate>Sat, 15 Jun 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/post/2024-06-15-quick-note/</guid>
+      <description>&lt;p&gt;Just pushed a big update to the project. Feeling accomplished!&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Cat Nap</title>
+      <link>//localhost:1313/post/2024-06-01-cat-nap/</link>
+      <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/post/2024-06-01-cat-nap/</guid>
+      <description>&lt;p&gt;Someone found the sunny spot again.&lt;/p&gt;&#xA;&lt;img src=&#34;https://dylan.blog/uploads/2024/2a9c4b8d1f.jpg&#34; alt=&#34;Cat sleeping&#34;&gt;&#xA;&lt;p&gt;Living his best life.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Hiking Adventure</title>
+      <link>//localhost:1313/post/2024-05-12-hiking-adventure/</link>
+      <pubDate>Sun, 12 May 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/post/2024-05-12-hiking-adventure/</guid>
+      <description>&lt;p&gt;10 miles today! The views at the summit were worth every step.&lt;/p&gt;&#xA;&lt;img src=&#34;https://dylan.blog/uploads/2024/5b8d5e5a6e.jpg&#34; alt=&#34;Mountain view&#34;&gt;&#xA;&lt;p&gt;Already planning the next trail.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Garden Progress</title>
+      <link>//localhost:1313/post/2024-04-05-garden-progress/</link>
+      <pubDate>Fri, 05 Apr 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/post/2024-04-05-garden-progress/</guid>
+      <description>&lt;p&gt;The tomatoes are finally coming in!&lt;/p&gt;&#xA;&lt;img src=&#34;https://dylan.blog/uploads/2024/8e75f48cc0.jpg&#34; alt=&#34;Garden&#34;&gt;&#xA;&lt;p&gt;All that watering is paying off.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Sunset Views</title>
+      <link>//localhost:1313/post/2024-03-10-sunset-views/</link>
+      <pubDate>Sun, 10 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/post/2024-03-10-sunset-views/</guid>
+      <description>&lt;p&gt;Caught this incredible sunset from the rooftop.&lt;/p&gt;&#xA;&lt;img src=&#34;https://dylan.blog/uploads/2024/d3b03b1b69.jpg&#34; alt=&#34;Sunset&#34;&gt;&#xA;&lt;p&gt;Nature really knows how to put on a show.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Coffee Time</title>
+      <link>//localhost:1313/post/2024-02-20-coffee-time/</link>
+      <pubDate>Tue, 20 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/post/2024-02-20-coffee-time/</guid>
+      <description>&lt;p&gt;Morning ritual complete. This latte art turned out pretty good!&lt;/p&gt;&#xA;&lt;img src=&#34;https://dylan.blog/uploads/2024/c1e8ba7d7c.jpg&#34; alt=&#34;Coffee&#34;&gt;&#xA;&lt;p&gt;Now I&amp;rsquo;m ready to tackle the day.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Beach Day</title>
+      <link>//localhost:1313/post/2024-01-15-beach-day/</link>
+      <pubDate>Mon, 15 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/post/2024-01-15-beach-day/</guid>
+      <description>&lt;p&gt;What a gorgeous day at the beach! The water was crystal clear.&lt;/p&gt;&#xA;&lt;img src=&#34;https://dylan.blog/uploads/2024/49bba7d95e.jpg&#34; alt=&#34;Beach photo&#34;&gt;&#xA;&lt;p&gt;Definitely coming back here soon.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Archive</title>
       <link>//localhost:1313/archive/</link>

@@ -1,5 +1,12 @@
 {
   "title": "dylan's blog",
+  "markup": {
+    "goldmark": {
+      "renderer": {
+        "unsafe": true
+      }
+    }
+  },
   "params": {
     "site_title": "dylan's blog",
     "footer_text": "Powered by chaos goblin energy"

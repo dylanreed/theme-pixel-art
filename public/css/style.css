@@ -980,6 +980,7 @@ html.night .page-content td {
     overflow: hidden;
     border: 3px solid #8b5a2b;
     border-radius: 4px;
+    position: relative;
     transition:
         transform 0.2s ease,
         box-shadow 0.2s ease;
@@ -995,6 +996,29 @@ html.night .page-content td {
     height: 100%;
     object-fit: cover;
     image-rendering: auto;
+}
+
+.photo-item img.pixelated {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    transition: opacity 0.4s ease;
+}
+
+.photo-item img.clear {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.photo-item:hover img.pixelated {
+    opacity: 0;
+}
+
+.photo-item:hover img.clear {
+    opacity: 1;
 }
 
 /* Sprite animations (96px size for list) */
@@ -1825,24 +1849,60 @@ html.night .site-footer p {
 .note-scroll {
     position: relative;
     z-index: 1;
-    margin: -150px auto;
+    margin: -73px auto;
     max-width: 800px;
     display: flex;
     flex-direction: column;
 }
 
+/* First open note */
 .note-scroll:first-child {
-    margin-top: -50px;
+    margin-top: 20px;
 }
 
-/* Space between consecutive notes */
+/* First closed note */
+.note-scroll.rolled-up:first-child {
+    margin-top: 2px;
+}
+
+/* Open + Open */
 .note-scroll + .note-scroll {
-    margin-top: 100px;
+    margin-top: -73px;
 }
 
-/* When a consecutive note is rolled up, needs more top margin to clear previous note's -150px bottom */
-.note-scroll + .note-scroll.rolled-up {
-    margin-top: 200px;
+/* Open + Closed */
+.note-scroll:not(.rolled-up) + .note-scroll.rolled-up {
+    margin-top: -13px;
+}
+
+/* Closed + Open */
+.note-scroll.rolled-up + .note-scroll:not(.rolled-up) {
+    margin-top: -124px;
+}
+
+/* Closed + Closed */
+.note-scroll.rolled-up + .note-scroll.rolled-up {
+    margin-top: -87px;
+}
+
+/* Open → Posts */
+.note-scroll:not(.rolled-up) + .posts-container {
+    margin-top: -23px;
+}
+
+/* Closed → Posts */
+.note-scroll.rolled-up + .posts-container {
+    margin-top: -100px;
+}
+
+/* Posts → Open */
+.posts-container + .note-scroll:not(.rolled-up) {
+    margin-top: -18px;
+}
+
+/* Posts → Closed */
+.posts-container + .note-scroll.rolled-up {
+    margin-top: 20px;
 }
 
 .note-scroll::before {
@@ -1850,7 +1910,7 @@ html.night .site-footer p {
     display: block;
     width: 100%;
     max-width: 800px;
-    height: 200px;
+    height: 289px;
     background: url("/fantasy/notes/top.webp") no-repeat center bottom;
     background-size: 100% auto;
     image-rendering: pixelated;
@@ -1860,7 +1920,7 @@ html.night .site-footer p {
     content: "";
     display: block;
     width: 100%;
-    height: 200px;
+    height: 269px;
     max-width: 800px;
     background: url("/fantasy/notes/bottom.webp") no-repeat center top;
     background-size: 100% auto;
@@ -1870,12 +1930,12 @@ html.night .site-footer p {
 .note-scroll .note-content {
     font-family: "MedievalSharp", cursive;
     font-size: 20px;
-    line-height: 1.6;
+    line-height: 1.5;
     color: #4a3520;
     text-align: center;
     width: 100%;
     max-width: 800px;
-    padding: 20px 15% 30px 15%;
+    padding: 0px 15% 0px 15%;
     box-sizing: border-box;
     background: url("/fantasy/notes/middle.webp") repeat-y center top;
     background-size: 100% auto;
@@ -1919,7 +1979,7 @@ html.night .site-footer p {
 .note-scroll .note-meta {
     text-align: center;
     position: absolute;
-    bottom: 90px;
+    bottom: 200px;
     left: 0;
     right: 0;
     z-index: 10;
@@ -1927,7 +1987,7 @@ html.night .site-footer p {
 
 .note-scroll .note-date {
     font-family: "MedievalSharp", cursive;
-    font-size: 14px;
+    font-size: 24px;
     color: #7a6550;
     text-decoration: none;
 }
@@ -1944,10 +2004,10 @@ html.night .site-footer p {
 /* Clickable bottom zone for scroll roll-up */
 .scroll-bottom-clickable {
     position: absolute;
-    bottom: 0;
+    bottom: 100px;
     left: 0;
     right: 0;
-    height: 100px;
+    height: 50px;
     cursor: url("/fantasy/cursors/hand.png"), pointer;
     z-index: 5;
     transition: filter 0.2s ease;
@@ -2006,22 +2066,35 @@ html.night .site-footer p {
 /* Rolled up state - show closed scroll image */
 .note-scroll.rolled-up {
     width: 100%;
-    height: 155px;
+    height: 289px;
     overflow: hidden;
-    margin: 10px auto 200px auto;
+    margin: 10px auto 10px auto;
     background: url("/fantasy/notes/closed.webp") no-repeat center top;
     background-size: 100% auto;
     image-rendering: pixelated;
     z-index: 100 !important;
 }
 
-.note-scroll.rolled-up .note-content,
-.note-scroll.rolled-up .note-meta {
+.note-scroll.rolled-up .note-content {
     max-height: 0 !important;
     overflow: hidden;
     opacity: 0;
     padding: 0 !important;
     margin: 0 !important;
+}
+
+.note-scroll.rolled-up .note-meta {
+    display: block;
+    position: absolute;
+    top: 28px;
+    bottom: auto;
+    opacity: 1;
+    max-height: none;
+}
+
+.note-scroll.rolled-up .note-date {
+    font-size: 24px;
+    color: #7a6550;
 }
 
 /* Hide top/bottom when rolled - using closed image instead */
@@ -2071,6 +2144,468 @@ html.night .note-scroll iframe,
 html.night .note-scroll embed,
 html.night .note-scroll object {
     filter: invert(1) hue-rotate(180deg);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   THEME: SCI-FI NOTES
+   ═══════════════════════════════════════════════════════════════ */
+
+/* sci-fi - Base spacing */
+html.theme-sci-fi .note-scroll {
+    margin: -196px auto;
+}
+
+html.theme-sci-fi .note-scroll:first-child {
+    margin-top: 20px;
+}
+
+html.theme-sci-fi .note-scroll.rolled-up:first-child {
+    margin-top: 2px;
+}
+
+/* sci-fi - Open + Open */
+html.theme-sci-fi .note-scroll + .note-scroll {
+    margin-top: -196px;
+}
+
+/* sci-fi - Open + Closed */
+html.theme-sci-fi .note-scroll:not(.rolled-up) + .note-scroll.rolled-up {
+    margin-top: -66px;
+}
+
+/* sci-fi - Closed + Open */
+html.theme-sci-fi .note-scroll.rolled-up + .note-scroll:not(.rolled-up) {
+    margin-top: -224px;
+}
+
+/* sci-fi - Closed + Closed */
+html.theme-sci-fi .note-scroll.rolled-up + .note-scroll.rolled-up {
+    margin-top: -87px;
+}
+
+/* sci-fi - Open → Posts */
+html.theme-sci-fi .note-scroll:not(.rolled-up) + .posts-container {
+    margin-top: -84px;
+}
+
+/* sci-fi - Closed → Posts */
+html.theme-sci-fi .note-scroll.rolled-up + .posts-container {
+    margin-top: -83px;
+}
+
+/* sci-fi - Posts → Open */
+html.theme-sci-fi .posts-container + .note-scroll:not(.rolled-up) {
+    margin-top: -94px;
+}
+
+/* sci-fi - Posts → Closed */
+html.theme-sci-fi .posts-container + .note-scroll.rolled-up {
+    margin-top: 13px;
+}
+
+html.theme-sci-fi .note-scroll::before {
+    background-image: url("/sci-fi/notes/top.webp");
+    height: 289px;
+}
+
+html.theme-sci-fi .note-scroll .note-content {
+    background-image: url("/sci-fi/notes/middle.webp");
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 20px;
+    color: #ffffff;
+    text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+    line-height: 1.5;
+    padding: 0px 15% 0px 15%;
+}
+
+html.theme-sci-fi .note-scroll::after {
+    background-image: url("/sci-fi/notes/bottom.webp");
+    height: 275px;
+}
+
+/* sci-fi - Date (Open) */
+html.theme-sci-fi .note-scroll .note-meta {
+    position: absolute;
+    bottom: 200px;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+html.theme-sci-fi .note-scroll .note-date {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 24px;
+    color: #88ccff;
+}
+
+/* sci-fi - Closed */
+html.theme-sci-fi .note-scroll.rolled-up {
+    background-image: url("/sci-fi/notes/closed.webp");
+    height: 289px;
+}
+
+/* sci-fi - Date (Closed) */
+html.theme-sci-fi .note-scroll.rolled-up .note-meta {
+    display: block;
+    position: absolute;
+    top: 60px;
+    bottom: auto;
+}
+
+html.theme-sci-fi .note-scroll.rolled-up .note-date {
+    font-size: 24px;
+    color: #88ccff;
+}
+
+html.theme-sci-fi .scroll-bottom-clickable {
+    height: 50px;
+    bottom: 100px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   THEME: CYBERPUNK NOTES
+   ═══════════════════════════════════════════════════════════════ */
+
+/* cyberpunk - Base spacing */
+html.theme-cyberpunk .note-scroll {
+    margin: -72px auto;
+}
+
+html.theme-cyberpunk .note-scroll:first-child {
+    margin-top: 20px;
+}
+
+html.theme-cyberpunk .note-scroll.rolled-up:first-child {
+    margin-top: 2px;
+}
+
+/* cyberpunk - Open + Open */
+html.theme-cyberpunk .note-scroll + .note-scroll {
+    margin-top: -72px;
+}
+
+/* cyberpunk - Open + Closed */
+html.theme-cyberpunk .note-scroll:not(.rolled-up) + .note-scroll.rolled-up {
+    margin-top: 24px;
+}
+
+/* cyberpunk - Closed + Open */
+html.theme-cyberpunk .note-scroll.rolled-up + .note-scroll:not(.rolled-up) {
+    margin-top: -96px;
+}
+
+/* cyberpunk - Closed + Closed */
+html.theme-cyberpunk .note-scroll.rolled-up + .note-scroll.rolled-up {
+    margin-top: -2px;
+}
+
+/* cyberpunk - Open → Posts */
+html.theme-cyberpunk .note-scroll:not(.rolled-up) + .posts-container {
+    margin-top: 29px;
+}
+
+/* cyberpunk - Closed → Posts */
+html.theme-cyberpunk .note-scroll.rolled-up + .posts-container {
+    margin-top: -15px;
+}
+
+/* cyberpunk - Posts → Open */
+html.theme-cyberpunk .posts-container + .note-scroll:not(.rolled-up) {
+    margin-top: -99px;
+}
+
+/* cyberpunk - Posts → Closed */
+html.theme-cyberpunk .posts-container + .note-scroll.rolled-up {
+    margin-top: 13px;
+}
+
+html.theme-cyberpunk .note-scroll::before {
+    background-image: url("/cyberpunk/notes/top.webp");
+    height: 289px;
+}
+
+html.theme-cyberpunk .note-scroll .note-content {
+    background-image: url("/cyberpunk/notes/middle.webp");
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 20px;
+    color: #33ff33;
+    text-shadow: 0 0 8px rgba(51, 255, 51, 0.6);
+    line-height: 1.5;
+    padding: 0px 15% 0px 15%;
+}
+
+html.theme-cyberpunk .note-scroll::after {
+    background-image: url("/cyberpunk/notes/bottom.webp");
+    height: 117px;
+}
+
+/* cyberpunk - Date (Open) */
+html.theme-cyberpunk .note-scroll .note-meta {
+    position: absolute;
+    bottom: 45px;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+html.theme-cyberpunk .note-scroll .note-date {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 24px;
+    color: #33ff33;
+}
+
+/* cyberpunk - Closed */
+html.theme-cyberpunk .note-scroll.rolled-up {
+    background-image: url("/cyberpunk/notes/closed.webp");
+    height: 209px;
+}
+
+/* cyberpunk - Date (Closed) */
+html.theme-cyberpunk .note-scroll.rolled-up .note-meta {
+    display: block;
+    position: absolute;
+    top: 116px;
+    bottom: auto;
+}
+
+html.theme-cyberpunk .note-scroll.rolled-up .note-date {
+    font-size: 24px;
+    color: #33ff33;
+}
+
+html.theme-cyberpunk .scroll-bottom-clickable {
+    height: 50px;
+    bottom: -12px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   THEME: CABIN NOTES
+   ═══════════════════════════════════════════════════════════════ */
+
+/* cabin - Base spacing */
+html.theme-cabin .note-scroll {
+    margin: -35px auto;
+}
+
+html.theme-cabin .note-scroll:first-child {
+    margin-top: 20px;
+}
+
+html.theme-cabin .note-scroll.rolled-up:first-child {
+    margin-top: 2px;
+}
+
+/* cabin - Open + Open */
+html.theme-cabin .note-scroll + .note-scroll {
+    margin-top: -35px;
+}
+
+/* cabin - Open + Closed */
+html.theme-cabin .note-scroll:not(.rolled-up) + .note-scroll.rolled-up {
+    margin-top: 0px;
+}
+
+/* cabin - Closed + Open */
+html.theme-cabin .note-scroll.rolled-up + .note-scroll:not(.rolled-up) {
+    margin-top: -113px;
+}
+
+/* cabin - Closed + Closed */
+html.theme-cabin .note-scroll.rolled-up + .note-scroll.rolled-up {
+    margin-top: -80px;
+}
+
+/* cabin - Open → Posts */
+html.theme-cabin .note-scroll:not(.rolled-up) + .posts-container {
+    margin-top: -8px;
+}
+
+/* cabin - Closed → Posts */
+html.theme-cabin .note-scroll.rolled-up + .posts-container {
+    margin-top: -92px;
+}
+
+/* cabin - Posts → Open */
+html.theme-cabin .posts-container + .note-scroll:not(.rolled-up) {
+    margin-top: 8px;
+}
+
+/* cabin - Posts → Closed */
+html.theme-cabin .posts-container + .note-scroll.rolled-up {
+    margin-top: 24px;
+}
+
+html.theme-cabin .note-scroll::before {
+    background-image: url("/cabin/notes/top.webp");
+    height: 200px;
+}
+
+html.theme-cabin .note-scroll .note-content {
+    background-image: url("/cabin/notes/middle.webp");
+    font-family: 'Cabin', sans-serif;
+    font-size: 20px;
+    color: #ef7c25;
+    line-height: 1.6;
+    padding: 20px 15% 30px 15%;
+}
+
+html.theme-cabin .note-scroll::after {
+    background-image: url("/cabin/notes/bottom.webp");
+    height: 200px;
+}
+
+/* cabin - Date (Open) */
+html.theme-cabin .note-scroll .note-meta {
+    position: absolute;
+    bottom: 88px;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+html.theme-cabin .note-scroll .note-date {
+    font-family: 'Cabin', sans-serif;
+    font-size: 24px;
+    color: #bfa440;
+}
+
+/* cabin - Closed */
+html.theme-cabin .note-scroll.rolled-up {
+    background-image: url("/cabin/notes/closed.webp");
+    height: 289px;
+}
+
+/* cabin - Date (Closed) */
+html.theme-cabin .note-scroll.rolled-up .note-meta {
+    display: block;
+    position: absolute;
+    top: 36px;
+    bottom: auto;
+}
+
+html.theme-cabin .note-scroll.rolled-up .note-date {
+    font-size: 24px;
+    color: #cf6717;
+}
+
+html.theme-cabin .scroll-bottom-clickable {
+    height: 50px;
+    bottom: 55px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   THEME: UNDERWATER NOTES
+   ═══════════════════════════════════════════════════════════════ */
+
+/* underwater - Base spacing */
+html.theme-underwater .note-scroll {
+    margin: -178px auto;
+}
+
+html.theme-underwater .note-scroll:first-child {
+    margin-top: 20px;
+}
+
+html.theme-underwater .note-scroll.rolled-up:first-child {
+    margin-top: 2px;
+}
+
+/* underwater - Open + Open */
+html.theme-underwater .note-scroll + .note-scroll {
+    margin-top: -178px;
+}
+
+/* underwater - Open + Closed */
+html.theme-underwater .note-scroll:not(.rolled-up) + .note-scroll.rolled-up {
+    margin-top: -61px;
+}
+
+/* underwater - Closed + Open */
+html.theme-underwater .note-scroll.rolled-up + .note-scroll:not(.rolled-up) {
+    margin-top: -188px;
+}
+
+/* underwater - Closed + Closed */
+html.theme-underwater .note-scroll.rolled-up + .note-scroll.rolled-up {
+    margin-top: -84px;
+}
+
+/* underwater - Open → Posts */
+html.theme-underwater .note-scroll:not(.rolled-up) + .posts-container {
+    margin-top: -59px;
+}
+
+/* underwater - Closed → Posts */
+html.theme-underwater .note-scroll.rolled-up + .posts-container {
+    margin-top: -92px;
+}
+
+/* underwater - Posts → Open */
+html.theme-underwater .posts-container + .note-scroll:not(.rolled-up) {
+    margin-top: -81px;
+}
+
+/* underwater - Posts → Closed */
+html.theme-underwater .posts-container + .note-scroll.rolled-up {
+    margin-top: 24px;
+}
+
+html.theme-underwater .note-scroll::before {
+    background-image: url("/underwater/notes/top.webp");
+    height: 289px;
+}
+
+html.theme-underwater .note-scroll .note-content {
+    background-image: url("/underwater/notes/middle.webp");
+    font-family: 'Quicksand', sans-serif;
+    font-size: 20px;
+    color: #5cffec;
+    line-height: 1.5;
+    padding: 0px 15% 0px 15%;
+}
+
+html.theme-underwater .note-scroll::after {
+    background-image: url("/underwater/notes/bottom.webp");
+    height: 272px;
+}
+
+/* underwater - Date (Open) */
+html.theme-underwater .note-scroll .note-meta {
+    position: absolute;
+    bottom: 200px;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+html.theme-underwater .note-scroll .note-date {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 24px;
+    color: #62b2b0;
+}
+
+/* underwater - Closed */
+html.theme-underwater .note-scroll.rolled-up {
+    background-image: url("/underwater/notes/closed.webp");
+    height: 289px;
+}
+
+/* underwater - Date (Closed) */
+html.theme-underwater .note-scroll.rolled-up .note-meta {
+    display: block;
+    position: absolute;
+    top: 60px;
+    bottom: auto;
+}
+
+html.theme-underwater .note-scroll.rolled-up .note-date {
+    font-size: 24px;
+    color: #62b2b0;
+}
+
+html.theme-underwater .scroll-bottom-clickable {
+    height: 50px;
+    bottom: 100px;
 }
 
 /* Hero image for posts */
@@ -3088,6 +3623,18 @@ html.easy-read .header-image[style*="clown.webp"] {
 
 html.easy-read .header-frame {
     background-image: url("/corporate/headers/ornate frame.webp") !important;
+}
+
+/* Corporate Theme Header Calibration */
+html.easy-read .header-image {
+    height: 212px !important;
+}
+
+html.easy-read .header-frame {
+    width: 103% !important;
+    height: 107% !important;
+    left: -10px !important;
+    top: -7px !important;
 }
 
 /* Navigation - corporate pixel signs */

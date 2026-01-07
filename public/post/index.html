@@ -84,12 +84,70 @@
     if (theme === 'night' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         document.documentElement.classList.add('night');
     }
+    
+    var themeStyle = localStorage.getItem('themeStyle') || 'fantasy';
+    if (themeStyle !== 'fantasy') {
+        document.documentElement.classList.add('theme-' + themeStyle);
+    }
 })();
 </script>
 
 
 <link rel="preload" href="/background/3.webp" as="image" type="image/webp">
 <link rel="preload" href="/background/3_night.webp" as="image" type="image/webp">
+
+
+<script>
+(function() {
+    var currentTheme = localStorage.getItem('themeStyle') || 'fantasy';
+
+    
+    function getThemeAssets(theme) {
+        var base = '/' + theme;
+        return [
+            base + '/tiles/day_tiles.webp',
+            base + '/tiles/tiles_night.webp',
+            base + '/dropdown/drop_down_menu.webp',
+            base + '/notes/top.webp',
+            base + '/notes/middle.webp',
+            base + '/notes/bottom.webp',
+            base + '/notes/closed.webp',
+            base + '/menu/sign.webp',
+            base + '/sprites/cat/sheets/walk_east.png',
+            base + '/sprites/cat/sheets/walk_west.png',
+            base + '/sprites/cat/sheets/idle_south.png'
+        ];
+    }
+
+    
+    var assets = getThemeAssets(currentTheme);
+    assets.forEach(function(src) {
+        var img = new Image();
+        img.src = src;
+    });
+
+    
+    window.preloadTheme = function(theme) {
+        return new Promise(function(resolve) {
+            var themeAssets = getThemeAssets(theme);
+            var loaded = 0;
+            var total = themeAssets.length;
+
+            themeAssets.forEach(function(src) {
+                var img = new Image();
+                img.onload = img.onerror = function() {
+                    loaded++;
+                    if (loaded >= total) resolve();
+                };
+                img.src = src;
+            });
+
+            
+            setTimeout(resolve, 3000);
+        });
+    };
+})();
+</script>
 
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -141,26 +199,26 @@
             <div class="sierra-title"><span>Controls</span></div>
             <div class="sierra-buttons">
                 <button class="sierra-btn" data-action="theme" data-tooltip="Day/Night">
-                    <img class="btn-icon day-icon" src="/sprites/drop_down_icons/day.png" alt="Switch to day mode">
-                    <img class="btn-icon night-icon" src="/sprites/drop_down_icons/night.png" alt="Switch to night mode" style="display:none">
+                    <img class="btn-icon day-icon" src="/sprites/drop_down_icons/day.webp" alt="Switch to day mode">
+                    <img class="btn-icon night-icon" src="/sprites/drop_down_icons/night.webp" alt="Switch to night mode" style="display:none">
                 </button>
                 <button class="sierra-btn" data-action="weather" data-tooltip="Weather">
-                    <img class="btn-icon weather-icon" src="/sprites/drop_down_icons/sun.png" alt="Cycle weather effects">
+                    <img class="btn-icon weather-icon" src="/sprites/drop_down_icons/sun.webp" alt="Cycle weather effects">
                 </button>
                 <button class="sierra-btn" data-action="rainbow" data-tooltip="Rainbow">
-                    <img class="btn-icon" src="/sprites/drop_down_icons/rainbow.png" alt="Toggle rainbow mode">
+                    <img class="btn-icon" src="/sprites/drop_down_icons/rainbow.webp" alt="Toggle rainbow mode">
                 </button>
                 <button class="sierra-btn" data-action="achievements" data-tooltip="Achievements">
-                    <img class="btn-icon" src="/sprites/drop_down_icons/trophey.png" alt="View achievements panel">
+                    <img class="btn-icon" src="/sprites/drop_down_icons/trophey.webp" alt="View achievements panel">
                 </button>
                 <button class="sierra-btn" data-action="mode" data-tooltip="Theme: Fantasy">
-                    <img class="btn-icon mode-icon" src="/modes/fantasy.png" alt="Cycle visual theme">
+                    <img class="btn-icon mode-icon" src="/modes/fantasy.webp" alt="Cycle visual theme">
                 </button>
                 <button class="sierra-btn" data-action="chaos" data-tooltip="Chaos">
-                    <img class="btn-icon" src="/sprites/drop_down_icons/swirl.png" alt="Toggle chaos mode">
+                    <img class="btn-icon" src="/sprites/drop_down_icons/swirl.webp" alt="Toggle chaos mode">
                 </button>
                 <button class="sierra-btn" data-action="help" data-tooltip="Help">
-                    <img class="btn-icon" src="/sprites/drop_down_icons/help.png" alt="Show help information">
+                    <img class="btn-icon" src="/sprites/drop_down_icons/help.webp" alt="Show help information">
                 </button>
             </div>
         </div>
@@ -187,9 +245,9 @@
             
             let currentWeather = null;
             const weatherIcons = {
-                sun: '/sprites/drop_down_icons/sun.png',
-                rain: '/sprites/drop_down_icons/rain.png',
-                snow: '/sprites/drop_down_icons/snow.png'
+                sun: '/sprites/drop_down_icons/sun.webp',
+                rain: '/sprites/drop_down_icons/rain.webp',
+                snow: '/sprites/drop_down_icons/snow.webp'
             };
 
             
@@ -202,11 +260,11 @@
                 'underwater': 'Underwater'
             };
             const themeIcons = {
-                'fantasy': '/modes/fantasy.png',
-                'sci-fi': '/modes/sci-fi.png',
-                'cyberpunk': '/modes/cyberpunk.png',
-                'cabin': '/modes/cabin.png',
-                'underwater': '/modes/underwater.png'
+                'fantasy': '/modes/fantasy.webp',
+                'sci-fi': '/modes/sci-fi.webp',
+                'cyberpunk': '/modes/cyberpunk.webp',
+                'cabin': '/modes/cabin.webp',
+                'underwater': '/modes/underwater.webp'
             };
             let currentThemeIndex = 0;
 
@@ -243,7 +301,7 @@
                         icon.src = themeIcons[theme];
                         
                         icon.onerror = function() {
-                            this.src = '/modes/fantasy.png';
+                            this.src = '/modes/fantasy.webp';
                             this.onerror = null;
                         };
                     }
@@ -306,9 +364,19 @@
 
                         
                         currentThemeIndex = (currentThemeIndex + 1) % themes.length;
-                        applyThemeStyle(themes[currentThemeIndex]);
+                        var newTheme = themes[currentThemeIndex];
+                        applyThemeStyle(newTheme);
+
                         
-                        location.reload();
+                        if (window.preloadTheme) {
+                            btn.style.opacity = '0.5';
+                            btn.style.pointerEvents = 'none';
+                            window.preloadTheme(newTheme).then(function() {
+                                location.reload();
+                            });
+                        } else {
+                            location.reload();
+                        }
                         break;
 
                     case 'achievements':
@@ -474,6 +542,11 @@
             <span>Photos</span>
         </a>
         
+        
+        <a href="/jokes/" class="nav-sign">
+            <span>Jokes</span>
+        </a>
+        
     </div>
 </nav>
 <script>
@@ -521,128 +594,65 @@
     
         
         
+
+        
+        <article class="note-scroll">
+            <div class="note-content">
+                <p>Discovered a new band today and I&rsquo;m obsessed. Sometimes the algorithm gets it right.</p>
+
+            </div>
+            <div class="note-meta">
+                <a href="//localhost:1313/post/2024-07-01-music-discovery/" class="note-date">July 1, 2024</a>
+            </div>
+        </article>
+    
+
+    
+    
+
+    
+        
+        
+
+        
+        <article class="note-scroll">
+            <div class="note-content">
+                <p>Currently reading &ldquo;Project Hail Mary&rdquo; and I can&rsquo;t put it down. Highly recommend!</p>
+
+            </div>
+            <div class="note-meta">
+                <a href="//localhost:1313/post/2024-06-20-another-note/" class="note-date">June 20, 2024</a>
+            </div>
+        </article>
+    
+
+    
+    
+
+    
+        
+        
+
+        
+        <article class="note-scroll">
+            <div class="note-content">
+                <p>Just pushed a big update to the project. Feeling accomplished!</p>
+
+            </div>
+            <div class="note-meta">
+                <a href="//localhost:1313/post/2024-06-15-quick-note/" class="note-date">June 15, 2024</a>
+            </div>
+        </article>
+    
+
+    
+    
+
+    
+        
+        
             <div class="posts-container"><div class="posts">
             
-        
-
-        
-        <article class="post category-clown">
-            
-            
-
-
-    
-
-
-
-
-
-
-
-
-
-
-<div class="post-sprite theme-sprite-6x3" data-category="clown">
-    <img src="/fantasy/sprites/category/clown.png" alt="Animated sprite for clown category">
-</div>
-
-
-            <div class="post-body">
-                
-                
-                    
-                    <span class="post-tag">clown</span>
-                    
-                
-
-                
-                
-                <h2 class="post-title">
-                    <a href="//localhost:1313/post/clown/">Honk If You Love Chaos</a>
-                </h2>
-                
-
-                
-                <div class="post-meta">December 27, 2025</div>
-
-                
-                <div class="post-excerpt">
-                    
-                        Life is a circus, and I&rsquo;m the one with the balloon animals. No refunds. Only honks.
-
-                    
-                </div>
-
-                <a href="//localhost:1313/post/clown/" class="post-link">Read more &rarr;</a>
-            </div>
-        </article>
-    
-
-    
-    
-
-    
-        
-        
-
-        
-        <article class="post category-tech">
-            
-            
-
-
-    
-
-
-
-
-
-
-
-
-
-
-<div class="post-sprite theme-sprite-6x3" data-category="tech">
-    <img src="/fantasy/sprites/category/tech.png" alt="Animated sprite for tech category">
-</div>
-
-
-            <div class="post-body">
-                
-                
-                    
-                    <span class="post-tag">tech</span>
-                    
-                
-
-                
-                
-                <h2 class="post-title">
-                    <a href="//localhost:1313/post/tech/">The Wizard&#39;s Guide to Modern Technology</a>
-                </h2>
-                
-
-                
-                <div class="post-meta">December 27, 2025</div>
-
-                
-                <div class="post-excerpt">
-                    
-                        Any sufficiently advanced technology is indistinguishable from magic. As a wizard, I find that offensive.
-
-                    
-                </div>
-
-                <a href="//localhost:1313/post/tech/" class="post-link">Read more &rarr;</a>
-            </div>
-        </article>
-    
-
-    
-    
-
-    
-        
         
 
         
@@ -662,7 +672,7 @@
 
 
 
-<div class="post-sprite theme-sprite-6x3" data-category="pets">
+<div class="post-sprite theme-sprite-6x3" data-category="pets" data-sprite="pets">
     <img src="/fantasy/sprites/category/pets.png" alt="Animated sprite for pets category">
 </div>
 
@@ -678,622 +688,23 @@
                 
                 
                 <h2 class="post-title">
-                    <a href="//localhost:1313/post/pets/">Tales from the Cat&#39;s Perspective</a>
+                    <a href="//localhost:1313/post/2024-06-01-cat-nap/">Cat Nap</a>
                 </h2>
                 
 
                 
-                <div class="post-meta">December 27, 2025</div>
+                <div class="post-meta">June 1, 2024</div>
 
                 
                 <div class="post-excerpt">
                     
-                        The humans think they own me. How adorable. I allow them to provide food and warmth.
+                        Someone found the sunny spot again.
+Living his best life.
 
                     
                 </div>
 
-                <a href="//localhost:1313/post/pets/" class="post-link">Read more &rarr;</a>
-            </div>
-        </article>
-    
-
-    
-    
-
-    
-        
-        
-
-        
-        <article class="post category-adhd">
-            
-            
-
-
-    
-
-
-
-
-
-
-
-
-
-
-<div class="post-sprite theme-sprite-6x3" data-category="adhd">
-    <img src="/fantasy/sprites/category/adhd.png" alt="Animated sprite for adhd category">
-</div>
-
-
-            <div class="post-body">
-                
-                
-                    
-                    <span class="post-tag">adhd</span>
-                    
-                
-
-                
-                
-                <h2 class="post-title">
-                    <a href="//localhost:1313/post/adhd/">The Donkey&#39;s Guide to Focus</a>
-                </h2>
-                
-
-                
-                <div class="post-meta">December 27, 2025</div>
-
-                
-                <div class="post-excerpt">
-                    
-                        Did you know donkeys can hear things from 60 miles away? That&rsquo;s why I notice everything. EVERYTHING.
-
-                    
-                </div>
-
-                <a href="//localhost:1313/post/adhd/" class="post-link">Read more &rarr;</a>
-            </div>
-        </article>
-    
-
-    
-    
-
-    
-        
-        
-
-        
-        <article class="post category-crafting">
-            
-            
-
-
-    
-
-
-
-
-
-
-
-
-
-
-<div class="post-sprite theme-sprite-6x3" data-category="crafting">
-    <img src="/fantasy/sprites/category/crafting.png" alt="Animated sprite for crafting category">
-</div>
-
-
-            <div class="post-body">
-                
-                
-                    
-                    <span class="post-tag">crafting</span>
-                    
-                
-
-                
-                
-                <h2 class="post-title">
-                    <a href="//localhost:1313/post/crafting/">The Muse&#39;s Workshop</a>
-                </h2>
-                
-
-                
-                <div class="post-meta">December 27, 2025</div>
-
-                
-                <div class="post-excerpt">
-                    
-                        Creating something with your hands is magic without the spell components. The muse whispers, and we build.
-
-                    
-                </div>
-
-                <a href="//localhost:1313/post/crafting/" class="post-link">Read more &rarr;</a>
-            </div>
-        </article>
-    
-
-    
-    
-
-    
-        
-        
-
-        
-        <article class="post category-reading">
-            
-            
-
-
-    
-
-
-
-
-
-
-
-
-
-
-<div class="post-sprite theme-sprite-6x3" data-category="reading">
-    <img src="/fantasy/sprites/category/reading.png" alt="Animated sprite for reading category">
-</div>
-
-
-            <div class="post-body">
-                
-                
-                    
-                    <span class="post-tag">reading</span>
-                    
-                
-
-                
-                
-                <h2 class="post-title">
-                    <a href="//localhost:1313/post/reading/">Books That Changed My Quest</a>
-                </h2>
-                
-
-                
-                <div class="post-meta">December 27, 2025</div>
-
-                
-                <div class="post-excerpt">
-                    
-                        Some books you read. Other books read you. These are the tomes that shaped my journey.
-
-                    
-                </div>
-
-                <a href="//localhost:1313/post/reading/" class="post-link">Read more &rarr;</a>
-            </div>
-        </article>
-    
-
-    
-    
-
-    
-        
-        
-
-        
-        <article class="post category-travel">
-            
-            
-
-
-    
-
-
-
-
-
-
-
-
-
-
-<div class="post-sprite theme-sprite-6x3" data-category="travel">
-    <img src="/fantasy/sprites/category/travel.png" alt="Animated sprite for travel category">
-</div>
-
-
-            <div class="post-body">
-                
-                
-                    
-                    <span class="post-tag">travel</span>
-                    
-                
-
-                
-                
-                <h2 class="post-title">
-                    <a href="//localhost:1313/post/travel/">Adventures Beyond the Map&#39;s Edge</a>
-                </h2>
-                
-
-                
-                <div class="post-meta">December 27, 2025</div>
-
-                
-                <div class="post-excerpt">
-                    
-                        The adventurer&rsquo;s motto: if it&rsquo;s not on the map, that&rsquo;s where the interesting things are.
-
-                    
-                </div>
-
-                <a href="//localhost:1313/post/travel/" class="post-link">Read more &rarr;</a>
-            </div>
-        </article>
-    
-
-    
-    
-
-    
-        
-        
-
-        
-        <article class="post category-music">
-            
-            
-
-
-    
-
-
-
-
-
-
-
-
-
-
-<div class="post-sprite theme-sprite-6x3" data-category="music">
-    <img src="/fantasy/sprites/category/music.png" alt="Animated sprite for music category">
-</div>
-
-
-            <div class="post-body">
-                
-                
-                    
-                    <span class="post-tag">music</span>
-                    
-                
-
-                
-                
-                <h2 class="post-title">
-                    <a href="//localhost:1313/post/music/">Strumming Through the Day</a>
-                </h2>
-                
-
-                
-                <div class="post-meta">December 27, 2025</div>
-
-                
-                <div class="post-excerpt">
-                    
-                        The banjo doesn&rsquo;t care if you hit a wrong note. It just wants you to keep playing.
-
-                    
-                </div>
-
-                <a href="//localhost:1313/post/music/" class="post-link">Read more &rarr;</a>
-            </div>
-        </article>
-    
-
-    
-    
-
-    
-        
-        
-
-        
-        <article class="post category-cooking">
-            
-            
-
-
-    
-
-
-
-
-
-
-
-
-
-
-<div class="post-sprite theme-sprite-6x3" data-category="cooking">
-    <img src="/fantasy/sprites/category/cooking.png" alt="Animated sprite for cooking category">
-</div>
-
-
-            <div class="post-body">
-                
-                
-                    
-                    <span class="post-tag">cooking</span>
-                    
-                
-
-                
-                
-                <h2 class="post-title">
-                    <a href="//localhost:1313/post/cooking/">Cauldron Recipes for Beginners</a>
-                </h2>
-                
-
-                
-                <div class="post-meta">December 27, 2025</div>
-
-                
-                <div class="post-excerpt">
-                    
-                        The bubbling cauldron holds many secrets. Today we&rsquo;re making something that won&rsquo;t turn anyone into a frog.
-
-                    
-                </div>
-
-                <a href="//localhost:1313/post/cooking/" class="post-link">Read more &rarr;</a>
-            </div>
-        </article>
-    
-
-    
-    
-
-    
-        
-        
-
-        
-        <article class="post category-writing">
-            
-            
-
-
-    
-
-
-
-
-
-
-
-
-
-
-<div class="post-sprite theme-sprite-6x3" data-category="writing">
-    <img src="/fantasy/sprites/category/writing.png" alt="Animated sprite for writing category">
-</div>
-
-
-            <div class="post-body">
-                
-                
-                    
-                    <span class="post-tag">writing</span>
-                    
-                
-
-                
-                
-                <h2 class="post-title">
-                    <a href="//localhost:1313/post/writing/">The Quill&#39;s Guide to Daily Writing</a>
-                </h2>
-                
-
-                
-                <div class="post-meta">December 27, 2025</div>
-
-                
-                <div class="post-excerpt">
-                    
-                        Every story starts with a single word. The quill dips into ink, and worlds begin to form on parchment.
-
-                    
-                </div>
-
-                <a href="//localhost:1313/post/writing/" class="post-link">Read more &rarr;</a>
-            </div>
-        </article>
-    
-
-    
-    
-
-    
-        
-        
-
-        
-        <article class="post category-personal">
-            
-            
-
-
-    
-
-
-
-
-
-
-
-
-
-
-<div class="post-sprite theme-sprite-6x3" data-category="personal">
-    <img src="/fantasy/sprites/category/personal.png" alt="Animated sprite for personal category">
-</div>
-
-
-            <div class="post-body">
-                
-                
-                    
-                    <span class="post-tag">personal</span>
-                    
-                
-
-                
-                
-                <h2 class="post-title">
-                    <a href="//localhost:1313/post/personal/">Life Updates from the Circus</a>
-                </h2>
-                
-
-                
-                <div class="post-meta">December 27, 2025</div>
-
-                
-                <div class="post-excerpt">
-                    
-                        Sometimes you just need to share what&rsquo;s going on. Today I learned three new juggling patterns.
-
-                    
-                </div>
-
-                <a href="//localhost:1313/post/personal/" class="post-link">Read more &rarr;</a>
-            </div>
-        </article>
-    
-
-    
-    
-
-    
-        
-        
-
-        
-        <article class="post category-gaming">
-            
-            
-
-
-    
-
-
-
-
-
-
-
-
-
-
-<div class="post-sprite theme-sprite-6x3" data-category="gaming">
-    <img src="/fantasy/sprites/category/gaming.png" alt="Animated sprite for gaming category">
-</div>
-
-
-            <div class="post-body">
-                
-                
-                    
-                    <span class="post-tag">gaming</span>
-                    
-                
-
-                
-                
-                <h2 class="post-title">
-                    <a href="//localhost:1313/post/gaming/">Dragon&#39;s Hoard of Favorite Games</a>
-                </h2>
-                
-
-                
-                <div class="post-meta">December 27, 2025</div>
-
-                
-                <div class="post-excerpt">
-                    
-                        As a dragon, I&rsquo;ve collected many treasures over the centuries. But nothing compares to my Steam library.
-
-                    
-                </div>
-
-                <a href="//localhost:1313/post/gaming/" class="post-link">Read more &rarr;</a>
-            </div>
-        </article>
-    
-
-    
-    
-
-    
-        
-        
-
-        
-        <article class="post category-tabletop">
-            
-            
-
-
-    
-
-
-
-
-
-
-
-
-
-
-<div class="post-sprite theme-sprite-6x3" data-category="tabletop">
-    <img src="/fantasy/sprites/category/tabletop.png" alt="Animated sprite for tabletop category">
-</div>
-
-
-            <div class="post-body">
-                
-                
-                    
-                    <span class="post-tag">tabletop</span>
-                    
-                
-
-                
-                
-                <h2 class="post-title">
-                    <a href="//localhost:1313/post/tabletop/">Rolling the Perfect D20</a>
-                </h2>
-                
-
-                
-                <div class="post-meta">December 27, 2025</div>
-
-                
-                <div class="post-excerpt">
-                    
-                        The knight knows best: when facing a dragon, always let the dice decide your fate. Natural 20 or bust.
-
-                    
-                </div>
-
-                <a href="//localhost:1313/post/tabletop/" class="post-link">Read more &rarr;</a>
+                <a href="//localhost:1313/post/2024-06-01-cat-nap/" class="post-link">Read more &rarr;</a>
             </div>
         </article>
     
@@ -1322,7 +733,7 @@
 
 
 
-<div class="post-sprite theme-sprite-6x3" data-category="health">
+<div class="post-sprite theme-sprite-6x3" data-category="health" data-sprite="health">
     <img src="/fantasy/sprites/category/health.png" alt="Animated sprite for health category">
 </div>
 
@@ -1338,22 +749,267 @@
                 
                 
                 <h2 class="post-title">
-                    <a href="//localhost:1313/post/health/">Skeleton&#39;s Guide to Staying Active</a>
+                    <a href="//localhost:1313/post/2024-05-12-hiking-adventure/">Hiking Adventure</a>
                 </h2>
                 
 
                 
-                <div class="post-meta">December 27, 2025</div>
+                <div class="post-meta">May 12, 2024</div>
 
                 
                 <div class="post-excerpt">
                     
-                        Even skeletons need to keep their bones in good shape. Here&rsquo;s my routine for maintaining peak skeletal health.
+                        10 miles today! The views at the summit were worth every step.
+Already planning the next trail.
 
                     
                 </div>
 
-                <a href="//localhost:1313/post/health/" class="post-link">Read more &rarr;</a>
+                <a href="//localhost:1313/post/2024-05-12-hiking-adventure/" class="post-link">Read more &rarr;</a>
+            </div>
+        </article>
+    
+
+    
+    
+
+    
+        
+        
+
+        
+        <article class="post category-crafting">
+            
+            
+
+
+    
+
+
+
+
+
+
+
+
+
+
+<div class="post-sprite theme-sprite-6x3" data-category="crafting" data-sprite="crafting">
+    <img src="/fantasy/sprites/category/crafting.png" alt="Animated sprite for crafting category">
+</div>
+
+
+            <div class="post-body">
+                
+                
+                    
+                    <span class="post-tag">crafting</span>
+                    
+                
+
+                
+                
+                <h2 class="post-title">
+                    <a href="//localhost:1313/post/2024-04-05-garden-progress/">Garden Progress</a>
+                </h2>
+                
+
+                
+                <div class="post-meta">April 5, 2024</div>
+
+                
+                <div class="post-excerpt">
+                    
+                        The tomatoes are finally coming in!
+All that watering is paying off.
+
+                    
+                </div>
+
+                <a href="//localhost:1313/post/2024-04-05-garden-progress/" class="post-link">Read more &rarr;</a>
+            </div>
+        </article>
+    
+
+    
+    
+
+    
+        
+        
+
+        
+        <article class="post category-travel">
+            
+            
+
+
+    
+
+
+
+
+
+
+
+
+
+
+<div class="post-sprite theme-sprite-6x3" data-category="travel" data-sprite="travel">
+    <img src="/fantasy/sprites/category/travel.png" alt="Animated sprite for travel category">
+</div>
+
+
+            <div class="post-body">
+                
+                
+                    
+                    <span class="post-tag">travel</span>
+                    
+                
+
+                
+                
+                <h2 class="post-title">
+                    <a href="//localhost:1313/post/2024-03-10-sunset-views/">Sunset Views</a>
+                </h2>
+                
+
+                
+                <div class="post-meta">March 10, 2024</div>
+
+                
+                <div class="post-excerpt">
+                    
+                        Caught this incredible sunset from the rooftop.
+Nature really knows how to put on a show.
+
+                    
+                </div>
+
+                <a href="//localhost:1313/post/2024-03-10-sunset-views/" class="post-link">Read more &rarr;</a>
+            </div>
+        </article>
+    
+
+    
+    
+
+    
+        
+        
+
+        
+        <article class="post category-cooking">
+            
+            
+
+
+    
+
+
+
+
+
+
+
+
+
+
+<div class="post-sprite theme-sprite-6x3" data-category="cooking" data-sprite="cooking">
+    <img src="/fantasy/sprites/category/cooking.png" alt="Animated sprite for cooking category">
+</div>
+
+
+            <div class="post-body">
+                
+                
+                    
+                    <span class="post-tag">cooking</span>
+                    
+                
+
+                
+                
+                <h2 class="post-title">
+                    <a href="//localhost:1313/post/2024-02-20-coffee-time/">Coffee Time</a>
+                </h2>
+                
+
+                
+                <div class="post-meta">February 20, 2024</div>
+
+                
+                <div class="post-excerpt">
+                    
+                        Morning ritual complete. This latte art turned out pretty good!
+Now I&rsquo;m ready to tackle the day.
+
+                    
+                </div>
+
+                <a href="//localhost:1313/post/2024-02-20-coffee-time/" class="post-link">Read more &rarr;</a>
+            </div>
+        </article>
+    
+
+    
+    
+
+    
+        
+        
+
+        
+        <article class="post category-travel">
+            
+            
+
+
+    
+
+
+
+
+
+
+
+
+
+
+<div class="post-sprite theme-sprite-6x3" data-category="travel" data-sprite="travel">
+    <img src="/fantasy/sprites/category/travel.png" alt="Animated sprite for travel category">
+</div>
+
+
+            <div class="post-body">
+                
+                
+                    
+                    <span class="post-tag">travel</span>
+                    
+                
+
+                
+                
+                <h2 class="post-title">
+                    <a href="//localhost:1313/post/2024-01-15-beach-day/">Beach Day</a>
+                </h2>
+                
+
+                
+                <div class="post-meta">January 15, 2024</div>
+
+                
+                <div class="post-excerpt">
+                    
+                        What a gorgeous day at the beach! The water was crystal clear.
+Definitely coming back here soon.
+
+                    
+                </div>
+
+                <a href="//localhost:1313/post/2024-01-15-beach-day/" class="post-link">Read more &rarr;</a>
             </div>
         </article>
     
@@ -1369,17 +1025,29 @@
 <nav class="pagination">
     
     
-    <a href="/post/page/2/">Older &rarr;</a>
-    
 </nav>
 
 
     </main><footer class="site-footer">
     <p>
-        dylan&#39;s blog &copy; 2025 &middot; Powered by chaos goblin
+        dylan&#39;s blog &copy; 2026 &middot; Powered by chaos goblin
         energy
     </p>
 </footer>
+
+<script>
+    
+    (function() {
+        const theme = localStorage.getItem('themeStyle') || 'fantasy';
+        document.querySelectorAll('.theme-sprite-6x3[data-sprite]').forEach(container => {
+            const sprite = container.dataset.sprite;
+            const img = container.querySelector('img');
+            if (img && sprite) {
+                img.src = `/${theme}/sprites/category/${sprite}.png`;
+            }
+        });
+    })();
+</script>
 
 <script>
     (function () {
@@ -1398,10 +1066,18 @@
         const usesSpriteSheets = true;
 
         
+        const themeSheetConfigs = {
+            'fantasy': { walk: 8, run: 8, idle: 8 },
+            'cabin': { walk: 8, run: 8, idle: 8 },
+            'sci-fi': { walk: 6, run: 6, idle: 8 },
+            'cyberpunk': { walk: 6, run: 6, idle: 8 },
+            'underwater': { walk: 6, run: 8, idle: 8 }
+        };
+        const themeFrames = themeSheetConfigs[currentTheme] || themeSheetConfigs['fantasy'];
         const sheetConfig = {
-            walk: { frames: 8, duration: 600 },
-            run: { frames: 8, duration: 400 },
-            idle: { frames: 8, duration: 800 }
+            walk: { frames: themeFrames.walk, duration: 600 },
+            run: { frames: themeFrames.run, duration: 400 },
+            idle: { frames: themeFrames.idle, duration: 800 }
         };
         const frameWidth = 140;
 
@@ -1731,14 +1407,79 @@
     })();
 </script>
 
+    <button id="back-to-top" class="fixed-btn fixed-btn-right" aria-label="Back to top" style="display: none;">
+        ↑ TOP
+    </button>
+    <button id="easy-read-toggle" class="fixed-btn fixed-btn-left" aria-label="Toggle easy read mode">
+        <span class="easy-label">👁 EASY</span>
+        <span class="fancy-label" style="display: none;">✨ FANCY</span>
+    </button>
+
+    <script>
+        
+        (function() {
+            const btn = document.getElementById('back-to-top');
+            if (!btn) return;
+
+            
+            function checkScroll() {
+                if (window.scrollY > 300) {
+                    btn.style.display = 'block';
+                } else {
+                    btn.style.display = 'none';
+                }
+            }
+
+            window.addEventListener('scroll', checkScroll, { passive: true });
+            checkScroll();
+
+            
+            btn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        })();
+
+        
+        (function() {
+            const btn = document.getElementById('easy-read-toggle');
+            if (!btn) return;
+
+            const easyLabel = btn.querySelector('.easy-label');
+            const fancyLabel = btn.querySelector('.fancy-label');
+
+            
+            const isEasyRead = localStorage.getItem('easyReadMode') === 'true';
+            if (isEasyRead) {
+                document.documentElement.classList.add('easy-read');
+                easyLabel.style.display = 'none';
+                fancyLabel.style.display = 'inline';
+            }
+
+            btn.addEventListener('click', () => {
+                const willBeEasy = !document.documentElement.classList.contains('easy-read');
+                document.documentElement.classList.toggle('easy-read', willBeEasy);
+                localStorage.setItem('easyReadMode', willBeEasy);
+
+                if (willBeEasy) {
+                    easyLabel.style.display = 'none';
+                    fancyLabel.style.display = 'inline';
+                } else {
+                    easyLabel.style.display = 'inline';
+                    fancyLabel.style.display = 'none';
+                }
+            });
+        })();
+    </script>
+
+    
 
     
 
 
     
-    <script src="/js/chaos.js?v=1767053838"></script>
-    <script src="/js/achievements.js?v=1767053838"></script>
-    <script src="/js/scroll-tiles.js?v=1767053838"></script>
-    <script src="/js/scroll-rollup.js?v=1767053838"></script>
+    <script src="/js/chaos.js?v=1767743675"></script>
+    <script src="/js/achievements.js?v=1767743675"></script>
+    <script src="/js/scroll-tiles.js?v=1767743675"></script>
+    <script src="/js/scroll-rollup.js?v=1767743675"></script>
 </body>
 </html>
