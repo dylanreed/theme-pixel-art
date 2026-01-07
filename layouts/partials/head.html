@@ -1,6 +1,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{{ if .Title }}{{ .Title }} - {{ end }}{{ .Site.Title }}</title>
+
+{{/* Title: avoid duplicate "site - site" on homepage */}}
+{{- $pageTitle := .Site.Title -}}
+{{- if and .Title (not .IsHome) -}}
+    {{- $pageTitle = printf "%s - %s" .Title .Site.Title -}}
+{{- end -}}
+<title>{{ $pageTitle }}</title>
 
 <!-- Favicon -->
 <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg">
@@ -26,10 +32,6 @@
     }
 })();
 </script>
-
-<!-- Preload background images -->
-<link rel="preload" href="/background/3.webp" as="image" type="image/webp">
-<link rel="preload" href="/background/3_night.webp" as="image" type="image/webp">
 
 <!-- Theme asset preloader -->
 <script>
@@ -118,3 +120,6 @@
 <!-- Plugin head HTML -->
 {{ partial "plugin_head_html.html" . }}
 {{ partial "plugin_css.html" . }}
+
+<!-- Tinylytics Analytics -->
+<script src="https://tinylytics.app/embed/vAx94n9xsiRF42VMw4tS.js" defer></script>
