@@ -1849,24 +1849,60 @@ html.night .site-footer p {
 .note-scroll {
     position: relative;
     z-index: 1;
-    margin: -150px auto;
+    margin: -73px auto;
     max-width: 800px;
     display: flex;
     flex-direction: column;
 }
 
+/* First open note */
 .note-scroll:first-child {
-    margin-top: -50px;
+    margin-top: 20px;
 }
 
-/* Space between consecutive notes */
+/* First closed note */
+.note-scroll.rolled-up:first-child {
+    margin-top: 2px;
+}
+
+/* Open + Open */
 .note-scroll + .note-scroll {
-    margin-top: 100px;
+    margin-top: -73px;
 }
 
-/* When a consecutive note is rolled up, needs more top margin to clear previous note's -150px bottom */
-.note-scroll + .note-scroll.rolled-up {
-    margin-top: 200px;
+/* Open + Closed */
+.note-scroll:not(.rolled-up) + .note-scroll.rolled-up {
+    margin-top: -13px;
+}
+
+/* Closed + Open */
+.note-scroll.rolled-up + .note-scroll:not(.rolled-up) {
+    margin-top: -124px;
+}
+
+/* Closed + Closed */
+.note-scroll.rolled-up + .note-scroll.rolled-up {
+    margin-top: -87px;
+}
+
+/* Open → Posts */
+.note-scroll:not(.rolled-up) + .posts-container {
+    margin-top: -23px;
+}
+
+/* Closed → Posts */
+.note-scroll.rolled-up + .posts-container {
+    margin-top: -100px;
+}
+
+/* Posts → Open */
+.posts-container + .note-scroll:not(.rolled-up) {
+    margin-top: -18px;
+}
+
+/* Posts → Closed */
+.posts-container + .note-scroll.rolled-up {
+    margin-top: 20px;
 }
 
 .note-scroll::before {
@@ -2114,9 +2150,57 @@ html.night .note-scroll object {
    THEME: SCI-FI NOTES
    ═══════════════════════════════════════════════════════════════ */
 
-/* sci-fi - Open */
+/* sci-fi - Base spacing */
 html.theme-sci-fi .note-scroll {
-    margin: 0 auto;
+    margin: -196px auto;
+}
+
+html.theme-sci-fi .note-scroll:first-child {
+    margin-top: 20px;
+}
+
+html.theme-sci-fi .note-scroll.rolled-up:first-child {
+    margin-top: 2px;
+}
+
+/* sci-fi - Open + Open */
+html.theme-sci-fi .note-scroll + .note-scroll {
+    margin-top: -196px;
+}
+
+/* sci-fi - Open + Closed */
+html.theme-sci-fi .note-scroll:not(.rolled-up) + .note-scroll.rolled-up {
+    margin-top: -66px;
+}
+
+/* sci-fi - Closed + Open */
+html.theme-sci-fi .note-scroll.rolled-up + .note-scroll:not(.rolled-up) {
+    margin-top: -224px;
+}
+
+/* sci-fi - Closed + Closed */
+html.theme-sci-fi .note-scroll.rolled-up + .note-scroll.rolled-up {
+    margin-top: -87px;
+}
+
+/* sci-fi - Open → Posts */
+html.theme-sci-fi .note-scroll:not(.rolled-up) + .posts-container {
+    margin-top: -84px;
+}
+
+/* sci-fi - Closed → Posts */
+html.theme-sci-fi .note-scroll.rolled-up + .posts-container {
+    margin-top: -83px;
+}
+
+/* sci-fi - Posts → Open */
+html.theme-sci-fi .posts-container + .note-scroll:not(.rolled-up) {
+    margin-top: -94px;
+}
+
+/* sci-fi - Posts → Closed */
+html.theme-sci-fi .posts-container + .note-scroll.rolled-up {
+    margin-top: 13px;
 }
 
 html.theme-sci-fi .note-scroll::before {
@@ -2158,7 +2242,6 @@ html.theme-sci-fi .note-scroll .note-date {
 html.theme-sci-fi .note-scroll.rolled-up {
     background-image: url("/sci-fi/notes/closed.webp");
     height: 289px;
-    margin: 10px auto 10px auto;
 }
 
 /* sci-fi - Date (Closed) */
@@ -2183,9 +2266,57 @@ html.theme-sci-fi .scroll-bottom-clickable {
    THEME: CYBERPUNK NOTES
    ═══════════════════════════════════════════════════════════════ */
 
-/* cyberpunk - Open */
+/* cyberpunk - Base spacing */
 html.theme-cyberpunk .note-scroll {
-    margin: 0 auto;
+    margin: -72px auto;
+}
+
+html.theme-cyberpunk .note-scroll:first-child {
+    margin-top: 20px;
+}
+
+html.theme-cyberpunk .note-scroll.rolled-up:first-child {
+    margin-top: 2px;
+}
+
+/* cyberpunk - Open + Open */
+html.theme-cyberpunk .note-scroll + .note-scroll {
+    margin-top: -72px;
+}
+
+/* cyberpunk - Open + Closed */
+html.theme-cyberpunk .note-scroll:not(.rolled-up) + .note-scroll.rolled-up {
+    margin-top: 24px;
+}
+
+/* cyberpunk - Closed + Open */
+html.theme-cyberpunk .note-scroll.rolled-up + .note-scroll:not(.rolled-up) {
+    margin-top: -96px;
+}
+
+/* cyberpunk - Closed + Closed */
+html.theme-cyberpunk .note-scroll.rolled-up + .note-scroll.rolled-up {
+    margin-top: -2px;
+}
+
+/* cyberpunk - Open → Posts */
+html.theme-cyberpunk .note-scroll:not(.rolled-up) + .posts-container {
+    margin-top: 29px;
+}
+
+/* cyberpunk - Closed → Posts */
+html.theme-cyberpunk .note-scroll.rolled-up + .posts-container {
+    margin-top: -15px;
+}
+
+/* cyberpunk - Posts → Open */
+html.theme-cyberpunk .posts-container + .note-scroll:not(.rolled-up) {
+    margin-top: -99px;
+}
+
+/* cyberpunk - Posts → Closed */
+html.theme-cyberpunk .posts-container + .note-scroll.rolled-up {
+    margin-top: 13px;
 }
 
 html.theme-cyberpunk .note-scroll::before {
@@ -2227,7 +2358,6 @@ html.theme-cyberpunk .note-scroll .note-date {
 html.theme-cyberpunk .note-scroll.rolled-up {
     background-image: url("/cyberpunk/notes/closed.webp");
     height: 209px;
-    margin: 10px auto 10px auto;
 }
 
 /* cyberpunk - Date (Closed) */
@@ -2252,9 +2382,57 @@ html.theme-cyberpunk .scroll-bottom-clickable {
    THEME: CABIN NOTES
    ═══════════════════════════════════════════════════════════════ */
 
-/* cabin - Open */
+/* cabin - Base spacing */
 html.theme-cabin .note-scroll {
-    margin: -150px auto;
+    margin: -35px auto;
+}
+
+html.theme-cabin .note-scroll:first-child {
+    margin-top: 20px;
+}
+
+html.theme-cabin .note-scroll.rolled-up:first-child {
+    margin-top: 2px;
+}
+
+/* cabin - Open + Open */
+html.theme-cabin .note-scroll + .note-scroll {
+    margin-top: -35px;
+}
+
+/* cabin - Open + Closed */
+html.theme-cabin .note-scroll:not(.rolled-up) + .note-scroll.rolled-up {
+    margin-top: 0px;
+}
+
+/* cabin - Closed + Open */
+html.theme-cabin .note-scroll.rolled-up + .note-scroll:not(.rolled-up) {
+    margin-top: -113px;
+}
+
+/* cabin - Closed + Closed */
+html.theme-cabin .note-scroll.rolled-up + .note-scroll.rolled-up {
+    margin-top: -80px;
+}
+
+/* cabin - Open → Posts */
+html.theme-cabin .note-scroll:not(.rolled-up) + .posts-container {
+    margin-top: -8px;
+}
+
+/* cabin - Closed → Posts */
+html.theme-cabin .note-scroll.rolled-up + .posts-container {
+    margin-top: -92px;
+}
+
+/* cabin - Posts → Open */
+html.theme-cabin .posts-container + .note-scroll:not(.rolled-up) {
+    margin-top: 8px;
+}
+
+/* cabin - Posts → Closed */
+html.theme-cabin .posts-container + .note-scroll.rolled-up {
+    margin-top: 24px;
 }
 
 html.theme-cabin .note-scroll::before {
@@ -2295,7 +2473,6 @@ html.theme-cabin .note-scroll .note-date {
 html.theme-cabin .note-scroll.rolled-up {
     background-image: url("/cabin/notes/closed.webp");
     height: 289px;
-    margin: 10px auto 10px auto;
 }
 
 /* cabin - Date (Closed) */
@@ -2320,9 +2497,57 @@ html.theme-cabin .scroll-bottom-clickable {
    THEME: UNDERWATER NOTES
    ═══════════════════════════════════════════════════════════════ */
 
-/* underwater - Open */
+/* underwater - Base spacing */
 html.theme-underwater .note-scroll {
-    margin: 0 auto;
+    margin: -178px auto;
+}
+
+html.theme-underwater .note-scroll:first-child {
+    margin-top: 20px;
+}
+
+html.theme-underwater .note-scroll.rolled-up:first-child {
+    margin-top: 2px;
+}
+
+/* underwater - Open + Open */
+html.theme-underwater .note-scroll + .note-scroll {
+    margin-top: -178px;
+}
+
+/* underwater - Open + Closed */
+html.theme-underwater .note-scroll:not(.rolled-up) + .note-scroll.rolled-up {
+    margin-top: -61px;
+}
+
+/* underwater - Closed + Open */
+html.theme-underwater .note-scroll.rolled-up + .note-scroll:not(.rolled-up) {
+    margin-top: -188px;
+}
+
+/* underwater - Closed + Closed */
+html.theme-underwater .note-scroll.rolled-up + .note-scroll.rolled-up {
+    margin-top: -84px;
+}
+
+/* underwater - Open → Posts */
+html.theme-underwater .note-scroll:not(.rolled-up) + .posts-container {
+    margin-top: -59px;
+}
+
+/* underwater - Closed → Posts */
+html.theme-underwater .note-scroll.rolled-up + .posts-container {
+    margin-top: -92px;
+}
+
+/* underwater - Posts → Open */
+html.theme-underwater .posts-container + .note-scroll:not(.rolled-up) {
+    margin-top: -81px;
+}
+
+/* underwater - Posts → Closed */
+html.theme-underwater .posts-container + .note-scroll.rolled-up {
+    margin-top: 24px;
 }
 
 html.theme-underwater .note-scroll::before {
@@ -2363,7 +2588,6 @@ html.theme-underwater .note-scroll .note-date {
 html.theme-underwater .note-scroll.rolled-up {
     background-image: url("/underwater/notes/closed.webp");
     height: 289px;
-    margin: 10px auto 10px auto;
 }
 
 /* underwater - Date (Closed) */
