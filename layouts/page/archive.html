@@ -19,7 +19,7 @@
 
                 <span class="archive-date">{{ .Date.Format "Jan 02" }}</span>
                 <a href="{{ .Permalink }}" class="archive-title">
-                    {{ if .Title }}{{ .Title }}{{ else }}{{ .Content | plainify | truncate 50 }}{{ end }}
+                    {{ if .Title }}{{ .Title }}{{ else }}{{ .Content | plainify | htmlUnescape | truncate 50 }}{{ end }}
                 </a>
                 {{ with .Params.categories }}
                     {{ range first 1 . }}

@@ -6,7 +6,7 @@
 {{ if .Description }}
     {{ $description = .Description }}
 {{ else if .Summary }}
-    {{ $description = .Summary | plainify | truncate 160 }}
+    {{ $description = .Summary | plainify | htmlUnescape | truncate 160 }}
 {{ else if .Site.Params.description }}
     {{ $description = .Site.Params.description }}
 {{ else }}

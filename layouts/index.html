@@ -72,9 +72,9 @@
                 {{ if eq $blogIndex 0 }}
                 <div class="post-excerpt">
                     {{ if .Summary }}
-                        {{ .Summary | plainify | truncate 200 }}
+                        {{ .Summary | plainify | htmlUnescape | truncate 200 }}
                     {{ else }}
-                        {{ .Content | plainify | truncate 200 }}
+                        {{ .Content | plainify | htmlUnescape | truncate 200 }}
                     {{ end }}
                 </div>
                 <a href="{{ .Permalink }}" class="post-link">Read more &rarr;</a>

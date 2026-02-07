@@ -55,9 +55,9 @@
                 {{/* Excerpt or full content for short posts */}}
                 <div class="post-excerpt">
                     {{ if .Summary }}
-                        {{ .Summary | plainify | truncate 200 }}
+                        {{ .Summary | plainify | htmlUnescape | truncate 200 }}
                     {{ else }}
-                        {{ .Content | plainify | truncate 200 }}
+                        {{ .Content | plainify | htmlUnescape | truncate 200 }}
                     {{ end }}
                 </div>
 
