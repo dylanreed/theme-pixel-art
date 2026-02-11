@@ -1,5 +1,5 @@
 {{/* Determine header image based on category */}}
-{{ $headerImage := "/headers/home.webp" }}
+{{ $headerImage := "/fantasy/headers/home.webp" }}
 {{ $cat := "" }}
 
 {{/* Get category from page or taxonomy */}}
@@ -15,35 +15,35 @@
 {{/* Map category to header image */}}
 {{ if $cat }}
     {{ if eq $cat "health" }}
-        {{ $headerImage = "/headers/health.webp" }}
+        {{ $headerImage = "/fantasy/headers/health.webp" }}
     {{ else if eq $cat "tabletop" }}
-        {{ $headerImage = "/headers/tabletop.webp" }}
+        {{ $headerImage = "/fantasy/headers/tabletop.webp" }}
     {{ else if eq $cat "gaming" }}
-        {{ $headerImage = "/headers/gaming.webp" }}
+        {{ $headerImage = "/fantasy/headers/gaming.webp" }}
     {{ else if eq $cat "personal" }}
-        {{ $headerImage = "/headers/home.webp" }}
+        {{ $headerImage = "/fantasy/headers/home.webp" }}
     {{ else if eq $cat "clown" }}
-        {{ $headerImage = "/headers/clown.webp" }}
+        {{ $headerImage = "/fantasy/headers/clown.webp" }}
     {{ else if eq $cat "writing" }}
-        {{ $headerImage = "/headers/writing.webp" }}
+        {{ $headerImage = "/fantasy/headers/writing.webp" }}
     {{ else if eq $cat "cooking" }}
-        {{ $headerImage = "/headers/cooking.webp" }}
+        {{ $headerImage = "/fantasy/headers/cooking.webp" }}
     {{ else if eq $cat "music" }}
-        {{ $headerImage = "/headers/music.webp" }}
+        {{ $headerImage = "/fantasy/headers/music.webp" }}
     {{ else if eq $cat "travel" }}
-        {{ $headerImage = "/headers/travel.webp" }}
+        {{ $headerImage = "/fantasy/headers/travel.webp" }}
     {{ else if eq $cat "reading" }}
-        {{ $headerImage = "/headers/reading.webp" }}
+        {{ $headerImage = "/fantasy/headers/reading.webp" }}
     {{ else if eq $cat "crafting" }}
-        {{ $headerImage = "/headers/crafting.webp" }}
+        {{ $headerImage = "/fantasy/headers/crafting.webp" }}
     {{ else if eq $cat "adhd" }}
-        {{ $headerImage = "/headers/adhd.webp" }}
+        {{ $headerImage = "/fantasy/headers/adhd.webp" }}
     {{ else if eq $cat "pets" }}
-        {{ $headerImage = "/headers/pets.webp" }}
+        {{ $headerImage = "/fantasy/headers/pets.webp" }}
     {{ else if eq $cat "tech" }}
-        {{ $headerImage = "/headers/tech.webp" }}
+        {{ $headerImage = "/fantasy/headers/tech.webp" }}
     {{ else }}
-        {{ $headerImage = "/headers/default.webp" }}
+        {{ $headerImage = "/fantasy/headers/default.webp" }}
     {{ end }}
 {{ end }}
 

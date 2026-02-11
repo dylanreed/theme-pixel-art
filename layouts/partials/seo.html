@@ -8,7 +8,7 @@
 {{ else if .Summary }}
     {{ $description = .Summary | plainify | htmlUnescape | truncate 160 }}
 {{ else if .Site.Params.description }}
-    {{ $description = .Site.Params.description }}
+    {{ $description = .Site.Params.description | plainify | htmlUnescape }}
 {{ else }}
     {{ $description = "Dylan's pixel art blog about gaming, health, tabletop, and life adventures." }}
 {{ end }}
@@ -71,8 +71,12 @@
 {{/* Canonical URL */}}
 <link rel="canonical" href="{{ $canonicalURL }}">
 
-{{/* Open Graph tags */}}
-<meta property="og:title" content="{{ $title }}">
+{{/* Open Graph tags — use page title only, og:site_name provides site context */}}
+{{ $ogTitle := .Site.Title }}
+{{ if and .Title (not .IsHome) }}
+    {{ $ogTitle = .Title }}
+{{ end }}
+<meta property="og:title" content="{{ $ogTitle }}">
 <meta property="og:description" content="{{ $description }}">
 <meta property="og:type" content="{{ $ogType }}">
 <meta property="og:url" content="{{ $canonicalURL }}">
@@ -92,7 +96,7 @@
 
 {{/* Twitter Card tags */}}
 <meta name="twitter:card" content="{{ if $image }}summary_large_image{{ else }}summary{{ end }}">
-<meta name="twitter:title" content="{{ $title }}">
+<meta name="twitter:title" content="{{ $ogTitle }}">
 <meta name="twitter:description" content="{{ $description }}">
 {{ with $image }}<meta name="twitter:image" content="{{ . }}">{{ end }}
 {{ with .Site.Params.twitter }}<meta name="twitter:site" content="@{{ . }}">{{ end }}
