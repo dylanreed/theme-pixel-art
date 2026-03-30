@@ -548,7 +548,10 @@ html.night .sparkle-pixel {
 .vaporwave-mode .posts-container,
 .vaporwave-mode .post-container,
 .vaporwave-mode .page-container,
-.vaporwave-mode .archive-container {
+.vaporwave-mode .archive-container,
+.vaporwave-mode .h-feed,
+.vaporwave-mode .photos-grid-container,
+.vaporwave-mode .archive_categories {
     border-image-source: none;
     border: 4px solid;
     border-image: linear-gradient(45deg, #ff00ff, #00ffff, #ff00ff) 1;
@@ -1481,7 +1484,10 @@ html.theme-sci-fi.night body {
 html.theme-sci-fi .posts-container,
 html.theme-sci-fi .post-container,
 html.theme-sci-fi .page-container,
-html.theme-sci-fi .archive-container {
+html.theme-sci-fi .archive-container,
+html.theme-sci-fi .h-feed,
+html.theme-sci-fi .photos-grid-container,
+html.theme-sci-fi .archive_categories {
     border-image-source: none !important;
 }
 
@@ -1560,14 +1566,20 @@ html.theme-sci-fi .site-title a {
 html.theme-sci-fi .posts-container::before,
 html.theme-sci-fi .post-container::before,
 html.theme-sci-fi .page-container::before,
-html.theme-sci-fi .archive-container::before {
+html.theme-sci-fi .archive-container::before,
+html.theme-sci-fi .h-feed::before,
+html.theme-sci-fi .photos-grid-container::before,
+html.theme-sci-fi .archive_categories::before {
     background: linear-gradient(135deg, #1a2535 0%, #0d1520 100%);
 }
 
 html.theme-sci-fi.night .posts-container::before,
 html.theme-sci-fi.night .post-container::before,
 html.theme-sci-fi.night .page-container::before,
-html.theme-sci-fi.night .archive-container::before {
+html.theme-sci-fi.night .archive-container::before,
+html.theme-sci-fi.night .h-feed::before,
+html.theme-sci-fi.night .photos-grid-container::before,
+html.theme-sci-fi.night .archive_categories::before {
     background: linear-gradient(135deg, #0a1525 0%, #050a10 100%);
 }
 

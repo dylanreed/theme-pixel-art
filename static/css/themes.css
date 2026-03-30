@@ -39,7 +39,10 @@ html.theme-cyberpunk.night .border-overlay {
 html.theme-cyberpunk .posts-container,
 html.theme-cyberpunk .post-container,
 html.theme-cyberpunk .page-container,
-html.theme-cyberpunk .archive-container {
+html.theme-cyberpunk .archive-container,
+html.theme-cyberpunk .h-feed,
+html.theme-cyberpunk .photos-grid-container,
+html.theme-cyberpunk .archive_categories {
     border-image-source: none !important;
 }
 
@@ -679,7 +682,10 @@ html.theme-cabin.night .border-overlay {
 html.theme-cabin .posts-container,
 html.theme-cabin .post-container,
 html.theme-cabin .page-container,
-html.theme-cabin .archive-container {
+html.theme-cabin .archive-container,
+html.theme-cabin .h-feed,
+html.theme-cabin .photos-grid-container,
+html.theme-cabin .archive_categories {
     border-image-source: none !important;
 }
 
@@ -909,7 +915,10 @@ html.theme-underwater.night .border-overlay {
 html.theme-underwater .posts-container,
 html.theme-underwater .post-container,
 html.theme-underwater .page-container,
-html.theme-underwater .archive-container {
+html.theme-underwater .archive-container,
+html.theme-underwater .h-feed,
+html.theme-underwater .photos-grid-container,
+html.theme-underwater .archive_categories {
     border-image-source: none !important;
 }
 
@@ -1488,34 +1497,58 @@ html.easy-read.theme-sci-fi .posts-container::before,
 html.easy-read.theme-sci-fi .post-container::before,
 html.easy-read.theme-sci-fi .page-container::before,
 html.easy-read.theme-sci-fi .archive-container::before,
+html.easy-read.theme-sci-fi .h-feed::before,
+html.easy-read.theme-sci-fi .photos-grid-container::before,
+html.easy-read.theme-sci-fi .archive_categories::before,
 html.easy-read.theme-sci-fi.night .posts-container::before,
 html.easy-read.theme-sci-fi.night .post-container::before,
 html.easy-read.theme-sci-fi.night .page-container::before,
 html.easy-read.theme-sci-fi.night .archive-container::before,
+html.easy-read.theme-sci-fi.night .h-feed::before,
+html.easy-read.theme-sci-fi.night .photos-grid-container::before,
+html.easy-read.theme-sci-fi.night .archive_categories::before,
 html.easy-read.theme-cyberpunk .posts-container::before,
 html.easy-read.theme-cyberpunk .post-container::before,
 html.easy-read.theme-cyberpunk .page-container::before,
 html.easy-read.theme-cyberpunk .archive-container::before,
+html.easy-read.theme-cyberpunk .h-feed::before,
+html.easy-read.theme-cyberpunk .photos-grid-container::before,
+html.easy-read.theme-cyberpunk .archive_categories::before,
 html.easy-read.theme-cyberpunk.night .posts-container::before,
 html.easy-read.theme-cyberpunk.night .post-container::before,
 html.easy-read.theme-cyberpunk.night .page-container::before,
 html.easy-read.theme-cyberpunk.night .archive-container::before,
+html.easy-read.theme-cyberpunk.night .h-feed::before,
+html.easy-read.theme-cyberpunk.night .photos-grid-container::before,
+html.easy-read.theme-cyberpunk.night .archive_categories::before,
 html.easy-read.theme-cabin .posts-container::before,
 html.easy-read.theme-cabin .post-container::before,
 html.easy-read.theme-cabin .page-container::before,
 html.easy-read.theme-cabin .archive-container::before,
+html.easy-read.theme-cabin .h-feed::before,
+html.easy-read.theme-cabin .photos-grid-container::before,
+html.easy-read.theme-cabin .archive_categories::before,
 html.easy-read.theme-cabin.night .posts-container::before,
 html.easy-read.theme-cabin.night .post-container::before,
 html.easy-read.theme-cabin.night .page-container::before,
 html.easy-read.theme-cabin.night .archive-container::before,
+html.easy-read.theme-cabin.night .h-feed::before,
+html.easy-read.theme-cabin.night .photos-grid-container::before,
+html.easy-read.theme-cabin.night .archive_categories::before,
 html.easy-read.theme-underwater .posts-container::before,
 html.easy-read.theme-underwater .post-container::before,
 html.easy-read.theme-underwater .page-container::before,
 html.easy-read.theme-underwater .archive-container::before,
+html.easy-read.theme-underwater .h-feed::before,
+html.easy-read.theme-underwater .photos-grid-container::before,
+html.easy-read.theme-underwater .archive_categories::before,
 html.easy-read.theme-underwater.night .posts-container::before,
 html.easy-read.theme-underwater.night .post-container::before,
 html.easy-read.theme-underwater.night .page-container::before,
-html.easy-read.theme-underwater.night .archive-container::before {
+html.easy-read.theme-underwater.night .archive-container::before,
+html.easy-read.theme-underwater.night .h-feed::before,
+html.easy-read.theme-underwater.night .photos-grid-container::before,
+html.easy-read.theme-underwater.night .archive_categories::before {
     background: #ffffff !important;
     background-color: #ffffff !important;
     background-image: none !important;
