@@ -619,7 +619,8 @@ html.night .archive-tag:hover {
     display: flex;
     align-items: flex-start;
     gap: 20px;
-    padding: 10px 0;
+    padding: 15px 0;
+    min-height: 96px;
     border-bottom: 2px solid rgba(139, 90, 43, 0.2);
 }
 
@@ -631,6 +632,8 @@ html.night .archive-tag:hover {
 .post-sprite {
     width: 96px;
     height: 96px;
+    min-width: 96px;
+    min-height: 96px;
     overflow: hidden;
     image-rendering: pixelated;
     flex-shrink: 0;
@@ -640,6 +643,7 @@ html.night .archive-tag:hover {
     width: 192px;
     height: 192px;
     image-rendering: pixelated;
+    display: block;
 }
 
 /* Post body */

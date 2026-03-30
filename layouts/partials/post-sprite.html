@@ -20,9 +20,12 @@
                  cooking, music, travel, reading, crafting, adhd, pets, tech
      Default: default.png
 */}}
+{{ $spriteMap := dict "clowning" "clown" }}
 {{ $spriteFile := $category }}
 {{ if eq $spriteFile "" }}
     {{ $spriteFile = "default" }}
+{{ else if index $spriteMap $spriteFile }}
+    {{ $spriteFile = index $spriteMap $spriteFile }}
 {{ end }}
 
 <div class="{{ if $isArchive }}archive-sprite{{ else }}post-sprite{{ end }} theme-sprite-6x3" data-category="{{ $category }}" data-sprite="{{ $spriteFile }}">
