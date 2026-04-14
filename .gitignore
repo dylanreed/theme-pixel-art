@@ -3,3 +3,17 @@
 
 # Local test posts (synced from micro.blog, not tracked in git)
 content/post/
+
+# Affinity Photo source files (exports live in static/)
+*.afphoto
+
+# Prompt scratch files
+*_prompts.md
+sprites.md
+
+# Unused/archived assets
+unused/
+
+# Build lock + scratch
+.hugo_build.lock
+.scratch/
