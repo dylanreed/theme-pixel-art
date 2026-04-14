@@ -6,6 +6,37 @@
 </footer>
 
 <script>
+    // Archive page: merge categories block into the h-feed frame so both
+    // sections share a single tile-bordered container.
+    (function () {
+        const cats = document.querySelector(".archive_categories");
+        const feed = document.querySelector(".h-feed");
+        if (cats && feed && cats.parentElement === feed.parentElement) {
+            feed.insertBefore(cats, feed.firstChild);
+            cats.classList.add("inside-feed");
+        }
+    })();
+</script>
+
+<script>
+    // Nav: mark active page based on current URL (platform-independent).
+    (function () {
+        const path = location.pathname.replace(/\/$/, "") || "/";
+        document.querySelectorAll(".site-nav .nav-sign").forEach((a) => {
+            a.classList.remove("active");
+            const href = (a.getAttribute("href") || "").replace(/^https?:\/\/[^/]+/, "").replace(/\/$/, "") || "/";
+            if (href === path) a.classList.add("active");
+        });
+        // If nothing matched and we're not on home, don't force home-active
+        const anyActive = document.querySelector(".site-nav .nav-sign.active");
+        if (!anyActive && path === "/") {
+            const home = document.querySelector('.site-nav .nav-sign[href$="/"]');
+            if (home) home.classList.add("active");
+        }
+    })();
+</script>
+
+<script>
     // Update category sprites to use current theme
     (function() {
         const theme = localStorage.getItem('themeStyle') || 'fantasy';
@@ -23,7 +54,7 @@
     (function () {
         // Find ALL content containers with grass borders
         const containers = document.querySelectorAll(
-            ".posts-container, .post-container, .page-container, .archive-container, .note-scroll-single",
+            ".posts-container, .post-container, .page-container, .archive-container, .note-scroll-single, .h-feed, .photos-grid-container",
         );
         if (containers.length === 0) return;
 

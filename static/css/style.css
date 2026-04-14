@@ -1894,6 +1894,18 @@ html.night .site-footer p {
     background: linear-gradient(180deg, #aa7843 0%, #8a5a33 100%);
 }
 
+/* When categories moved inside .h-feed by JS, drop its own frame */
+.archive_categories.inside-feed {
+    border: 0 !important;
+    padding: 0 0 16px 0 !important;
+    margin: 0 0 16px 0 !important;
+    border-bottom: 2px dashed rgba(139, 90, 43, 0.35) !important;
+}
+
+.archive_categories.inside-feed::before {
+    display: none;
+}
+
 /* Archive feed container */
 .h-feed {
     position: relative;
@@ -1990,10 +2002,13 @@ html.night .site-footer p {
     border-image-slice: 64 96 64 96;
     border-image-width: 64px 96px 64px 96px;
     border-image-repeat: round;
-    padding: 20px !important;
+    padding: 0 !important;
     margin-top: 10px;
     margin-bottom: 80px;
-    gap: 12px !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    grid-column-gap: 0 !important;
+    grid-row-gap: 0 !important;
+    gap: 0 !important;
 }
 
 .photos-grid-container::before {
@@ -2012,7 +2027,8 @@ html.night .site-footer p {
     z-index: 1;
     display: block;
     overflow: hidden;
-    border: 3px solid #8b5a2b;
+    border: 0;
+    aspect-ratio: 1 / 1;
     transition:
         transform 0.2s ease,
         box-shadow 0.2s ease;
@@ -2027,7 +2043,9 @@ html.night .site-footer p {
 .photos-grid-container .photos-grid-item {
     border-radius: 0 !important;
     width: 100% !important;
-    height: auto !important;
+    height: 100% !important;
+    object-fit: cover;
+    display: block;
 }
 
 /* Category page */
