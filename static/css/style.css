@@ -602,8 +602,16 @@ html.night .archive-tag:hover {
 .posts-container:has(.border-overlay),
 .post-container:has(.border-overlay),
 .page-container:has(.border-overlay),
-.archive-container:has(.border-overlay) {
+.archive-container:has(.border-overlay),
+.h-feed:has(> .border-overlay),
+.photos-grid-container:has(> .border-overlay),
+.archive_categories:has(> .border-overlay) {
     border-image-source: none;
+}
+
+/* Merged categories inside feed: no overlay frame */
+.archive_categories.inside-feed > .border-overlay {
+    display: none !important;
 }
 
 /* Post list */
