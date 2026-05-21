@@ -1,22 +1,32 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-{{/* Title: avoid duplicate "site - site" on homepage */}}
+{{/*- /latest/ redirect: bounces visitors to the newest post (used for the Instagram bio link).
+     Computed at build time, so micro.blog rebuilds it to the current latest post on every publish.
+     Detection is by URL so it only affects the single page whose micro.blog slug is "latest". -*/}}
+{{- if eq (strings.TrimSuffix "/" .RelPermalink) "/latest" -}}
+    {{- $posts := where .Site.RegularPages "Section" "posts" -}}
+    {{- if eq (len $posts) 0 -}}{{- $posts = where .Site.RegularPages "Type" "post" -}}{{- end -}}
+    {{- if eq (len $posts) 0 -}}{{- $posts = where .Site.RegularPages ".Params.layout" "!=" "page" -}}{{- end -}}
+    {{- with index (first 1 $posts.ByDate.Reverse) 0 -}}
+        <meta http-equiv="refresh" content="0; url={{ .Permalink }}">
+        <script>window.location.replace({{ .Permalink }});</script>
+    {{- end -}}
+{{- end -}}
+
+{{/*- Title: avoid duplicate "site - site" on homepage -*/}}
 {{- $pageTitle := .Site.Title -}}
 {{- if and .Title (not .IsHome) -}}
     {{- $pageTitle = printf "%s - %s" .Title .Site.Title -}}
 {{- end -}}
 <title>{{ $pageTitle }}</title>
 
-<!-- Favicon -->
 <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
 <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
 <link rel="manifest" href="/favicon/site.webmanifest">
-
-{{/* SEO and social sharing meta tags */}}
-{{ partial "seo.html" . }}
+{{- partial "seo.html" . -}}
 
 <!-- Theme detection - MUST run before CSS to prevent flash -->
 <script>
@@ -99,7 +109,7 @@
 <link rel="stylesheet" href="/css/sierra-panel.css">
 
 <!-- Custom CSS from micro.blog -->
-{{ partial "custom_css.html" . }}
+{{- partial "custom_css.html" . -}}
 
 <!-- IndieWeb endpoints -->
 <link rel="authorization_endpoint" href="https://micro.blog/indieauth/auth">
@@ -109,17 +119,17 @@
 <link rel="microsub" href="https://micro.blog/microsub">
 
 <!-- Social identity links -->
-{{ with .Site.Params.twitter }}<link rel="me" href="https://twitter.com/{{ . }}">{{ end }}
-{{ with .Site.Params.github }}<link rel="me" href="https://github.com/{{ . }}">{{ end }}
-{{ with .Site.Params.instagram }}<link rel="me" href="https://instagram.com/{{ . }}">{{ end }}
+{{- with .Site.Params.twitter }}<link rel="me" href="https://twitter.com/{{ . }}">{{ end }}
+{{- with .Site.Params.github }}<link rel="me" href="https://github.com/{{ . }}">{{ end }}
+{{- with .Site.Params.instagram }}<link rel="me" href="https://instagram.com/{{ . }}">{{ end }}
 
 <!-- RSS Feed -->
 <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{ .Site.BaseURL }}feed.xml">
 <link rel="alternate" type="application/json" title="{{ .Site.Title }}" href="{{ .Site.BaseURL }}feed.json">
 
 <!-- Plugin head HTML -->
-{{ partial "plugin_head_html.html" . }}
-{{ partial "plugin_css.html" . }}
+{{- partial "plugin_head_html.html" . -}}
+{{- partial "plugin_css.html" . -}}
 
 <!-- Tinylytics Analytics -->
 <script src="https://tinylytics.app/embed/vAx94n9xsiRF42VMw4tS.js" defer></script>
