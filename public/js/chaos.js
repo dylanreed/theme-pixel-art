@@ -439,7 +439,7 @@
 
     // Border overlay management - adds overlay to all containers for border-on-top effect
     function addBorderOverlays() {
-        const containers = document.querySelectorAll('.posts-container, .post-container, .page-container, .archive-container');
+        const containers = document.querySelectorAll('.posts-container, .post-container, .page-container, .archive-container, .h-feed, .photos-grid-container, .archive_categories');
         containers.forEach(container => {
             // Don't add if already exists
             if (container.querySelector('.border-overlay')) return;

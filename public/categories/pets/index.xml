@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Pets on dylan&#39;s blog</title>
-    <link>//localhost:1313/categories/pets/</link>
+    <link>/categories/pets/</link>
     <description>Recent content in Pets on dylan&#39;s blog</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Sat, 01 Jun 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/categories/pets/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/categories/pets/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Cat Nap</title>
-      <link>//localhost:1313/post/2024-06-01-cat-nap/</link>
+      <link>/post/2024-06-01-cat-nap/</link>
       <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/post/2024-06-01-cat-nap/</guid>
+      <guid>/post/2024-06-01-cat-nap/</guid>
       <description>&lt;p&gt;Someone found the sunny spot again.&lt;/p&gt;&#xA;&lt;img src=&#34;https://dylan.blog/uploads/2024/2a9c4b8d1f.jpg&#34; alt=&#34;Cat sleeping&#34;&gt;&#xA;&lt;p&gt;Living his best life.&lt;/p&gt;</description>
     </item>
   </channel>

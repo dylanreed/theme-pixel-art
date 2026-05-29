@@ -1,17 +1,20 @@
-{{ define "main" }}
+{{/* ABOUTME: Default list template for Hugo pages (homepage, section lists). */}}
+{{/* ABOUTME: Groups blog posts in a container and renders notes as standalone scrolls. */}}
+
+{{- define "main" -}}
 {{/* Track state for grouping blogs vs notes */}}
-{{ $.Scratch.Set "inBlogGroup" false }}
+{{- $.Scratch.Set "inBlogGroup" false -}}
 
-{{ range .Pages }}
+{{- range .Pages -}}
     {{/* Note = no title OR explicitly marked as note */}}
-    {{ $isNote := or (not .Title) (eq .Params.format "note") }}
+    {{- $isNote := or (not .Title) (eq .Params.format "note") -}}
 
-    {{ if $isNote }}
+    {{- if $isNote -}}
         {{/* Close blog container if we were in one */}}
-        {{ if $.Scratch.Get "inBlogGroup" }}
+        {{- if $.Scratch.Get "inBlogGroup" }}
             </div></div>
-            {{ $.Scratch.Set "inBlogGroup" false }}
-        {{ end }}
+            {{- $.Scratch.Set "inBlogGroup" false -}}
+        {{- end }}
 
         {{/* Render note as scroll */}}
         <article class="note-scroll">
@@ -22,12 +25,12 @@
                 <a href="{{ .Permalink }}" class="note-date">{{ .Date.Format "January 2, 2006" }}</a>
             </div>
         </article>
-    {{ else }}
+    {{- else -}}
         {{/* Open blog container if not already in one */}}
-        {{ if not ($.Scratch.Get "inBlogGroup") }}
+        {{- if not ($.Scratch.Get "inBlogGroup") }}
             <div class="posts-container"><div class="posts">
-            {{ $.Scratch.Set "inBlogGroup" true }}
-        {{ end }}
+            {{- $.Scratch.Set "inBlogGroup" true -}}
+        {{- end }}
 
         {{/* Render blog post */}}
         <article class="post {{ partial "category-class.html" . }}">
@@ -36,51 +39,51 @@
 
             <div class="post-body">
                 {{/* Category tag */}}
-                {{ with .Params.categories }}
-                    {{ range first 1 . }}
+                {{- with .Params.categories -}}
+                    {{- range first 1 . }}
                     <span class="post-tag">{{ . }}</span>
-                    {{ end }}
-                {{ end }}
+                    {{- end -}}
+                {{- end }}
 
                 {{/* Post title - only show if exists */}}
-                {{ if .Title }}
+                {{- if .Title }}
                 <h2 class="post-title">
                     <a href="{{ .Permalink }}">{{ .Title }}</a>
                 </h2>
-                {{ end }}
+                {{- end }}
 
                 {{/* Post date */}}
                 <div class="post-meta">{{ .Date.Format "January 2, 2006" }}</div>
 
                 {{/* Excerpt or full content for short posts */}}
                 <div class="post-excerpt">
-                    {{ if .Summary }}
+                    {{- if .Summary }}
                         {{ .Summary | plainify | htmlUnescape | truncate 200 }}
-                    {{ else }}
+                    {{- else }}
                         {{ .Content | plainify | htmlUnescape | truncate 200 }}
-                    {{ end }}
+                    {{- end }}
                 </div>
 
                 <a href="{{ .Permalink }}" class="post-link">Read more &rarr;</a>
             </div>
         </article>
-    {{ end }}
-{{ end }}
+    {{- end -}}
+{{- end }}
 
 {{/* Close blog container if still open */}}
-{{ if $.Scratch.Get "inBlogGroup" }}
+{{- if $.Scratch.Get "inBlogGroup" }}
     </div></div>
-{{ end }}
+{{- end }}
 
 {{/* Pagination */}}
-{{ if .Paginator }}
+{{- if .Paginator }}
 <nav class="pagination">
-    {{ if .Paginator.HasPrev }}
+    {{- if .Paginator.HasPrev }}
     <a href="{{ .Paginator.Prev.URL }}">&larr; Newer</a>
-    {{ end }}
-    {{ if .Paginator.HasNext }}
+    {{- end }}
+    {{- if .Paginator.HasNext }}
     <a href="{{ .Paginator.Next.URL }}">Older &rarr;</a>
-    {{ end }}
+    {{- end }}
 </nav>
-{{ end }}
-{{ end }}
+{{- end }}
+{{- end }}

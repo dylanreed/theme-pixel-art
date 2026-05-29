@@ -347,6 +347,14 @@ html.theme-cyberpunk article p {
     font-family: "Fira Code", monospace;
 }
 
+/* Feed excerpt legibility on dark day-mode scenes. The base excerpt color
+   (#5a4030) is only lightened by night mode, so on themes whose day
+   background is dark it reads as brown-on-dark. Lighten it for those. */
+html.theme-cyberpunk .post-excerpt,
+html.theme-sci-fi .post-excerpt {
+    color: #e8e8e8;
+}
+
 /* ═══════════════════════════════════════════════════════════════
    THEME-SPECIFIC "READ MORE" BUTTONS
    Each theme gets a unique button style matching its aesthetic
@@ -863,16 +871,20 @@ html.theme-cabin .note-scroll::after {
 
 html.theme-cabin .note-scroll .note-content {
     background-image: url("/cabin/notes/middle.webp");
-    color: #4a3728;
-    text-shadow: none;
+    color: #f0e6d2;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+html.theme-cabin .note-scroll .note-date {
+    color: #d8c7a0;
 }
 
 html.theme-cabin .note-scroll .note-content a {
-    color: #8b4513;
+    color: #e0a25a;
 }
 
 html.theme-cabin .note-scroll .note-content a:hover {
-    color: #a0522d;
+    color: #f0c080;
 }
 
 /* Cabin closed note */
@@ -1006,16 +1018,20 @@ html.theme-underwater .note-scroll::after {
 
 html.theme-underwater .note-scroll .note-content {
     background-image: url("/underwater/notes/middle.webp");
-    color: #3a2a1a;
-    text-shadow: none;
+    color: #e3f4fc;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+html.theme-underwater .note-scroll .note-date {
+    color: #bfe6f5;
 }
 
 html.theme-underwater .note-scroll .note-content a {
-    color: #5a3a2a;
+    color: #8fd4ef;
 }
 
 html.theme-underwater .note-scroll .note-content a:hover {
-    color: #7a4a3a;
+    color: #bfe6f5;
 }
 
 /* Underwater closed note */

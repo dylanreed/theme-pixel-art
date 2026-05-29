@@ -1990,6 +1990,24 @@ html.night .site-footer p {
     font-weight: normal;
 }
 
+.h-feed .p-name-link {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.15s ease, text-shadow 0.15s ease;
+}
+
+.h-feed .p-name-link:hover .p-name {
+    color: #5c3d2e;
+    text-shadow:
+        0 0 10px rgba(139, 90, 43, 0.25),
+        1px 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+html.night .h-feed .p-name-link:hover .p-name {
+    color: #e8d5b0;
+    text-shadow: 0 0 12px rgba(232, 213, 176, 0.5);
+}
+
 /* Summary */
 .h-feed .p-summary {
     font-size: 14px;
@@ -2100,60 +2118,23 @@ html.night .site-footer p {
 .note-scroll {
     position: relative;
     z-index: 1;
-    margin: -73px auto;
+    margin: 14px auto;
     max-width: 800px;
     display: flex;
     flex-direction: column;
 }
 
-/* First open note */
+/* First note: a touch more breathing room below the nav */
 .note-scroll:first-child {
     margin-top: 20px;
 }
 
-/* First closed note */
-.note-scroll.rolled-up:first-child {
-    margin-top: 2px;
-}
-
-/* Open + Open */
-.note-scroll + .note-scroll {
-    margin-top: -73px;
-}
-
-/* Open + Closed */
-.note-scroll:not(.rolled-up) + .note-scroll.rolled-up {
-    margin-top: -13px;
-}
-
-/* Closed + Open */
-.note-scroll.rolled-up + .note-scroll:not(.rolled-up) {
-    margin-top: -124px;
-}
-
-/* Closed + Closed */
-.note-scroll.rolled-up + .note-scroll.rolled-up {
-    margin-top: -87px;
-}
-
-/* Open → Posts */
-.note-scroll:not(.rolled-up) + .posts-container {
-    margin-top: -23px;
-}
-
-/* Closed → Posts */
-.note-scroll.rolled-up + .posts-container {
-    margin-top: -100px;
-}
-
-/* Posts → Open */
-.posts-container + .note-scroll:not(.rolled-up) {
-    margin-top: -18px;
-}
-
-/* Posts → Closed */
-.posts-container + .note-scroll.rolled-up {
-    margin-top: 20px;
+/* Note → posts feed: keep the same uniform gap. The frame pieces are now
+   sized to their artwork (no transparent dead-air to absorb), so adjacent
+   sections sit flush with a small consistent gap instead of overlapping. */
+.note-scroll + .posts-container,
+.posts-container + .note-scroll {
+    margin-top: 14px;
 }
 
 .note-scroll::before {
@@ -2161,9 +2142,9 @@ html.night .site-footer p {
     display: block;
     width: 100%;
     max-width: 800px;
-    height: 289px;
+    aspect-ratio: 1338 / 289;
     background: url("/fantasy/notes/top.webp") no-repeat center bottom;
-    background-size: 100% auto;
+    background-size: 100% 100%;
     image-rendering: pixelated;
 }
 
@@ -2171,10 +2152,10 @@ html.night .site-footer p {
     content: "";
     display: block;
     width: 100%;
-    height: 269px;
+    aspect-ratio: 1338 / 289;
     max-width: 800px;
     background: url("/fantasy/notes/bottom.webp") no-repeat center top;
-    background-size: 100% auto;
+    background-size: 100% 100%;
     image-rendering: pixelated;
 }
 
@@ -2192,9 +2173,9 @@ html.night .site-footer p {
     background-size: 100% auto;
     image-rendering: pixelated;
     margin-top: 0px;
-    margin-bottom: -59px;
+    margin-bottom: 0px;
     position: relative;
-    z-index: -1;
+    z-index: 1;
 }
 
 .note-scroll .note-content p {
@@ -2317,11 +2298,12 @@ html.night .site-footer p {
 /* Rolled up state - show closed scroll image */
 .note-scroll.rolled-up {
     width: 100%;
-    height: 289px;
+    aspect-ratio: 1338 / 289;
+    height: auto;
     overflow: hidden;
-    margin: 10px auto 10px auto;
+    margin: 14px auto;
     background: url("/fantasy/notes/closed.webp") no-repeat center top;
-    background-size: 100% auto;
+    background-size: 100% 100%;
     image-rendering: pixelated;
     z-index: 100 !important;
 }
@@ -2402,61 +2384,12 @@ html.night .note-scroll object {
    ═══════════════════════════════════════════════════════════════ */
 
 /* sci-fi - Base spacing */
-html.theme-sci-fi .note-scroll {
-    margin: -196px auto;
-}
-
-html.theme-sci-fi .note-scroll:first-child {
-    margin-top: 20px;
-}
-
-html.theme-sci-fi .note-scroll.rolled-up:first-child {
-    margin-top: 2px;
-}
-
-/* sci-fi - Open + Open */
-html.theme-sci-fi .note-scroll + .note-scroll {
-    margin-top: -196px;
-}
-
-/* sci-fi - Open + Closed */
-html.theme-sci-fi .note-scroll:not(.rolled-up) + .note-scroll.rolled-up {
-    margin-top: -66px;
-}
-
-/* sci-fi - Closed + Open */
-html.theme-sci-fi .note-scroll.rolled-up + .note-scroll:not(.rolled-up) {
-    margin-top: -224px;
-}
-
-/* sci-fi - Closed + Closed */
-html.theme-sci-fi .note-scroll.rolled-up + .note-scroll.rolled-up {
-    margin-top: -87px;
-}
-
-/* sci-fi - Open → Posts */
-html.theme-sci-fi .note-scroll:not(.rolled-up) + .posts-container {
-    margin-top: -84px;
-}
-
-/* sci-fi - Closed → Posts */
-html.theme-sci-fi .note-scroll.rolled-up + .posts-container {
-    margin-top: -83px;
-}
-
-/* sci-fi - Posts → Open */
-html.theme-sci-fi .posts-container + .note-scroll:not(.rolled-up) {
-    margin-top: -94px;
-}
-
-/* sci-fi - Posts → Closed */
-html.theme-sci-fi .posts-container + .note-scroll.rolled-up {
-    margin-top: 13px;
-}
+/* sci-fi note spacing inherits the shared base .note-scroll rules. The frame
+   artwork is uniform across themes and sized via aspect-ratio, so no
+   per-theme dead-air margin tuning is needed. */
 
 html.theme-sci-fi .note-scroll::before {
     background-image: url("/sci-fi/notes/top.webp");
-    height: 289px;
 }
 
 html.theme-sci-fi .note-scroll .note-content {
@@ -2471,7 +2404,6 @@ html.theme-sci-fi .note-scroll .note-content {
 
 html.theme-sci-fi .note-scroll::after {
     background-image: url("/sci-fi/notes/bottom.webp");
-    height: 275px;
 }
 
 /* sci-fi - Date (Open) */
@@ -2492,7 +2424,6 @@ html.theme-sci-fi .note-scroll .note-date {
 /* sci-fi - Closed */
 html.theme-sci-fi .note-scroll.rolled-up {
     background-image: url("/sci-fi/notes/closed.webp");
-    height: 289px;
 }
 
 /* sci-fi - Date (Closed) */
@@ -2517,62 +2448,12 @@ html.theme-sci-fi .scroll-bottom-clickable {
    THEME: CYBERPUNK NOTES
    ═══════════════════════════════════════════════════════════════ */
 
-/* cyberpunk - Base spacing */
-html.theme-cyberpunk .note-scroll {
-    margin: -72px auto;
-}
-
-html.theme-cyberpunk .note-scroll:first-child {
-    margin-top: 20px;
-}
-
-html.theme-cyberpunk .note-scroll.rolled-up:first-child {
-    margin-top: 2px;
-}
-
-/* cyberpunk - Open + Open */
-html.theme-cyberpunk .note-scroll + .note-scroll {
-    margin-top: -72px;
-}
-
-/* cyberpunk - Open + Closed */
-html.theme-cyberpunk .note-scroll:not(.rolled-up) + .note-scroll.rolled-up {
-    margin-top: 24px;
-}
-
-/* cyberpunk - Closed + Open */
-html.theme-cyberpunk .note-scroll.rolled-up + .note-scroll:not(.rolled-up) {
-    margin-top: -96px;
-}
-
-/* cyberpunk - Closed + Closed */
-html.theme-cyberpunk .note-scroll.rolled-up + .note-scroll.rolled-up {
-    margin-top: -2px;
-}
-
-/* cyberpunk - Open → Posts */
-html.theme-cyberpunk .note-scroll:not(.rolled-up) + .posts-container {
-    margin-top: 29px;
-}
-
-/* cyberpunk - Closed → Posts */
-html.theme-cyberpunk .note-scroll.rolled-up + .posts-container {
-    margin-top: -15px;
-}
-
-/* cyberpunk - Posts → Open */
-html.theme-cyberpunk .posts-container + .note-scroll:not(.rolled-up) {
-    margin-top: -99px;
-}
-
-/* cyberpunk - Posts → Closed */
-html.theme-cyberpunk .posts-container + .note-scroll.rolled-up {
-    margin-top: 13px;
-}
+/* cyberpunk note spacing inherits the shared base .note-scroll rules. The
+   frame artwork is uniform across themes and sized via aspect-ratio, so no
+   per-theme dead-air margin tuning is needed. */
 
 html.theme-cyberpunk .note-scroll::before {
     background-image: url("/cyberpunk/notes/top.webp");
-    height: 289px;
 }
 
 html.theme-cyberpunk .note-scroll .note-content {
@@ -2587,13 +2468,12 @@ html.theme-cyberpunk .note-scroll .note-content {
 
 html.theme-cyberpunk .note-scroll::after {
     background-image: url("/cyberpunk/notes/bottom.webp");
-    height: 117px;
 }
 
 /* cyberpunk - Date (Open) */
 html.theme-cyberpunk .note-scroll .note-meta {
     position: absolute;
-    bottom: 45px;
+    bottom: 200px;
     left: 0;
     right: 0;
     text-align: center;
@@ -2608,7 +2488,6 @@ html.theme-cyberpunk .note-scroll .note-date {
 /* cyberpunk - Closed */
 html.theme-cyberpunk .note-scroll.rolled-up {
     background-image: url("/cyberpunk/notes/closed.webp");
-    height: 209px;
 }
 
 /* cyberpunk - Date (Closed) */
@@ -2634,61 +2513,12 @@ html.theme-cyberpunk .scroll-bottom-clickable {
    ═══════════════════════════════════════════════════════════════ */
 
 /* cabin - Base spacing */
-html.theme-cabin .note-scroll {
-    margin: -35px auto;
-}
-
-html.theme-cabin .note-scroll:first-child {
-    margin-top: 20px;
-}
-
-html.theme-cabin .note-scroll.rolled-up:first-child {
-    margin-top: 2px;
-}
-
-/* cabin - Open + Open */
-html.theme-cabin .note-scroll + .note-scroll {
-    margin-top: -35px;
-}
-
-/* cabin - Open + Closed */
-html.theme-cabin .note-scroll:not(.rolled-up) + .note-scroll.rolled-up {
-    margin-top: 0px;
-}
-
-/* cabin - Closed + Open */
-html.theme-cabin .note-scroll.rolled-up + .note-scroll:not(.rolled-up) {
-    margin-top: -113px;
-}
-
-/* cabin - Closed + Closed */
-html.theme-cabin .note-scroll.rolled-up + .note-scroll.rolled-up {
-    margin-top: -80px;
-}
-
-/* cabin - Open → Posts */
-html.theme-cabin .note-scroll:not(.rolled-up) + .posts-container {
-    margin-top: -8px;
-}
-
-/* cabin - Closed → Posts */
-html.theme-cabin .note-scroll.rolled-up + .posts-container {
-    margin-top: -92px;
-}
-
-/* cabin - Posts → Open */
-html.theme-cabin .posts-container + .note-scroll:not(.rolled-up) {
-    margin-top: 8px;
-}
-
-/* cabin - Posts → Closed */
-html.theme-cabin .posts-container + .note-scroll.rolled-up {
-    margin-top: 24px;
-}
+/* cabin note spacing inherits the shared base .note-scroll rules. The frame
+   artwork is uniform across themes and sized via aspect-ratio, so no
+   per-theme dead-air margin tuning is needed. */
 
 html.theme-cabin .note-scroll::before {
     background-image: url("/cabin/notes/top.webp");
-    height: 200px;
 }
 
 html.theme-cabin .note-scroll .note-content {
@@ -2702,13 +2532,12 @@ html.theme-cabin .note-scroll .note-content {
 
 html.theme-cabin .note-scroll::after {
     background-image: url("/cabin/notes/bottom.webp");
-    height: 200px;
 }
 
 /* cabin - Date (Open) */
 html.theme-cabin .note-scroll .note-meta {
     position: absolute;
-    bottom: 88px;
+    bottom: 200px;
     left: 0;
     right: 0;
     text-align: center;
@@ -2723,7 +2552,6 @@ html.theme-cabin .note-scroll .note-date {
 /* cabin - Closed */
 html.theme-cabin .note-scroll.rolled-up {
     background-image: url("/cabin/notes/closed.webp");
-    height: 289px;
 }
 
 /* cabin - Date (Closed) */
@@ -2748,62 +2576,12 @@ html.theme-cabin .scroll-bottom-clickable {
    THEME: UNDERWATER NOTES
    ═══════════════════════════════════════════════════════════════ */
 
-/* underwater - Base spacing */
-html.theme-underwater .note-scroll {
-    margin: -178px auto;
-}
-
-html.theme-underwater .note-scroll:first-child {
-    margin-top: 20px;
-}
-
-html.theme-underwater .note-scroll.rolled-up:first-child {
-    margin-top: 2px;
-}
-
-/* underwater - Open + Open */
-html.theme-underwater .note-scroll + .note-scroll {
-    margin-top: -178px;
-}
-
-/* underwater - Open + Closed */
-html.theme-underwater .note-scroll:not(.rolled-up) + .note-scroll.rolled-up {
-    margin-top: -61px;
-}
-
-/* underwater - Closed + Open */
-html.theme-underwater .note-scroll.rolled-up + .note-scroll:not(.rolled-up) {
-    margin-top: -188px;
-}
-
-/* underwater - Closed + Closed */
-html.theme-underwater .note-scroll.rolled-up + .note-scroll.rolled-up {
-    margin-top: -84px;
-}
-
-/* underwater - Open → Posts */
-html.theme-underwater .note-scroll:not(.rolled-up) + .posts-container {
-    margin-top: -59px;
-}
-
-/* underwater - Closed → Posts */
-html.theme-underwater .note-scroll.rolled-up + .posts-container {
-    margin-top: -92px;
-}
-
-/* underwater - Posts → Open */
-html.theme-underwater .posts-container + .note-scroll:not(.rolled-up) {
-    margin-top: -81px;
-}
-
-/* underwater - Posts → Closed */
-html.theme-underwater .posts-container + .note-scroll.rolled-up {
-    margin-top: 24px;
-}
+/* underwater note spacing inherits the shared base .note-scroll rules. The
+   frame artwork is uniform across themes and sized via aspect-ratio, so no
+   per-theme dead-air margin tuning is needed. */
 
 html.theme-underwater .note-scroll::before {
     background-image: url("/underwater/notes/top.webp");
-    height: 289px;
 }
 
 html.theme-underwater .note-scroll .note-content {
@@ -2817,7 +2595,6 @@ html.theme-underwater .note-scroll .note-content {
 
 html.theme-underwater .note-scroll::after {
     background-image: url("/underwater/notes/bottom.webp");
-    height: 272px;
 }
 
 /* underwater - Date (Open) */
@@ -2838,7 +2615,6 @@ html.theme-underwater .note-scroll .note-date {
 /* underwater - Closed */
 html.theme-underwater .note-scroll.rolled-up {
     background-image: url("/underwater/notes/closed.webp");
-    height: 289px;
 }
 
 /* underwater - Date (Closed) */
@@ -3330,29 +3106,22 @@ html.night .pagination-info {
     /* Note scrolls - responsive width */
     .note-scroll {
         max-width: 100%;
-        margin: -100px auto;
+        margin: 12px auto;
     }
 
     .note-scroll:first-child {
-        margin-top: -30px;
+        margin-top: 16px;
     }
 
     .note-scroll::before,
     .note-scroll::after {
         max-width: 100%;
-        height: 200px;
-        background-size: contain;
-    }
-
-    .note-scroll::after {
-        margin-top: -5px;
     }
 
     .note-scroll .note-content {
         max-width: 100%;
         font-size: 16px;
         padding: 15px 15% 20px 15%;
-        margin-bottom: -40px;
     }
 
     /* Pagination */

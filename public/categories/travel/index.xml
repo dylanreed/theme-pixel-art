@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Travel on dylan&#39;s blog</title>
-    <link>//localhost:1313/categories/travel/</link>
+    <link>/categories/travel/</link>
     <description>Recent content in Travel on dylan&#39;s blog</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Sun, 10 Mar 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/categories/travel/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/categories/travel/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Sunset Views</title>
-      <link>//localhost:1313/post/2024-03-10-sunset-views/</link>
+      <link>/post/2024-03-10-sunset-views/</link>
       <pubDate>Sun, 10 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/post/2024-03-10-sunset-views/</guid>
+      <guid>/post/2024-03-10-sunset-views/</guid>
       <description>&lt;p&gt;Caught this incredible sunset from the rooftop.&lt;/p&gt;&#xA;&lt;img src=&#34;https://dylan.blog/uploads/2024/d3b03b1b69.jpg&#34; alt=&#34;Sunset&#34;&gt;&#xA;&lt;p&gt;Nature really knows how to put on a show.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Beach Day</title>
-      <link>//localhost:1313/post/2024-01-15-beach-day/</link>
+      <link>/post/2024-01-15-beach-day/</link>
       <pubDate>Mon, 15 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/post/2024-01-15-beach-day/</guid>
+      <guid>/post/2024-01-15-beach-day/</guid>
       <description>&lt;p&gt;What a gorgeous day at the beach! The water was crystal clear.&lt;/p&gt;&#xA;&lt;img src=&#34;https://dylan.blog/uploads/2024/49bba7d95e.jpg&#34; alt=&#34;Beach photo&#34;&gt;&#xA;&lt;p&gt;Definitely coming back here soon.&lt;/p&gt;</description>
     </item>
   </channel>

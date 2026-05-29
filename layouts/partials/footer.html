@@ -16,6 +16,21 @@
             cats.classList.add("inside-feed");
         }
     })();
+
+    // Micro.blog's h-entry markup only links the date; wrap the title
+    // (.p-name) in the same href so clicking the title navigates too.
+    (function () {
+        document.querySelectorAll(".h-entry").forEach((entry) => {
+            const url = entry.querySelector("a.u-url");
+            const name = entry.querySelector(".p-name");
+            if (!url || !name || name.closest("a")) return;
+            const link = document.createElement("a");
+            link.href = url.href;
+            link.className = "p-name-link";
+            name.parentNode.insertBefore(link, name);
+            link.appendChild(name);
+        });
+    })();
 </script>
 
 <script>

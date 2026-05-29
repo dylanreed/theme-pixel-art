@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Music on dylan&#39;s blog</title>
-    <link>//localhost:1313/categories/music/</link>
+    <link>/categories/music/</link>
     <description>Recent content in Music on dylan&#39;s blog</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Mon, 01 Jul 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/categories/music/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/categories/music/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title></title>
-      <link>//localhost:1313/post/2024-07-01-music-discovery/</link>
+      <link>/post/2024-07-01-music-discovery/</link>
       <pubDate>Mon, 01 Jul 2024 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/post/2024-07-01-music-discovery/</guid>
+      <guid>/post/2024-07-01-music-discovery/</guid>
       <description>&lt;p&gt;Discovered a new band today and I&amp;rsquo;m obsessed. Sometimes the algorithm gets it right.&lt;/p&gt;</description>
     </item>
   </channel>

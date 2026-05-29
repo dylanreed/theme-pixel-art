@@ -1,3 +1,5 @@
+{{/* ABOUTME: Base HTML template that wraps all pages on the blog. */}}
+{{/* ABOUTME: Includes Sierra control panel, navigation, chaos mode, and shared UI elements. */}}
 <!doctype html>
 <html lang="en">
 <head>
@@ -400,8 +402,8 @@
         })();
     </script>
 
-    {{ partial "custom_footer.html" . }}
-    {{ partial "plugin_js.html" . }}
+    {{- partial "custom_footer.html" . -}}
+    {{- partial "plugin_js.html" . -}}
 
     <!-- Chaos Goblin Mode -->
     <script src="/js/chaos.js?v={{ now.Unix }}"></script>

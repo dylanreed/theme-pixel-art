@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tech on dylan&#39;s blog</title>
-    <link>//localhost:1313/categories/tech/</link>
+    <link>/categories/tech/</link>
     <description>Recent content in Tech on dylan&#39;s blog</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Sat, 15 Jun 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/categories/tech/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/categories/tech/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title></title>
-      <link>//localhost:1313/post/2024-06-15-quick-note/</link>
+      <link>/post/2024-06-15-quick-note/</link>
       <pubDate>Sat, 15 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/post/2024-06-15-quick-note/</guid>
+      <guid>/post/2024-06-15-quick-note/</guid>
       <description>&lt;p&gt;Just pushed a big update to the project. Feeling accomplished!&lt;/p&gt;</description>
     </item>
   </channel>
