@@ -17,3 +17,7 @@ unused/
 # Build lock + scratch
 .hugo_build.lock
 .scratch/
+
+# Local Hugo build output (Micro.blog builds from source; not served)
+public/
+resources/
