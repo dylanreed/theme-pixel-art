@@ -807,6 +807,42 @@ html.night .archive-tag:hover {
     display: block;
 }
 
+/* --- Book review card ---
+   Floats left so the review text starts beside it and wraps underneath.
+   The theme does NOT detect review posts: the post declares itself by
+   wrapping the card in .review-card, the same way footnotes ship as raw
+   HTML. Emitted by the bookreview skill. */
+.post-content .review-card {
+    float: left;
+    width: 42%;
+    max-width: 420px;
+    margin: 0 1.6em 1em 0;
+}
+
+.post-content .review-card img {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    display: block;
+    /* The card is a composite PNG carrying a real book cover — let it
+       downscale smoothly. Pixelating it would wreck the cover art. */
+    image-rendering: auto;
+}
+
+/* The closing links block should never sit in the float's shadow. */
+.post-content .review-getit {
+    clear: both;
+}
+
+@media (max-width: 768px) {
+    .post-content .review-card {
+        float: none;
+        width: 100%;
+        max-width: none;
+        margin: 0 0 1.4em 0;
+    }
+}
+
 /* First image in post - put at top with no top margin */
 .post-content > p:first-child img,
 .post-content > img:first-child {
