@@ -1,0 +1,20 @@
+{{- /* ABOUTME: Emits the theme registry and per-theme sprite manifest as browser globals. */ -}}
+{{- /* ABOUTME: Hugo can see the filesystem; the browser cannot, so it gets told. */ -}}
+{{- $themes := .Site.Data.themes -}}
+{{- $manifest := dict -}}
+{{- range $themes -}}
+    {{- $names := slice -}}
+    {{- $dir := printf "static/%s/sprites/category" .id -}}
+    {{- if fileExists $dir -}}
+        {{- range readDir $dir -}}
+            {{- if strings.HasSuffix .Name ".png" -}}
+                {{- $names = $names | append (strings.TrimSuffix ".png" .Name) -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+    {{- $manifest = merge $manifest (dict .id $names) -}}
+{{- end -}}
+<script>
+window.PIXEL_THEMES = {{ $themes | jsonify | safeJS }};
+window.SPRITE_MANIFEST = {{ $manifest | jsonify | safeJS }};
+</script>

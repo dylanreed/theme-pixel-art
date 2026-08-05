@@ -54,3 +54,24 @@ test('taxonomy term page resolves through the alias map', () => {
 test('taxonomy term page falls back to default for an unknown term', () => {
   assert.strictEqual(spriteOf('categories/cryptid-cataloger'), 'default');
 });
+
+test('theme manifest is emitted with every theme key', () => {
+  const html = pages.get('known-category');
+  const m = html.match(/window\.SPRITE_MANIFEST\s*=\s*(\{.*?\});/s);
+  assert.ok(m, 'SPRITE_MANIFEST not emitted');
+  const manifest = JSON.parse(m[1]);
+  for (const id of ['fantasy', 'sci-fi', 'cyberpunk', 'cabin', 'underwater']) {
+    assert.ok(Array.isArray(manifest[id]), `${id} missing from manifest`);
+  }
+  assert.ok(manifest.fantasy.includes('gaming'), 'fantasy should list gaming');
+  assert.ok(manifest.fantasy.includes('default'), 'fantasy should list default');
+});
+
+test('theme registry is emitted in cycle order', () => {
+  const html = pages.get('known-category');
+  const m = html.match(/window\.PIXEL_THEMES\s*=\s*(\[.*?\]);/s);
+  assert.ok(m, 'PIXEL_THEMES not emitted');
+  const themes = JSON.parse(m[1]);
+  assert.strictEqual(themes[0].id, 'fantasy', 'fantasy must be first');
+  assert.strictEqual(themes.length, 5);
+});
