@@ -21,3 +21,4 @@ unused/
 # Local Hugo build output (Micro.blog builds from source; not served)
 public/
 resources/
+node_modules/

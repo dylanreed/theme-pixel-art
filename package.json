@@ -3,7 +3,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test 'test/**/*.test.mjs'",
-    "test:contrast": "node --test test/contrast.test.mjs"
+    "test": "node --test 'test/*.test.mjs'",
+    "test:contrast": "node --test 'test/audit/*.test.mjs'",
+    "test:all": "npm test && npm run test:contrast"
+  },
+  "devDependencies": {
+    "pngjs": "^7.0.0",
+    "puppeteer": "^25.5.0"
   }
 }
