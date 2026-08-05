@@ -1,0 +1,5 @@
+{
+  "title": "fixture",
+  "baseURL": "http://localhost/",
+  "markup": { "goldmark": { "renderer": { "unsafe": true } } }
+}

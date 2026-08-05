@@ -1,0 +1,9 @@
+{
+  "name": "theme-pixel-art",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/",
+    "test:contrast": "node --test test/contrast.test.mjs"
+  }
+}
