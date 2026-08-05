@@ -1,18 +1,18 @@
 /* ABOUTME: Theme switching styles for fantasy, sci-fi, and cyberpunk themes */
 /* ABOUTME: Fantasy is default (no class), others use html.theme-* classes */
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    THEME: SCI-FI
    Assets in: /static/sci-fi/{backgrounds,headers,tiles}
    Styles in: chaos.css (html.theme-sci-fi selectors)
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 /* Sci-fi styles are in chaos.css using html.theme-sci-fi selectors */
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    THEME: CYBERPUNK
    Assets in: /static/cyberpunk/{backgrounds,headers,tiles}
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 /* Cyberpunk background - day */
 html.theme-cyberpunk body {
@@ -46,9 +46,9 @@ html.theme-cyberpunk .archive_categories {
     border-image-source: none !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    CYBERPUNK HEADERS - Day mode
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 html.theme-cyberpunk .header-image[style*="home.webp"] {
     background-image: url("/cyberpunk/headers/home.webp") !important;
@@ -197,18 +197,18 @@ html.theme-cyberpunk [onclick] {
     cursor: url("/cyberpunk/cursors/hand.png"), pointer !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    SCI-FI MENU SIGNS
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 html.theme-sci-fi .nav-sign,
 html.theme-sci-fi .nav-hamburger {
     background-image: url("/sci-fi/menu/sign.webp") !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    SCI-FI CURSORS
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 html.theme-sci-fi * {
     cursor: url("/sci-fi/cursors/pointer.png"), auto !important;
@@ -238,9 +238,9 @@ html.theme-sci-fi [onclick] {
     cursor: url("/sci-fi/cursors/hand.png"), pointer !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    SCI-FI NOTE SCROLL ASSETS
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 html.theme-sci-fi .note-scroll::before {
     background-image: url("/sci-fi/notes/top.webp");
@@ -270,13 +270,13 @@ html.theme-sci-fi .note-scroll.rolled-up {
     background-image: url("/sci-fi/notes/closed.webp");
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    SCI-FI FONTS
    Retro analog aesthetic (70s NASA, Alien)
    - Title: Orbitron (geometric, control room)
    - Menus: Share Tech Mono (terminal readout)
    - Body: IBM Plex Mono (retro-tech heritage)
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 /* Sci-Fi site title */
 html.theme-sci-fi .site-title {
@@ -307,13 +307,13 @@ html.theme-sci-fi article p {
     font-family: "IBM Plex Mono", monospace;
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    CYBERPUNK FONTS
    Gritty neon aesthetic (Blade Runner, CP2077)
    - Title: Teko (angular, aggressive)
    - Menus: Rajdhani (sharp edges, readable)
    - Body: Fira Code (hacker terminal)
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 /* Cyberpunk site title */
 html.theme-cyberpunk .site-title {
@@ -355,10 +355,10 @@ html.theme-sci-fi .post-excerpt {
     color: #e8e8e8;
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    THEME-SPECIFIC "READ MORE" BUTTONS
    Each theme gets a unique button style matching its aesthetic
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 /* Sci-Fi: Holographic tech panel button */
 html.theme-sci-fi .post-link {
@@ -490,7 +490,7 @@ html.theme-underwater .post-link {
 
 /* Bubble accent */
 html.theme-underwater .post-link::before {
-    content: "○";
+    content: "\25CB";
     position: absolute;
     top: -4px;
     right: 8px;
@@ -520,13 +520,13 @@ html.theme-underwater .post-link:active {
         1px 1px 0 rgba(0, 0, 0, 0.2);
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    CABIN FONTS
    Storybook cozy aesthetic (hygge, children's book, warm)
    - Title: Fredericka the Great (sketchy, hand-drawn storybook)
    - Menus: Quicksand (soft, rounded, friendly)
    - Body: Literata (warm book-like serif)
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 /* Cabin site title */
 html.theme-cabin .site-title {
@@ -567,13 +567,13 @@ html.theme-cabin article p {
     font-family: "Literata", serif;
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    UNDERWATER FONTS
    Nautical/maritime aesthetic (captain's log, old maps, diving bells)
    - Title: IM Fell English (18th century maritime documents)
    - Menus: Vollkorn (warm, sturdy, classic)
    - Body: EB Garamond (elegant old-world serif)
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 /* Underwater site title */
 html.theme-underwater .site-title {
@@ -614,10 +614,10 @@ html.theme-underwater article p {
     font-family: "EB Garamond", serif;
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    SCI-FI ARCHIVE COLORS
    Blue/tech tones - year headers and dates only (category colors handle titles/tags)
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 html.theme-sci-fi .archive-date {
     color: #4a6a8a;
@@ -636,10 +636,10 @@ html.theme-sci-fi .archive-entry:hover {
     background: rgba(42, 106, 156, 0.1);
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    CYBERPUNK ARCHIVE COLORS
    Neon tones - year headers and dates only (category colors handle titles/tags)
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 html.theme-cyberpunk .archive-date {
     color: #ff66ff;
@@ -659,11 +659,11 @@ html.theme-cyberpunk .archive-entry:hover {
     background: rgba(255, 0, 255, 0.1);
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    THEME: CABIN
    Assets in: /static/cabin/{backgrounds,headers,tiles,notes,menu}
    Cozy mountain retreat, warm wood, firelight, rustic comfort
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 /* Cabin background - day */
 html.theme-cabin body {
@@ -697,9 +697,9 @@ html.theme-cabin .archive_categories {
     border-image-source: none !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    CABIN HEADERS - Day mode
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 html.theme-cabin .header-image[style*="home.webp"] {
     background-image: url("/cabin/headers/home.webp") !important;
@@ -799,13 +799,13 @@ html.theme-cabin [onclick] {
     cursor: url("/cabin/cursors/hand.png"), pointer !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    CABIN FONTS
    Cozy rustic aesthetic (mountain lodge, handcrafted)
    - Title: Amatic SC (hand-drawn, rustic)
    - Menus: Cabin (clean, friendly)
    - Body: Merriweather (readable, warm serif)
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 /* Cabin site title */
 html.theme-cabin .site-title {
@@ -838,10 +838,10 @@ html.theme-cabin article p {
     font-family: "Merriweather", serif;
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    CABIN ARCHIVE COLORS
    Warm wood and amber tones
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 html.theme-cabin .archive-date {
     color: #8b6914;
@@ -892,11 +892,11 @@ html.theme-cabin .note-scroll.rolled-up {
     background-image: url("/cabin/notes/closed.webp");
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    THEME: UNDERWATER
    Assets in: /static/underwater/{backgrounds,headers,tiles,notes,menu}
    Nautical maritime, captain's log, treasure maps, brass fittings
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 /* Underwater background - day (use fantasy fallback if missing) */
 html.theme-underwater body {
@@ -934,9 +934,9 @@ html.theme-underwater .archive_categories {
     border-image-source: none !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    UNDERWATER HEADERS - Day mode
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 html.theme-underwater .header-image[style*="home.webp"] {
     background-image: url("/underwater/headers/home.webp") !important;
@@ -1068,13 +1068,13 @@ html.theme-underwater [onclick] {
     cursor: url("/underwater/cursors/hand.png"), pointer !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    UNDERWATER FONTS
    Deep sea aesthetic (nautical, mysterious, ancient)
    - Title: Cinzel (ancient, atlantean)
    - Menus: Quicksand (flowing, rounded like bubbles)
    - Body: Source Sans Pro (clean, readable)
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 /* Underwater site title */
 html.theme-underwater .site-title {
@@ -1108,10 +1108,10 @@ html.theme-underwater article p {
     font-family: "Source Sans Pro", sans-serif;
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    UNDERWATER ARCHIVE COLORS
    Nautical brass and parchment tones
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 html.theme-underwater .archive-date {
     color: #6a5a4a;
@@ -1130,10 +1130,10 @@ html.theme-underwater .archive-entry:hover {
     background: rgba(201, 162, 39, 0.1);
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    THEME-SPECIFIC DROPDOWN PANELS
    All panels are 926x226 native, scaled to ~500px display width
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 /* Fantasy dropdown (base/default) */
 .sierra-panel-bg {
@@ -1310,9 +1310,9 @@ body.chaos-mode .sierra-btn:nth-child(6) img {
     }
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    THEME-SPECIFIC ACCESSIBILITY - Focus colors per theme
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 /* Sci-Fi focus colors - blue/cyan tech */
 html.theme-sci-fi a:focus-visible,
@@ -1381,10 +1381,10 @@ html.theme-underwater .skip-link:focus {
     outline-color: #4a9a8a;
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    THEME-SPECIFIC HEADER STYLES (from calibration tool)
    Contains header heights, site title, and nav sign styles per theme
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 /* Sci-Fi header styles */
 html.theme-sci-fi .header-image {
@@ -1482,10 +1482,10 @@ html.theme-underwater .nav-sign.active span {
     text-shadow: 1px 1px 0 #8b6914, -1px -1px 0 #e8d48b;
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    EASY READ MODE - CORPORATE THEME OVERRIDES
    Must be at end of file to override all theme-specific styles
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 /* Corporate background - override ANY theme */
 html.easy-read body,

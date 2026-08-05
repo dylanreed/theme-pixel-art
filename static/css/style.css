@@ -176,9 +176,9 @@ html.night {
     display: none;
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    MOBILE HAMBURGER MENU
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 /* Nav links wrapper - flex on desktop */
 .nav-links {
@@ -824,7 +824,7 @@ html.night .archive-tag:hover {
     height: auto;
     margin: 0;
     display: block;
-    /* The card is a composite PNG carrying a real book cover — let it
+    /* The card is a composite PNG carrying a real book cover -- let it
        downscale smoothly. Pixelating it would wreck the cover art. */
     image-rendering: auto;
 }
@@ -978,7 +978,7 @@ html.night .page-content td {
 }
 
 .post-link::after {
-    content: " →";
+    content: " \2192";
 }
 
 /* Single post header */
@@ -1685,7 +1685,7 @@ html.night .page-content td {
 
 /* Decorative pixel divider above footer */
 .site-footer::before {
-    content: "⚔ ✦ ⚔";
+    content: "\2694\0020\2726\0020\2694";
     display: block;
     margin-bottom: 20px;
     font-size: 18px;
@@ -1869,11 +1869,11 @@ html.night .site-footer p {
     background: linear-gradient(180deg, #aa7843 0%, #8a5a33 100%);
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    MICRO.BLOG BUILT-IN PAGES
    Archive (/archive/) and Photos (/photos/) use micro.blog's
    internal templates with h-feed/h-entry/photos-grid classes
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 /* Archive category filter bar */
 .archive_categories {
@@ -2165,7 +2165,7 @@ html.night .h-feed .p-name-link:hover .p-name {
     margin-top: 20px;
 }
 
-/* Note → posts feed: keep the same uniform gap. The frame pieces are now
+/* Note -> posts feed: keep the same uniform gap. The frame pieces are now
    sized to their artwork (no transparent dead-air to absorb), so adjacent
    sections sit flush with a small consistent gap instead of overlapping. */
 .note-scroll + .posts-container,
@@ -2415,9 +2415,9 @@ html.night .note-scroll object {
     filter: invert(1) hue-rotate(180deg);
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    THEME: SCI-FI NOTES
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 /* sci-fi - Base spacing */
 /* sci-fi note spacing inherits the shared base .note-scroll rules. The frame
@@ -2480,9 +2480,9 @@ html.theme-sci-fi .scroll-bottom-clickable {
     bottom: 100px;
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    THEME: CYBERPUNK NOTES
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 /* cyberpunk note spacing inherits the shared base .note-scroll rules. The
    frame artwork is uniform across themes and sized via aspect-ratio, so no
@@ -2544,9 +2544,9 @@ html.theme-cyberpunk .scroll-bottom-clickable {
     bottom: -12px;
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    THEME: CABIN NOTES
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 /* cabin - Base spacing */
 /* cabin note spacing inherits the shared base .note-scroll rules. The frame
@@ -2608,9 +2608,9 @@ html.theme-cabin .scroll-bottom-clickable {
     bottom: 55px;
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    THEME: UNDERWATER NOTES
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 /* underwater note spacing inherits the shared base .note-scroll rules. The
    frame artwork is uniform across themes and sized via aspect-ratio, so no
@@ -2868,9 +2868,9 @@ html.theme-underwater .scroll-bottom-clickable {
     }
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    PAGINATION
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 .pagination {
     display: flex;
@@ -2941,9 +2941,9 @@ html.night .pagination-info {
     color: #a0b0c0;
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    ENHANCED MOBILE RESPONSIVE STYLES
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 /* Small tablets and large phones */
 @media (max-width: 600px) {
@@ -3330,9 +3330,9 @@ html.night .pagination-info {
     }
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    ACCESSIBILITY - Focus states, skip links, reduced motion
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 /* Skip to content link - hidden until focused */
 .skip-link {
@@ -3456,9 +3456,9 @@ html.night .note-scroll:focus-visible {
     }
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    FIXED UI BUTTONS - Back to Top & Easy Read Toggle
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 .fixed-btn {
     position: fixed;
@@ -3549,20 +3549,20 @@ html.night .fixed-btn {
     }
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    PAGINATION Z-INDEX FIX
    Ensure pagination sits above overlapping note scrolls
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 .pagination {
     position: relative;
     z-index: 10;
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    EASY READ MODE - Corporate Pixel Art
    Same pixel aesthetic, just boring and professional
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
 /* Corporate color palette */
 html.easy-read {
