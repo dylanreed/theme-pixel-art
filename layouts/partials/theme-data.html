@@ -27,6 +27,21 @@
     {{- range $family, $probe := $assetFamilies -}}
         {{- $families = merge $families (dict $family (fileExists (printf "static/%s/%s" $id $probe))) -}}
     {{- end -}}
+
+    {{- /* Family presence is not enough for the cat: fantasy ships 20 of the
+           24 direction sheets, so probing one file says "present" while five
+           run directions still 404. List them individually. */ -}}
+    {{- $sheets := slice -}}
+    {{- $catDir := printf "static/%s/sprites/cat/sheets" $id -}}
+    {{- if fileExists $catDir -}}
+        {{- range readDir $catDir -}}
+            {{- if strings.HasSuffix .Name ".png" -}}
+                {{- $sheets = $sheets | append (strings.TrimSuffix ".png" .Name) -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+    {{- $families = merge $families (dict "catSheets" $sheets) -}}
+
     {{- $themeAssets = merge $themeAssets (dict $id $families) -}}
 {{- end -}}
 <script>

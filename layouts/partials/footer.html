@@ -104,6 +104,21 @@
         };
         const frameWidth = 140;
 
+        // Resolve one direction sheet. Fantasy ships 20 of the 24 sheets --
+        // run_north and the four run diagonals are missing -- so a run
+        // direction with no sheet borrows the walk sheet for the same
+        // direction. Safe because walk and run share a frame count on every
+        // theme in themeSheetConfigs; if that ever stops being true the
+        // substituted animation would desync.
+        const availableSheets = ((window.THEME_ASSETS || {})[currentTheme] || {}).catSheets;
+        function sheet(name) {
+            if (availableSheets && availableSheets.length && !availableSheets.includes(name)) {
+                const alt = name.replace(/^run_/, 'walk_');
+                if (alt !== name && availableSheets.includes(alt)) return `${sheetPath}/${alt}.png`;
+            }
+            return `${sheetPath}/${name}.png`;
+        }
+
         // Sprite sheet paths (all themes)
         const sprites = {
             walkNorth: `${sheetPath}/walk_north.png`,
@@ -114,14 +129,14 @@
             walkSouthwest: `${sheetPath}/walk_south-west.png`,
             walkWest: `${sheetPath}/walk_west.png`,
             walkNorthwest: `${sheetPath}/walk_north-west.png`,
-            runNorth: `${sheetPath}/run_north.png`,
-            runNortheast: `${sheetPath}/run_north-east.png`,
-            runEast: `${sheetPath}/run_east.png`,
-            runSoutheast: `${sheetPath}/run_south-east.png`,
-            runSouth: `${sheetPath}/run_south.png`,
-            runSouthwest: `${sheetPath}/run_south-west.png`,
-            runWest: `${sheetPath}/run_west.png`,
-            runNorthwest: `${sheetPath}/run_north-west.png`,
+            runNorth: sheet('run_north'),
+            runNortheast: sheet('run_north-east'),
+            runEast: sheet('run_east'),
+            runSoutheast: sheet('run_south-east'),
+            runSouth: sheet('run_south'),
+            runSouthwest: sheet('run_south-west'),
+            runWest: sheet('run_west'),
+            runNorthwest: sheet('run_north-west'),
             idleNorth: `${sheetPath}/idle_north.png`,
             idleNortheast: `${sheetPath}/idle_north-east.png`,
             idleEast: `${sheetPath}/idle_east.png`,
