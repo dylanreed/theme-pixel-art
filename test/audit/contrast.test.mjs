@@ -28,6 +28,31 @@ const PAGES = [
 
 const VIEWPORT_WIDTH = 1280;
 
+// Purely decorative effects. WCAG 1.4.3 governs text that conveys meaning;
+// these are ambient particles that carry none, and every one of them sits on
+// whatever happens to be behind it at the time, so a contrast figure for them
+// is not even well defined. Excluded from measurement rather than accepted as
+// a failure, because they are not content.
+const DECORATIVE = [
+  '.ramona', '.ramona-heart', '.ramona-dirt',
+  '.sparkle', '.particle', '.seasonal-particle',
+  '.falling-sprite', '.chaos-sprite', '.floating-sprite', '.floating-rune',
+  '.rain-drop', '.snow-flake',
+].join(',');
+
+// Real failures that are a deliberate design decision to defer, not bugs to
+// silently hide. These are still measured and still reported every run; they
+// just do not fail the suite. Anything added here needs a reason and a
+// tracking issue -- an entry without one is how an audit quietly rots.
+const ACCEPTED = [
+  {
+    match: sel => /h1\.site-title/.test(sel),
+    why: 'Site title sits on photographic pixel-art header art. Cannot pass '
+       + 'without a scrim, text plate, or heavy shadow, all of which change '
+       + 'the design. Deferred by Dylan 2026-08-05; tracked as theme-pixel-art-8lo.',
+  },
+];
+
 let browser, server;
 
 before(async () => {
@@ -87,6 +112,7 @@ function collectTextElements() {
     if (!el || seen.has(el)) continue;
     const cs = getComputedStyle(el);
     if (cs.visibility === 'hidden' || cs.display === 'none' || cs.opacity === '0') continue;
+    if (window.__DECORATIVE__ && el.closest(window.__DECORATIVE__)) continue;
     const rect = el.getBoundingClientRect();
     if (rect.width < 1 || rect.height < 1) continue;
     // Off-canvas UI (skip link, Sierra panel before hover, etc.) still has a
@@ -146,6 +172,7 @@ async function auditPage(page, pageLabel) {
   );
   await page.setViewport({ width: VIEWPORT_WIDTH, height });
 
+  await page.evaluate(sel => { window.__DECORATIVE__ = sel; }, DECORATIVE);
   const elements = await page.evaluate(collectTextElements);
 
   // True painted background: make every glyph transparent, then screenshot.
@@ -260,11 +287,24 @@ for (const theme of THEMES) {
   for (const modes of MODE_COMBOS) {
     const label = [theme, ...modes].join('+');
     test(`AA contrast: ${label}`, async () => {
-      const failures = await failuresFor(theme, modes);
-      const report = failures.map(f =>
-        `  [${f.page}] ${f.selector} "${f.text}" ${f.fg} on ${f.bg} = ${f.ratio}:1 (need ${f.needed}:1)`
-      ).join('\n');
-      assert.strictEqual(failures.length, 0, `${label} has ${failures.length} contrast failures:\n${report}`);
+      const all = await failuresFor(theme, modes);
+      const fmt = f =>
+        `  [${f.page}] ${f.selector} "${f.text}" ${f.fg} on ${f.bg} = ${f.ratio}:1 (need ${f.needed}:1)`;
+
+      const accepted = all.filter(f => ACCEPTED.some(a => a.match(f.selector)));
+      const failures = all.filter(f => !ACCEPTED.some(a => a.match(f.selector)));
+
+      // Surface deferred failures every run so they stay visible rather than
+      // decaying into permanent silent debt.
+      if (accepted.length) {
+        console.log(`${label}: ${accepted.length} accepted (deferred) contrast failures`);
+        for (const a of ACCEPTED) {
+          if (accepted.some(f => a.match(f.selector))) console.log(`    - ${a.why}`);
+        }
+      }
+
+      assert.strictEqual(failures.length, 0,
+        `${label} has ${failures.length} contrast failures:\n${failures.map(fmt).join('\n')}`);
     });
   }
 }
