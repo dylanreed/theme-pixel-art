@@ -673,6 +673,16 @@ Refs theme-pixel-art-gxe"
 - Modify: `static/js/chaos.js:571-591` (`getCurrentTheme`, `getThemeSpriteSheet`)
 - Modify: `static/js/chaos.js:781-892` (`updateCategorySprites`)
 - Modify: `layouts/_default/baseof.html:72-86` (theme literals)
+- Modify: `layouts/partials/footer.html:54-65` (the second, competing sprite swapper)
+
+**A second sprite swapper exists.** `layouts/partials/footer.html:54-65` runs an
+inline IIFE that reads `themeStyle` from localStorage and builds
+`/${theme}/sprites/category/${sprite}.png` with no existence check. It duplicates
+`updateCategorySprites()` and races it: the footer script runs during parse, then
+`chaos.js` runs on `DOMContentLoaded`. This is the actual mechanism behind the
+missing-sprite 404s — the footer requests a path unconditionally, and `chaos.js`
+early-returns for themes absent from its map, so the bad request stands. Both must
+go through `spriteUrl()`.
 
 **Interfaces:**
 - Consumes: `window.PIXEL_THEMES`, `window.SPRITE_MANIFEST` from Task 4
@@ -748,6 +758,39 @@ explicit map but fall back rather than assume:
         };
         return spriteFiles[theme] || spriteFiles['fantasy'];
     }
+```
+
+- [ ] **Step 4b: Route the footer's swapper through the same resolver**
+
+`spriteUrl` lives inside the `chaos.js` IIFE, so expose it once alongside the other
+public helpers rather than duplicating the logic. In `chaos.js`, add it to the
+existing `window.chaos` surface:
+
+```js
+    window.chaos.spriteUrl = spriteUrl;
+```
+
+Then replace the whole IIFE at `layouts/partials/footer.html:54-65` with one that
+defers to it, falling back to the manifest directly if `chaos.js` has not run yet:
+
+```html
+<script>
+    // Category sprites for the current theme. Resolution lives in chaos.js so
+    // the fallback chain has exactly one implementation.
+    (function() {
+        const theme = localStorage.getItem('themeStyle') || 'fantasy';
+        const resolve = (window.chaos && window.chaos.spriteUrl) || function(t, name) {
+            const have = (window.SPRITE_MANIFEST || {})[t] || [];
+            if (have.includes(name)) return '/' + t + '/sprites/category/' + name + '.png';
+            if (have.includes('default')) return '/' + t + '/sprites/category/default.png';
+            return '/fantasy/sprites/category/' + name + '.png';
+        };
+        document.querySelectorAll('.theme-sprite-6x3[data-sprite]').forEach(container => {
+            const img = container.querySelector('img');
+            if (img && container.dataset.sprite) img.src = resolve(theme, container.dataset.sprite);
+        });
+    })();
+</script>
 ```
 
 - [ ] **Step 5: Drive baseof.html from the registry**
@@ -1065,6 +1108,25 @@ Closes theme-pixel-art-t1t"
 - Consumes: every theme shipped in `data/themes.json`
 - Produces: `ratio(fg, bg)` → `number`; `audit(page)` → `Array<{selector, fg, bg,
   ratio, needed}>` listing only failures
+
+**Measure pixels, not computed styles.** Walking up the DOM for the first
+non-transparent `backgroundColor` is wrong in this theme and will report passes
+that are visibly false. This bit us on kaiju: `.posts-container::before` computed a
+correct dark teal while the parchment scroll graphic painted over it, and the real
+rendered result was cream text on cream. Almost every surface here is a background
+*image* — parchment, tiles, panel art — for which `backgroundColor` is
+`rgba(0,0,0,0)`.
+
+The technique that works, two screenshots per theme/mode combination:
+
+1. Record each text element's bounding rect and computed `color`. Foreground is
+   reliable; text colour is a colour, not an image.
+2. Inject a stylesheet making all text transparent, screenshot the full page. That
+   gives the true painted background with no glyphs in it.
+3. For each rect, sample several points from that screenshot and keep the pixel with
+   the **worst** contrast against the element's colour. Sampling several points and
+   taking the worst is what makes gradients and busy pixel art honest rather than
+   averaging a failure away.
 
 - [ ] **Step 1: Add puppeteer**
 
