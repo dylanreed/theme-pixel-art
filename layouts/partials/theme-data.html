@@ -2,9 +2,18 @@
 {{- /* ABOUTME: Hugo can see the filesystem; the browser cannot, so it gets told. */ -}}
 {{- $themes := .Site.Data.themes -}}
 {{- $manifest := dict -}}
+{{- $assetFamilies := dict
+    "tiles" "tiles/day_tiles.webp"
+    "dropdown" "dropdown/drop_down_menu.webp"
+    "notes" "notes/middle.webp"
+    "menu" "menu/sign.webp"
+    "cat" "sprites/cat/sheets/walk_east.png"
+-}}
+{{- $themeAssets := dict -}}
 {{- range $themes -}}
+    {{- $id := .id -}}
     {{- $names := slice -}}
-    {{- $dir := printf "static/%s/sprites/category" .id -}}
+    {{- $dir := printf "static/%s/sprites/category" $id -}}
     {{- if fileExists $dir -}}
         {{- range readDir $dir -}}
             {{- if strings.HasSuffix .Name ".png" -}}
@@ -12,9 +21,16 @@
             {{- end -}}
         {{- end -}}
     {{- end -}}
-    {{- $manifest = merge $manifest (dict .id $names) -}}
+    {{- $manifest = merge $manifest (dict $id $names) -}}
+
+    {{- $families := dict -}}
+    {{- range $family, $probe := $assetFamilies -}}
+        {{- $families = merge $families (dict $family (fileExists (printf "static/%s/%s" $id $probe))) -}}
+    {{- end -}}
+    {{- $themeAssets = merge $themeAssets (dict $id $families) -}}
 {{- end -}}
 <script>
 window.PIXEL_THEMES = {{ $themes | jsonify | safeJS }};
 window.SPRITE_MANIFEST = {{ $manifest | jsonify | safeJS }};
+window.THEME_ASSETS = {{ $themeAssets | jsonify | safeJS }};
 </script>

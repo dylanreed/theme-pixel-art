@@ -77,8 +77,11 @@
         );
         if (containers.length === 0) return;
 
-        // Get current theme for sprite paths
-        const currentTheme = localStorage.getItem('themeStyle') || 'fantasy';
+        // Get current theme for sprite paths. Themes without cat sprite
+        // sheets (e.g. kaiju) fall back to fantasy art so Ramona never 404s.
+        const requestedTheme = localStorage.getItem('themeStyle') || 'fantasy';
+        const themeAssets = (window.THEME_ASSETS || {})[requestedTheme] || {};
+        const currentTheme = themeAssets.cat ? requestedTheme : 'fantasy';
         const spritePath = `/${currentTheme}/sprites/cat`;
         const sheetPath = `${spritePath}/sheets`;
 
