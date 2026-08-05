@@ -1,32 +1,14 @@
-{{/* Get first category and determine sprite */}}
+{{- /* ABOUTME: Renders the animated category sprite for a post. */ -}}
+{{- /* ABOUTME: Sprite name is resolved at build time; chaos.js swaps the theme path. */ -}}
 {{ $category := "" }}
-{{ with .Params.categories }}
-    {{ $category = index . 0 | lower }}
-{{ end }}
+{{ with .Params.categories }}{{ $category = index . 0 | lower }}{{ end }}
 
-{{/* Check if this is archive view - only access isArchive on dicts */}}
 {{ $isArchive := false }}
 {{ if not .IsPage }}
-    {{ if .isArchive }}
-        {{ $isArchive = true }}
-    {{ end }}
+    {{ if .isArchive }}{{ $isArchive = true }}{{ end }}
 {{ end }}
 
-{{/* 18-frame sprite sheets (6x3 grid, 64x64 frames)
-     Located at /{theme}/sprites/category/{category}.png
-     Theme is read from localStorage, defaults to fantasy
-
-     Categories: health, tabletop, gaming, personal, clown, writing,
-                 cooking, music, travel, reading, crafting, adhd, pets, tech
-     Default: default.png
-*/}}
-{{ $spriteMap := dict "clowning" "clown" }}
-{{ $spriteFile := $category }}
-{{ if eq $spriteFile "" }}
-    {{ $spriteFile = "default" }}
-{{ else if index $spriteMap $spriteFile }}
-    {{ $spriteFile = index $spriteMap $spriteFile }}
-{{ end }}
+{{ $spriteFile := partial "sprite-name.html" . }}
 
 <div class="{{ if $isArchive }}archive-sprite{{ else }}post-sprite{{ end }} theme-sprite-6x3" data-category="{{ $category }}" data-sprite="{{ $spriteFile }}">
     <img src="/fantasy/sprites/category/{{ $spriteFile }}.png" alt="Animated sprite for {{ $category | default "default" }} category">

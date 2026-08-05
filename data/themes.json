@@ -1,0 +1,7 @@
+[
+  { "id": "fantasy",    "name": "Fantasy",    "icon": "/modes/fantasy.webp" },
+  { "id": "sci-fi",     "name": "Sci-Fi",     "icon": "/modes/sci-fi.webp" },
+  { "id": "cyberpunk",  "name": "Cyberpunk",  "icon": "/modes/cyberpunk.webp" },
+  { "id": "cabin",      "name": "Cabin",      "icon": "/modes/cabin.webp" },
+  { "id": "underwater", "name": "Underwater", "icon": "/modes/underwater.webp" }
+]

@@ -1,0 +1,32 @@
+{{- /* ABOUTME: Resolves a page to a category sprite base name. */ -}}
+{{- /* ABOUTME: Chain is category, then alias map, then tags, then default. */ -}}
+{{- $aliases := index .Site.Data "sprite-aliases" | default dict -}}
+{{- $available := slice -}}
+{{- range readDir "static/fantasy/sprites/category" -}}
+    {{- if strings.HasSuffix .Name ".png" -}}
+        {{- $available = $available | append (strings.TrimSuffix ".png" .Name) -}}
+    {{- end -}}
+{{- end -}}
+
+{{- /* Ordered candidate terms: first category, then every tag. */ -}}
+{{- $terms := slice -}}
+{{- with .Params.categories -}}
+    {{- $terms = $terms | append (index . 0) -}}
+{{- end -}}
+{{- with .Params.tags -}}
+    {{- range . -}}
+        {{- $terms = $terms | append . -}}
+    {{- end -}}
+{{- end -}}
+
+{{- $resolved := "" -}}
+{{- range $terms -}}
+    {{- if not $resolved -}}
+        {{- $key := . | urlize -}}
+        {{- with index $aliases $key -}}{{- $key = . -}}{{- end -}}
+        {{- if in $available $key -}}{{- $resolved = $key -}}{{- end -}}
+    {{- end -}}
+{{- end -}}
+
+{{- if not $resolved -}}{{- $resolved = "default" -}}{{- end -}}
+{{- return $resolved -}}

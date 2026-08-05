@@ -377,7 +377,7 @@ Body.
 ---
 title: Unknown Category Known Tag
 date: 2026-01-03
-categories: [muppets]
+categories: [cryptid-cataloger]
 tags: [warhammer]
 ---
 Body.
@@ -389,7 +389,7 @@ Body.
 ---
 title: Unknown Everything
 date: 2026-01-04
-categories: [muppets]
+categories: [cryptid-cataloger]
 tags: [nonsense]
 ---
 Body.
@@ -456,9 +456,16 @@ Keys are `urlize`d taxonomy terms. Values must be canonical sprite base names.
   "yarn": "crafting",
   "serial": "writing",
   "side-projects": "tech",
-  "productivity": "adhd"
+  "productivity": "adhd",
+  "muppets": "personal"
 }
 ```
+
+`muppets` is the third-largest tag on the blog at 30 posts and had no sprite of
+its own, so it resolved to `default`. `personal` is the established catch-all.
+Because that makes `muppets` resolvable, the fixtures below use
+`cryptid-cataloger` — which has no sprite and no alias — wherever the test needs a
+genuinely unresolvable term.
 
 - [ ] **Step 6: Write the resolver partial**
 
