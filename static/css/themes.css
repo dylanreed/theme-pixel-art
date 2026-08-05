@@ -1564,7 +1564,14 @@ html.easy-read.theme-underwater.night .page-container::before,
 html.easy-read.theme-underwater.night .archive-container::before,
 html.easy-read.theme-underwater.night .h-feed::before,
 html.easy-read.theme-underwater.night .photos-grid-container::before,
-html.easy-read.theme-underwater.night .archive_categories::before {
+html.easy-read.theme-underwater.night .archive_categories::before,
+html.easy-read.theme-kaiju .posts-container::before,
+html.easy-read.theme-kaiju .post-container::before,
+html.easy-read.theme-kaiju .page-container::before,
+html.easy-read.theme-kaiju .archive-container::before,
+html.easy-read.theme-kaiju .h-feed::before,
+html.easy-read.theme-kaiju .photos-grid-container::before,
+html.easy-read.theme-kaiju .archive_categories::before {
     background: #ffffff !important;
     background-color: #ffffff !important;
     background-image: none !important;
@@ -1702,4 +1709,112 @@ html.easy-read .nav-sign,
 html.easy-read .post-tag,
 html.easy-read .pagination a {
     cursor: pointer !important;
+}
+
+/* ===============================================================
+   KAIJU - Night street, cinema marquee, city-scale trouble
+   =============================================================== */
+
+html.theme-kaiju {
+    --kaiju-bg: #0b1416;
+    --kaiju-panel: #16242a;
+    --kaiju-border: #8b1a1a;
+    --kaiju-text: #e8dcc0;
+    --kaiju-heading: #ffc94a;
+    --kaiju-link: #7fd4d6;
+    --kaiju-hot: #ff5533;
+    --kaiju-muted: #9ab0b3;
+}
+
+html.theme-kaiju body {
+    background: url("/kaiju/backgrounds/3.png");
+    background-size: 75%;
+    background-repeat: repeat;
+}
+
+html.theme-kaiju.night body {
+    background: url("/kaiju/backgrounds/3_night.png");
+    background-size: 75%;
+    background-repeat: repeat;
+}
+
+html.theme-kaiju .posts-container::before,
+html.theme-kaiju .post-container::before,
+html.theme-kaiju .page-container::before,
+html.theme-kaiju .archive-container::before,
+html.theme-kaiju .h-feed::before,
+html.theme-kaiju .photos-grid-container::before,
+html.theme-kaiju .archive_categories::before {
+    background: var(--kaiju-panel);
+    background-image: none;
+}
+
+html.theme-kaiju body,
+html.theme-kaiju .post-content,
+html.theme-kaiju .page-content,
+html.theme-kaiju .post-excerpt,
+html.theme-kaiju article p {
+    color: var(--kaiju-text);
+}
+
+html.theme-kaiju .post-content h2,
+html.theme-kaiju .post-content h3,
+html.theme-kaiju .post-title,
+html.theme-kaiju .post-title a,
+html.theme-kaiju .page-title,
+html.theme-kaiju .category-title,
+html.theme-kaiju .year-header {
+    color: var(--kaiju-heading);
+}
+
+html.theme-kaiju .post-content a,
+html.theme-kaiju .page-content a {
+    color: var(--kaiju-link);
+    text-decoration-color: rgba(127, 212, 214, 0.5);
+}
+
+html.theme-kaiju .post-meta,
+html.theme-kaiju .note-date,
+html.theme-kaiju .post-counter,
+html.theme-kaiju .pagination {
+    color: var(--kaiju-muted);
+}
+
+/* Marquee button */
+html.theme-kaiju .post-link {
+    background: linear-gradient(180deg, #8b1a1a 0%, #5e1010 100%);
+    border: 3px solid var(--kaiju-hot);
+    color: var(--kaiju-heading);
+    box-shadow:
+        inset 1px 1px 0 rgba(255, 201, 74, 0.35),
+        inset -1px -1px 0 rgba(0, 0, 0, 0.4),
+        0 0 12px rgba(255, 85, 51, 0.25),
+        2px 2px 0 rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+}
+
+html.theme-kaiju .post-link:hover {
+    background: linear-gradient(180deg, #a52020 0%, #741414 100%);
+    color: #fff3d0;
+    box-shadow:
+        inset 1px 1px 0 rgba(255, 201, 74, 0.5),
+        inset -1px -1px 0 rgba(0, 0, 0, 0.4),
+        0 0 18px rgba(255, 85, 51, 0.4),
+        3px 3px 0 rgba(0, 0, 0, 0.3);
+}
+
+html.theme-kaiju .post-link:active {
+    background: linear-gradient(180deg, #5e1010 0%, #8b1a1a 100%);
+    box-shadow:
+        inset -1px -1px 0 rgba(255, 201, 74, 0.3),
+        inset 1px 1px 0 rgba(0, 0, 0, 0.4),
+        1px 1px 0 rgba(0, 0, 0, 0.3);
+}
+
+html.theme-kaiju .header-image {
+    background-image: url("/kaiju/headers/default.png");
+}
+
+html.theme-kaiju .note-scroll .note-content {
+    color: var(--kaiju-text);
 }

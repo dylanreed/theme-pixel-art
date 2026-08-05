@@ -73,5 +73,6 @@ test('theme registry is emitted in cycle order', () => {
   assert.ok(m, 'PIXEL_THEMES not emitted');
   const themes = JSON.parse(m[1]);
   assert.strictEqual(themes[0].id, 'fantasy', 'fantasy must be first');
-  assert.strictEqual(themes.length, 5);
+  assert.strictEqual(themes.length, 6);
+  assert.ok(themes.some(t => t.id === 'kaiju'), 'kaiju must be in the registry');
 });
