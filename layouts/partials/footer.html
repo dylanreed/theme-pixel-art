@@ -53,19 +53,23 @@
 
 <script>
     // Category sprites for the current theme. Resolution lives in chaos.js so
-    // the fallback chain has exactly one implementation.
+    // the fallback chain has exactly one implementation. Re-runs on
+    // 'themechange' so switching themes updates sprites without a reload.
     (function() {
-        const theme = localStorage.getItem('themeStyle') || 'fantasy';
-        const resolve = (window.chaos && window.chaos.spriteUrl) || function(t, name) {
-            const have = (window.SPRITE_MANIFEST || {})[t] || [];
-            if (have.includes(name)) return '/' + t + '/sprites/category/' + name + '.png';
-            if (have.includes('default')) return '/' + t + '/sprites/category/default.png';
-            return '/fantasy/sprites/category/' + name + '.png';
-        };
-        document.querySelectorAll('.theme-sprite-6x3[data-sprite]').forEach(container => {
-            const img = container.querySelector('img');
-            if (img && container.dataset.sprite) img.src = resolve(theme, container.dataset.sprite);
-        });
+        function updateSprites(theme) {
+            const resolve = (window.chaos && window.chaos.spriteUrl) || function(t, name) {
+                const have = (window.SPRITE_MANIFEST || {})[t] || [];
+                if (have.includes(name)) return '/' + t + '/sprites/category/' + name + '.png';
+                if (have.includes('default')) return '/' + t + '/sprites/category/default.png';
+                return '/fantasy/sprites/category/' + name + '.png';
+            };
+            document.querySelectorAll('.theme-sprite-6x3[data-sprite]').forEach(container => {
+                const img = container.querySelector('img');
+                if (img && container.dataset.sprite) img.src = resolve(theme, container.dataset.sprite);
+            });
+        }
+        updateSprites(localStorage.getItem('themeStyle') || 'fantasy');
+        document.addEventListener('themechange', (e) => updateSprites(e.detail.theme));
     })();
 </script>
 
@@ -76,14 +80,6 @@
             ".posts-container, .post-container, .page-container, .archive-container, .note-scroll-single, .h-feed, .photos-grid-container",
         );
         if (containers.length === 0) return;
-
-        // Get current theme for sprite paths. Themes without cat sprite
-        // sheets (e.g. kaiju) fall back to fantasy art so Ramona never 404s.
-        const requestedTheme = localStorage.getItem('themeStyle') || 'fantasy';
-        const themeAssets = (window.THEME_ASSETS || {})[requestedTheme] || {};
-        const currentTheme = themeAssets.cat ? requestedTheme : 'fantasy';
-        const spritePath = `/${currentTheme}/sprites/cat`;
-        const sheetPath = `${spritePath}/sheets`;
 
         // All themes now use sprite sheets
         const usesSpriteSheets = true;
@@ -96,21 +92,23 @@
             'cyberpunk': { walk: 6, run: 6, idle: 8 },
             'underwater': { walk: 6, run: 8, idle: 8 }
         };
-        const themeFrames = themeSheetConfigs[currentTheme] || themeSheetConfigs['fantasy'];
-        const sheetConfig = {
-            walk: { frames: themeFrames.walk, duration: 600 },
-            run: { frames: themeFrames.run, duration: 400 },
-            idle: { frames: themeFrames.idle, duration: 800 }
-        };
         const frameWidth = 140;
+
+        // Everything below is recomputed per theme by resolveAssets() so a
+        // 'themechange' event (dispatched by applyThemeStyle in baseof.html)
+        // can re-bind Ramona's art in place instead of relying on a reload.
+        let currentTheme, spritePath, sheetPath, sheetConfig;
+        let availableSheets, sprites, gifFallbacks;
+        let idleSprites, turnEastToWest, turnWestToEast;
+        let loadedSheets, failedSheets;
 
         // Resolve one direction sheet. Fantasy ships 20 of the 24 sheets --
         // run_north and the four run diagonals are missing -- so a run
         // direction with no sheet borrows the walk sheet for the same
         // direction. Safe because walk and run share a frame count on every
         // theme in themeSheetConfigs; if that ever stops being true the
-        // substituted animation would desync.
-        const availableSheets = ((window.THEME_ASSETS || {})[currentTheme] || {}).catSheets;
+        // substituted animation would desync. Reads availableSheets/sheetPath
+        // as set by the resolveAssets() call currently in progress.
         function sheet(name) {
             if (availableSheets && availableSheets.length && !availableSheets.includes(name)) {
                 const alt = name.replace(/^run_/, 'walk_');
@@ -119,117 +117,148 @@
             return `${sheetPath}/${name}.png`;
         }
 
-        // Sprite sheet paths (all themes)
-        const sprites = {
-            walkNorth: `${sheetPath}/walk_north.png`,
-            walkNortheast: `${sheetPath}/walk_north-east.png`,
-            walkEast: `${sheetPath}/walk_east.png`,
-            walkSoutheast: `${sheetPath}/walk_south-east.png`,
-            walkSouth: `${sheetPath}/walk_south.png`,
-            walkSouthwest: `${sheetPath}/walk_south-west.png`,
-            walkWest: `${sheetPath}/walk_west.png`,
-            walkNorthwest: `${sheetPath}/walk_north-west.png`,
-            runNorth: sheet('run_north'),
-            runNortheast: sheet('run_north-east'),
-            runEast: sheet('run_east'),
-            runSoutheast: sheet('run_south-east'),
-            runSouth: sheet('run_south'),
-            runSouthwest: sheet('run_south-west'),
-            runWest: sheet('run_west'),
-            runNorthwest: sheet('run_north-west'),
-            idleNorth: `${sheetPath}/idle_north.png`,
-            idleNortheast: `${sheetPath}/idle_north-east.png`,
-            idleEast: `${sheetPath}/idle_east.png`,
-            idleSoutheast: `${sheetPath}/idle_south-east.png`,
-            idleSouth: `${sheetPath}/idle_south.png`,
-            idleSouthwest: `${sheetPath}/idle_south-west.png`,
-            idleWest: `${sheetPath}/idle_west.png`,
-            idleNorthwest: `${sheetPath}/idle_north-west.png`,
-        };
+        // Recompute every theme-dependent value for `requestedTheme` and
+        // kick off a fresh preload. Themes without cat sprite sheets (e.g.
+        // kaiju) fall back to fantasy art and fantasy frame counts so Ramona
+        // never 404s.
+        function resolveAssets(requestedTheme) {
+            const themeAssets = (window.THEME_ASSETS || {})[requestedTheme] || {};
+            currentTheme = themeAssets.cat ? requestedTheme : 'fantasy';
+            spritePath = `/${currentTheme}/sprites/cat`;
+            sheetPath = `${spritePath}/sheets`;
 
-        // GIF fallbacks for themes missing some sprite sheets
-        const gifFallbacks = {
-            walkNorth: `${spritePath}/walk_north.gif`,
-            walkNortheast: `${spritePath}/walk_north_east.gif`,
-            walkEast: `${spritePath}/walk_east.gif`,
-            walkSoutheast: `${spritePath}/walk_south_east.gif`,
-            walkSouth: `${spritePath}/walk_south.gif`,
-            walkSouthwest: `${spritePath}/walk_south_west.gif`,
-            walkWest: `${spritePath}/walk_west.gif`,
-            walkNorthwest: `${spritePath}/walk_north_west.gif`,
-            runNorth: `${spritePath}/run_north.gif`,
-            runNortheast: `${spritePath}/run_north_east.gif`,
-            runEast: `${spritePath}/run_east.gif`,
-            runSoutheast: `${spritePath}/run_south_east.gif`,
-            runSouth: `${spritePath}/run_south.gif`,
-            runSouthwest: `${spritePath}/run_south_west.gif`,
-            runWest: `${spritePath}/run_west.gif`,
-            runNorthwest: `${spritePath}/run_north_west.gif`,
-            idleNorth: `${spritePath}/idle_north.gif`,
-            idleNortheast: `${spritePath}/idle_north_east.gif`,
-            idleEast: `${spritePath}/idle_east.gif`,
-            idleSoutheast: `${spritePath}/idle_south_east.gif`,
-            idleSouth: `${spritePath}/idle_south.gif`,
-            idleSouthwest: `${spritePath}/idle_south_west.gif`,
-            idleWest: `${spritePath}/idle_west.gif`,
-            idleNorthwest: `${spritePath}/idle_north_west.gif`,
-        };
-
-        // Track which sprite sheets loaded successfully
-        const loadedSheets = new Set();
-        const failedSheets = new Set();
-
-        const idleSprites = [
-            sprites.idleNorth,
-            sprites.idleNortheast,
-            sprites.idleEast,
-            sprites.idleSoutheast,
-            sprites.idleSouth,
-            sprites.idleSouthwest,
-            sprites.idleWest,
-            sprites.idleNorthwest,
-        ];
-
-        // Turn sequences for animated direction changes (using walk sprites)
-        const turnEastToWest = [
-            sprites.walkEast,
-            sprites.walkSoutheast,
-            sprites.walkSouth,
-            sprites.walkSouthwest,
-            sprites.walkWest,
-        ];
-        const turnWestToEast = [
-            sprites.walkWest,
-            sprites.walkSouthwest,
-            sprites.walkSouth,
-            sprites.walkSoutheast,
-            sprites.walkEast,
-        ];
-
-        // Preload all sprites and track which ones load successfully
-        Object.entries(sprites).forEach(([key, src]) => {
-            const img = new Image();
-            img.onload = () => loadedSheets.add(src);
-            img.onerror = () => {
-                failedSheets.add(src);
-                // Preload the GIF fallback
-                const fallbackImg = new Image();
-                fallbackImg.src = gifFallbacks[key];
+            const themeFrames = themeSheetConfigs[currentTheme] || themeSheetConfigs['fantasy'];
+            sheetConfig = {
+                walk: { frames: themeFrames.walk, duration: 600 },
+                run: { frames: themeFrames.run, duration: 400 },
+                idle: { frames: themeFrames.idle, duration: 800 }
             };
-            img.src = src;
-        });
 
-        // Inject sprite sheet CSS animations if needed
-        if (usesSpriteSheets) {
-            const style = document.createElement('style');
-            // Element is 192px, frames are 140px, so scale factor is 192/140 ≈ 1.371
+            availableSheets = ((window.THEME_ASSETS || {})[currentTheme] || {}).catSheets;
+
+            // Sprite sheet paths (all themes)
+            sprites = {
+                walkNorth: `${sheetPath}/walk_north.png`,
+                walkNortheast: `${sheetPath}/walk_north-east.png`,
+                walkEast: `${sheetPath}/walk_east.png`,
+                walkSoutheast: `${sheetPath}/walk_south-east.png`,
+                walkSouth: `${sheetPath}/walk_south.png`,
+                walkSouthwest: `${sheetPath}/walk_south-west.png`,
+                walkWest: `${sheetPath}/walk_west.png`,
+                walkNorthwest: `${sheetPath}/walk_north-west.png`,
+                runNorth: sheet('run_north'),
+                runNortheast: sheet('run_north-east'),
+                runEast: sheet('run_east'),
+                runSoutheast: sheet('run_south-east'),
+                runSouth: sheet('run_south'),
+                runSouthwest: sheet('run_south-west'),
+                runWest: sheet('run_west'),
+                runNorthwest: sheet('run_north-west'),
+                idleNorth: `${sheetPath}/idle_north.png`,
+                idleNortheast: `${sheetPath}/idle_north-east.png`,
+                idleEast: `${sheetPath}/idle_east.png`,
+                idleSoutheast: `${sheetPath}/idle_south-east.png`,
+                idleSouth: `${sheetPath}/idle_south.png`,
+                idleSouthwest: `${sheetPath}/idle_south-west.png`,
+                idleWest: `${sheetPath}/idle_west.png`,
+                idleNorthwest: `${sheetPath}/idle_north-west.png`,
+            };
+
+            // GIF fallbacks for themes missing some sprite sheets
+            gifFallbacks = {
+                walkNorth: `${spritePath}/walk_north.gif`,
+                walkNortheast: `${spritePath}/walk_north_east.gif`,
+                walkEast: `${spritePath}/walk_east.gif`,
+                walkSoutheast: `${spritePath}/walk_south_east.gif`,
+                walkSouth: `${spritePath}/walk_south.gif`,
+                walkSouthwest: `${spritePath}/walk_south_west.gif`,
+                walkWest: `${spritePath}/walk_west.gif`,
+                walkNorthwest: `${spritePath}/walk_north_west.gif`,
+                runNorth: `${spritePath}/run_north.gif`,
+                runNortheast: `${spritePath}/run_north_east.gif`,
+                runEast: `${spritePath}/run_east.gif`,
+                runSoutheast: `${spritePath}/run_south_east.gif`,
+                runSouth: `${spritePath}/run_south.gif`,
+                runSouthwest: `${spritePath}/run_south_west.gif`,
+                runWest: `${spritePath}/run_west.gif`,
+                runNorthwest: `${spritePath}/run_north_west.gif`,
+                idleNorth: `${spritePath}/idle_north.gif`,
+                idleNortheast: `${spritePath}/idle_north_east.gif`,
+                idleEast: `${spritePath}/idle_east.gif`,
+                idleSoutheast: `${spritePath}/idle_south_east.gif`,
+                idleSouth: `${spritePath}/idle_south.gif`,
+                idleSouthwest: `${spritePath}/idle_south_west.gif`,
+                idleWest: `${spritePath}/idle_west.gif`,
+                idleNorthwest: `${spritePath}/idle_north_west.gif`,
+            };
+
+            idleSprites = [
+                sprites.idleNorth,
+                sprites.idleNortheast,
+                sprites.idleEast,
+                sprites.idleSoutheast,
+                sprites.idleSouth,
+                sprites.idleSouthwest,
+                sprites.idleWest,
+                sprites.idleNorthwest,
+            ];
+
+            // Turn sequences for animated direction changes (using walk sprites)
+            turnEastToWest = [
+                sprites.walkEast,
+                sprites.walkSoutheast,
+                sprites.walkSouth,
+                sprites.walkSouthwest,
+                sprites.walkWest,
+            ];
+            turnWestToEast = [
+                sprites.walkWest,
+                sprites.walkSouthwest,
+                sprites.walkSouth,
+                sprites.walkSoutheast,
+                sprites.walkEast,
+            ];
+
+            // Preload all sprites for this theme and track which ones load
+            // successfully. Local Sets, published to loadedSheets/failedSheets
+            // only once populated, so a slow-loading image from a theme the
+            // player has already switched away from can't land in the wrong
+            // theme's fallback bookkeeping.
+            const freshLoaded = new Set();
+            const freshFailed = new Set();
+            Object.entries(sprites).forEach(([key, src]) => {
+                const img = new Image();
+                img.onload = () => freshLoaded.add(src);
+                img.onerror = () => {
+                    freshFailed.add(src);
+                    // Preload the GIF fallback
+                    const fallbackImg = new Image();
+                    fallbackImg.src = gifFallbacks[key];
+                };
+                img.src = src;
+            });
+            loadedSheets = freshLoaded;
+            failedSheets = freshFailed;
+        }
+
+        // Inject/update the sprite sheet CSS animations. Frame counts (and
+        // therefore sheet widths) vary by theme, so this has to re-run
+        // whenever resolveAssets() picks a new theme.
+        let animStyleEl = null;
+        function updateAnimationStyle() {
+            if (!usesSpriteSheets) return;
+            // Element is 192px, frames are 140px, so scale factor is 192/140 ~= 1.371
             const scale = 192 / 140;
             const walkSheetWidth = Math.round(frameWidth * sheetConfig.walk.frames * scale);
             const runSheetWidth = Math.round(frameWidth * sheetConfig.run.frames * scale);
             const idleSheetWidth = Math.round(frameWidth * sheetConfig.idle.frames * scale);
             const scaledHeight = Math.round(140 * scale);
 
-            style.textContent = `
+            if (!animStyleEl) {
+                animStyleEl = document.createElement('style');
+                document.head.appendChild(animStyleEl);
+            }
+            animStyleEl.textContent = `
                 @keyframes sprite-walk { from { background-position-x: 0; } to { background-position-x: -${walkSheetWidth}px; } }
                 @keyframes sprite-run { from { background-position-x: 0; } to { background-position-x: -${runSheetWidth}px; } }
                 @keyframes sprite-idle { from { background-position-x: 0; } to { background-position-x: -${idleSheetWidth}px; } }
@@ -238,7 +267,6 @@
                 .ramona.sprite-sheet.anim-run { background-size: ${runSheetWidth}px ${scaledHeight}px; animation: sprite-run ${sheetConfig.run.duration}ms steps(${sheetConfig.run.frames}) infinite; }
                 .ramona.sprite-sheet.anim-idle { background-size: ${idleSheetWidth}px ${scaledHeight}px; animation: sprite-idle ${sheetConfig.idle.duration}ms steps(${sheetConfig.idle.frames}) infinite; }
             `;
-            document.head.appendChild(style);
         }
 
         // Create Ramona for the first container only (persists across pages)
@@ -277,6 +305,7 @@
         let state = "walking"; // Always start walking - don't restore idle/turning states
         let speed = 1.25;
         let currentAnimClass = '';
+        let turnIntervalId = null;
 
         // Clamp x to valid bounds
         x = Math.max(0, Math.min(x, bounds.width - spriteSize));
@@ -291,7 +320,32 @@
         }
         setInterval(saveState, 500); // Save more frequently
 
+        resolveAssets(localStorage.getItem('themeStyle') || 'fantasy');
+        updateAnimationStyle();
         setSprite(direction === 1 ? sprites.walkEast : sprites.walkWest, 'walk');
+
+        // Re-bind to the new theme's art on switch. Sprites/frame counts are
+        // recomputed, the animation CSS is regenerated, and whatever Ramona
+        // is currently doing (walking, running, idling) is redrawn with the
+        // new sheets immediately -- a mid-turn switch just snaps to walking
+        // rather than finishing the turn on stale art.
+        document.addEventListener('themechange', (e) => {
+            const theme = (e.detail && e.detail.theme) || localStorage.getItem('themeStyle') || 'fantasy';
+            resolveAssets(theme);
+            updateAnimationStyle();
+            if (turnIntervalId) {
+                clearInterval(turnIntervalId);
+                turnIntervalId = null;
+            }
+            if (state === 'running') {
+                setSprite(direction === 1 ? sprites.runEast : sprites.runWest, 'run');
+            } else if (state === 'idle') {
+                setSprite(idleSprites[Math.floor(Math.random() * idleSprites.length)], 'idle');
+            } else {
+                state = 'walking';
+                setSprite(direction === 1 ? sprites.walkEast : sprites.walkWest, 'walk');
+            }
+        });
 
         function setSprite(src, animType) {
             // Check if this sprite sheet failed to load - use GIF fallback
@@ -381,12 +435,13 @@
             state = "turning";
             const sequence = newDirection === -1 ? turnEastToWest : turnWestToEast;
             let frameIndex = 0;
-            const turnInterval = setInterval(() => {
+            turnIntervalId = setInterval(() => {
                 if (frameIndex < sequence.length) {
                     setSprite(sequence[frameIndex], 'walk');
                     frameIndex++;
                 } else {
-                    clearInterval(turnInterval);
+                    clearInterval(turnIntervalId);
+                    turnIntervalId = null;
                     direction = newDirection;
                     startWalking();
                 }

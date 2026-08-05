@@ -117,6 +117,11 @@
                 if (updateStorage) {
                     localStorage.setItem('themeStyle', theme);
                 }
+                // Everything theme-dependent is CSS keyed off html.theme-<id>
+                // and already switched above. Anything bound in JS at init
+                // time (category sprites, Ramona) listens for this to re-bind
+                // instead of relying on a page reload.
+                document.dispatchEvent(new CustomEvent('themechange', { detail: { theme } }));
             }
 
             // Chaos mode easter egg - unlock after 25 clicks or 5 minutes
@@ -173,15 +178,13 @@
                         var newTheme = themes[currentThemeIndex];
                         applyThemeStyle(newTheme);
 
-                        // Preload new theme assets before reloading
+                        // Warm the image cache for the new theme's CSS-driven
+                        // backgrounds (tiles, notes, menu, etc). Not awaited:
+                        // nothing needs to block on it now that there's no
+                        // reload, it just gets the requests started a beat
+                        // earlier than the browser would on its own.
                         if (window.preloadTheme) {
-                            btn.style.opacity = '0.5';
-                            btn.style.pointerEvents = 'none';
-                            window.preloadTheme(newTheme).then(function() {
-                                location.reload();
-                            });
-                        } else {
-                            location.reload();
+                            window.preloadTheme(newTheme);
                         }
                         break;
 

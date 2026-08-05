@@ -802,6 +802,11 @@ KONAMI CODE: ↑↑↓↓←→←→BA
         });
     }
 
+    // Re-resolve on theme switch so this copy never disagrees with the one
+    // in footer.html (both exist so the fallback chain works before and
+    // after chaos.js has loaded).
+    document.addEventListener('themechange', updateCategorySprites);
+
     // ═══════════════════════════════════════════════════════════════
     // INITIALIZATION
     // ═══════════════════════════════════════════════════════════════
