@@ -1815,6 +1815,42 @@ html.theme-kaiju .header-image {
     background-image: url("/kaiju/headers/default.png");
 }
 
+/* Note scrolls. Without these the cream body text lands on the fantasy
+   parchment graphic and all but disappears -- kaiju ships its own note art. */
+html.theme-kaiju .note-scroll::before {
+    background-image: url("/kaiju/notes/top.webp");
+}
+
+html.theme-kaiju .note-scroll::after {
+    background-image: url("/kaiju/notes/bottom.webp");
+}
+
 html.theme-kaiju .note-scroll .note-content {
+    background-image: url("/kaiju/notes/middle.webp");
     color: var(--kaiju-text);
+}
+
+html.theme-kaiju .note-scroll.rolled-up {
+    background-image: url("/kaiju/notes/closed.webp");
+}
+
+html.theme-kaiju .note-scroll .note-date {
+    color: var(--kaiju-muted);
+}
+
+/* Nav signs and hamburger. Kaiju names these menu.webp, not sign.webp. */
+html.theme-kaiju .nav-sign,
+html.theme-kaiju .nav-hamburger {
+    background-image: url("/kaiju/menu/menu.webp") !important;
+}
+
+html.theme-kaiju .nav-sign span {
+    color: var(--kaiju-text);
+}
+
+html.theme-kaiju .nav-sign.active span {
+    color: var(--kaiju-heading);
+    text-shadow:
+        0 0 5px var(--kaiju-hot),
+        0 0 10px var(--kaiju-hot);
 }
