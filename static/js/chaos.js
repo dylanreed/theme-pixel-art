@@ -524,6 +524,8 @@ KONAMI CODE: ↑↑↓↓←→←→BA
         }
     };
 
+    window.chaos.spriteUrl = spriteUrl;
+
     // ═══════════════════════════════════════════════════════════════
     // AUTO NIGHT MODE - Based on actual time of day
     // ═══════════════════════════════════════════════════════════════
@@ -569,13 +571,12 @@ KONAMI CODE: ↑↑↓↓←→←→BA
     // ═══════════════════════════════════════════════════════════════
 
     function getCurrentTheme() {
-        // Check for theme class on html element
         const html = document.documentElement;
-        if (html.classList.contains('theme-sci-fi')) return 'sci-fi';
-        if (html.classList.contains('theme-cyberpunk')) return 'cyberpunk';
-        if (html.classList.contains('theme-cabin')) return 'cabin';
-        if (html.classList.contains('theme-underwater')) return 'underwater';
-        return 'fantasy'; // default
+        const themes = window.PIXEL_THEMES || [];
+        for (const t of themes) {
+            if (t.id !== 'fantasy' && html.classList.contains('theme-' + t.id)) return t.id;
+        }
+        return 'fantasy';
     }
 
     function getThemeSpriteSheet(theme) {
@@ -778,117 +779,26 @@ KONAMI CODE: ↑↑↓↓←→←→BA
     // THEME-SPECIFIC CATEGORY SPRITES
     // ═══════════════════════════════════════════════════════════════
 
+    // Resolve a sprite name to a path for a theme, degrading through the
+    // theme's own default and then fantasy. Never returns a 404 path so
+    // long as fantasy/default.png exists.
+    function spriteUrl(theme, name) {
+        const manifest = window.SPRITE_MANIFEST || {};
+        const have = manifest[theme] || [];
+        if (have.includes(name)) return '/' + theme + '/sprites/category/' + name + '.png';
+        if (have.includes('default')) return '/' + theme + '/sprites/category/default.png';
+        const fantasy = manifest.fantasy || [];
+        if (fantasy.includes(name)) return '/fantasy/sprites/category/' + name + '.png';
+        return '/fantasy/sprites/category/default.png';
+    }
+
     function updateCategorySprites() {
         const theme = getCurrentTheme();
-
-        // All possible categories (from post-sprite.html)
-        const categories = [
-            'health', 'tabletop', 'gaming', 'personal', 'clown', 'writing',
-            'cooking', 'music', 'travel', 'reading', 'crafting', 'adhd', 'pets', 'tech'
-        ];
-
-        // Theme-specific sprite overrides
-        // When adding a new sprite: place PNG in /{theme}/sprites/category/{category}.png
-        // Sprite format: 6x3 grid of 64x64 frames (384x192 total), last frame can be duplicate
-        const themeSprites = {
-            'fantasy': {
-                'adhd': '/fantasy/sprites/category/adhd.png',
-                'clown': '/fantasy/sprites/category/clown.png',
-                'cooking': '/fantasy/sprites/category/cooking.png',
-                'crafting': '/fantasy/sprites/category/crafting.png',
-                'gaming': '/fantasy/sprites/category/gaming.png',
-                'health': '/fantasy/sprites/category/health.png',
-                'music': '/fantasy/sprites/category/music.png',
-                'personal': '/fantasy/sprites/category/personal.png',
-                'pets': '/fantasy/sprites/category/pets.png',
-                'reading': '/fantasy/sprites/category/reading.png',
-                'tabletop': '/fantasy/sprites/category/tabletop.png',
-                'tech': '/fantasy/sprites/category/tech.png',
-                'travel': '/fantasy/sprites/category/travel.png',
-                'writing': '/fantasy/sprites/category/writing.png'
-            },
-            'sci-fi': {
-                'adhd': '/sci-fi/sprites/category/adhd.png',
-                'clown': '/sci-fi/sprites/category/clown.png',
-                'cooking': '/sci-fi/sprites/category/cooking.png',
-                'crafting': '/sci-fi/sprites/category/crafting.png',
-                'gaming': '/sci-fi/sprites/category/gaming.png',
-                'health': '/sci-fi/sprites/category/health.png',
-                'music': '/sci-fi/sprites/category/music.png',
-                'personal': '/sci-fi/sprites/category/personal.png',
-                'pets': '/sci-fi/sprites/category/pets.png',
-                'reading': '/sci-fi/sprites/category/reading.png',
-                'tabletop': '/sci-fi/sprites/category/tabletop.png',
-                'tech': '/sci-fi/sprites/category/tech.png',
-                'travel': '/sci-fi/sprites/category/travel.png',
-                'writing': '/sci-fi/sprites/category/writing.png'
-            },
-            'cyberpunk': {
-                'adhd': '/cyberpunk/sprites/category/adhd.png',
-                'clown': '/cyberpunk/sprites/category/clown.png',
-                'cooking': '/cyberpunk/sprites/category/cooking.png',
-                'crafting': '/cyberpunk/sprites/category/crafting.png',
-                'gaming': '/cyberpunk/sprites/category/gaming.png',
-                'health': '/cyberpunk/sprites/category/health.png',
-                'music': '/cyberpunk/sprites/category/music.png',
-                'personal': '/cyberpunk/sprites/category/personal.png',
-                'pets': '/cyberpunk/sprites/category/pets.png',
-                'reading': '/cyberpunk/sprites/category/reading.png',
-                'tabletop': '/cyberpunk/sprites/category/tabletop.png',
-                'tech': '/cyberpunk/sprites/category/tech.png',
-                'travel': '/cyberpunk/sprites/category/travel.png',
-                'writing': '/cyberpunk/sprites/category/writing.png'
-            },
-            'cabin': {
-                'adhd': '/cabin/sprites/category/adhd.png',
-                'clown': '/cabin/sprites/category/clown.png',
-                'cooking': '/cabin/sprites/category/cooking.png',
-                'crafting': '/cabin/sprites/category/crafting.png',
-                'gaming': '/cabin/sprites/category/gaming.png',
-                'health': '/cabin/sprites/category/health.png',
-                'music': '/cabin/sprites/category/music.png',
-                'personal': '/cabin/sprites/category/personal.png',
-                'pets': '/cabin/sprites/category/pets.png',
-                'reading': '/cabin/sprites/category/reading.png',
-                'tabletop': '/cabin/sprites/category/tabletop.png',
-                'tech': '/cabin/sprites/category/tech.png',
-                'travel': '/cabin/sprites/category/travel.png',
-                'writing': '/cabin/sprites/category/writing.png'
-            },
-            'underwater': {
-                'adhd': '/underwater/sprites/category/adhd.png',
-                'clown': '/underwater/sprites/category/clown.png',
-                'cooking': '/underwater/sprites/category/cooking.png',
-                'crafting': '/underwater/sprites/category/crafting.png',
-                'gaming': '/underwater/sprites/category/gaming.png',
-                'health': '/underwater/sprites/category/health.png',
-                'music': '/underwater/sprites/category/music.png',
-                'personal': '/underwater/sprites/category/personal.png',
-                'pets': '/underwater/sprites/category/pets.png',
-                'reading': '/underwater/sprites/category/reading.png',
-                'tabletop': '/underwater/sprites/category/tabletop.png',
-                'tech': '/underwater/sprites/category/tech.png',
-                'travel': '/underwater/sprites/category/travel.png',
-                'writing': '/underwater/sprites/category/writing.png'
-            }
-        };
-
-        // Get overrides for current theme
-        const overrides = themeSprites[theme];
-        if (!overrides) return;
-
-        // Find all category sprite containers and update their images
-        const spriteContainers = document.querySelectorAll('[data-category]');
-        spriteContainers.forEach(container => {
-            const category = container.dataset.category;
-            if (overrides[category]) {
-                const img = container.querySelector('img');
-                if (img) {
-                    img.src = overrides[category];
-                    // Add class for theme-specific CSS animations (6x3 grid format)
-                    container.classList.add('theme-sprite-6x3');
-                }
-            }
+        document.querySelectorAll('[data-sprite]').forEach(container => {
+            const img = container.querySelector('img');
+            if (!img) return;
+            img.src = spriteUrl(theme, container.dataset.sprite);
+            container.classList.add('theme-sprite-6x3');
         });
     }
 

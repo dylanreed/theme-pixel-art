@@ -52,15 +52,19 @@
 </script>
 
 <script>
-    // Update category sprites to use current theme
+    // Category sprites for the current theme. Resolution lives in chaos.js so
+    // the fallback chain has exactly one implementation.
     (function() {
         const theme = localStorage.getItem('themeStyle') || 'fantasy';
+        const resolve = (window.chaos && window.chaos.spriteUrl) || function(t, name) {
+            const have = (window.SPRITE_MANIFEST || {})[t] || [];
+            if (have.includes(name)) return '/' + t + '/sprites/category/' + name + '.png';
+            if (have.includes('default')) return '/' + t + '/sprites/category/default.png';
+            return '/fantasy/sprites/category/' + name + '.png';
+        };
         document.querySelectorAll('.theme-sprite-6x3[data-sprite]').forEach(container => {
-            const sprite = container.dataset.sprite;
             const img = container.querySelector('img');
-            if (img && sprite) {
-                img.src = `/${theme}/sprites/category/${sprite}.png`;
-            }
+            if (img && container.dataset.sprite) img.src = resolve(theme, container.dataset.sprite);
         });
     })();
 </script>

@@ -68,22 +68,10 @@
                 snow: '/sprites/drop_down_icons/snow.webp'
             };
 
-            // Theme style state (fantasy, sci-fi, cyberpunk, cabin, underwater)
-            const themes = ['fantasy', 'sci-fi', 'cyberpunk', 'cabin', 'underwater'];
-            const themeNames = {
-                'fantasy': 'Fantasy',
-                'sci-fi': 'Sci-Fi',
-                'cyberpunk': 'Cyberpunk',
-                'cabin': 'Cabin',
-                'underwater': 'Underwater'
-            };
-            const themeIcons = {
-                'fantasy': '/modes/fantasy.webp',
-                'sci-fi': '/modes/sci-fi.webp',
-                'cyberpunk': '/modes/cyberpunk.webp',
-                'cabin': '/modes/cabin.webp',
-                'underwater': '/modes/underwater.webp'
-            };
+            // Theme style state, driven by the registry emitted in theme-data.html
+            const themes = (window.PIXEL_THEMES || []).map(t => t.id);
+            const themeNames = Object.fromEntries((window.PIXEL_THEMES || []).map(t => [t.id, t.name]));
+            const themeIcons = Object.fromEntries((window.PIXEL_THEMES || []).map(t => [t.id, t.icon]));
             let currentThemeIndex = 0;
 
             // Chaos mode easter egg tracking
