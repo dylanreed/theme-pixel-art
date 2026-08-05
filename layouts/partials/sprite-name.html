@@ -1,6 +1,10 @@
 {{- /* ABOUTME: Resolves a page to a category sprite base name. */ -}}
 {{- /* ABOUTME: Chain is category, then alias map, then tags, then default. */ -}}
-{{- $aliases := index .Site.Data "sprite-aliases" | default dict -}}
+{{- /* Use the global `site`, not `.Site`: several callers (taxonomy.html,
+       the archive lists) hand this partial a synthetic dict rather than a
+       Page, and a missing map key yields nil instead of an error, which
+       would silently empty the alias map. */ -}}
+{{- $aliases := index site.Data "sprite-aliases" | default dict -}}
 {{- $available := slice -}}
 {{- range readDir "static/fantasy/sprites/category" -}}
     {{- if strings.HasSuffix .Name ".png" -}}

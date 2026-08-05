@@ -38,3 +38,19 @@ test('post with no category at all falls back to default', () => {
 test('category containing a space is normalised before lookup', () => {
   assert.strictEqual(spriteOf('spaced-category'), 'tabletop');
 });
+
+// taxonomy.html hands the partial a synthetic dict rather than a Page. Go
+// templates return nil for a missing map key instead of erroring, so a
+// context-dependent lookup silently no-ops there. Resolution must not care
+// which kind of context it was handed.
+test('taxonomy term page resolves a known category', () => {
+  assert.strictEqual(spriteOf('categories/gaming'), 'gaming');
+});
+
+test('taxonomy term page resolves through the alias map', () => {
+  assert.strictEqual(spriteOf('categories/clowning'), 'clown');
+});
+
+test('taxonomy term page falls back to default for an unknown term', () => {
+  assert.strictEqual(spriteOf('categories/cryptid-cataloger'), 'default');
+});

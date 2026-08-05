@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test test/",
+    "test": "node --test 'test/**/*.test.mjs'",
     "test:contrast": "node --test test/contrast.test.mjs"
   }
 }
