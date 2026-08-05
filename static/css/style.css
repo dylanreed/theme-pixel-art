@@ -3859,3 +3859,32 @@ html.easy-read .post-link {
 html.easy-read .post-link:hover {
     background: var(--corp-accent-hover) !important;
 }
+
+/* ===============================================================
+   HEADING CONTRAST
+   .post-content h2/h3 set #4a3020, which reads at 12.11:1 on the
+   day panel but only 1.24:1 on the night panel #3b454d. Night mode
+   overrides body text but never reached the headings.
+   =============================================================== */
+
+html.night .post-content h2,
+html.night .post-content h3,
+html.night .post-content h4,
+html.night .post-content h5,
+html.night .post-content h6,
+html.night .page-content h2,
+html.night .page-content h3 {
+    color: #e8c9a0;
+}
+
+/* Easy read never set heading colours either, so they inherited the
+   theme brown regardless of the corporate palette. */
+html.easy-read .post-content h2,
+html.easy-read .post-content h3,
+html.easy-read .post-content h4,
+html.easy-read .post-content h5,
+html.easy-read .post-content h6,
+html.easy-read .page-content h2,
+html.easy-read .page-content h3 {
+    color: var(--corp-text) !important;
+}
