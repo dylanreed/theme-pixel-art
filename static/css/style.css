@@ -3726,10 +3726,10 @@ html.easy-read .nav-hamburger {
     background-image: url("/corporate/menu/sign.webp") !important;
 }
 
-/* Easy read inverts the backing, as the site title does: the corporate
-   palette wants dark ink, which would vanish on the dark themed scrim. */
+/* Easy read takes the light corporate sign, so it needs no shading and dark
+   ink. --sign-shade is set on the sign itself in themes.css; this only has
+   to fix the ink. */
 html.easy-read .nav-sign span {
-    --nav-scrim: rgba(255, 255, 255, 0.9) !important;
     --nav-ink: var(--corp-text) !important;
     text-shadow: none !important;
 }
