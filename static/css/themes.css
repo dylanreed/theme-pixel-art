@@ -270,83 +270,6 @@ html.theme-sci-fi .note-scroll.rolled-up {
     background-image: url("/sci-fi/notes/closed.webp");
 }
 
-/* ===============================================================
-   SCI-FI FONTS
-   Retro analog aesthetic (70s NASA, Alien)
-   - Title: Orbitron (geometric, control room)
-   - Menus: Share Tech Mono (terminal readout)
-   - Body: IBM Plex Mono (retro-tech heritage)
-   =============================================================== */
-
-/* Sci-Fi site title */
-html.theme-sci-fi .site-title {
-    font-family: "Orbitron", sans-serif;
-}
-
-/* Sci-Fi menu/UI elements */
-html.theme-sci-fi .nav-sign span,
-html.theme-sci-fi .post-tag,
-html.theme-sci-fi .post-title,
-html.theme-sci-fi .post-link,
-html.theme-sci-fi .archive-tag,
-html.theme-sci-fi .pagination,
-html.theme-sci-fi .note-date,
-html.theme-sci-fi .post-meta,
-html.theme-sci-fi .sierra-btn::after,
-html.theme-sci-fi .theme-switcher::after {
-    font-family: "Share Tech Mono", monospace;
-}
-
-/* Sci-Fi body text */
-html.theme-sci-fi body,
-html.theme-sci-fi .post-excerpt,
-html.theme-sci-fi .post-content,
-html.theme-sci-fi .page-content,
-html.theme-sci-fi .note-content,
-html.theme-sci-fi article p {
-    font-family: "IBM Plex Mono", monospace;
-}
-
-/* ===============================================================
-   CYBERPUNK FONTS
-   Gritty neon aesthetic (Blade Runner, CP2077)
-   - Title: Teko (angular, aggressive)
-   - Menus: Rajdhani (sharp edges, readable)
-   - Body: Fira Code (hacker terminal)
-   =============================================================== */
-
-/* Cyberpunk site title */
-html.theme-cyberpunk .site-title {
-    font-family: "Teko", sans-serif;
-    font-weight: 600;
-    letter-spacing: 2px;
-}
-
-/* Cyberpunk menu/UI elements */
-html.theme-cyberpunk .nav-sign span,
-html.theme-cyberpunk .post-tag,
-html.theme-cyberpunk .post-title,
-html.theme-cyberpunk .post-link,
-html.theme-cyberpunk .archive-tag,
-html.theme-cyberpunk .pagination,
-html.theme-cyberpunk .note-date,
-html.theme-cyberpunk .post-meta,
-html.theme-cyberpunk .sierra-btn::after,
-html.theme-cyberpunk .theme-switcher::after {
-    font-family: "Rajdhani", sans-serif;
-    font-weight: 600;
-}
-
-/* Cyberpunk body text */
-html.theme-cyberpunk body,
-html.theme-cyberpunk .post-excerpt,
-html.theme-cyberpunk .post-content,
-html.theme-cyberpunk .page-content,
-html.theme-cyberpunk .note-content,
-html.theme-cyberpunk article p {
-    font-family: "Fira Code", monospace;
-}
-
 /* Feed excerpt legibility on dark day-mode scenes. The base excerpt color
    (#5a4030) is only lightened by night mode, so on themes whose day
    background is dark it reads as brown-on-dark. Lighten it for those. */
@@ -518,100 +441,6 @@ html.theme-underwater .post-link:active {
         inset 1px 1px 0 rgba(0, 0, 0, 0.3),
         0 0 10px rgba(58, 138, 154, 0.3),
         1px 1px 0 rgba(0, 0, 0, 0.2);
-}
-
-/* ===============================================================
-   CABIN FONTS
-   Storybook cozy aesthetic (hygge, children's book, warm)
-   - Title: Fredericka the Great (sketchy, hand-drawn storybook)
-   - Menus: Quicksand (soft, rounded, friendly)
-   - Body: Literata (warm book-like serif)
-   =============================================================== */
-
-/* Cabin site title */
-html.theme-cabin .site-title {
-    font-family: "Fredericka the Great", cursive;
-}
-
-/* Cabin menu/UI elements */
-html.theme-cabin .nav-sign span,
-html.theme-cabin .post-tag,
-html.theme-cabin .post-title,
-html.theme-cabin .post-link,
-html.theme-cabin .archive-tag,
-html.theme-cabin .archive-title,
-html.theme-cabin .pagination,
-html.theme-cabin .note-date,
-html.theme-cabin .post-meta,
-html.theme-cabin .post-counter,
-html.theme-cabin .page-title,
-html.theme-cabin .year-header,
-html.theme-cabin .category-title,
-html.theme-cabin .sierra-btn::after,
-html.theme-cabin .theme-switcher::after {
-    font-family: "Quicksand", sans-serif;
-    font-weight: 500;
-}
-
-/* Cabin body text */
-html.theme-cabin body,
-html.theme-cabin .post-excerpt,
-html.theme-cabin .post-content,
-html.theme-cabin .post-content h2,
-html.theme-cabin .post-content h3,
-html.theme-cabin .page-content,
-html.theme-cabin .page-content th,
-html.theme-cabin .note-content,
-html.theme-cabin .note-scroll .note-content,
-html.theme-cabin article p {
-    font-family: "Literata", serif;
-}
-
-/* ===============================================================
-   UNDERWATER FONTS
-   Nautical/maritime aesthetic (captain's log, old maps, diving bells)
-   - Title: IM Fell English (18th century maritime documents)
-   - Menus: Vollkorn (warm, sturdy, classic)
-   - Body: EB Garamond (elegant old-world serif)
-   =============================================================== */
-
-/* Underwater site title */
-html.theme-underwater .site-title {
-    font-family: "IM Fell English", serif;
-}
-
-/* Underwater menu/UI elements */
-html.theme-underwater .nav-sign span,
-html.theme-underwater .post-tag,
-html.theme-underwater .post-title,
-html.theme-underwater .post-link,
-html.theme-underwater .archive-tag,
-html.theme-underwater .archive-title,
-html.theme-underwater .pagination,
-html.theme-underwater .note-date,
-html.theme-underwater .post-meta,
-html.theme-underwater .post-counter,
-html.theme-underwater .page-title,
-html.theme-underwater .year-header,
-html.theme-underwater .category-title,
-html.theme-underwater .sierra-btn::after,
-html.theme-underwater .theme-switcher::after {
-    font-family: "Vollkorn", serif;
-    font-weight: 500;
-}
-
-/* Underwater body text */
-html.theme-underwater body,
-html.theme-underwater .post-excerpt,
-html.theme-underwater .post-content,
-html.theme-underwater .post-content h2,
-html.theme-underwater .post-content h3,
-html.theme-underwater .page-content,
-html.theme-underwater .page-content th,
-html.theme-underwater .note-content,
-html.theme-underwater .note-scroll .note-content,
-html.theme-underwater article p {
-    font-family: "EB Garamond", serif;
 }
 
 /* ===============================================================
@@ -797,44 +626,6 @@ html.theme-cabin .theme-switcher,
 html.theme-cabin [role="button"],
 html.theme-cabin [onclick] {
     cursor: url("/cabin/cursors/hand.png"), pointer !important;
-}
-
-/* ===============================================================
-   CABIN FONTS
-   Cozy rustic aesthetic (mountain lodge, handcrafted)
-   - Title: Amatic SC (hand-drawn, rustic)
-   - Menus: Cabin (clean, friendly)
-   - Body: Merriweather (readable, warm serif)
-   =============================================================== */
-
-/* Cabin site title */
-html.theme-cabin .site-title {
-    font-family: "Amatic SC", cursive;
-    font-weight: 700;
-}
-
-/* Cabin menu/UI elements */
-html.theme-cabin .nav-sign span,
-html.theme-cabin .post-tag,
-html.theme-cabin .post-title,
-html.theme-cabin .post-link,
-html.theme-cabin .archive-tag,
-html.theme-cabin .pagination,
-html.theme-cabin .note-date,
-html.theme-cabin .post-meta,
-html.theme-cabin .sierra-btn::after,
-html.theme-cabin .theme-switcher::after {
-    font-family: "Cabin", sans-serif;
-}
-
-/* Cabin body text */
-html.theme-cabin body,
-html.theme-cabin .post-excerpt,
-html.theme-cabin .post-content,
-html.theme-cabin .page-content,
-html.theme-cabin .note-content,
-html.theme-cabin article p {
-    font-family: "Merriweather", serif;
 }
 
 /* ===============================================================
@@ -1065,46 +856,6 @@ html.theme-underwater .theme-switcher,
 html.theme-underwater [role="button"],
 html.theme-underwater [onclick] {
     cursor: url("/underwater/cursors/hand.png"), pointer !important;
-}
-
-/* ===============================================================
-   UNDERWATER FONTS
-   Deep sea aesthetic (nautical, mysterious, ancient)
-   - Title: Cinzel (ancient, atlantean)
-   - Menus: Quicksand (flowing, rounded like bubbles)
-   - Body: Source Sans Pro (clean, readable)
-   =============================================================== */
-
-/* Underwater site title */
-html.theme-underwater .site-title {
-    font-family: "Cinzel", serif;
-    font-weight: 600;
-    letter-spacing: 2px;
-}
-
-/* Underwater menu/UI elements */
-html.theme-underwater .nav-sign span,
-html.theme-underwater .post-tag,
-html.theme-underwater .post-title,
-html.theme-underwater .post-link,
-html.theme-underwater .archive-tag,
-html.theme-underwater .pagination,
-html.theme-underwater .note-date,
-html.theme-underwater .post-meta,
-html.theme-underwater .sierra-btn::after,
-html.theme-underwater .theme-switcher::after {
-    font-family: "Quicksand", sans-serif;
-    font-weight: 500;
-}
-
-/* Underwater body text */
-html.theme-underwater body,
-html.theme-underwater .post-excerpt,
-html.theme-underwater .post-content,
-html.theme-underwater .page-content,
-html.theme-underwater .note-content,
-html.theme-underwater article p {
-    font-family: "Source Sans Pro", sans-serif;
 }
 
 /* ===============================================================

@@ -32,12 +32,32 @@ label,
     cursor: url("/fantasy/cursors/hand.png"), pointer;
 }
 
+/* ===============================================================
+   TYPE SYSTEM
+   One display face across every theme. The themes share a medium
+   rather than a genre -- they are all pixel art -- so a face that
+   belongs to the medium reads as deliberate on all six, where a
+   medieval or a cyberpunk face only ever suits one.
+
+   This replaced five per-theme display faces and fifteen loaded
+   families. That arrangement had drifted rather than been tuned:
+   cabin and underwater each carried two complete competing font
+   blocks with only the later one winning, kaiju had no rules at
+   all and rendered medieval, and five families downloaded on every
+   page without ever being painted.
+
+   A theme can still opt out by setting --font-display; that is a
+   deliberate override rather than an inherited accident. Body stays
+   a real text face because pixel faces close up at paragraph size.
+   =============================================================== */
 html {
+    --font-display: "Pixelify Sans", ui-monospace, "Courier New", monospace;
+    --font-body: "Spectral", Georgia, serif;
     overflow-x: hidden;
 }
 
 body {
-    font-family: "Spectral", Georgia, serif;
+    font-family: var(--font-body);
     min-height: 100vh;
     background-color: #87ceeb;
     background-image: url("/fantasy/backgrounds/3.webp");
@@ -144,7 +164,7 @@ html.night {
 }
 
 .nav-sign span {
-    font-family: "MedievalSharp", cursive;
+    font-family: var(--font-display);
     font-size: 27px;
     color: #4a3520;
     text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
@@ -539,7 +559,7 @@ html.night .archive-tag:hover {
     position: absolute;
     bottom: 10px;
     left: 55px;
-    font-family: "Uncial Antiqua", cursive;
+    font-family: var(--font-display);
     font-size: 37px;
     color: #f5e6d3;
     background: var(--title-scrim);
@@ -680,7 +700,7 @@ html.night .archive-tag:hover {
     padding: 4px 12px;
     border-radius: 0;
     font-size: 12px;
-    font-family: "MedievalSharp", cursive;
+    font-family: var(--font-display);
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 10px;
@@ -707,7 +727,7 @@ html.night .archive-tag:hover {
 }
 
 .post-title {
-    font-family: "MedievalSharp", cursive;
+    font-family: var(--font-display);
     font-size: 24px;
     color: #2d2d2d;
     margin-bottom: 8px;
@@ -750,14 +770,14 @@ html.night .archive-tag:hover {
 }
 
 .post-content h2 {
-    font-family: "MedievalSharp", cursive;
+    font-family: var(--font-display);
     font-size: 24px;
     color: #4a3020;
     margin: 2em 0 1em;
 }
 
 .post-content h3 {
-    font-family: "MedievalSharp", cursive;
+    font-family: var(--font-display);
     font-size: 20px;
     color: #4a3020;
     margin: 1.5em 0 0.75em;
@@ -937,7 +957,7 @@ html.night .archive-tag:hover {
 .post-content th,
 .page-content th {
     background: rgba(139, 90, 43, 0.15);
-    font-family: "MedievalSharp", cursive;
+    font-family: var(--font-display);
     color: #4a3520;
 }
 
@@ -962,7 +982,7 @@ html.night .page-content td {
     color: #f5e6d3;
     text-decoration: none;
     font-weight: bold;
-    font-family: "MedievalSharp", cursive;
+    font-family: var(--font-display);
     background: linear-gradient(180deg, #8b5a2b 0%, #6b4423 100%);
     border: 3px solid #5c3d1e;
     box-shadow:
@@ -1030,7 +1050,7 @@ html.night .page-content td {
 
 /* Page title (for about, contact, etc) */
 .page-title {
-    font-family: "MedievalSharp", cursive;
+    font-family: var(--font-display);
     font-size: 32px;
     color: #2d2d2d;
     margin-bottom: 20px;
@@ -1677,7 +1697,7 @@ html.night .page-content td {
 }
 
 .post-counter {
-    font-family: "MedievalSharp", cursive;
+    font-family: var(--font-display);
     font-size: 18px;
     color: #5c3d2e;
     min-width: 60px;
@@ -1692,7 +1712,7 @@ html.night .page-content td {
     text-align: center;
     color: #5c4030;
     font-size: 14px;
-    font-family: "MedievalSharp", cursive;
+    font-family: var(--font-display);
     position: relative;
 }
 
@@ -1777,7 +1797,7 @@ html.night .site-footer p {
 }
 
 .year-header {
-    font-family: "MedievalSharp", cursive;
+    font-family: var(--font-display);
     font-size: 32px;
     color: #4a3020;
     margin-bottom: 20px;
@@ -1838,7 +1858,7 @@ html.night .site-footer p {
 
 .archive-title {
     flex: 1;
-    font-family: "MedievalSharp", cursive;
+    font-family: var(--font-display);
     font-size: 18px;
     color: #2d2d2d;
     text-decoration: none;
@@ -1862,7 +1882,7 @@ html.night .site-footer p {
     padding: 3px 8px;
     border-radius: 0;
     font-size: 12px;
-    font-family: "MedievalSharp", cursive;
+    font-family: var(--font-display);
     text-transform: uppercase;
     letter-spacing: 0.5px;
     text-decoration: none;
@@ -1931,7 +1951,7 @@ html.night .site-footer p {
     color: #f5e6d3;
     padding: 4px 10px;
     font-size: 13px;
-    font-family: "MedievalSharp", cursive;
+    font-family: var(--font-display);
     text-transform: uppercase;
     letter-spacing: 0.5px;
     text-decoration: none;
@@ -2024,12 +2044,12 @@ html.night .site-footer p {
 .h-feed .dt-published {
     font-size: 14px;
     color: #6a5a4a;
-    font-family: "Spectral", serif;
+    font-family: var(--font-body);
 }
 
 /* Title */
 .h-feed .p-name {
-    font-family: "MedievalSharp", cursive;
+    font-family: var(--font-display);
     font-size: 18px;
     color: #2d2d2d;
     font-weight: normal;
@@ -2061,7 +2081,7 @@ html.night .h-feed .p-name-link:hover .p-name {
 .h-feed .p-summary {
     font-size: 14px;
     color: #6a5a4a;
-    font-family: "Spectral", serif;
+    font-family: var(--font-body);
     flex-basis: 100%;
     padding-left: 102px;
 }
@@ -2150,7 +2170,7 @@ html.night .h-feed .p-name-link:hover .p-name {
 }
 
 .category-title {
-    font-family: "MedievalSharp", cursive;
+    font-family: var(--font-display);
     font-size: 36px;
     color: #5c3d2e;
     margin-bottom: 8px;
@@ -2209,7 +2229,7 @@ html.night .h-feed .p-name-link:hover .p-name {
 }
 
 .note-scroll .note-content {
-    font-family: "MedievalSharp", cursive;
+    font-family: var(--font-display);
     font-size: 20px;
     line-height: 1.5;
     color: #4a3520;
@@ -2267,7 +2287,7 @@ html.night .h-feed .p-name-link:hover .p-name {
 }
 
 .note-scroll .note-date {
-    font-family: "MedievalSharp", cursive;
+    font-family: var(--font-display);
     font-size: 24px;
     color: #7a6550;
     text-decoration: none;
@@ -2443,7 +2463,7 @@ html.theme-sci-fi .note-scroll::before {
 
 html.theme-sci-fi .note-scroll .note-content {
     background-image: url("/sci-fi/notes/middle.webp");
-    font-family: 'Share Tech Mono', monospace;
+    font-family: var(--font-display);
     font-size: 20px;
     color: #ffffff;
     text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
@@ -2465,7 +2485,7 @@ html.theme-sci-fi .note-scroll .note-meta {
 }
 
 html.theme-sci-fi .note-scroll .note-date {
-    font-family: 'Share Tech Mono', monospace;
+    font-family: var(--font-display);
     font-size: 24px;
     color: #88ccff;
 }
@@ -2507,7 +2527,7 @@ html.theme-cyberpunk .note-scroll::before {
 
 html.theme-cyberpunk .note-scroll .note-content {
     background-image: url("/cyberpunk/notes/middle.webp");
-    font-family: 'Share Tech Mono', monospace;
+    font-family: var(--font-display);
     font-size: 20px;
     color: #33ff33;
     text-shadow: 0 0 8px rgba(51, 255, 51, 0.6);
@@ -2529,7 +2549,7 @@ html.theme-cyberpunk .note-scroll .note-meta {
 }
 
 html.theme-cyberpunk .note-scroll .note-date {
-    font-family: 'Share Tech Mono', monospace;
+    font-family: var(--font-display);
     font-size: 24px;
     color: #33ff33;
 }
@@ -2572,7 +2592,7 @@ html.theme-cabin .note-scroll::before {
 
 html.theme-cabin .note-scroll .note-content {
     background-image: url("/cabin/notes/middle.webp");
-    font-family: 'Cabin', sans-serif;
+    font-family: var(--font-display);
     font-size: 20px;
     color: #ef7c25;
     line-height: 1.6;
@@ -2593,7 +2613,7 @@ html.theme-cabin .note-scroll .note-meta {
 }
 
 html.theme-cabin .note-scroll .note-date {
-    font-family: 'Cabin', sans-serif;
+    font-family: var(--font-display);
     font-size: 24px;
     color: #bfa440;
 }
@@ -2635,7 +2655,7 @@ html.theme-underwater .note-scroll::before {
 
 html.theme-underwater .note-scroll .note-content {
     background-image: url("/underwater/notes/middle.webp");
-    font-family: 'Quicksand', sans-serif;
+    font-family: var(--font-display);
     font-size: 20px;
     color: #5cffec;
     line-height: 1.5;
@@ -2656,7 +2676,7 @@ html.theme-underwater .note-scroll .note-meta {
 }
 
 html.theme-underwater .note-scroll .note-date {
-    font-family: 'Quicksand', sans-serif;
+    font-family: var(--font-display);
     font-size: 24px;
     color: #62b2b0;
 }
@@ -2903,7 +2923,7 @@ html.theme-underwater .scroll-bottom-clickable {
 }
 
 .pagination a {
-    font-family: "MedievalSharp", cursive;
+    font-family: var(--font-display);
     font-size: 16px;
     color: #4a3520;
     text-decoration: none;
@@ -2922,7 +2942,7 @@ html.theme-underwater .scroll-bottom-clickable {
 }
 
 .pagination-info {
-    font-family: "MedievalSharp", cursive;
+    font-family: var(--font-display);
     font-size: 14px;
     color: #5c4030;
 }
@@ -3356,7 +3376,7 @@ html.night .pagination-info {
     background: #4a3520;
     color: #f5e6d3;
     padding: 12px 24px;
-    font-family: "MedievalSharp", cursive;
+    font-family: var(--font-display);
     font-size: 16px;
     text-decoration: none;
     border-radius: 0 0 8px 8px;
@@ -3478,7 +3498,7 @@ html.night .note-scroll:focus-visible {
     bottom: 20px;
     z-index: 9000;
     padding: 10px 16px;
-    font-family: "MedievalSharp", cursive;
+    font-family: var(--font-display);
     font-size: 14px;
     color: #4a3520;
     background: linear-gradient(180deg, #f5e6c8 0%, #e0d0a8 100%);

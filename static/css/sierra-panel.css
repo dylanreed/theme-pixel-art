@@ -139,7 +139,7 @@
     transform: translateX(-50%);
     background: #2a1a0a;
     color: #c9a227;
-    font-family: "MedievalSharp", cursive;
+    font-family: var(--font-display);
     font-size: 10px;
     padding: 4px 8px;
     border-radius: 4px;

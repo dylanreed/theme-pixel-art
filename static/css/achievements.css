@@ -47,7 +47,7 @@
     color: #fff;
     font-size: 11px;
     font-weight: bold;
-    font-family: "MedievalSharp", cursive;
+    font-family: var(--font-display);
     border: 2px solid #a03020;
     display: flex;
     align-items: center;
@@ -122,7 +122,7 @@ html.night .achievement-panel {
 }
 
 .achievement-panel-header h2 {
-    font-family: "MedievalSharp", cursive;
+    font-family: var(--font-display);
     font-size: 24px;
     color: #f5e6d3;
     margin: 0 0 5px 0;
@@ -132,7 +132,7 @@ html.night .achievement-panel {
 .achievement-panel-stats {
     display: flex;
     gap: 15px;
-    font-family: "MedievalSharp", cursive;
+    font-family: var(--font-display);
     font-size: 14px;
     color: #e8d4b8;
     text-align: center;
@@ -191,7 +191,7 @@ html.night .achievement-panel-header {
 }
 
 .achievement-category h3 {
-    font-family: "MedievalSharp", cursive;
+    font-family: var(--font-display);
     font-size: 18px;
     color: #5c3d2e;
     margin-bottom: 10px;
@@ -277,7 +277,7 @@ html.night .achievement-item.unlocked {
 }
 
 .achievement-name {
-    font-family: "MedievalSharp", cursive;
+    font-family: var(--font-display);
     font-size: 16px;
     color: #4a3020;
     margin-bottom: 2px;
@@ -298,7 +298,7 @@ html.night .achievement-desc {
 }
 
 .achievement-points {
-    font-family: "MedievalSharp", cursive;
+    font-family: var(--font-display);
     font-size: 14px;
     color: #d4a030;
     white-space: nowrap;
@@ -379,7 +379,7 @@ html.night .achievement-points {
 }
 
 .achievement-toast-title {
-    font-family: "MedievalSharp", cursive;
+    font-family: var(--font-display);
     font-size: 12px;
     color: #d4a030;
     text-transform: uppercase;
@@ -394,7 +394,7 @@ html.night .achievement-points {
 }
 
 .achievement-toast-name {
-    font-family: "MedievalSharp", cursive;
+    font-family: var(--font-display);
     font-size: 20px;
     color: #f5e6d3;
     text-shadow: 2px 2px 0 rgba(0,0,0,0.8);
@@ -408,7 +408,7 @@ html.night .achievement-points {
 }
 
 .achievement-toast-points {
-    font-family: "MedievalSharp", cursive;
+    font-family: var(--font-display);
     font-size: 16px;
     color: #4ade80;
     margin-top: 5px;
