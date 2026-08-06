@@ -119,11 +119,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600&family=Spectral:wght@400;600&display=swap" rel="stylesheet">
 
 <!-- Theme CSS -->
-<link rel="stylesheet" href="/css/style.css">
-<link rel="stylesheet" href="/css/chaos.css">
-<link rel="stylesheet" href="/css/themes.css">
-<link rel="stylesheet" href="/css/achievements.css">
-<link rel="stylesheet" href="/css/sierra-panel.css">
+{{/* Cache-bust the stylesheets the same way baseof.html does the scripts.
+     Without this a returning visitor gets fresh HTML and fresh JS against a
+     stale cached stylesheet, which renders as a broken theme rather than an
+     old one. */}}
+{{ $v := now.Unix }}
+<link rel="stylesheet" href="/css/style.css?v={{ $v }}">
+<link rel="stylesheet" href="/css/chaos.css?v={{ $v }}">
+<link rel="stylesheet" href="/css/themes.css?v={{ $v }}">
+<link rel="stylesheet" href="/css/achievements.css?v={{ $v }}">
+<link rel="stylesheet" href="/css/sierra-panel.css?v={{ $v }}">
 
 <!-- Custom CSS from micro.blog -->
 {{- partial "custom_css.html" . -}}
