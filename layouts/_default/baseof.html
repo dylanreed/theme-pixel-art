@@ -165,6 +165,10 @@
                         const isNight = document.documentElement.classList.toggle('night');
                         localStorage.setItem('theme', isNight ? 'night' : 'day');
                         updateThemeButton();
+                        // Night has its own header art (fantasy ships _night
+                        // variants); re-resolve it the same way a theme
+                        // switch does, instead of waiting on a reload.
+                        document.dispatchEvent(new CustomEvent('themechange', { detail: { theme: themes[currentThemeIndex] } }));
                         break;
 
                     case 'mode':

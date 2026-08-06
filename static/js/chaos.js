@@ -808,6 +808,42 @@ KONAMI CODE: ↑↑↓↓←→←→BA
     document.addEventListener('themechange', updateCategorySprites);
 
     // ═══════════════════════════════════════════════════════════════
+    // THEME-SPECIFIC HEADER IMAGE
+    // ═══════════════════════════════════════════════════════════════
+
+    // Resolve a header's canonical category name to a URL for a theme,
+    // preferring a night variant when one exists (fantasy only) and
+    // degrading through the theme's default and then fantasy's. Mirrors
+    // spriteUrl's fallback shape so the two never disagree in spirit.
+    function headerUrl(theme, name, night) {
+        const m = window.HEADER_MANIFEST || {};
+        const t = m[theme] || {};
+        const f = m.fantasy || {};
+        return (night && t[name + '_night']) || t[name] || t.default
+            || (night && f[name + '_night']) || f[name] || f.default;
+    }
+
+    function updateHeaderImage() {
+        const el = document.querySelector('.header-image[data-header]');
+        if (!el) return;
+        const night = document.documentElement.classList.contains('night');
+        // Easy read always shows the corporate header, same as every other
+        // easy-read override -- the boring version wins regardless of theme.
+        const theme = document.documentElement.classList.contains('easy-read')
+            ? 'corporate'
+            : getCurrentTheme();
+        const url = headerUrl(theme, el.dataset.header, night);
+        if (url) el.style.backgroundImage = "url('" + url + "')";
+    }
+
+    // Re-resolve on theme switch, same as category sprites, so the header
+    // updates without a page reload. The night toggle also dispatches
+    // 'themechange' (see baseof.html) since it affects which header art
+    // applies too; easy-read doesn't need to -- its corporate header is a
+    // plain CSS override that wins regardless of what this function sets.
+    document.addEventListener('themechange', updateHeaderImage);
+
+    // ═══════════════════════════════════════════════════════════════
     // INITIALIZATION
     // ═══════════════════════════════════════════════════════════════
 
@@ -816,6 +852,9 @@ KONAMI CODE: ↑↑↓↓←→←→BA
 
         // Update category sprites based on current theme
         updateCategorySprites();
+
+        // Resolve the header image for the current theme/night/easy-read state
+        updateHeaderImage();
 
         // Create permanent elements
         createCRTOverlay();

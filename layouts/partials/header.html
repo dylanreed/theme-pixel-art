@@ -1,5 +1,6 @@
-{{/* Determine header image based on category */}}
-{{ $headerImage := "/fantasy/headers/home.webp" }}
+{{/* Determine the canonical header name from the page's category. Real
+     URL resolution (theme, extension, night variant) happens in JS against
+     window.HEADER_MANIFEST -- header.html only needs to name the category. */}}
 {{ $cat := "" }}
 
 {{/* Get category from page or taxonomy */}}
@@ -12,47 +13,32 @@
     {{ $cat = .Data.Term | lower }}
 {{ end }}
 
-{{/* Map category to header image */}}
+{{/* personal has no header art of its own; it shares home's */}}
+{{ if eq $cat "personal" }}
+    {{ $cat = "home" }}
+{{ end }}
+
+{{ $headerNames := slice "adhd" "clown" "cooking" "crafting" "default" "gaming" "garden" "health" "home" "music" "pets" "reading" "tabletop" "tech" "travel" "writing" }}
+{{ $headerName := "home" }}
 {{ if $cat }}
-    {{ if eq $cat "health" }}
-        {{ $headerImage = "/fantasy/headers/health.webp" }}
-    {{ else if eq $cat "tabletop" }}
-        {{ $headerImage = "/fantasy/headers/tabletop.webp" }}
-    {{ else if eq $cat "gaming" }}
-        {{ $headerImage = "/fantasy/headers/gaming.webp" }}
-    {{ else if eq $cat "personal" }}
-        {{ $headerImage = "/fantasy/headers/home.webp" }}
-    {{ else if eq $cat "clown" }}
-        {{ $headerImage = "/fantasy/headers/clown.webp" }}
-    {{ else if eq $cat "writing" }}
-        {{ $headerImage = "/fantasy/headers/writing.webp" }}
-    {{ else if eq $cat "cooking" }}
-        {{ $headerImage = "/fantasy/headers/cooking.webp" }}
-    {{ else if eq $cat "music" }}
-        {{ $headerImage = "/fantasy/headers/music.webp" }}
-    {{ else if eq $cat "travel" }}
-        {{ $headerImage = "/fantasy/headers/travel.webp" }}
-    {{ else if eq $cat "reading" }}
-        {{ $headerImage = "/fantasy/headers/reading.webp" }}
-    {{ else if eq $cat "crafting" }}
-        {{ $headerImage = "/fantasy/headers/crafting.webp" }}
-    {{ else if eq $cat "adhd" }}
-        {{ $headerImage = "/fantasy/headers/adhd.webp" }}
-    {{ else if eq $cat "pets" }}
-        {{ $headerImage = "/fantasy/headers/pets.webp" }}
-    {{ else if eq $cat "tech" }}
-        {{ $headerImage = "/fantasy/headers/tech.webp" }}
+    {{ if in $headerNames $cat }}
+        {{ $headerName = $cat }}
     {{ else }}
-        {{ $headerImage = "/fantasy/headers/default.webp" }}
+        {{ $headerName = "default" }}
     {{ end }}
 {{ end }}
+
+{{/* No-JS baseline: the fantasy art for this category, same as JS would
+     resolve on first paint. JS upgrades this once HEADER_MANIFEST and the
+     current theme/night state are known. */}}
+{{ $headerImage := printf "/fantasy/headers/%s.webp" $headerName }}
 
 {{/* Check for video version of header */}}
 {{ $headerVideo := replace $headerImage ".webp" ".mp4" }}
 
 <header class="site-header">
     <div class="header-container">
-        <div class="header-image" style="background-image: url('{{ $headerImage }}');">
+        <div class="header-image" data-header="{{ $headerName }}" style="background-image: url('{{ $headerImage }}');">
             {{/* If video exists, add video element for hover effect */}}
             {{ $videoPath := printf "static%s" $headerVideo }}
             {{ if fileExists $videoPath }}

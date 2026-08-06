@@ -44,8 +44,58 @@
 
     {{- $themeAssets = merge $themeAssets (dict $id $families) -}}
 {{- end -}}
+
+{{- /* Header manifest: canonical category name -> real URL, per theme.
+       header.html can no longer guess an extension or a filename (kaiju
+       renames clown to clowning.png and ships no .webp at all), so it is
+       resolved here, once, at build time. corporate isn't a switchable
+       theme -- it's not in data/themes.json -- but easy-read needs its
+       header art, so it gets a manifest entry alongside the real themes. */ -}}
+{{- $headerNames := slice "adhd" "clown" "cooking" "crafting" "default" "gaming" "garden" "health" "home" "music" "pets" "reading" "tabletop" "tech" "travel" "writing" -}}
+{{- $headerThemeIDs := slice -}}
+{{- range $themes -}}
+    {{- $headerThemeIDs = $headerThemeIDs | append .id -}}
+{{- end -}}
+{{- $headerThemeIDs = $headerThemeIDs | append "corporate" -}}
+{{- $headerManifest := dict -}}
+{{- range $headerThemeIDs -}}
+    {{- $id := . -}}
+    {{- $dir := printf "static/%s/headers" $id -}}
+    {{- $entries := dict -}}
+    {{- if fileExists $dir -}}
+        {{- range $headerNames -}}
+            {{- $name := . -}}
+            {{- /* kaiju ships its clown header as clowning.png */ -}}
+            {{- $srcName := $name -}}
+            {{- if and (eq $id "kaiju") (eq $name "clown") -}}
+                {{- $srcName = "clowning" -}}
+            {{- end -}}
+            {{- $webp := printf "%s/%s.webp" $dir $srcName -}}
+            {{- $png := printf "%s/%s.png" $dir $srcName -}}
+            {{- if fileExists $webp -}}
+                {{- $entries = merge $entries (dict $name (printf "/%s/headers/%s.webp" $id $srcName)) -}}
+            {{- else if fileExists $png -}}
+                {{- $entries = merge $entries (dict $name (printf "/%s/headers/%s.png" $id $srcName)) -}}
+            {{- end -}}
+
+            {{- /* Only fantasy ships _night variants */ -}}
+            {{- if eq $id "fantasy" -}}
+                {{- $nightKey := printf "%s_night" $name -}}
+                {{- $webpNight := printf "%s/%s_night.webp" $dir $srcName -}}
+                {{- $pngNight := printf "%s/%s_night.png" $dir $srcName -}}
+                {{- if fileExists $webpNight -}}
+                    {{- $entries = merge $entries (dict $nightKey (printf "/%s/headers/%s_night.webp" $id $srcName)) -}}
+                {{- else if fileExists $pngNight -}}
+                    {{- $entries = merge $entries (dict $nightKey (printf "/%s/headers/%s_night.png" $id $srcName)) -}}
+                {{- end -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+    {{- $headerManifest = merge $headerManifest (dict $id $entries) -}}
+{{- end -}}
 <script>
 window.PIXEL_THEMES = {{ $themes | jsonify | safeJS }};
 window.SPRITE_MANIFEST = {{ $manifest | jsonify | safeJS }};
 window.THEME_ASSETS = {{ $themeAssets | jsonify | safeJS }};
+window.HEADER_MANIFEST = {{ $headerManifest | jsonify | safeJS }};
 </script>

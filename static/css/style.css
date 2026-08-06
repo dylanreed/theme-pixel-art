@@ -354,56 +354,6 @@ html.night .border-overlay {
     border-image-source: url("/fantasy/tiles/tiles_night.webp");
 }
 
-/* Night mode headers - swap to night versions */
-html.night .header-image[style*="home.webp"] {
-    background-image: url("/fantasy/headers/home_night.webp") !important;
-}
-html.night .header-image[style*="default.webp"] {
-    background-image: url("/fantasy/headers/default_night.webp") !important;
-}
-html.night .header-image[style*="health.webp"] {
-    background-image: url("/fantasy/headers/health_night.webp") !important;
-}
-html.night .header-image[style*="tabletop.webp"] {
-    background-image: url("/fantasy/headers/tabletop_night.webp") !important;
-}
-html.night .header-image[style*="gaming.webp"] {
-    background-image: url("/fantasy/headers/gaming_night.webp") !important;
-}
-html.night .header-image[style*="clown.webp"] {
-    background-image: url("/fantasy/headers/clown_night.webp") !important;
-}
-html.night .header-image[style*="writing.webp"] {
-    background-image: url("/fantasy/headers/writing_night.webp") !important;
-}
-html.night .header-image[style*="cooking.webp"] {
-    background-image: url("/fantasy/headers/cooking_night.webp") !important;
-}
-html.night .header-image[style*="music.webp"] {
-    background-image: url("/fantasy/headers/music_night.webp") !important;
-}
-html.night .header-image[style*="travel.webp"] {
-    background-image: url("/fantasy/headers/travel_night.webp") !important;
-}
-html.night .header-image[style*="reading.webp"] {
-    background-image: url("/fantasy/headers/reading_night.webp") !important;
-}
-html.night .header-image[style*="crafting.webp"] {
-    background-image: url("/fantasy/headers/crafting_night.webp") !important;
-}
-html.night .header-image[style*="garden.webp"] {
-    background-image: url("/fantasy/headers/garden_night.webp") !important;
-}
-html.night .header-image[style*="tech.webp"] {
-    background-image: url("/fantasy/headers/tech_night.webp") !important;
-}
-html.night .header-image[style*="pets.webp"] {
-    background-image: url("/fantasy/headers/pets_night.webp") !important;
-}
-html.night .header-image[style*="adhd.webp"] {
-    background-image: url("/fantasy/headers/adhd_night.webp") !important;
-}
-
 /* Night mode text adjustments for readability */
 html.night .post-title,
 html.night .post-title a,
@@ -3721,23 +3671,7 @@ html.easy-read .ramona-dirt {
 }
 
 /* Headers - use corporate header for ALL categories, override any theme */
-html.easy-read .header-image,
-html.easy-read .header-image[style*="home.webp"],
-html.easy-read .header-image[style*="default.webp"],
-html.easy-read .header-image[style*="health.webp"],
-html.easy-read .header-image[style*="tech.webp"],
-html.easy-read .header-image[style*="gaming.webp"],
-html.easy-read .header-image[style*="cooking.webp"],
-html.easy-read .header-image[style*="reading.webp"],
-html.easy-read .header-image[style*="music.webp"],
-html.easy-read .header-image[style*="writing.webp"],
-html.easy-read .header-image[style*="crafting.webp"],
-html.easy-read .header-image[style*="pets.webp"],
-html.easy-read .header-image[style*="travel.webp"],
-html.easy-read .header-image[style*="tabletop.webp"],
-html.easy-read .header-image[style*="garden.webp"],
-html.easy-read .header-image[style*="adhd.webp"],
-html.easy-read .header-image[style*="clown.webp"] {
+html.easy-read .header-image {
     background-image: url("/corporate/headers/default.png") !important;
 }
 

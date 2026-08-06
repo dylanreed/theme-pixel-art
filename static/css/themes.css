@@ -46,59 +46,6 @@ html.theme-cyberpunk .archive_categories {
     border-image-source: none !important;
 }
 
-/* ===============================================================
-   CYBERPUNK HEADERS - Day mode
-   =============================================================== */
-
-html.theme-cyberpunk .header-image[style*="home.webp"] {
-    background-image: url("/cyberpunk/headers/home.webp") !important;
-}
-html.theme-cyberpunk .header-image[style*="default.webp"] {
-    background-image: url("/cyberpunk/headers/default.webp") !important;
-}
-html.theme-cyberpunk .header-image[style*="health.webp"] {
-    background-image: url("/cyberpunk/headers/health.webp") !important;
-}
-html.theme-cyberpunk .header-image[style*="tech.webp"] {
-    background-image: url("/cyberpunk/headers/tech.webp") !important;
-}
-html.theme-cyberpunk .header-image[style*="gaming.webp"] {
-    background-image: url("/cyberpunk/headers/gaming.webp") !important;
-}
-html.theme-cyberpunk .header-image[style*="cooking.webp"] {
-    background-image: url("/cyberpunk/headers/cooking.webp") !important;
-}
-html.theme-cyberpunk .header-image[style*="reading.webp"] {
-    background-image: url("/cyberpunk/headers/reading.webp") !important;
-}
-html.theme-cyberpunk .header-image[style*="music.webp"] {
-    background-image: url("/cyberpunk/headers/music.webp") !important;
-}
-html.theme-cyberpunk .header-image[style*="writing.webp"] {
-    background-image: url("/cyberpunk/headers/writing.webp") !important;
-}
-html.theme-cyberpunk .header-image[style*="crafting.webp"] {
-    background-image: url("/cyberpunk/headers/crafting.webp") !important;
-}
-html.theme-cyberpunk .header-image[style*="pets.webp"] {
-    background-image: url("/cyberpunk/headers/pets.webp") !important;
-}
-html.theme-cyberpunk .header-image[style*="travel.webp"] {
-    background-image: url("/cyberpunk/headers/travel.webp") !important;
-}
-html.theme-cyberpunk .header-image[style*="tabletop.webp"] {
-    background-image: url("/cyberpunk/headers/tabletop.webp") !important;
-}
-html.theme-cyberpunk .header-image[style*="garden.webp"] {
-    background-image: url("/cyberpunk/headers/garden.webp") !important;
-}
-html.theme-cyberpunk .header-image[style*="adhd.webp"] {
-    background-image: url("/cyberpunk/headers/adhd.webp") !important;
-}
-html.theme-cyberpunk .header-image[style*="clown.webp"] {
-    background-image: url("/cyberpunk/headers/clown.webp") !important;
-}
-
 /* Cyberpunk header frame */
 html.theme-cyberpunk .header-frame {
     background-image: url("/cyberpunk/headers/ornate frame.webp");
@@ -515,59 +462,6 @@ html.theme-cabin .archive_categories {
     border-image-source: none !important;
 }
 
-/* ===============================================================
-   CABIN HEADERS - Day mode
-   =============================================================== */
-
-html.theme-cabin .header-image[style*="home.webp"] {
-    background-image: url("/cabin/headers/home.webp") !important;
-}
-html.theme-cabin .header-image[style*="default.webp"] {
-    background-image: url("/cabin/headers/default.webp") !important;
-}
-html.theme-cabin .header-image[style*="health.webp"] {
-    background-image: url("/cabin/headers/health.webp") !important;
-}
-html.theme-cabin .header-image[style*="tech.webp"] {
-    background-image: url("/cabin/headers/tech.webp") !important;
-}
-html.theme-cabin .header-image[style*="gaming.webp"] {
-    background-image: url("/cabin/headers/gaming.webp") !important;
-}
-html.theme-cabin .header-image[style*="cooking.webp"] {
-    background-image: url("/cabin/headers/cooking.webp") !important;
-}
-html.theme-cabin .header-image[style*="reading.webp"] {
-    background-image: url("/cabin/headers/reading.webp") !important;
-}
-html.theme-cabin .header-image[style*="music.webp"] {
-    background-image: url("/cabin/headers/music.webp") !important;
-}
-html.theme-cabin .header-image[style*="writing.webp"] {
-    background-image: url("/cabin/headers/writing.webp") !important;
-}
-html.theme-cabin .header-image[style*="crafting.webp"] {
-    background-image: url("/cabin/headers/crafting.webp") !important;
-}
-html.theme-cabin .header-image[style*="pets.webp"] {
-    background-image: url("/cabin/headers/pets.webp") !important;
-}
-html.theme-cabin .header-image[style*="travel.webp"] {
-    background-image: url("/cabin/headers/travel.webp") !important;
-}
-html.theme-cabin .header-image[style*="tabletop.webp"] {
-    background-image: url("/cabin/headers/tabletop.webp") !important;
-}
-html.theme-cabin .header-image[style*="garden.webp"] {
-    background-image: url("/cabin/headers/garden.webp") !important;
-}
-html.theme-cabin .header-image[style*="adhd.webp"] {
-    background-image: url("/cabin/headers/adhd.webp") !important;
-}
-html.theme-cabin .header-image[style*="clown.webp"] {
-    background-image: url("/cabin/headers/clown.webp") !important;
-}
-
 /* Cabin header frame */
 html.theme-cabin .header-frame {
     background-image: url("/cabin/headers/ornate_frame.webp");
@@ -702,59 +596,6 @@ html.theme-underwater .h-feed,
 html.theme-underwater .photos-grid-container,
 html.theme-underwater .archive_categories {
     border-image-source: none !important;
-}
-
-/* ===============================================================
-   UNDERWATER HEADERS - Day mode
-   =============================================================== */
-
-html.theme-underwater .header-image[style*="home.webp"] {
-    background-image: url("/underwater/headers/home.webp") !important;
-}
-html.theme-underwater .header-image[style*="default.webp"] {
-    background-image: url("/underwater/headers/default.webp") !important;
-}
-html.theme-underwater .header-image[style*="health.webp"] {
-    background-image: url("/underwater/headers/health.webp") !important;
-}
-html.theme-underwater .header-image[style*="tech.webp"] {
-    background-image: url("/underwater/headers/tech.webp") !important;
-}
-html.theme-underwater .header-image[style*="gaming.webp"] {
-    background-image: url("/underwater/headers/gaming.webp") !important;
-}
-html.theme-underwater .header-image[style*="cooking.webp"] {
-    background-image: url("/underwater/headers/cooking.webp") !important;
-}
-html.theme-underwater .header-image[style*="reading.webp"] {
-    background-image: url("/underwater/headers/reading.webp") !important;
-}
-html.theme-underwater .header-image[style*="music.webp"] {
-    background-image: url("/underwater/headers/music.webp") !important;
-}
-html.theme-underwater .header-image[style*="writing.webp"] {
-    background-image: url("/underwater/headers/writing.webp") !important;
-}
-html.theme-underwater .header-image[style*="crafting.webp"] {
-    background-image: url("/underwater/headers/crafting.webp") !important;
-}
-html.theme-underwater .header-image[style*="pets.webp"] {
-    background-image: url("/underwater/headers/pets.webp") !important;
-}
-html.theme-underwater .header-image[style*="travel.webp"] {
-    background-image: url("/underwater/headers/travel.webp") !important;
-}
-html.theme-underwater .header-image[style*="tabletop.webp"] {
-    background-image: url("/underwater/headers/tabletop.webp") !important;
-}
-html.theme-underwater .header-image[style*="garden.webp"] {
-    background-image: url("/underwater/headers/garden.webp") !important;
-}
-html.theme-underwater .header-image[style*="adhd.webp"] {
-    background-image: url("/underwater/headers/adhd.webp") !important;
-}
-html.theme-underwater .header-image[style*="clown.webp"] {
-    background-image: url("/underwater/headers/clown.webp") !important;
 }
 
 /* Underwater header frame */
@@ -1248,34 +1089,10 @@ html.easy-read.theme-kaiju .archive_categories::before {
 
 /* Corporate header - ALL categories get same boring header */
 html.easy-read .header-image,
-html.easy-read .header-image[style*="home.webp"],
-html.easy-read .header-image[style*="default.webp"],
-html.easy-read .header-image[style*="health.webp"],
-html.easy-read .header-image[style*="tech.webp"],
-html.easy-read .header-image[style*="gaming.webp"],
-html.easy-read .header-image[style*="cooking.webp"],
-html.easy-read .header-image[style*="reading.webp"],
-html.easy-read .header-image[style*="music.webp"],
-html.easy-read .header-image[style*="writing.webp"],
-html.easy-read .header-image[style*="crafting.webp"],
-html.easy-read .header-image[style*="pets.webp"],
-html.easy-read .header-image[style*="travel.webp"],
-html.easy-read .header-image[style*="tabletop.webp"],
-html.easy-read .header-image[style*="garden.webp"],
-html.easy-read .header-image[style*="adhd.webp"],
-html.easy-read .header-image[style*="clown.webp"],
 html.easy-read.theme-sci-fi .header-image,
-html.easy-read.theme-sci-fi .header-image[style*="home.webp"],
-html.easy-read.theme-sci-fi .header-image[style*="default.webp"],
 html.easy-read.theme-cyberpunk .header-image,
-html.easy-read.theme-cyberpunk .header-image[style*="home.webp"],
-html.easy-read.theme-cyberpunk .header-image[style*="default.webp"],
 html.easy-read.theme-cabin .header-image,
-html.easy-read.theme-cabin .header-image[style*="home.webp"],
-html.easy-read.theme-cabin .header-image[style*="default.webp"],
-html.easy-read.theme-underwater .header-image,
-html.easy-read.theme-underwater .header-image[style*="home.webp"],
-html.easy-read.theme-underwater .header-image[style*="default.webp"] {
+html.easy-read.theme-underwater .header-image {
     background-image: url("/corporate/headers/default.png") !important;
 }
 
@@ -1480,10 +1297,6 @@ html.theme-kaiju .post-link:active {
         1px 1px 0 rgba(0, 0, 0, 0.3);
 }
 
-html.theme-kaiju .header-image {
-    background-image: url("/kaiju/headers/default.png") !important;
-}
-
 html.theme-kaiju .site-title {
     --title-scrim: rgba(11, 20, 22, 0.76);
 }
@@ -1519,75 +1332,6 @@ html.theme-kaiju .note-scroll .note-date {
 html.theme-kaiju .nav-sign,
 html.theme-kaiju .nav-hamburger {
     background-image: url("/kaiju/menu/menu.webp") !important;
-}
-
-/* Kaiju headers. header.html writes the image as an inline style, which
-   outranks any stylesheet rule, so each category needs an attribute
-   selector and !important -- the same enumeration every other theme uses.
-   Tracked for replacement as theme-pixel-art-5v9. */
-
-html.theme-kaiju .header-image[style*="home.webp"] {
-    background-image: url("/kaiju/headers/home.png") !important;
-}
-
-html.theme-kaiju .header-image[style*="default.webp"] {
-    background-image: url("/kaiju/headers/default.png") !important;
-}
-
-html.theme-kaiju .header-image[style*="health.webp"] {
-    background-image: url("/kaiju/headers/health.png") !important;
-}
-
-html.theme-kaiju .header-image[style*="tabletop.webp"] {
-    background-image: url("/kaiju/headers/tabletop.png") !important;
-}
-
-html.theme-kaiju .header-image[style*="gaming.webp"] {
-    background-image: url("/kaiju/headers/gaming.png") !important;
-}
-
-html.theme-kaiju .header-image[style*="writing.webp"] {
-    background-image: url("/kaiju/headers/writing.png") !important;
-}
-
-html.theme-kaiju .header-image[style*="cooking.webp"] {
-    background-image: url("/kaiju/headers/cooking.png") !important;
-}
-
-html.theme-kaiju .header-image[style*="music.webp"] {
-    background-image: url("/kaiju/headers/music.png") !important;
-}
-
-html.theme-kaiju .header-image[style*="travel.webp"] {
-    background-image: url("/kaiju/headers/travel.png") !important;
-}
-
-html.theme-kaiju .header-image[style*="reading.webp"] {
-    background-image: url("/kaiju/headers/reading.png") !important;
-}
-
-html.theme-kaiju .header-image[style*="crafting.webp"] {
-    background-image: url("/kaiju/headers/crafting.png") !important;
-}
-
-html.theme-kaiju .header-image[style*="adhd.webp"] {
-    background-image: url("/kaiju/headers/adhd.png") !important;
-}
-
-html.theme-kaiju .header-image[style*="pets.webp"] {
-    background-image: url("/kaiju/headers/pets.png") !important;
-}
-
-html.theme-kaiju .header-image[style*="tech.webp"] {
-    background-image: url("/kaiju/headers/tech.png") !important;
-}
-
-html.theme-kaiju .header-image[style*="garden.webp"] {
-    background-image: url("/kaiju/headers/garden.png") !important;
-}
-
-html.theme-kaiju .header-image[style*="clown.webp"] {
-    background-image: url("/kaiju/headers/clowning.png") !important;
 }
 
 /* ===============================================================
