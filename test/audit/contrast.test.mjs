@@ -44,14 +44,10 @@ const DECORATIVE = [
 // silently hide. These are still measured and still reported every run; they
 // just do not fail the suite. Anything added here needs a reason and a
 // tracking issue -- an entry without one is how an audit quietly rots.
-const ACCEPTED = [
-  {
-    match: sel => /h1\.site-title/.test(sel),
-    why: 'Site title sits on photographic pixel-art header art. Cannot pass '
-       + 'without a scrim, text plate, or heavy shadow, all of which change '
-       + 'the design. Deferred by Dylan 2026-08-05; tracked as theme-pixel-art-8lo.',
-  },
-];
+// The site title used to live here. It is fixed now -- unified bottom-left
+// placement with a theme-tinted backing -- so it is measured like anything
+// else and must keep passing.
+const ACCEPTED = [];
 
 let browser, server;
 

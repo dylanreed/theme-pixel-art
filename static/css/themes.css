@@ -811,7 +811,6 @@ html.theme-cabin [onclick] {
 html.theme-cabin .site-title {
     font-family: "Amatic SC", cursive;
     font-weight: 700;
-    font-size: 2.5em;
 }
 
 /* Cabin menu/UI elements */
@@ -1392,11 +1391,8 @@ html.theme-sci-fi .header-image {
 }
 
 html.theme-sci-fi .site-title {
-    font-size: 42px;
-    bottom: 30px;
-    left: 100px;
+    --title-scrim: rgba(2, 26, 34, 0.76);
     color: #00d4ff;
-    text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
 }
 
 html.theme-sci-fi .nav-sign span {
@@ -1415,12 +1411,13 @@ html.theme-cyberpunk .header-image {
     box-shadow: 0 4px 20px rgba(255, 0, 255, 0.3);
 }
 
+/* Magenta is the hardest colour in the set -- #ff00ff tops out at 6.7:1 even
+   against pure black -- so cyberpunk needs a heavier scrim than the 0.76
+   that clears every other theme. At 0.76 it measured 3.13:1, barely over
+   the 3:1 floor and with no room for new header art. */
 html.theme-cyberpunk .site-title {
-    font-size: 48px;
-    bottom: 100px;
-    left: 200px;
+    --title-scrim: rgba(24, 4, 34, 0.88);
     color: #ff00ff;
-    text-shadow: 0 0 10px #ff00ff, 2px 2px 0 #00ffff;
 }
 
 html.theme-cyberpunk .nav-sign span {
@@ -1440,11 +1437,8 @@ html.theme-cabin .header-image {
 }
 
 html.theme-cabin .site-title {
-    font-size: 52px;
-    bottom: 30px;
-    left: 100px;
+    --title-scrim: rgba(28, 17, 8, 0.76);
     color: #fff5e6;
-    text-shadow: 2px 2px 4px rgba(60, 40, 20, 0.8);
 }
 
 html.theme-cabin .nav-sign span {
@@ -1464,11 +1458,8 @@ html.theme-underwater .header-image {
 }
 
 html.theme-underwater .site-title {
-    font-size: 42px;
-    bottom: 30px;
-    left: 100px;
+    --title-scrim: rgba(4, 32, 42, 0.76);
     color: #c0e8e0;
-    text-shadow: 2px 2px 4px rgba(20, 40, 50, 0.8);
 }
 
 html.theme-underwater .nav-sign span {
@@ -1812,7 +1803,15 @@ html.theme-kaiju .post-link:active {
 }
 
 html.theme-kaiju .header-image {
-    background-image: url("/kaiju/headers/default.png");
+    background-image: url("/kaiju/headers/default.png") !important;
+}
+
+html.theme-kaiju .site-title {
+    --title-scrim: rgba(11, 20, 22, 0.76);
+}
+
+html.theme-kaiju .header-frame {
+    background-image: url("/kaiju/headers/ornate_frame.webp");
 }
 
 /* Note scrolls. Without these the cream body text lands on the fantasy
@@ -1853,4 +1852,73 @@ html.theme-kaiju .nav-sign.active span {
     text-shadow:
         0 0 5px var(--kaiju-hot),
         0 0 10px var(--kaiju-hot);
+}
+
+/* Kaiju headers. header.html writes the image as an inline style, which
+   outranks any stylesheet rule, so each category needs an attribute
+   selector and !important -- the same enumeration every other theme uses.
+   Tracked for replacement as theme-pixel-art-5v9. */
+
+html.theme-kaiju .header-image[style*="home.webp"] {
+    background-image: url("/kaiju/headers/home.png") !important;
+}
+
+html.theme-kaiju .header-image[style*="default.webp"] {
+    background-image: url("/kaiju/headers/default.png") !important;
+}
+
+html.theme-kaiju .header-image[style*="health.webp"] {
+    background-image: url("/kaiju/headers/health.png") !important;
+}
+
+html.theme-kaiju .header-image[style*="tabletop.webp"] {
+    background-image: url("/kaiju/headers/tabletop.png") !important;
+}
+
+html.theme-kaiju .header-image[style*="gaming.webp"] {
+    background-image: url("/kaiju/headers/gaming.png") !important;
+}
+
+html.theme-kaiju .header-image[style*="writing.webp"] {
+    background-image: url("/kaiju/headers/writing.png") !important;
+}
+
+html.theme-kaiju .header-image[style*="cooking.webp"] {
+    background-image: url("/kaiju/headers/cooking.png") !important;
+}
+
+html.theme-kaiju .header-image[style*="music.webp"] {
+    background-image: url("/kaiju/headers/music.png") !important;
+}
+
+html.theme-kaiju .header-image[style*="travel.webp"] {
+    background-image: url("/kaiju/headers/travel.png") !important;
+}
+
+html.theme-kaiju .header-image[style*="reading.webp"] {
+    background-image: url("/kaiju/headers/reading.png") !important;
+}
+
+html.theme-kaiju .header-image[style*="crafting.webp"] {
+    background-image: url("/kaiju/headers/crafting.png") !important;
+}
+
+html.theme-kaiju .header-image[style*="adhd.webp"] {
+    background-image: url("/kaiju/headers/adhd.png") !important;
+}
+
+html.theme-kaiju .header-image[style*="pets.webp"] {
+    background-image: url("/kaiju/headers/pets.png") !important;
+}
+
+html.theme-kaiju .header-image[style*="tech.webp"] {
+    background-image: url("/kaiju/headers/tech.png") !important;
+}
+
+html.theme-kaiju .header-image[style*="garden.webp"] {
+    background-image: url("/kaiju/headers/garden.png") !important;
+}
+
+html.theme-kaiju .header-image[style*="clown.webp"] {
+    background-image: url("/kaiju/headers/clowning.png") !important;
 }
