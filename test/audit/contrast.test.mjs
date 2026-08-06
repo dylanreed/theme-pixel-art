@@ -128,9 +128,18 @@ function collectTextElements() {
     range.detach();
     if (!lineRects.length) continue;
 
+    // A CSS filter on any ancestor means the declared colour is not what gets
+    // painted -- night mode inverts note scrolls -- so those elements have to
+    // be measured from pixels instead.
+    let filtered = false;
+    for (let n = el; n && n !== document.documentElement; n = n.parentElement) {
+      if (getComputedStyle(n).filter !== 'none') { filtered = true; break; }
+    }
+
     seen.add(el);
     out.push({
       selector: describe(el),
+      filtered,
       text: node.textContent.trim().slice(0, 60),
       fg: cs.color,
       fontSize: parseFloat(cs.fontSize),
@@ -139,25 +148,6 @@ function collectTextElements() {
     });
   }
   return out;
-}
-
-// A grid inside a text line box. Kept away from the edges because a line box
-// includes half-leading above and below the glyphs, which on a small button
-// or pill can fall outside the painted surface. Sampling several points and
-// keeping the worst is what catches gradients and busy pixel art that
-// averaging would hide.
-function samplePoints(rect, imgW, imgH) {
-  const xs = rect.width < 8 ? [0.5] : [0.2, 0.5, 0.8];
-  const ys = rect.height < 8 ? [0.5] : [0.35, 0.5, 0.65];
-  const points = [];
-  for (const gx of xs) {
-    for (const gy of ys) {
-      const x = Math.min(imgW - 1, Math.max(0, Math.round(rect.x + gx * rect.width)));
-      const y = Math.min(imgH - 1, Math.max(0, Math.round(rect.y + gy * rect.height)));
-      points.push([x, y]);
-    }
-  }
-  return points;
 }
 
 async function auditPage(page, pageLabel) {
@@ -171,17 +161,24 @@ async function auditPage(page, pageLabel) {
   await page.evaluate(sel => { window.__DECORATIVE__ = sel; }, DECORATIVE);
   const elements = await page.evaluate(collectTextElements);
 
-  // True painted background: make every glyph transparent, then screenshot.
-  // This must be done with inline styles, not a stylesheet. Much of the theme
-  // sets colour with !important at a specificity a bare `*` rule cannot beat
-  // (html.easy-read .post-link, and similar), so an injected stylesheet leaves
-  // text visible and the "background" screenshot ends up full of glyphs that
-  // then get sampled as though they were background. An inline !important
-  // declaration outranks any stylesheet !important.
-  // Transitions must die first. A running transition outranks even an
-  // important author declaration in the cascade, so setting colour on an
-  // element with `transition: color` reads back the mid-flight value and the
-  // glyph is still painted when the screenshot is taken.
+  // Both sides of the ratio must come from painted pixels. Reading the
+  // foreground from computed style and the background from the screenshot
+  // silently mismatches wherever a CSS filter is in play -- night mode runs
+  // `filter: invert(0.85) hue-rotate(180deg)` on note scrolls, so the declared
+  // colour is a dark brown while the glyphs actually paint light. Comparing
+  // those two produced a confident 1.06:1 on text that really measures ~8:1.
+  //
+  // So: shoot the page twice, once normally and once with every glyph made
+  // transparent. Pixels that differ between the two ARE the glyphs; the same
+  // coordinate in the blanked shot is the background behind them. Filters,
+  // blend modes and gradients all apply equally to both shots, so whatever
+  // they do cancels out.
+  const litBuf = await page.screenshot({ type: 'png' });
+
+  // Blanking must use inline styles, not an injected stylesheet: much of the
+  // theme sets colour with !important at a specificity a bare `*` rule cannot
+  // beat. Transitions have to die first, since a running transition outranks
+  // even an important author declaration and the glyph would still be painted.
   await page.evaluate(() => {
     for (const el of document.querySelectorAll('*')) {
       el.style.setProperty('transition', 'none', 'important');
@@ -194,12 +191,10 @@ async function auditPage(page, pageLabel) {
     }
   });
 
-  // Fail loudly rather than silently measuring glyphs as background.
   const stillPainted = await page.evaluate(() => {
     let n = 0;
     for (const el of document.querySelectorAll('*')) {
-      const c = getComputedStyle(el).color;
-      const m = /^rgba?\(([^)]+)\)$/.exec(c);
+      const m = /^rgba?\(([^)]+)\)$/.exec(getComputedStyle(el).color);
       if (!m) continue;
       const parts = m[1].split(',').map(s => parseFloat(s));
       if (parts.length < 4 || parts[3] > 0) n++;
@@ -209,44 +204,71 @@ async function auditPage(page, pageLabel) {
   assert.strictEqual(stillPainted, 0,
     `${stillPainted} elements resisted text blanking; the background screenshot would contain glyphs`);
 
-  const buf = await page.screenshot({ type: 'png' });
-  const png = PNG.sync.read(Buffer.from(buf));
+  const darkBuf = await page.screenshot({ type: 'png' });
+  const lit = PNG.sync.read(Buffer.from(litBuf));
+  const dark = PNG.sync.read(Buffer.from(darkBuf));
 
   const failures = [];
   for (const el of elements) {
-    const fg = parseColor(el.fg);
-    if (!fg || fg.a === 0) continue; // not actually painted
+    const hit = glyphContrast(el, lit, dark);
+    if (!hit) continue;                       // no glyph pixels found
 
-    let worstRatio = Infinity;
-    let worstBg = null;
-    for (const lineRect of el.lineRects) {
-      for (const [px, py] of samplePoints(lineRect, png.width, png.height)) {
-        const idx = (png.width * py + px) << 2;
-        const bgPixel = [png.data[idx], png.data[idx + 1], png.data[idx + 2]];
-        const effectiveFg = fg.a < 1 ? blend(fg, bgPixel) : [fg.r, fg.g, fg.b];
-        const r = ratio(effectiveFg, bgPixel);
-        if (r < worstRatio) {
-          worstRatio = r;
-          worstBg = bgPixel;
-        }
+    // WCAG is defined on the specified text colour, not the antialiased
+    // rendering -- for small text no pixel is ever fully inked, so measuring
+    // painted ink is stricter than the standard and flags text that conforms.
+    // Use the declared colour, except where a filter means it is not what
+    // reaches the screen.
+    if (!el.filtered) {
+      const declared = parseColor(el.fg);
+      if (declared && declared.a > 0) {
+        const fgc = declared.a < 1 ? blend(declared, hit.bg) : [declared.r, declared.g, declared.b];
+        hit.ratio = ratio(fgc, hit.bg);
+        hit.fg = fgc.map(Math.round);
       }
     }
-    if (worstRatio === Infinity) continue;
-
     const needed = required(el.fontSize, el.fontWeight);
-    if (worstRatio < needed) {
+    if (hit.ratio < needed) {
       failures.push({
-        page: pageLabel,
-        selector: el.selector,
-        text: el.text,
-        fg: el.fg,
-        bg: `rgb(${worstBg[0]}, ${worstBg[1]}, ${worstBg[2]})`,
-        ratio: +worstRatio.toFixed(2),
-        needed,
+        page: pageLabel, selector: el.selector, text: el.text,
+        fg: `rgb(${hit.fg.join(', ')})`, bg: `rgb(${hit.bg.join(', ')})`,
+        declared: el.fg, ratio: +hit.ratio.toFixed(2), needed,
       });
     }
   }
   return failures;
+}
+
+/* Find the glyph pixels inside an element's line boxes and return the worst
+   contrast among the well-covered ones. Coverage is how far a pixel moved
+   when the text was blanked: a fully-inked pixel moves most, an antialiased
+   edge only partly. Edge pixels are excluded because they are a blend of ink
+   and background and would report a failure that no reader can see. */
+function glyphContrast(el, lit, dark) {
+  const cand = [];
+  let maxDelta = 0;
+  for (const r of el.lineRects) {
+    const x0 = Math.max(0, Math.floor(r.x)), x1 = Math.min(lit.width,  Math.ceil(r.x + r.width));
+    const y0 = Math.max(0, Math.floor(r.y)), y1 = Math.min(lit.height, Math.ceil(r.y + r.height));
+    for (let y = y0; y < y1; y++) {
+      for (let x = x0; x < x1; x++) {
+        const i = (lit.width * y + x) << 2;
+        const a = [lit.data[i], lit.data[i+1], lit.data[i+2]];
+        const b = [dark.data[i], dark.data[i+1], dark.data[i+2]];
+        const delta = Math.abs(a[0]-b[0]) + Math.abs(a[1]-b[1]) + Math.abs(a[2]-b[2]);
+        if (delta > maxDelta) maxDelta = delta;
+        if (delta > 0) cand.push({ a, b, delta });
+      }
+    }
+  }
+  if (!cand.length || maxDelta < 12) return null;   // nothing legibly painted
+  const floor = maxDelta * 0.85;
+  let worst = null;
+  for (const c of cand) {
+    if (c.delta < floor) continue;
+    const v = ratio(c.a, c.b);
+    if (!worst || v < worst.ratio) worst = { ratio: v, fg: c.a, bg: c.b };
+  }
+  return worst;
 }
 
 async function failuresFor(theme, modes) {
@@ -285,7 +307,9 @@ for (const theme of THEMES) {
     test(`AA contrast: ${label}`, async () => {
       const all = await failuresFor(theme, modes);
       const fmt = f =>
-        `  [${f.page}] ${f.selector} "${f.text}" ${f.fg} on ${f.bg} = ${f.ratio}:1 (need ${f.needed}:1)`;
+        `  [${f.page}] ${f.selector} "${f.text}" painted ${f.fg} on ${f.bg}`
+        + ` = ${f.ratio}:1 (need ${f.needed}:1)`
+        + (f.declared && f.declared !== f.fg ? `  [declared ${f.declared}]` : '');
 
       const accepted = all.filter(f => ACCEPTED.some(a => a.match(f.selector)));
       const failures = all.filter(f => !ACCEPTED.some(a => a.match(f.selector)));
