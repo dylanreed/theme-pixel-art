@@ -53,6 +53,17 @@ label,
 html {
     --font-display: "Pixelify Sans", ui-monospace, "Courier New", monospace;
     --font-body: "Spectral", Georgia, serif;
+
+    /* Text inks. Themes set these; night and easy-read override them from the
+       end of themes.css so they actually win. Before this, html.night rules
+       lived in style.css and html.theme-* rules in themes.css at identical
+       specificity -- so the theme colour beat the night colour purely on file
+       order, and archive titles rendered mid-tone on a dark panel in every
+       theme. That single ordering bug was 72 of the audit's failures. */
+    --ink-title: #2d2d2d;
+    --ink-meta: #6a5a4a;
+    --ink-heading: #4a3020;
+    --ink-body: #5a4030;
     overflow-x: hidden;
 }
 
@@ -178,8 +189,12 @@ html.night {
     font-size: 27px;
     color: var(--nav-ink);
     background: var(--nav-scrim);
-    padding: 2px 10px 4px;
-    margin-top: 30px; /* Clear the chain art above the sign face */
+    /* Generous top padding on purpose. The line box sits taller than the
+       glyphs, and with only ~1px of plate above it the topmost antialiased
+       row landed on the plate's own fractional edge -- a blend of plate and
+       sign -- which measured as cream-on-cream. */
+    padding: 7px 12px 5px;
+    margin-top: 26px; /* Clear the chain art above the sign face */
     border-radius: 2px;
     text-align: center;
     line-height: 1.1;
@@ -359,8 +374,6 @@ html.night .post-title,
 html.night .post-title a,
 html.night .page-title,
 html.night .category-title,
-html.night .archive-title,
-html.night .year-header,
 html.night .h-feed .p-name {
     color: #e18c5a;
 }
@@ -372,7 +385,6 @@ html.night .page-content {
 }
 
 html.night .post-meta,
-html.night .archive-date,
 html.night .category-count,
 html.night .h-feed .dt-published,
 html.night .h-feed .p-summary {
@@ -694,7 +706,7 @@ html.night .archive-tag:hover {
 .post-title {
     font-family: var(--font-display);
     font-size: 24px;
-    color: #2d2d2d;
+    color: var(--ink-title);
     margin-bottom: 8px;
 }
 
@@ -715,13 +727,13 @@ html.night .archive-tag:hover {
 
 .post-meta {
     font-size: 14px;
-    color: #6a5a4a;
+    color: var(--ink-meta);
     margin-bottom: 15px;
 }
 
 .post-excerpt,
 .post-content {
-    color: #5a4030;
+    color: var(--ink-body);
     line-height: 1.7;
 }
 
@@ -1529,7 +1541,7 @@ html.night .page-content td {
 .sprite-adventure ~ .post-body .post-tag,
 .category-travel .post-tag,
 .category-travel .archive-tag {
-    background: #5a9e5a;
+    background: #4a824a;
     color: #fff;
 }
 
@@ -1543,7 +1555,7 @@ html.night .page-content td {
 .sprite-donkey ~ .post-body .post-tag,
 .category-adhd .post-tag,
 .category-adhd .archive-tag {
-    background: #5a9e5a;
+    background: #4a824a;
     color: #fff;
 }
 
@@ -1587,7 +1599,7 @@ html.night .page-content td {
 .sprite-cauldron ~ .post-body .post-tag,
 .category-cooking .post-tag,
 .category-cooking .archive-tag {
-    background: #e07040;
+    background: #b35a33;
     color: #fff;
 }
 
@@ -1764,7 +1776,7 @@ html.night .site-footer p {
 .year-header {
     font-family: var(--font-display);
     font-size: 32px;
-    color: #4a3020;
+    color: var(--ink-heading);
     margin-bottom: 20px;
     padding-bottom: 10px;
     border-bottom: 3px solid #8b5a2b;
@@ -1817,7 +1829,7 @@ html.night .site-footer p {
 
 .archive-date {
     font-size: 14px;
-    color: #6a5a4a;
+    color: var(--ink-meta);
     min-width: 60px;
 }
 
@@ -1825,7 +1837,7 @@ html.night .site-footer p {
     flex: 1;
     font-family: var(--font-display);
     font-size: 18px;
-    color: #2d2d2d;
+    color: var(--ink-title);
     text-decoration: none;
     transition:
         color 0.15s ease,
@@ -2391,9 +2403,18 @@ html.night .h-feed .p-name-link:hover .p-name {
     filter: brightness(1.05);
 }
 
-/* Night mode notes */
+/* Night mode notes. The inversion exists to darken the light parchment art
+   that fantasy, cabin and underwater use. Cyberpunk and kaiju already ship
+   dark note art, so inverting theirs makes it LIGHT -- backwards for night --
+   and drags their note text with it: cyberpunk's #33ff33 came out as a dark
+   green on a pale panel at 2.65:1. Those two keep their own art. */
 html.night .note-scroll {
     filter: invert(0.85) hue-rotate(180deg);
+}
+
+html.night.theme-cyberpunk .note-scroll,
+html.night.theme-kaiju .note-scroll {
+    filter: none;
 }
 
 html.night .note-scroll.rolled-up:hover {
@@ -3642,7 +3663,12 @@ html.easy-read .note-scroll::after {
 }
 
 html.easy-read .note-scroll .note-content {
-    background-image: url("/corporate/notes/middle.webp") !important;
+    /* Superseded by the rule in themes.css, which loads later and also carries
+       !important. Kept aligned so the two cannot drift apart again. */
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)),
+        url("/corporate/notes/middle.webp") !important;
+    background-size: 100% 100%, 100% 100% !important;
     color: var(--corp-text) !important;
 }
 
@@ -3736,10 +3762,12 @@ html.easy-read .pagination-info {
     color: var(--corp-text-light) !important;
 }
 
-/* Footer - corporate gray */
+/* Footer - corporate gray. corp-text-light measured 3.3:1 against the
+   parchment footer strip that shows through, so the footer takes the
+   full-strength corporate ink. */
 html.easy-read .site-footer {
     background: var(--corp-header-bg) !important;
-    color: var(--corp-text-light) !important;
+    color: var(--corp-text) !important;
     border-top: 2px solid var(--corp-border) !important;
 }
 

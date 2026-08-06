@@ -206,13 +206,12 @@ html.theme-sci-fi .note-scroll.rolled-up {
     background-image: url("/sci-fi/notes/closed.webp");
 }
 
-/* Feed excerpt legibility on dark day-mode scenes. The base excerpt color
-   (#5a4030) is only lightened by night mode, so on themes whose day
-   background is dark it reads as brown-on-dark. Lighten it for those. */
-html.theme-cyberpunk .post-excerpt,
-html.theme-sci-fi .post-excerpt {
-    color: #e8e8e8;
-}
+/* Excerpt legibility is handled by --ink-body now, which is set per theme
+   according to that theme's PANEL, not its page background. The rule that
+   used to live here lightened cyberpunk and sci-fi together on the premise
+   that both had dark day scenes -- true of sci-fi's panel, false of
+   cyberpunk's, whose panel is light parchment. It measured 1.01:1. */
+
 
 /* ===============================================================
    THEME-SPECIFIC "READ MORE" BUTTONS
@@ -379,41 +378,12 @@ html.theme-underwater .post-link:active {
         1px 1px 0 rgba(0, 0, 0, 0.2);
 }
 
-/* ===============================================================
-   SCI-FI ARCHIVE COLORS
-   Blue/tech tones - year headers and dates only (category colors handle titles/tags)
-   =============================================================== */
-
-html.theme-sci-fi .archive-date {
-    color: #4a6a8a;
-}
-
-html.theme-sci-fi .year-header {
-    color: #1a3a5c;
-    border-bottom-color: #3a6a9a;
-}
-
 html.theme-sci-fi .archive-entry {
     border-bottom-color: rgba(42, 106, 156, 0.2);
 }
 
 html.theme-sci-fi .archive-entry:hover {
     background: rgba(42, 106, 156, 0.1);
-}
-
-/* ===============================================================
-   CYBERPUNK ARCHIVE COLORS
-   Neon tones - year headers and dates only (category colors handle titles/tags)
-   =============================================================== */
-
-html.theme-cyberpunk .archive-date {
-    color: #ff66ff;
-}
-
-html.theme-cyberpunk .year-header {
-    color: #ff00ff;
-    border-bottom-color: #00ffff;
-    text-shadow: 0 0 8px rgba(255, 0, 255, 0.4);
 }
 
 html.theme-cyberpunk .archive-entry {
@@ -500,20 +470,6 @@ html.theme-cabin .theme-switcher,
 html.theme-cabin [role="button"],
 html.theme-cabin [onclick] {
     cursor: url("/cabin/cursors/hand.png"), pointer !important;
-}
-
-/* ===============================================================
-   CABIN ARCHIVE COLORS
-   Warm wood and amber tones
-   =============================================================== */
-
-html.theme-cabin .archive-date {
-    color: #8b6914;
-}
-
-html.theme-cabin .year-header {
-    color: #6b4423;
-    border-bottom-color: #a0522d;
 }
 
 html.theme-cabin .archive-entry {
@@ -668,20 +624,6 @@ html.theme-underwater .theme-switcher,
 html.theme-underwater [role="button"],
 html.theme-underwater [onclick] {
     cursor: url("/underwater/cursors/hand.png"), pointer !important;
-}
-
-/* ===============================================================
-   UNDERWATER ARCHIVE COLORS
-   Nautical brass and parchment tones
-   =============================================================== */
-
-html.theme-underwater .archive-date {
-    color: #6a5a4a;
-}
-
-html.theme-underwater .year-header {
-    color: #8b6914;
-    border-bottom-color: #c9a227;
 }
 
 html.theme-underwater .archive-entry {
@@ -1157,12 +1099,21 @@ html.easy-read.theme-underwater .note-scroll::after {
     background-image: url("/corporate/notes/bottom.webp") !important;
 }
 
+/* The corporate memo graphic is mid grey (#848386) and the corporate palette
+   is dark ink, which measured 2.78:1. Washing the graphic toward white keeps
+   the memo shape while giving the ink paper to sit on.
+   The theme-qualified selectors are redundant -- html.easy-read already wins
+   over html.theme-* here on source order -- but they are left in place because
+   removing them is a specificity change, not a colour change. */
 html.easy-read .note-scroll .note-content,
 html.easy-read.theme-sci-fi .note-scroll .note-content,
 html.easy-read.theme-cyberpunk .note-scroll .note-content,
 html.easy-read.theme-cabin .note-scroll .note-content,
 html.easy-read.theme-underwater .note-scroll .note-content {
-    background-image: url("/corporate/notes/middle.webp") !important;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)),
+        url("/corporate/notes/middle.webp") !important;
+    background-size: 100% 100%, 100% 100% !important;
 }
 
 html.easy-read .note-scroll.rolled-up,
@@ -1241,16 +1192,6 @@ html.theme-kaiju .page-content,
 html.theme-kaiju .post-excerpt,
 html.theme-kaiju article p {
     color: var(--kaiju-text);
-}
-
-html.theme-kaiju .post-content h2,
-html.theme-kaiju .post-content h3,
-html.theme-kaiju .post-title,
-html.theme-kaiju .post-title a,
-html.theme-kaiju .page-title,
-html.theme-kaiju .category-title,
-html.theme-kaiju .year-header {
-    color: var(--kaiju-heading);
 }
 
 html.theme-kaiju .post-content a,
@@ -1385,4 +1326,41 @@ html.theme-kaiju .nav-sign span {
 
 html.theme-kaiju .nav-sign.active span {
     --nav-ink: var(--kaiju-heading);
+}
+
+/* ===============================================================
+   TEXT INK TOKENS
+   Themes tint the inks; the mode blocks below override them.
+   Order matters and is the whole point: these sit at the end of the
+   last stylesheet, so html.night and html.easy-read beat html.theme-*
+   at equal specificity. Previously the night rules lived earlier in
+   style.css and silently lost.
+   =============================================================== */
+/* Themes with a LIGHT panel take dark ink. */
+html.theme-cyberpunk  { --ink-title: #6b1a6b; --ink-meta: #7a2a7a; --ink-heading: #a01aa0; --ink-body: #4a2a4a; }
+html.theme-cabin      { --ink-title: #4a3020; --ink-meta: #5c4426; --ink-heading: #6b4423; --ink-body: #4a3626; }
+html.theme-underwater { --ink-title: #1a3a42; --ink-meta: #2f4c54; --ink-heading: #2a4a52; --ink-body: #22404a; }
+
+/* sci-fi and kaiju carry a DARK panel in every mode -- sci-fi a near-black
+   gradient, kaiju #16242a -- so they take light ink even in base mode. Giving
+   them dark ink like the others was worth 57 of the audit's failures. */
+html.theme-sci-fi     { --ink-title: #cfe8f5; --ink-meta: #9dc0d4; --ink-heading: #6fd3ef; --ink-body: #d6e9f2; }
+html.theme-kaiju      { --ink-title: #e8dcc0; --ink-meta: #b6c4c6; --ink-heading: #ffc94a; --ink-body: #e8dcc0; }
+
+/* Night: one readable palette for every theme. The panel underneath is
+   #3b454d regardless of theme, so a per-theme night ink would be six ways
+   of solving the same problem. */
+html.night {
+    --ink-title: #f0dcc0;
+    --ink-meta: #d6cdc0;
+    --ink-heading: #f0c9a0;
+    --ink-body: #f0f0f0;
+}
+
+/* Easy read wants the corporate palette on a white panel. */
+html.easy-read {
+    --ink-title: var(--corp-text);
+    --ink-meta: #4a5157;
+    --ink-heading: var(--corp-text);
+    --ink-body: var(--corp-text);
 }

@@ -164,6 +164,20 @@ async function auditPage(page, pageLabel) {
   // the pixel diff compares two different layouts and reports nonsense.
   await page.evaluate(() => document.fonts.ready);
 
+  // Transitions must die before ANY measurement, not just before blanking.
+  // Applying a mode class starts colour transitions (.archive-title carries
+  // `transition: color .15s`), so reading computed colour or shooting the lit
+  // screenshot straight afterwards captures a mid-animation value. That
+  // reported settled, conforming text as failing -- archive titles measured
+  // as their pre-night colour on the night panel.
+  await page.evaluate(() => {
+    for (const el of document.querySelectorAll('*')) {
+      el.style.setProperty('transition', 'none', 'important');
+      el.style.setProperty('animation', 'none', 'important');
+    }
+  });
+  await new Promise(r => setTimeout(r, 50));
+
   await page.evaluate(sel => { window.__DECORATIVE__ = sel; }, DECORATIVE);
   const elements = await page.evaluate(collectTextElements);
 
@@ -186,6 +200,10 @@ async function auditPage(page, pageLabel) {
   // beat. Transitions have to die first, since a running transition outranks
   // even an important author declaration and the glyph would still be painted.
   await page.evaluate(() => {
+    // Re-kill transitions: elements created since the first pass (Ramona, the
+    // achievement toast, weather particles) still carry them, and a colour
+    // transition outranks even an important declaration, so their glyphs would
+    // survive the blanking and be sampled as background.
     for (const el of document.querySelectorAll('*')) {
       el.style.setProperty('transition', 'none', 'important');
       el.style.setProperty('animation', 'none', 'important');
