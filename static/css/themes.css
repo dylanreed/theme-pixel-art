@@ -139,17 +139,6 @@ html.theme-cyberpunk .nav-hamburger {
     background-image: url("/cyberpunk/menu/sign.webp") !important;
 }
 
-/* Cyberpunk active menu - glowing pink neon */
-html.theme-cyberpunk .nav-sign.active span {
-    color: #ff00ff;
-    text-shadow:
-        0 0 5px #ff00ff,
-        0 0 10px #ff00ff,
-        0 0 20px #ff00ff,
-        0 0 40px #ff00ff;
-    animation: cyberpunk-neon-pulse 1.5s ease-in-out infinite alternate;
-}
-
 @keyframes cyberpunk-neon-pulse {
     from {
         text-shadow:
@@ -590,15 +579,6 @@ html.theme-cabin .nav-hamburger {
     background-image: url("/cabin/menu/sign.webp") !important;
 }
 
-/* Cabin active menu - warm golden glow */
-html.theme-cabin .nav-sign.active span {
-    color: #ffbf00;
-    text-shadow:
-        0 0 5px #ff8c00,
-        0 0 10px #ff8c00,
-        0 0 15px #cd853f;
-}
-
 /* Cabin cursors */
 html.theme-cabin * {
     cursor: url("/cabin/cursors/pointer.png"), auto !important;
@@ -786,15 +766,6 @@ html.theme-underwater .header-frame {
 html.theme-underwater .nav-sign,
 html.theme-underwater .nav-hamburger {
     background-image: url("/underwater/menu/sign.webp") !important;
-}
-
-/* Underwater active menu - brass nautical style */
-html.theme-underwater .nav-sign.active span {
-    color: #c9a227;
-    text-shadow:
-        1px 1px 0 #8b6914,
-        -1px -1px 0 #e8d48b,
-        2px 2px 2px rgba(0, 0, 0, 0.3);
 }
 
 /* Underwater note scroll assets - nautical treasure map style */
@@ -1146,17 +1117,6 @@ html.theme-sci-fi .site-title {
     color: #00d4ff;
 }
 
-html.theme-sci-fi .nav-sign span {
-    color: #1a3a5c;
-    text-shadow: 0 0 4px rgba(0, 212, 255, 0.3);
-    padding-top: 23px;
-}
-
-html.theme-sci-fi .nav-sign.active span {
-    color: #00d4ff;
-    text-shadow: 0 0 12px rgba(0, 212, 255, 0.7);
-}
-
 /* Cyberpunk header styles */
 html.theme-cyberpunk .header-image {
     box-shadow: 0 4px 20px rgba(255, 0, 255, 0.3);
@@ -1171,17 +1131,6 @@ html.theme-cyberpunk .site-title {
     color: #ff00ff;
 }
 
-html.theme-cyberpunk .nav-sign span {
-    color: #000000;
-    text-shadow: 0 0 4px rgba(255, 0, 255, 0.5);
-    padding-top: 30px;
-}
-
-html.theme-cyberpunk .nav-sign.active span {
-    color: #ff00ff;
-    text-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff;
-}
-
 /* Cabin header styles */
 html.theme-cabin .header-image {
     box-shadow: 0 4px 20px rgba(90, 60, 30, 0.4);
@@ -1192,17 +1141,6 @@ html.theme-cabin .site-title {
     color: #fff5e6;
 }
 
-html.theme-cabin .nav-sign span {
-    color: #5a3a2a;
-    text-shadow: 1px 1px 0 rgba(255, 245, 230, 0.3);
-    padding-top: 30px;
-}
-
-html.theme-cabin .nav-sign.active span {
-    color: #2e260f;
-    text-shadow: 0 0 5px #ff8c00, 0 0 10px #ff8c00;
-}
-
 /* Underwater header styles */
 html.theme-underwater .header-image {
     box-shadow: 0 4px 20px rgba(30, 80, 100, 0.4);
@@ -1211,17 +1149,6 @@ html.theme-underwater .header-image {
 html.theme-underwater .site-title {
     --title-scrim: rgba(4, 32, 42, 0.76);
     color: #c0e8e0;
-}
-
-html.theme-underwater .nav-sign span {
-    color: #3a5a4a;
-    text-shadow: 1px 1px 0 rgba(192, 232, 224, 0.3);
-    padding-top: 30px;
-}
-
-html.theme-underwater .nav-sign.active span {
-    color: #c9a227;
-    text-shadow: 1px 1px 0 #8b6914, -1px -1px 0 #e8d48b;
 }
 
 /* ===============================================================
@@ -1594,17 +1521,6 @@ html.theme-kaiju .nav-hamburger {
     background-image: url("/kaiju/menu/menu.webp") !important;
 }
 
-html.theme-kaiju .nav-sign span {
-    color: var(--kaiju-text);
-}
-
-html.theme-kaiju .nav-sign.active span {
-    color: var(--kaiju-heading);
-    text-shadow:
-        0 0 5px var(--kaiju-hot),
-        0 0 10px var(--kaiju-hot);
-}
-
 /* Kaiju headers. header.html writes the image as an inline style, which
    outranks any stylesheet rule, so each category needs an attribute
    selector and !important -- the same enumeration every other theme uses.
@@ -1672,4 +1588,57 @@ html.theme-kaiju .header-image[style*="garden.webp"] {
 
 html.theme-kaiju .header-image[style*="clown.webp"] {
     background-image: url("/kaiju/headers/clowning.png") !important;
+}
+
+/* ===============================================================
+   NAV LABEL TOKENS
+   One rule per theme. Geometry lives in style.css; themes set only
+   the backing tint and the ink. Replaces eight scattered colour
+   rules, three of which were duplicate "active" definitions with
+   conflicting values that had been silently resolved by rule order.
+   =============================================================== */
+html.theme-sci-fi .nav-sign span {
+    --nav-scrim: rgba(2, 26, 34, 0.80);
+    --nav-ink: #bfe9f5;
+    margin-top: 23px;
+}
+
+html.theme-sci-fi .nav-sign.active span {
+    --nav-ink: #00d4ff;
+}
+
+html.theme-cyberpunk .nav-sign span {
+    --nav-scrim: rgba(24, 4, 34, 0.86);
+    --nav-ink: #ffb3ff;
+}
+
+html.theme-cyberpunk .nav-sign.active span {
+    --nav-ink: #ff6bff;
+}
+
+html.theme-cabin .nav-sign span {
+    --nav-scrim: rgba(28, 17, 8, 0.78);
+    --nav-ink: #ffeccf;
+}
+
+html.theme-cabin .nav-sign.active span {
+    --nav-ink: #ffbf00;
+}
+
+html.theme-underwater .nav-sign span {
+    --nav-scrim: rgba(4, 32, 42, 0.78);
+    --nav-ink: #cfeee8;
+}
+
+html.theme-underwater .nav-sign.active span {
+    --nav-ink: #ffd166;
+}
+
+html.theme-kaiju .nav-sign span {
+    --nav-scrim: rgba(11, 20, 22, 0.78);
+    --nav-ink: var(--kaiju-text);
+}
+
+html.theme-kaiju .nav-sign.active span {
+    --nav-ink: var(--kaiju-heading);
 }

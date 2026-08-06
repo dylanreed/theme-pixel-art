@@ -158,6 +158,12 @@ async function auditPage(page, pageLabel) {
   );
   await page.setViewport({ width: VIEWPORT_WIDTH, height });
 
+  // Webfonts must be settled before anything is measured. networkidle0 does
+  // not cover them -- @font-face requests start after it fires -- and if a
+  // face lands between the lit and blanked screenshots the glyphs move, so
+  // the pixel diff compares two different layouts and reports nonsense.
+  await page.evaluate(() => document.fonts.ready);
+
   await page.evaluate(sel => { window.__DECORATIVE__ = sel; }, DECORATIVE);
   const elements = await page.evaluate(collectTextElements);
 
